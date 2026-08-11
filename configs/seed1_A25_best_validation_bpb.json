@@ -1,0 +1,35 @@
+{
+  "name": "seed1_A25_best_validation_bpb",
+  "source_file_sha256": "bbbe813237c5513e40386a99b2a4585f664cdec6391b1229efbea3ace2b329ee",
+  "source_file_origin": "results/candidates/autopareto-seed1-20260731/0025-train.py",
+  "experiment_id": 162,
+  "campaign_id": "autopareto-seed1-20260731",
+  "experiment_number": 25,
+  "training_seed": 1,
+  "discovery_metrics": {
+    "val_bpb": 1.0957550904836137,
+    "cached_decode_tokens_per_second": 253.70475030193842,
+    "allocated_inference_memory_mib": 132.1974868774414,
+    "parameter_count": 24576298
+  },
+  "config_assignments": {
+    "ASPECT_RATIO": 64,
+    "HEAD_DIM": 128,
+    "WINDOW_PATTERN": "SSSL",
+    "TOTAL_BATCH_SIZE": "2 ** 17",
+    "EMBEDDING_LR": 0.4,
+    "UNEMBEDDING_LR": 0.004,
+    "MATRIX_LR": 0.045,
+    "SCALAR_LR": 0.5,
+    "WEIGHT_DECAY": 0.1,
+    "ADAM_BETAS": [
+      0.8,
+      0.95
+    ],
+    "WARMUP_RATIO": 0.0,
+    "WARMDOWN_RATIO": 0.6,
+    "FINAL_LR_FRAC": 0.0,
+    "DEPTH": 5,
+    "DEVICE_BATCH_SIZE": 64
+  }
+}

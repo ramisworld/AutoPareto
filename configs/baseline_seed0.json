@@ -1,0 +1,35 @@
+{
+  "name": "baseline_seed0",
+  "source_file_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+  "source_file_origin": "results/candidates/baseline-a40-cached-fresh-20260722/0001-train.py",
+  "experiment_id": 8,
+  "campaign_id": "baseline-a40-cached-fresh-20260722",
+  "experiment_number": 1,
+  "training_seed": 0,
+  "discovery_metrics": {
+    "val_bpb": 1.2137349928434058,
+    "cached_decode_tokens_per_second": 164.11263064330285,
+    "allocated_inference_memory_mib": 249.88385009765625,
+    "parameter_count": 50332176
+  },
+  "config_assignments": {
+    "ASPECT_RATIO": 64,
+    "HEAD_DIM": 128,
+    "WINDOW_PATTERN": "SSSL",
+    "TOTAL_BATCH_SIZE": "2 ** 19",
+    "EMBEDDING_LR": 0.6,
+    "UNEMBEDDING_LR": 0.004,
+    "MATRIX_LR": 0.04,
+    "SCALAR_LR": 0.5,
+    "WEIGHT_DECAY": 0.2,
+    "ADAM_BETAS": [
+      0.8,
+      0.95
+    ],
+    "WARMUP_RATIO": 0.0,
+    "WARMDOWN_RATIO": 0.5,
+    "FINAL_LR_FRAC": 0.0,
+    "DEPTH": 8,
+    "DEVICE_BATCH_SIZE": 64
+  }
+}

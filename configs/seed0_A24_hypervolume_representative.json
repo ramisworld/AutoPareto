@@ -1,0 +1,35 @@
+{
+  "name": "seed0_A24_hypervolume_representative",
+  "source_file_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+  "source_file_origin": "results/candidates/autopareto-seed0-20260731/0024-train.py",
+  "experiment_id": 136,
+  "campaign_id": "autopareto-seed0-20260731",
+  "experiment_number": 24,
+  "training_seed": 0,
+  "discovery_metrics": {
+    "val_bpb": 1.116323646635026,
+    "cached_decode_tokens_per_second": 351.0924966214659,
+    "allocated_inference_memory_mib": 105.1969223022461,
+    "parameter_count": 17891526
+  },
+  "config_assignments": {
+    "ASPECT_RATIO": 128,
+    "HEAD_DIM": 128,
+    "WINDOW_PATTERN": "SSSL",
+    "TOTAL_BATCH_SIZE": "2 ** 17",
+    "EMBEDDING_LR": 0.5,
+    "UNEMBEDDING_LR": 0.0035,
+    "MATRIX_LR": 0.035,
+    "SCALAR_LR": 0.5,
+    "WEIGHT_DECAY": 0.2,
+    "ADAM_BETAS": [
+      0.8,
+      0.95
+    ],
+    "WARMUP_RATIO": 0.0,
+    "WARMDOWN_RATIO": 0.5,
+    "FINAL_LR_FRAC": 0.0,
+    "DEPTH": 3,
+    "DEVICE_BATCH_SIZE": 64
+  }
+}

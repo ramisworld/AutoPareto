@@ -1,0 +1,91 @@
+{
+  "description": "Exact configuration assignments extracted from the candidate source files. Full agent/search code will be released with the paper.",
+  "measurement_conditions": "Discovery metrics are bfloat16 cached decode on one NVIDIA A40, 256 input tokens, 256 generated tokens, batch size 1, 10 measured repetitions.",
+  "configs": [
+    {
+      "file": "baseline_seed0.json",
+      "experiment_id": 8,
+      "source_file_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8"
+    },
+    {
+      "file": "seed0_A08_low_memory_boundary.json",
+      "experiment_id": 120,
+      "source_file_sha256": "1a5002ca246244c648177038209f443266c34cefbacd725cf83b060b4cec48de"
+    },
+    {
+      "file": "seed0_A12_lowest_memory_within_1pct.json",
+      "experiment_id": 124,
+      "source_file_sha256": "c2a5e5dcdc90f8465533d71f700b9ea8a4c2b024151759e2302126a17b425340"
+    },
+    {
+      "file": "seed0_A22_best_validation_bpb.json",
+      "experiment_id": 134,
+      "source_file_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a"
+    },
+    {
+      "file": "seed0_A24_hypervolume_representative.json",
+      "experiment_id": 136,
+      "source_file_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10"
+    },
+    {
+      "file": "seed0_A25_fastest_within_1pct.json",
+      "experiment_id": 137,
+      "source_file_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b"
+    },
+    {
+      "file": "seed1_A10_lowest_memory_within_1pct.json",
+      "experiment_id": 147,
+      "source_file_sha256": "f313a9b312be6676d1b5363dbf55c8fca1b5274c3b0b2af82090fe79404987b4"
+    },
+    {
+      "file": "seed1_A15_efficiency_boundary.json",
+      "experiment_id": 152,
+      "source_file_sha256": "308309de83d7da2723e3bae54f0833089b06d4da6ac89f27a227d3c96beb1cf6"
+    },
+    {
+      "file": "seed1_A16_degradation_boundary.json",
+      "experiment_id": 153,
+      "source_file_sha256": "b7b671de8ad0ac829c722090e9f15a4616a9cffadd78dcba5567ecb395853e6a"
+    },
+    {
+      "file": "seed1_A21_fastest_within_1pct.json",
+      "experiment_id": 158,
+      "source_file_sha256": "bd0e52b383e6eca77f182e7b7d71b14b8beaa1be54ef7f883a2fb82d6a7225eb"
+    },
+    {
+      "file": "seed1_A25_best_validation_bpb.json",
+      "experiment_id": 162,
+      "source_file_sha256": "bbbe813237c5513e40386a99b2a4585f664cdec6391b1229efbea3ace2b329ee"
+    },
+    {
+      "file": "seed42_A14_balanced.json",
+      "experiment_id": 101,
+      "source_file_sha256": "6854f6ef9d7767605835acd89835a2f534a2f0dc90b4e2014faa828ebfffde3c"
+    },
+    {
+      "file": "seed42_A15_efficiency.json",
+      "experiment_id": 102,
+      "source_file_sha256": "f77dc3bb16cd3ee424443acf5629845a60f58ee9d52d14940361cd967935d8eb"
+    },
+    {
+      "file": "seed42_A16_primary_efficiency.json",
+      "experiment_id": 103,
+      "source_file_sha256": "b206f4688e8f794f99502dd1b5fbbac04991a4b5a1693088009601bf48548958"
+    },
+    {
+      "file": "seed42_A17_fastest_smallest.json",
+      "experiment_id": 104,
+      "source_file_sha256": "3787be8708f44d09005aefdbf2ac9147752c709a700e4840c518fb81d689765e"
+    },
+    {
+      "file": "seed42_A21_kv_shared.json",
+      "experiment_id": 108,
+      "source_file_sha256": "820f11ee7320f80392ed6f2a69174866ef6751dfe38818052b2290024663e4aa"
+    },
+    {
+      "file": "seed42_A22_best_validation_bpb.json",
+      "experiment_id": 109,
+      "source_file_sha256": "0f99e3c815a2a127b78805ffab9d2c7cfb37c98530317ab9398fee6e38d92703"
+    }
+  ]
+}
