@@ -1,6 +1,6 @@
 # Data
 
-These CSV files are public exports from the audited `results/results.db` ledger used for this release. They are sufficient to reproduce the plots in `/plots` and the tables in the repository README.
+These CSV files are public exports from the audited `results/results.db` ledger used for this release. They are sufficient to regenerate the released tables and plots with [`scripts/generate_release_plots.py`](../scripts/generate_release_plots.py).
 
 | File | Rows | Contents |
 |---|---:|---|
@@ -11,4 +11,3 @@ These CSV files are public exports from the audited `results/results.db` ledger 
 All published performance measurements use one NVIDIA A40 and bfloat16. The README names the workload for every headline value: 256 input tokens, 256 generated tokens, batch size 1, and 10 measured cached-decode repetitions. Deployment rows use their own explicit workload columns and should not be substituted for that headline measurement.
 
 The raw SQLite ledger is intentionally not included in this first results release. It contains operational records and will be released with the full code and paper.
-

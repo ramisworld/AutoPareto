@@ -2,13 +2,13 @@
 
 AutoPareto is a controlled autonomous research loop for Transformer architecture and training configuration search. For each attempt, it mutates a candidate, retrains from scratch under a fixed budget, runs protected cached-inference evaluation, and selects on validation BPB, cached decode throughput, allocated GPU memory, and parameter count. In the seed-0 discovery campaign, a 26.2M-parameter candidate reached **1.0974 validation BPB, 408.4 cached tokens/s, and 141.4 MiB allocated GPU memory**, versus the same-seed 50.3M-parameter baseline at 1.2137 BPB, 164.1 tokens/s, and 249.9 MiB: **9.6% lower validation BPB, 2.49× throughput, 43.4% less memory, and 47.9% fewer parameters**. These are discovery measurements, not a confirmed frontier.
 
-Against the strongest cached-inference-compatible historical AutoResearch reference, the same candidate has near-identical validation BPB, 1.0974 versus 1.0968, at **2.53× cached decode throughput and 43.4% less allocated GPU memory**. The reference is a historical seed-42 run rather than a same-seed comparison; both use the headline bfloat16 A40 cached-decode workload below.
+Against the strongest cached-inference-compatible historical AutoResearch reference, the same candidate has near-identical validation BPB, 1.0974 versus 1.0968, at **2.53× cached decode throughput and 43.4% less allocated GPU memory**. This is a historical seed-42 comparison, not a same-seed result, and the AutoResearch study used earlier cache-evaluation rules. It is retained as contextual discovery evidence, not a matched final-evaluator claim.
 
 **Headline measurement conditions:** one NVIDIA A40; bfloat16; cached decode; 256 input tokens; 256 generated tokens; batch size 1; 10 measured repetitions. Validation BPB is measured after 300 training seconds from scratch.
 
 ![Discovery frontier](plots/discovery_frontier.png)
 
-*Discovery frontier (confirmation retraining in progress). Seed-0 candidates are plotted as discovery evidence. Point area encodes allocated inference memory. The same-seed baseline and the historical compatible AutoResearch reference are marked.*
+*Discovery frontier. Seed-0 candidates are discovery evidence; the frozen confirmation retraining plan has not started. Point area encodes allocated inference memory. The same-seed baseline and the historical compatible AutoResearch reference are marked.*
 
 ## Method
 
@@ -84,7 +84,7 @@ Across discovery campaigns, reducing depth often lowered allocated memory and in
 
 ### 2. Compact candidates retained near-reference validation BPB in the fixed-budget regime
 
-The seed-0 A25 candidate has 26.21M parameters, 1.0974 validation BPB, 408.4 cached tokens/s, and 141.4 MiB allocated memory. The historical compatible AutoResearch reference has 50.33M parameters, 1.0968 BPB, 161.6 tokens/s, and 249.9 MiB. This is a discovery comparison under the same headline inference workload, not a same-seed confirmation result.
+The seed-0 A25 candidate has 26.21M parameters, 1.0974 validation BPB, 408.4 cached tokens/s, and 141.4 MiB allocated memory. The historical compatible AutoResearch reference has 50.33M parameters, 1.0968 BPB, 161.6 tokens/s, and 249.9 MiB. This is a historical discovery comparison under the same headline inference workload, not a same-seed or final-evaluator confirmation result.
 
 ### 3. Smaller training batch, not the architecture bundle, drove most of the five-minute validation gain
 
@@ -128,7 +128,7 @@ AutoPareto edited arbitrary candidate code, whereas the classical methods search
 ## Status and limitations
 
 - **Discovery evidence:** three 25-attempt AutoPareto campaigns are complete. The release includes 284 experiment records, 302 training runs, and 3,017 inference-plus-deployment measurement rows.
-- **Confirmation retraining:** not complete. The frozen plan retrains four seed-0 candidates, A12, A22, A24, and A25, across seeds 0, 1, and 2 for 12 runs total.
+- **Confirmation retraining:** planned, not started. The frozen plan retrains four seed-0 candidates, A12, A22, A24, and A25, across seeds 0, 1, and 2 for 12 runs total.
 - **Confirmed frontier:** empty. No discovery candidate is presented as a confirmed Pareto-frontier result.
 - **Downstream evaluation:** frozen but unrun. The suite contains held-out ClimbMix, LAMBADA, BLiMP, PIQA, and ARC-Easy.
 - **Quantization:** specified but unrun. The planned protocol includes a bfloat16 reference and INT8 weight-only evaluation, with INT4 only if an A40-compatible kernel is verified.
@@ -143,6 +143,9 @@ Full agent and search code will be released with the paper. Targeting a NeurIPS 
 | Path | Contents |
 |---|---|
 | [`data/`](data/) | CSV exports for experiment records, repeated inference measurements, and deployment measurements. |
-| [`configs/`](configs/) | Exact named-candidate configuration snapshots with source hashes. |
+| [`configs/`](configs/) | Named-candidate parameter snapshots with source hashes. |
 | [`plots/`](plots/) | SVG and PNG versions of the released plots. |
 | [`protocol/`](protocol/) | Protocol and public ledger-schema description. |
+| [`scripts/`](scripts/) | Export, plot-generation, and verification utilities for this release. |
+| [`RELEASE.md`](RELEASE.md) | Frozen release provenance and file hashes. |
+| [`REPRODUCIBILITY.md`](REPRODUCIBILITY.md) | What this release can and cannot reproduce. |

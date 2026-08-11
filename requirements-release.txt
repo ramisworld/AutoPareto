@@ -1,0 +1,2 @@
+# Required only to regenerate plots. The release verifier and CSV exporter use Python's standard library.
+matplotlib==3.10.8
