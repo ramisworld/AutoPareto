@@ -14,7 +14,7 @@ classical-search controls. We then evaluated a frozen seven-recipe panel at exac
 201,326,592 training tokens using three seeds per recipe. The strongest current
 balanced AutoPareto candidate, AP292, has 29.36M parameters, a mean stabilized cached
 decode throughput of 383.02 tokens/s, and a mean steady-state-equivalent training time
-of 385.02 s. The equal-size AutoResearch reference has 50.33M parameters, 192.93
+of 385.02 s. The AutoResearch reference has 50.33M parameters, 192.93
 tokens/s, and 696.16 s respectively. AP292 therefore demonstrates a substantial
 efficiency point, but its held-out BPB is worse (1.14184 versus 1.09980) and its BLiMP
 accuracy is lower (0.72017 versus 0.74559). ARC-Easy, PIQA, and LAMBADA exact match
@@ -33,7 +33,8 @@ downstream tasks, while also showing that the quality cost is real and task-depe
 ## Open questions before submission
 
 - Which individual architectural or training changes cause AP292’s efficiency, after
-  controlling for parameter count, batch size, and training schedule?
+  controlling for parameter count and training schedule? (AP292 and AutoResearch
+  already use the same batch settings in the equal-token verification.)
 - Does the AP292 frontier transfer from the A40 to an RTX 3090 and H100?
 - Does the result survive a final untouched shard and a larger 100–300M-scale pilot?
 - Are classical-search comparisons fair under matched seeds, budgets, and checkpoint
