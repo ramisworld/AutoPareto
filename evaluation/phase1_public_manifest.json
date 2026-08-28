@@ -1,0 +1,81 @@
+{
+  "format": "autopareto_public_phase1_manifest_v1",
+  "status": "verified_equal_token_protocol",
+  "campaign": "phase1-equal-token-verification",
+  "token_budget": 201326592,
+  "seeds": [3, 4, 5],
+  "hardware": "NVIDIA A40",
+  "sequence_length": 2048,
+  "device_batch_size": 64,
+  "models": [
+    {
+      "model_id": "baseline",
+      "parameter_count": 50332176,
+      "source_path": "results/candidates/baseline-a40-seed0/0002-train.py",
+      "source_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "total_batch_size": 524288,
+      "gradient_accumulation": 4
+    },
+    {
+      "model_id": "autoresearch_compatible",
+      "parameter_count": 50332176,
+      "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "total_batch_size": 131072,
+      "gradient_accumulation": 1
+    },
+    {
+      "model_id": "tpe_quality",
+      "parameter_count": 39846284,
+      "source_path": "results/candidates/tpe-seed42-20260805/0021-train.py",
+      "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "total_batch_size": 131072,
+      "gradient_accumulation": 1
+    },
+    {
+      "model_id": "motpe_quality",
+      "parameter_count": 26345772,
+      "source_path": "results/candidates/motpe-seed42-20260805/0022-train.py",
+      "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "total_batch_size": 131072,
+      "gradient_accumulation": 1
+    },
+    {
+      "model_id": "autopareto_292",
+      "parameter_count": 29360392,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "total_batch_size": 131072,
+      "gradient_accumulation": 1
+    },
+    {
+      "model_id": "autopareto_299",
+      "parameter_count": 26214662,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0025-train.py",
+      "source_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "total_batch_size": 131072,
+      "gradient_accumulation": 1
+    },
+    {
+      "model_id": "autopareto_294",
+      "parameter_count": 17891526,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0024-train.py",
+      "source_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "total_batch_size": 131072,
+      "gradient_accumulation": 1
+    }
+  ],
+  "evaluation": {
+    "suite_path": "evaluation/downstream_suite.json",
+    "result_summary_path": "results/phase1/public_downstream_metrics.json",
+    "training_summary_path": "results/phase1/phase1_equal_token_results.json",
+    "figure_data_path": "results/phase1/phase1_equal_token_results.csv",
+    "historical_context_path": "results/phase1/discovery_heldout_bpb.json"
+  },
+  "public_artifact_policy": {
+    "checkpoints_included": false,
+    "databases_included": false,
+    "raw_logs_included": false,
+    "dataset_cache_included": false
+  }
+}

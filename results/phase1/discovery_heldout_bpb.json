@@ -1,0 +1,15 @@
+{
+  "format": "autopareto_public_discovery_heldout_bpb_v1",
+  "campaign": "five-minute discovery",
+  "metric": "held-out ClimbMix bits per byte",
+  "note": "Historical selected representatives; not directly comparable to the equal-token means.",
+  "models": {
+    "baseline": {"source_experiment_id": 4, "heldout_bpb": 1.21272999168195},
+    "autoresearch_compatible": {"source_experiment_id": 77, "heldout_bpb": 1.10238265710456},
+    "tpe_quality": {"source_experiment_id": 183, "heldout_bpb": 1.09770222878352},
+    "motpe_quality": {"source_experiment_id": 300, "heldout_bpb": 1.09750753987337},
+    "autopareto_292": {"source_experiment_id": 292, "heldout_bpb": 1.09393953958691},
+    "autopareto_299": {"source_experiment_id": 299, "heldout_bpb": 1.09867509613115},
+    "autopareto_294": {"source_experiment_id": 294, "heldout_bpb": 1.12537387428022}
+  }
+}

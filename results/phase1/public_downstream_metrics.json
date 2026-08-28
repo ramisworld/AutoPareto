@@ -1,0 +1,181 @@
+{
+  "format": "autopareto_public_phase1_downstream_metrics_v1",
+  "campaign": "phase1-200m-downstream",
+  "token_budget": 201326592,
+  "seeds": [3, 4, 5],
+  "notes": [
+    "Aggregate means and sample standard deviations across seeds 3, 4, and 5.",
+    "This public summary intentionally excludes the private SQLite database and per-run raw bundles.",
+    "Higher is better for accuracy and exact match; lower is better for perplexity and BPB."
+  ],
+  "models": {
+    "baseline": {
+      "parameter_count": 50332176,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.352834, "sample_standard_deviation": 0.014775},
+          "length_normalized_accuracy": {"mean": 0.333333, "sample_standard_deviation": 0.002628}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.573631, "sample_standard_deviation": 0.004155},
+          "length_normalized_accuracy": {"mean": 0.576895, "sample_standard_deviation": 0.002738}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.204735, "sample_standard_deviation": 0.006053},
+          "perplexity": {"mean": 14.347381, "sample_standard_deviation": 0.571008}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.713721, "sample_standard_deviation": 0.008240},
+          "micro_accuracy": {"mean": 0.713721, "sample_standard_deviation": 0.008240}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.146590, "sample_standard_deviation": 0.004673}
+        }
+      }
+    },
+    "autoresearch_compatible": {
+      "parameter_count": 50332176,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.365039, "sample_standard_deviation": 0.013744},
+          "length_normalized_accuracy": {"mean": 0.324355, "sample_standard_deviation": 0.009282}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.586688, "sample_standard_deviation": 0.013660},
+          "length_normalized_accuracy": {"mean": 0.572543, "sample_standard_deviation": 0.014295}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.204412, "sample_standard_deviation": 0.009295},
+          "perplexity": {"mean": 14.151782, "sample_standard_deviation": 0.997844}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.745592, "sample_standard_deviation": 0.005920},
+          "micro_accuracy": {"mean": 0.745592, "sample_standard_deviation": 0.005920}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.099803, "sample_standard_deviation": 0.001943}
+        }
+      }
+    },
+    "tpe_quality": {
+      "parameter_count": 39846284,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.357043, "sample_standard_deviation": 0.010113},
+          "length_normalized_accuracy": {"mean": 0.324635, "sample_standard_deviation": 0.012171}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.576351, "sample_standard_deviation": 0.007101},
+          "length_normalized_accuracy": {"mean": 0.560754, "sample_standard_deviation": 0.008979}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.214244, "sample_standard_deviation": 0.012587},
+          "perplexity": {"mean": 13.915339, "sample_standard_deviation": 1.448747}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.732970, "sample_standard_deviation": 0.007820},
+          "micro_accuracy": {"mean": 0.732970, "sample_standard_deviation": 0.007820}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.119402, "sample_standard_deviation": 0.004271}
+        }
+      }
+    },
+    "motpe_quality": {
+      "parameter_count": 26345772,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.354097, "sample_standard_deviation": 0.018143},
+          "length_normalized_accuracy": {"mean": 0.339646, "sample_standard_deviation": 0.015725}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.574538, "sample_standard_deviation": 0.004453},
+          "length_normalized_accuracy": {"mean": 0.565651, "sample_standard_deviation": 0.003279}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.215279, "sample_standard_deviation": 0.022652},
+          "perplexity": {"mean": 15.061575, "sample_standard_deviation": 1.727131}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.724726, "sample_standard_deviation": 0.005488},
+          "micro_accuracy": {"mean": 0.724726, "sample_standard_deviation": 0.005488}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.148253, "sample_standard_deviation": 0.003102}
+        }
+      }
+    },
+    "autopareto_292": {
+      "parameter_count": 29360392,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.369108, "sample_standard_deviation": 0.003645},
+          "length_normalized_accuracy": {"mean": 0.341611, "sample_standard_deviation": 0.012906}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.582880, "sample_standard_deviation": 0.002571},
+          "length_normalized_accuracy": {"mean": 0.579071, "sample_standard_deviation": 0.004155}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.214956, "sample_standard_deviation": 0.018502},
+          "perplexity": {"mean": 14.208496, "sample_standard_deviation": 1.632028}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.720174, "sample_standard_deviation": 0.003573},
+          "micro_accuracy": {"mean": 0.720174, "sample_standard_deviation": 0.003573}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.141837, "sample_standard_deviation": 0.006035}
+        }
+      }
+    },
+    "autopareto_299": {
+      "parameter_count": 26214662,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.356762, "sample_standard_deviation": 0.015552},
+          "length_normalized_accuracy": {"mean": 0.325617, "sample_standard_deviation": 0.019385}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.572724, "sample_standard_deviation": 0.007387},
+          "length_normalized_accuracy": {"mean": 0.563293, "sample_standard_deviation": 0.013616}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.207646, "sample_standard_deviation": 0.002099},
+          "perplexity": {"mean": 15.604131, "sample_standard_deviation": 0.725848}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.704736, "sample_standard_deviation": 0.007093},
+          "micro_accuracy": {"mean": 0.704736, "sample_standard_deviation": 0.007093}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.159309, "sample_standard_deviation": 0.000370}
+        }
+      }
+    },
+    "autopareto_294": {
+      "parameter_count": 17891526,
+      "metrics": {
+        "arc_easy": {
+          "accuracy": {"mean": 0.348345, "sample_standard_deviation": 0.008832},
+          "length_normalized_accuracy": {"mean": 0.330527, "sample_standard_deviation": 0.009050}
+        },
+        "piqa": {
+          "accuracy": {"mean": 0.569097, "sample_standard_deviation": 0.002372},
+          "length_normalized_accuracy": {"mean": 0.562749, "sample_standard_deviation": 0.002997}
+        },
+        "lambada_openai": {
+          "exact_match": {"mean": 0.199172, "sample_standard_deviation": 0.006089},
+          "perplexity": {"mean": 17.706836, "sample_standard_deviation": 0.476929}
+        },
+        "blimp": {
+          "macro_accuracy": {"mean": 0.693343, "sample_standard_deviation": 0.010543},
+          "micro_accuracy": {"mean": 0.693343, "sample_standard_deviation": 0.010543}
+        },
+        "heldout_climbmix_bpb": {
+          "bits_per_byte": {"mean": 1.190057, "sample_standard_deviation": 0.002179}
+        }
+      }
+    }
+  }
+}

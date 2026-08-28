@@ -1,0 +1,12 @@
+{
+  "format": "autopareto_phase1_200m_downstream_summary_v1",
+  "generation_rows": 576,
+  "runs": [
+    [
+      "completed",
+      32
+    ]
+  ],
+  "selection_sha256": "226c381fef6d6cd2711e23d8b3d266818f6c7fdd5a281823303db4daf79cf477",
+  "task_rows": 288
+}
