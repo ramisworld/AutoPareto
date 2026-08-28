@@ -1,0 +1,346 @@
+{
+  "config": "evaluation/phase1_stabilized_inference_rebenchmark.json",
+  "format": "autopareto_phase1_stabilized_inference_rebenchmark_results_v1",
+  "maximum_throughput_policy": "diagnostic only; never substituted for the primary metric",
+  "models": [
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 4,
+      "checkpoint_provenance": "historical selected checkpoint for experiment 4",
+      "historical_legacy_median_tok_per_s": 158.3153909482479,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator",
+      "incremental_kv_cache_median_mb": null,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/01-baseline.log",
+      "measurement_pass_medians_tok_per_s": [],
+      "measurement_pass_stability": [],
+      "model_id": "baseline",
+      "partial_median_tok_per_s_diagnostic": null,
+      "peak_allocated_vram_mb": null,
+      "peak_reserved_vram_mb": null,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/01-baseline.json",
+      "returncode": 2,
+      "role": "untouched original train.py baseline",
+      "source_experiment_id": 4,
+      "standardized_max_tok_per_s_diagnostic": null,
+      "standardized_median_tok_per_s": null,
+      "status": "unstable_environment",
+      "warmup_counts": [
+        30
+      ]
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 77,
+      "checkpoint_provenance": "exact-recipe recovery/confirmation checkpoint for source experiment 68; original checkpoint unavailable",
+      "historical_legacy_median_tok_per_s": 161.4235396941305,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute for source experiment 68; legacy fixed warm-up evaluator",
+      "incremental_kv_cache_median_mb": null,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/02-autoresearch_compatible.log",
+      "measurement_pass_medians_tok_per_s": [],
+      "measurement_pass_stability": [],
+      "model_id": "autoresearch_compatible",
+      "partial_median_tok_per_s_diagnostic": null,
+      "peak_allocated_vram_mb": null,
+      "peak_reserved_vram_mb": null,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/02-autoresearch_compatible.json",
+      "returncode": 2,
+      "role": "strongest/frozen AutoResearch representative",
+      "source_experiment_id": 68,
+      "standardized_max_tok_per_s_diagnostic": null,
+      "standardized_median_tok_per_s": null,
+      "status": "unstable_environment",
+      "warmup_counts": [
+        30
+      ]
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 183,
+      "checkpoint_provenance": "historical selected checkpoint for source experiment 183",
+      "historical_legacy_median_tok_per_s": 212.29453004307547,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator",
+      "incremental_kv_cache_median_mb": 2.98828125,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/03-tpe_quality.log",
+      "measurement_pass_medians_tok_per_s": [
+        253.39539748694267,
+        219.89688687661595
+      ],
+      "measurement_pass_stability": [
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.011040416948089028,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.027592812950758053,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": false
+        }
+      ],
+      "model_id": "tpe_quality",
+      "partial_median_tok_per_s_diagnostic": 250.95900427841136,
+      "peak_allocated_vram_mb": 205.880859375,
+      "peak_reserved_vram_mb": 242.0,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/03-tpe_quality.json",
+      "returncode": 2,
+      "role": "strongest/frozen TPE representative",
+      "source_experiment_id": 183,
+      "standardized_max_tok_per_s_diagnostic": 256.165828359301,
+      "standardized_median_tok_per_s": null,
+      "status": "unstable_environment",
+      "warmup_counts": [
+        15,
+        10
+      ]
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 300,
+      "checkpoint_provenance": "exact-recipe recovery checkpoint for source experiment 234; original checkpoint unavailable",
+      "historical_legacy_median_tok_per_s": 226.08480692471505,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute for source experiment 234; legacy fixed warm-up evaluator",
+      "incremental_kv_cache_median_mb": 2.2412109375,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/04-motpe_quality.log",
+      "measurement_pass_medians_tok_per_s": [
+        267.8347841231126,
+        269.5926367587109,
+        268.26668997603156
+      ],
+      "measurement_pass_stability": [
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.0012824022369161265,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.0010303147955509273,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.0109594493250248,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        }
+      ],
+      "model_id": "motpe_quality",
+      "partial_median_tok_per_s_diagnostic": 268.34378283854244,
+      "peak_allocated_vram_mb": 145.568359375,
+      "peak_reserved_vram_mb": 216.0,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/04-motpe_quality.json",
+      "returncode": 0,
+      "role": "strongest/frozen MOTPE representative",
+      "source_experiment_id": 234,
+      "standardized_max_tok_per_s_diagnostic": 272.0078404888483,
+      "standardized_median_tok_per_s": 268.34378283854244,
+      "status": "completed",
+      "warmup_counts": [
+        25,
+        10,
+        10
+      ]
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 292,
+      "checkpoint_provenance": "confirmed selected checkpoint for experiment 292, exact recipe sourced from discovery experiment 134",
+      "historical_legacy_median_tok_per_s": 318.27445787057286,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator",
+      "incremental_kv_cache_median_mb": 1.9921875,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/05-autopareto_292.log",
+      "measurement_pass_medians_tok_per_s": [
+        307.57067908649816,
+        316.36340790645875
+      ],
+      "measurement_pass_stability": [
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.01257272121021773,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.02571448845528332,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": false
+        }
+      ],
+      "model_id": "autopareto_292",
+      "partial_median_tok_per_s_diagnostic": 308.590818567692,
+      "peak_allocated_vram_mb": 162.8798828125,
+      "peak_reserved_vram_mb": 222.0,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/05-autopareto_292.json",
+      "returncode": 2,
+      "role": "AutoPareto confirmed-quality recipe",
+      "source_experiment_id": 292,
+      "standardized_max_tok_per_s_diagnostic": 342.7825570648898,
+      "standardized_median_tok_per_s": null,
+      "status": "unstable_environment",
+      "warmup_counts": [
+        10,
+        30
+      ]
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 299,
+      "checkpoint_provenance": "confirmed selected checkpoint for experiment 299, exact recipe sourced from discovery experiment 137",
+      "historical_legacy_median_tok_per_s": 361.1765124935292,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator; smoke showed later timing drift",
+      "incremental_kv_cache_median_mb": 1.494140625,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/06-autopareto_299.log",
+      "measurement_pass_medians_tok_per_s": [
+        493.64424430663513,
+        493.4023578128471,
+        474.88973640130746
+      ],
+      "measurement_pass_stability": [
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.0008131351432150292,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.001491027555815105,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.0016187536725050537,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": false
+        }
+      ],
+      "model_id": "autopareto_299",
+      "partial_median_tok_per_s_diagnostic": 492.8910272413432,
+      "peak_allocated_vram_mb": 142.3798828125,
+      "peak_reserved_vram_mb": 198.0,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/06-autopareto_299.json",
+      "returncode": 2,
+      "role": "AutoPareto shallow-wide / fast-quality recipe",
+      "source_experiment_id": 299,
+      "standardized_max_tok_per_s_diagnostic": 496.11154578249113,
+      "standardized_median_tok_per_s": null,
+      "status": "unstable_environment",
+      "warmup_counts": [
+        25,
+        10,
+        15
+      ]
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_experiment_id": 294,
+      "checkpoint_provenance": "confirmed selected checkpoint for experiment 294, exact recipe sourced from discovery experiment 136",
+      "historical_legacy_median_tok_per_s": 404.9996000762904,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator",
+      "incremental_kv_cache_median_mb": 1.12060546875,
+      "log": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/07-autopareto_294.log",
+      "measurement_pass_medians_tok_per_s": [
+        493.099671696055,
+        494.5905030271049,
+        415.51327928185714
+      ],
+      "measurement_pass_stability": [
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.006593980140005947,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.007461223746588818,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": true
+        },
+        {
+          "coefficient_of_variation_limit": 0.05,
+          "current_block_index": 1,
+          "median_relative_drift": 0.1779335967783243,
+          "median_relative_tolerance": 0.02,
+          "previous_block_index": 0,
+          "stable": false
+        }
+      ],
+      "model_id": "autopareto_294",
+      "partial_median_tok_per_s_diagnostic": 491.85854083332754,
+      "peak_allocated_vram_mb": 106.9423828125,
+      "peak_reserved_vram_mb": 168.0,
+      "raw_output": "results/phase1/stabilized_inference/phase1-stabilized-inference-a40-20260824-retry1/07-autopareto_294.json",
+      "returncode": 2,
+      "role": "AutoPareto efficiency-boundary recipe",
+      "source_experiment_id": 294,
+      "standardized_max_tok_per_s_diagnostic": 498.8283275987425,
+      "standardized_median_tok_per_s": null,
+      "status": "unstable_environment",
+      "warmup_counts": [
+        30,
+        10,
+        20
+      ]
+    }
+  ],
+  "primary_metric": "median_cached_decode_tokens_per_second from the 30 stabilized measured repetitions",
+  "protocol": {
+    "evaluator": "deployment_benchmark.py",
+    "failure_policy": "a pass or model that does not stabilize is explicitly unresolved and has no canonical throughput value",
+    "headline_summary": "median of all 30 stabilized synchronized-wall-clock decode repetitions; maximum is diagnostic only",
+    "measured_block_gate": "each pass also requires its first and second five-measurement blocks to satisfy the same 2% median-drift and 5% CV rule",
+    "measurement_passes": 3,
+    "repetitions_per_pass": 10,
+    "stability_policy": {
+      "adjacent_median_relative_tolerance": 0.02,
+      "max_warmups_per_pass": 30,
+      "required_stable_adjacent_blocks": 2,
+      "warmup_block_size": 5,
+      "within_block_coefficient_of_variation_limit": 0.05
+    },
+    "version": "autopareto_inference_stabilized_v2"
+  },
+  "status": "COMPLETED_WITH_EXPLICIT_MODEL_STATUSES",
+  "workload": {
+    "batch_size": 1,
+    "generated_tokens": 256,
+    "generation_mode": "greedy",
+    "hardware": "NVIDIA A40",
+    "input_tokens": 256,
+    "metric_mode": "cached_decode",
+    "precision": "bfloat16",
+    "prompt": "benchmark_config.FIXED_INPUT_TEXT",
+    "selection_rationale": "Phase 1 protected headline workload; the timing protocol is corrected without changing the frozen Phase 1 workload."
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "format": "autopareto_downstream_quality_suite_v1",
+  "status": "preregistered_before_seed0",
+  "purpose": "Post-search language-quality characterization only. These measurements never influence search proposals, Pareto retention, or the three headline objectives.",
+  "selection": {
+    "timing": "after all authorized AutoPareto and classical search campaigns finish",
+    "rule": "mechanical representatives only",
+    "roles": [
+      "same-seed baseline",
+      "best confirmed AutoResearch quality",
+      "best confirmed AutoPareto quality",
+      "fastest confirmed AutoPareto model within the preregistered quality budget",
+      "lowest-memory confirmed AutoPareto model within the preregistered quality budget",
+      "largest-contribution confirmed AutoPareto trade-off",
+      "mechanically selected representative from each completed classical method"
+    ]
+  },
+  "runtime": {
+    "precision": "bfloat16",
+    "device": "cuda",
+    "max_sequence_tokens": 2048,
+    "scoring_batch_size": 8,
+    "random_seed": 20260731,
+    "datasets_package": "5.0.1"
+  },
+  "heldout_bpb": {
+    "dataset": "karpathy/climbmix-400b-shuffle",
+    "dataset_revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+    "filename": "shard_06541.parquet",
+    "evaluated_tokens": 5242880,
+    "bootstrap_repetitions": 1000,
+    "metric": "bits_per_byte",
+    "higher_is_better": false
+  },
+  "tasks": [
+    {
+      "name": "lambada_openai",
+      "dataset": "EleutherAI/lambada_openai",
+      "dataset_revision": "900124bf3b8235c6daf21033af9948b3f07346c4",
+      "dataset_config": "default",
+      "split": "test",
+      "metrics": [
+        "perplexity",
+        "exact_match"
+      ],
+      "prompt_contract": "Score the final whitespace-delimited word, including its leading space, from the preceding passage."
+    },
+    {
+      "name": "blimp",
+      "dataset": "nyu-mll/blimp",
+      "dataset_revision": "877fba0801ffb7cbd8c39c1ff314a46f053f6036",
+      "dataset_config": "all",
+      "split": "train",
+      "metrics": [
+        "macro_accuracy",
+        "micro_accuracy"
+      ],
+      "prompt_contract": "Choose the sentence with the larger unnormalized full-sentence log likelihood; report every configuration and their unweighted macro average."
+    },
+    {
+      "name": "piqa",
+      "dataset": "baber/piqa",
+      "dataset_revision": "142f6d7367fd9877f0fb3b5734ea6a545f54cdd1",
+      "dataset_config": null,
+      "split": "validation",
+      "metrics": [
+        "accuracy",
+        "length_normalized_accuracy"
+      ],
+      "prompt_contract": "Context is 'Question: {goal}\\nAnswer:' and each candidate continuation begins with one space."
+    },
+    {
+      "name": "arc_easy",
+      "dataset": "allenai/ai2_arc",
+      "dataset_revision": "210d026faf9955653af8916fad021475a3f00453",
+      "dataset_config": "ARC-Easy",
+      "split": "test",
+      "metrics": [
+        "accuracy",
+        "length_normalized_accuracy"
+      ],
+      "prompt_contract": "Context is 'Question: {question}\\nAnswer:' and each candidate continuation begins with one space."
+    }
+  ],
+  "qualitative_completions": {
+    "scientific_role": "illustration_only_not_an_optimization_metric",
+    "generated_tokens": 128,
+    "temperature": 0.8,
+    "top_k": 50,
+    "seeds": [
+      0,
+      1,
+      2
+    ],
+    "prompts": [
+      {
+        "id": "narrative",
+        "text": "The scientist opened the old notebook and discovered that"
+      },
+      {
+        "id": "explanation",
+        "text": "In simple terms, the reason the sky appears blue is"
+      },
+      {
+        "id": "technical",
+        "text": "A key-value cache makes transformer inference faster because"
+      },
+      {
+        "id": "argument",
+        "text": "The strongest argument for using renewable energy is"
+      },
+      {
+        "id": "code",
+        "text": "def fibonacci(n):\n    \"\"\"Return the nth Fibonacci number.\"\"\"\n"
+      },
+      {
+        "id": "continuation",
+        "text": "When the power failed across the city, Maya knew she had only one option:"
+      }
+    ]
+  },
+  "reporting": {
+    "aggregate_policy": "Do not collapse heterogeneous tasks into one undocumented quality score.",
+    "uncertainty": "Report binomial standard errors for accuracies and a deterministic segment bootstrap interval for held-out BPB.",
+    "raw_results_required": true,
+    "failures_required": true
+  }
+}

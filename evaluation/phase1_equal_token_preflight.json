@@ -1,0 +1,1147 @@
+{
+  "analysis_policy": {
+    "amendment_rule": "do not change primary outcomes after seed-3 results without a recorded protocol amendment",
+    "deployment_gate": "inference is a separate gate; unstable inference does not invalidate training or BPB, but deployment throughput remains unavailable",
+    "primary_deployment_metric": "final protected cached-decode throughput under the frozen headline workload/protocol",
+    "primary_quality_metric": "final held-out BPB at exactly 201326592 training tokens",
+    "primary_training_efficiency_metric": "steady_state_equivalent_seconds for exactly 201326592 tokens, computed from synchronized post-step-11 throughput",
+    "secondary_training_time_metric": "total_scientific_step_wall_seconds, the observed sum from first through final optimizer step",
+    "seed_aggregation": "report every seed, arithmetic mean, sample SD, and paired candidate-minus-baseline differences; no successful-run outlier deletion",
+    "supporting_metrics": [
+      "validation BPB at the four registered token milestones",
+      "allocated and reserved VRAM",
+      "incremental KV-cache memory",
+      "cached-decode correctness",
+      "time-to-quality only for a pre-declared threshold with no post-hoc cherry-picking"
+    ]
+  },
+  "data_equivalence": {
+    "claim_scope": "same exact token-ID microbatch sequence for all seven models at each fixed seed, conditional on identical tokenizer/data cache bytes",
+    "determinism_basis": [
+      "sorted training shard paths excluding pinned validation shard",
+      "deterministic parquet row-group and row order",
+      "deterministic tokenizer encoding of each document batch",
+      "deterministic best-fit packing and shortest-document cropping",
+      "no random operation or seed-dependent branch in make_dataloader",
+      "all seven frozen sources use the identical loader call and defaults"
+    ],
+    "exact_sequence_for_fixed_cache": true,
+    "loader_call_signature": "make_dataloader(tokenizer, DEVICE_BATCH_SIZE, MAX_SEQ_LEN, \"train\")",
+    "loader_function": "make_dataloader",
+    "loader_path": "prepare.py",
+    "loader_settings": {
+      "baseline_gradient_accumulation": 4,
+      "device_batch_size": 64,
+      "microbatch_tokens": 131072,
+      "microbatches_to_target": 1536,
+      "other_gradient_accumulation": 1,
+      "sequence_length": 2048
+    },
+    "loader_sha256_at_preflight": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+    "microbatch_boundary_proof": "baseline consumes 4 consecutive microbatches per optimizer step; the other six consume 1; 384*4 = 1536*1 = 1536",
+    "runtime_hash_output": "results/phase1/token_stream_verification.json",
+    "runtime_hashes_observed": false,
+    "seed_effect": "seed changes model initialization and training RNG only; loader sequence is seed-independent",
+    "status": "ANALYTICALLY_ESTABLISHED_RUNTIME_HASH_REQUIRED",
+    "verification_script": "scripts/verify_phase1_token_stream.py"
+  },
+  "documentation_sha256": {
+    "docs/PHASE1_EQUAL_TOKEN_PREFLIGHT.md": "4860b584d89bea21b737907cf4bb7eea81038bec51c6ab2f1be76ec24b69796b",
+    "docs/PHASE1_MEASUREMENT_AMENDMENT.md": "ef28b2b101ca13fe9ad2c649adf860fefdf438ced767196fc20b92e3b7dd2d33"
+  },
+  "format": "autopareto_phase1_equal_token_preflight_v3",
+  "implementation": {
+    "checkpoint_evaluator": "scripts/evaluate_phase1_checkpoints.py",
+    "preflight_generator": "scripts/prepare_phase1_equal_tokens.py",
+    "runtime_recorder": "protected/phase1_runtime.py",
+    "source_transform": "protected/phase1_source_transform.py",
+    "staged_executor": "scripts/run_phase1_equal_tokens.py",
+    "token_launcher": "protected/phase1_train_launcher.py",
+    "token_stream_verifier": "scripts/verify_phase1_token_stream.py",
+    "transform_policy": "hash-verify frozen source, derive execution-only source, preserve original source bytes"
+  },
+  "implementation_sha256": {
+    "protected/phase1_runtime.py": "527c1093867ee36d8021cf0156b3766aff9c8c3b97a6f97d6ed532a90cae94fd",
+    "protected/phase1_source_transform.py": "efb993cd97fd8cb6e62d0e56d682dfed4bd07a62fa4088310a4db2d9e77a1e01",
+    "protected/phase1_train_launcher.py": "6b39dbccbaa89ca32f2657999352aa2590f7728f2f31fbe09f016084660adb84",
+    "scripts/evaluate_phase1_checkpoints.py": "2c2d0e8d25df3a3fecb4f93c90ecd1784f3ac478208e80e7856477b20525cf7c",
+    "scripts/prepare_phase1_equal_tokens.py": "06eb9dd8f1a5da180bd58a60ba573b7df68473397cccd476b0ec9b23a9d1c788",
+    "scripts/run_phase1_equal_tokens.py": "e4e5d530de55745df43e250e18f4b324513858d50b4b94c9a24587f4a030af0f",
+    "scripts/verify_phase1_token_stream.py": "5f5d1867c9e49aa5d38e16621730df836f99b79f36ecec4c86faa9b4fa762e4a"
+  },
+  "measurement_amendment": {
+    "frozen_source_files_unchanged": true,
+    "scientific_cuda_events": false,
+    "scientific_execution_unchanged": true,
+    "smoke_excluded_from_scientific_analysis": true,
+    "steady_state_start_step_index": 11,
+    "telemetry_calls_cuda_runtime": false,
+    "telemetry_calls_cuda_synchronize": false,
+    "telemetry_implementation": "background NVML/host sampler outside timed critical path; sampler never imports torch or calls CUDA runtime APIs",
+    "telemetry_sampling_interval_seconds": 2.0,
+    "version": "autopareto_phase1_measurement_infrastructure_v3"
+  },
+  "models": [
+    {
+      "architecture": {
+        "depth": 8,
+        "head_dimension": 128,
+        "kv_heads": 4,
+        "query_heads": 4,
+        "width": 512
+      },
+      "checkpoint_history_ids": [
+        4
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "baseline-a40-seed0",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 159401129,
+          "checkpoint_sha256": "d8d03b3ef3df27ea1fe25a5a199b62a9e70ea246f2b443420434f2fb7d1302e9",
+          "database_checkpoint_path": "/workspace/autopareto/results/preserved_checkpoints/baseline-a40-seed0/0002.pt",
+          "experiment_id": 4,
+          "experiment_number": 2,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/baseline-a40-seed0/0002.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": null,
+      "gradient_accumulation": 4,
+      "historical_five_minute": {
+        "campaign_id": "baseline-a40-seed0",
+        "checkpoint_path": "/workspace/autopareto/results/preserved_checkpoints/baseline-a40-seed0/0002.pt",
+        "git_commit": "5ea452c9d86a43ad4bebd507c5872f18249627ce",
+        "incremental_kv_cache_memory_mb": 3.984375,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 158.3153909482479,
+        "parameter_count": 50332176,
+        "peak_inference_cuda_memory_mb": 249.88385009765625,
+        "peak_reserved_inference_cuda_memory_mb": 352.0,
+        "program_sha256": null,
+        "total_runtime_seconds": 468.7313320636749,
+        "total_training_tokens": 92798976,
+        "training_seconds": 301.3131194114685,
+        "training_seed": 1,
+        "training_tokens_per_second": 307981.8634557202,
+        "val_bpb": 1.2127299916819494
+      },
+      "historical_row_id": 4,
+      "method": "baseline",
+      "model_id": "baseline",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 50332176,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 64,
+        "DEPTH": 8,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.6,
+        "FINAL_LR_FRAC": 0.0,
+        "HEAD_DIM": 128,
+        "MATRIX_LR": 0.04,
+        "MUON_NS_STEPS": 5,
+        "SCALAR_LR": 0.5,
+        "TOTAL_BATCH_SIZE": 524288,
+        "UNEMBEDDING_LR": 0.004,
+        "WARMDOWN_RATIO": 0.5,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.2,
+        "WINDOW_PATTERN": "SSSL"
+      },
+      "role": "untouched original train.py baseline",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "sequence_length": 2048,
+      "source_bytes": 26242,
+      "source_experiment_id": 4,
+      "source_path": "results/candidates/baseline-a40-seed0/0002-train.py",
+      "source_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 524288
+    },
+    {
+      "architecture": {
+        "depth": 8,
+        "head_dimension": 128,
+        "kv_heads": 4,
+        "query_heads": 4,
+        "width": 512
+      },
+      "checkpoint_history_ids": [
+        68,
+        77
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "autoresearch-diagnostic5-seed42-20260724",
+          "checkpoint_available_locally": false,
+          "checkpoint_bytes": null,
+          "checkpoint_sha256": null,
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autoresearch-diagnostic5-seed42-20260724/0005.pt",
+          "experiment_id": 68,
+          "experiment_number": 5,
+          "local_checkpoint_path": null
+        },
+        {
+          "campaign_id": "confirmation-exp68-seeds012-20260725",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 159401129,
+          "checkpoint_sha256": "87f5094983f7c3ae78685aee7121e8c3b5ebe11cfbe51eb71334cf9337710dc8",
+          "database_checkpoint_path": "/workspace/autopareto/results/preserved_checkpoints/confirmation-exp68-seeds012-20260725/0003.pt",
+          "experiment_id": 77,
+          "experiment_number": 3,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/confirmation-exp68-seeds012-20260725/0003.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": null,
+      "gradient_accumulation": 1,
+      "historical_five_minute": {
+        "campaign_id": "autoresearch-diagnostic5-seed42-20260724",
+        "checkpoint_path": "/workspace/autopareto/results/checkpoints/autoresearch-diagnostic5-seed42-20260724/0005.pt",
+        "git_commit": "75af7b7ec8d170e59aaac5b68fa154c5a5117a5b",
+        "incremental_kv_cache_memory_mb": 3.984375,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 161.4235396941305,
+        "parameter_count": 50332176,
+        "peak_inference_cuda_memory_mb": 249.88385009765625,
+        "peak_reserved_inference_cuda_memory_mb": 288.0,
+        "program_sha256": "9dde08ed148ae645bd238ed60c1ecde322c9431e4955c053677d761137f9a7ca",
+        "total_runtime_seconds": 498.205525636673,
+        "total_training_tokens": 88866816,
+        "training_seconds": 300.3158621788025,
+        "training_seed": 42,
+        "training_tokens_per_second": 291110.2442799001,
+        "val_bpb": 1.0949760675404565
+      },
+      "historical_row_id": 68,
+      "method": "autoresearch",
+      "model_id": "autoresearch_compatible",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 50332176,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 64,
+        "DEPTH": 8,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.7,
+        "FINAL_LR_FRAC": 0.078125,
+        "HEAD_DIM": 128,
+        "MATRIX_LR": 0.04,
+        "MUON_NS_STEPS": 6,
+        "SCALAR_LR": 0.4,
+        "TOTAL_BATCH_SIZE": 131072,
+        "UNEMBEDDING_LR": 0.006,
+        "WARMDOWN_RATIO": 0.6,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.1,
+        "WINDOW_PATTERN": "SSSS"
+      },
+      "role": "strongest frozen AutoResearch compatible representative",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "selection_note": "Experiment 68 is the preregistered best-compatible AutoResearch recipe. Experiment 19 is a separate historical speed reference, not this role.",
+      "sequence_length": 2048,
+      "source_bytes": 26243,
+      "source_experiment_id": 68,
+      "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 131072
+    },
+    {
+      "architecture": {
+        "depth": 6,
+        "head_dimension": 128,
+        "kv_heads": 4,
+        "query_heads": 4,
+        "width": 512
+      },
+      "checkpoint_history_ids": [
+        183
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "tpe-seed42-20260805",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 125842813,
+          "checkpoint_sha256": "c931ca261d018c433b7a69b4130413c6ef1e7d881317d2dc00f5dc08f9d92509",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/tpe-seed42-20260805/0021.pt",
+          "experiment_id": 183,
+          "experiment_number": 21,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/tpe-seed42-20260805/0021.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": null,
+      "gradient_accumulation": 1,
+      "historical_five_minute": {
+        "campaign_id": "tpe-seed42-20260805",
+        "checkpoint_path": "/workspace/autopareto/results/checkpoints/tpe-seed42-20260805/0021.pt",
+        "git_commit": "471674859cbebb57a2feb46543489b4849b02e9e",
+        "incremental_kv_cache_memory_mb": 2.98828125,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 212.29453004307547,
+        "parameter_count": 39846284,
+        "peak_inference_cuda_memory_mb": 204.8855438232422,
+        "peak_reserved_inference_cuda_memory_mb": 224.0,
+        "program_sha256": null,
+        "total_runtime_seconds": 622.7245573997498,
+        "total_training_tokens": 113770496,
+        "training_seconds": 300.25094962120056,
+        "training_seed": 42,
+        "training_tokens_per_second": 374116.06571674446,
+        "val_bpb": 1.0977022287835185
+      },
+      "historical_row_id": 183,
+      "method": "tpe",
+      "model_id": "tpe_quality",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 39846284,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 80,
+        "DEPTH": 6,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.3,
+        "FINAL_LR_FRAC": 0.05,
+        "HEAD_DIM": 128,
+        "KV_HEAD_RATIO": 1,
+        "MATRIX_LR": 0.03,
+        "MUON_NS_STEPS": 5,
+        "SCALAR_LR": 0.25,
+        "TOTAL_BATCH_SIZE": 131072,
+        "UNEMBEDDING_LR": 0.002,
+        "WARMDOWN_RATIO": 0.3,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.3,
+        "WINDOW_PATTERN": "SSSS"
+      },
+      "role": "strongest frozen TPE quality representative",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "sequence_length": 2048,
+      "source_bytes": 26613,
+      "source_experiment_id": 183,
+      "source_path": "results/candidates/tpe-seed42-20260805/0021-train.py",
+      "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 131072
+    },
+    {
+      "architecture": {
+        "depth": 6,
+        "head_dimension": 128,
+        "kv_heads": 3,
+        "query_heads": 3,
+        "width": 384
+      },
+      "checkpoint_history_ids": [
+        234,
+        300
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "motpe-seed42-20260805",
+          "checkpoint_available_locally": false,
+          "checkpoint_bytes": null,
+          "checkpoint_sha256": null,
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/motpe-seed42-20260805/0022.pt",
+          "experiment_id": 234,
+          "experiment_number": 22,
+          "local_checkpoint_path": null
+        },
+        {
+          "campaign_id": "downstream-recovery-motpe-exp234-seed42-20260812",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 80229373,
+          "checkpoint_sha256": "8865fdaa7aea062e56e344b72b7e275b3446d74414f2dc66aba0bd4f2640a76b",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/downstream-recovery-motpe-exp234-seed42-20260812/0001.pt",
+          "experiment_id": 300,
+          "experiment_number": 1,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/downstream-recovery-motpe-exp234-seed42-20260812/0001.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": null,
+      "gradient_accumulation": 1,
+      "historical_five_minute": {
+        "campaign_id": "motpe-seed42-20260805",
+        "checkpoint_path": "/workspace/autopareto/results/checkpoints/motpe-seed42-20260805/0022.pt",
+        "git_commit": "940fe4171601463c53561284235930204c349d62",
+        "incremental_kv_cache_memory_mb": 2.2412109375,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 226.08480692471505,
+        "parameter_count": 26345772,
+        "peak_inference_cuda_memory_mb": 142.69749450683594,
+        "peak_reserved_inference_cuda_memory_mb": 160.0,
+        "program_sha256": null,
+        "total_runtime_seconds": 650.2566301822662,
+        "total_training_tokens": 152961024,
+        "training_seconds": 300.2232143878937,
+        "training_seed": 42,
+        "training_tokens_per_second": 504688.5941479345,
+        "val_bpb": 1.0981116329963774
+      },
+      "historical_row_id": 234,
+      "method": "motpe",
+      "model_id": "motpe_quality",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 26345772,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 48,
+        "DEPTH": 6,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.45,
+        "FINAL_LR_FRAC": 0.05,
+        "HEAD_DIM": 128,
+        "KV_HEAD_RATIO": 1,
+        "MATRIX_LR": 0.04,
+        "MUON_NS_STEPS": 5,
+        "SCALAR_LR": 0.25,
+        "TOTAL_BATCH_SIZE": 131072,
+        "UNEMBEDDING_LR": 0.006,
+        "WARMDOWN_RATIO": 0.7,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.1,
+        "WINDOW_PATTERN": "L"
+      },
+      "role": "strongest frozen MOTPE quality representative",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "selection_note": "The original seed-42 checkpoint was lost to ephemeral storage; the exact recipe and measurements are frozen, and recovery experiment 300 is separate.",
+      "sequence_length": 2048,
+      "source_bytes": 26611,
+      "source_experiment_id": 234,
+      "source_path": "results/candidates/motpe-seed42-20260805/0022-train.py",
+      "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 131072
+    },
+    {
+      "architecture": {
+        "depth": 4,
+        "head_dimension": 128,
+        "kv_heads": 4,
+        "query_heads": 4,
+        "width": 512
+      },
+      "checkpoint_history_ids": [
+        134,
+        292
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "autopareto-seed0-20260731",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 92284433,
+          "checkpoint_sha256": "ebdfdd1373d4e4f2d3a59187314146bdc5f424cfdf074d887d9a1ea64644fa04",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-seed0-20260731/0022.pt",
+          "experiment_id": 134,
+          "experiment_number": 22,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/autopareto-seed0-20260731/0022.pt"
+        },
+        {
+          "campaign_id": "autopareto-primary-best-quality-exp134-seed1-20260810",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 92284433,
+          "checkpoint_sha256": "e913acf38c74f731471248abfe78a7516edd3e1adf7719187a4a85cad37f5ccd",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-primary-best-quality-exp134-seed1-20260810/0001.pt",
+          "experiment_id": 292,
+          "experiment_number": 1,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/autopareto-primary-best-quality-exp134-seed1-20260810/0001.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": 134,
+      "gradient_accumulation": 1,
+      "historical_five_minute": {
+        "campaign_id": "autopareto-primary-best-quality-exp134-seed1-20260810",
+        "checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-primary-best-quality-exp134-seed1-20260810/0001.pt",
+        "git_commit": "7813202ac807c08e68c4079e944775bcd3f5a787",
+        "incremental_kv_cache_memory_mb": 1.9921875,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 318.27445787057286,
+        "parameter_count": 29360392,
+        "peak_inference_cuda_memory_mb": 159.88479614257812,
+        "peak_reserved_inference_cuda_memory_mb": 192.0,
+        "program_sha256": null,
+        "total_runtime_seconds": 451.9322600364685,
+        "total_training_tokens": 159252480,
+        "training_seconds": 300.2130115032196,
+        "training_seed": 1,
+        "training_tokens_per_second": 525662.3862164201,
+        "val_bpb": 1.0939395395869094
+      },
+      "historical_row_id": 292,
+      "method": "autopareto",
+      "model_id": "autopareto_292",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 29360392,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 128,
+        "DEPTH": 4,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "HEAD_DIM": 128,
+        "MATRIX_LR": 0.035,
+        "MUON_NS_STEPS": 5,
+        "SCALAR_LR": 0.5,
+        "TOTAL_BATCH_SIZE": 131072,
+        "UNEMBEDDING_LR": 0.0035,
+        "WARMDOWN_RATIO": 0.5,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.2,
+        "WINDOW_PATTERN": "SSSL"
+      },
+      "role": "AutoPareto confirmed-quality recipe corresponding to confirmation 292",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "sequence_length": 2048,
+      "source_bytes": 26244,
+      "source_experiment_id": 292,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 131072
+    },
+    {
+      "architecture": {
+        "depth": 3,
+        "head_dimension": 128,
+        "kv_heads": 4,
+        "query_heads": 4,
+        "width": 512
+      },
+      "checkpoint_history_ids": [
+        137,
+        299
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "autopareto-seed0-20260731",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 79700149,
+          "checkpoint_sha256": "11753cb480733a3beb1a79e07442903c079dc9c3bf3283b4fad71a131c95c76f",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-seed0-20260731/0025.pt",
+          "experiment_id": 137,
+          "experiment_number": 25,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/autopareto-seed0-20260731/0025.pt"
+        },
+        {
+          "campaign_id": "autopareto-primary-fastest-within-1pct-quality-exp137-seed2-20260810",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 79700149,
+          "checkpoint_sha256": "8a297f127ed3a2d5e0978eb2b8fac6cafbed32b4b4c773841e2ddf7356ea3653",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-primary-fastest-within-1pct-quality-exp137-seed2-20260810/0001.pt",
+          "experiment_id": 299,
+          "experiment_number": 1,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/autopareto-primary-fastest-within-1pct-quality-exp137-seed2-20260810/0001.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": 137,
+      "gradient_accumulation": 1,
+      "historical_five_minute": {
+        "campaign_id": "autopareto-primary-fastest-within-1pct-quality-exp137-seed2-20260810",
+        "checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-primary-fastest-within-1pct-quality-exp137-seed2-20260810/0001.pt",
+        "git_commit": "7813202ac807c08e68c4079e944775bcd3f5a787",
+        "incremental_kv_cache_memory_mb": 1.494140625,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 361.1765124935292,
+        "parameter_count": 26214662,
+        "peak_inference_cuda_memory_mb": 141.3847885131836,
+        "peak_reserved_inference_cuda_memory_mb": 192.0,
+        "program_sha256": null,
+        "total_runtime_seconds": 468.5319697856903,
+        "total_training_tokens": 196345856,
+        "training_seconds": 300.1214244365692,
+        "training_seed": 2,
+        "training_tokens_per_second": 649417.362875382,
+        "val_bpb": 1.098675096131147
+      },
+      "historical_row_id": 299,
+      "method": "autopareto",
+      "model_id": "autopareto_299",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 26214662,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 160,
+        "DEPTH": 3,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "HEAD_DIM": 128,
+        "MATRIX_LR": 0.035,
+        "MUON_NS_STEPS": 5,
+        "SCALAR_LR": 0.5,
+        "TOTAL_BATCH_SIZE": 131072,
+        "UNEMBEDDING_LR": 0.0035,
+        "WARMDOWN_RATIO": 0.5,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.2,
+        "WINDOW_PATTERN": "SSSL"
+      },
+      "role": "AutoPareto shallow-wide / fast-quality recipe corresponding to confirmation 299",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "sequence_length": 2048,
+      "source_bytes": 26244,
+      "source_experiment_id": 299,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0025-train.py",
+      "source_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 131072
+    },
+    {
+      "architecture": {
+        "depth": 3,
+        "head_dimension": 128,
+        "kv_heads": 3,
+        "query_heads": 3,
+        "width": 384
+      },
+      "checkpoint_history_ids": [
+        136,
+        294
+      ],
+      "checkpoint_provenance": [
+        {
+          "campaign_id": "autopareto-seed0-20260731",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 52699061,
+          "checkpoint_sha256": "bc7f28c8deaed3d4bc179a1d806f1d94cb0203578ba98b63fcfad9b3c3e855d6",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-seed0-20260731/0024.pt",
+          "experiment_id": 136,
+          "experiment_number": 24,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/autopareto-seed0-20260731/0024.pt"
+        },
+        {
+          "campaign_id": "autopareto-primary-largest-exclusive-hypervolume-contribution-exp136-seed0-20260810",
+          "checkpoint_available_locally": true,
+          "checkpoint_bytes": 52699061,
+          "checkpoint_sha256": "d5c29a5b3fede97fd485e4e5be59fe29f336d20a45cdb8806e4f300dafc0eb26",
+          "database_checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-primary-largest-exclusive-hypervolume-contribution-exp136-seed0-20260810/0001.pt",
+          "experiment_id": 294,
+          "experiment_number": 1,
+          "local_checkpoint_path": "/Users/Rami/Documents/dev/autopareto/results/checkpoints/autopareto-primary-largest-exclusive-hypervolume-contribution-exp136-seed0-20260810/0001.pt"
+        }
+      ],
+      "device_batch_size": 64,
+      "discovery_source_experiment_id": 136,
+      "gradient_accumulation": 1,
+      "historical_five_minute": {
+        "campaign_id": "autopareto-primary-largest-exclusive-hypervolume-contribution-exp136-seed0-20260810",
+        "checkpoint_path": "/workspace/autopareto/results/checkpoints/autopareto-primary-largest-exclusive-hypervolume-contribution-exp136-seed0-20260810/0001.pt",
+        "git_commit": "7813202ac807c08e68c4079e944775bcd3f5a787",
+        "incremental_kv_cache_memory_mb": 1.12060546875,
+        "inference_metric_mode": "cached_decode",
+        "median_cached_decode_tokens_per_second": 404.9996000762904,
+        "parameter_count": 17891526,
+        "peak_inference_cuda_memory_mb": 105.1969223022461,
+        "peak_reserved_inference_cuda_memory_mb": 160.0,
+        "program_sha256": null,
+        "total_runtime_seconds": 526.7060534954071,
+        "total_training_tokens": 209715200,
+        "training_seconds": 300.08877968788147,
+        "training_seed": 0,
+        "training_tokens_per_second": 694039.304690507,
+        "val_bpb": 1.1253738742802166
+      },
+      "historical_row_id": 294,
+      "method": "autopareto",
+      "model_id": "autopareto_294",
+      "optimizer": "MuonAdamW (Muon matrix groups + AdamW embedding/unembedding/scalars)",
+      "optional": false,
+      "parameter_count": 17891526,
+      "recipe_constants": {
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "ASPECT_RATIO": 128,
+        "DEPTH": 3,
+        "DEVICE_BATCH_SIZE": 64,
+        "EMBEDDING_LR": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "HEAD_DIM": 128,
+        "MATRIX_LR": 0.035,
+        "MUON_NS_STEPS": 5,
+        "SCALAR_LR": 0.5,
+        "TOTAL_BATCH_SIZE": 131072,
+        "UNEMBEDDING_LR": 0.0035,
+        "WARMDOWN_RATIO": 0.5,
+        "WARMUP_RATIO": 0.0,
+        "WEIGHT_DECAY": 0.2,
+        "WINDOW_PATTERN": "SSSL"
+      },
+      "role": "AutoPareto efficiency-boundary recipe corresponding to confirmation 294",
+      "schedule_audit": {
+        "historical_progress_basis": "total_training_time / TIME_BUDGET",
+        "historical_time_budget_seconds": 300,
+        "muon_momentum_basis": "optimizer step / 300, unchanged because it is not wall-clock LR progress",
+        "phase1_progress_basis": "optimizer_step * TOTAL_BATCH_SIZE / TOKEN_BUDGET",
+        "transformation": "same warmup/warmdown/final fraction shape over token progress; no ratio changes",
+        "weight_decay_basis": "same translated token progress as LR multiplier"
+      },
+      "sequence_length": 2048,
+      "source_bytes": 26244,
+      "source_experiment_id": 294,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0024-train.py",
+      "source_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "tokens_per_microbatch": 131072,
+      "tokens_per_optimizer_step": 131072
+    }
+  ],
+  "panel_policy": {
+    "all_seven_models_frozen_before_stage_B": true,
+    "core_model_count": 7,
+    "core_scientific_runs": 21,
+    "no_treatment_changes_after_seed3": true,
+    "optional_model": null,
+    "optional_total_runs": 0
+  },
+  "prepared_on": "2026-08-25",
+  "preregistered_model_order": {
+    "3": [
+      "baseline",
+      "autoresearch_compatible",
+      "tpe_quality",
+      "motpe_quality",
+      "autopareto_292",
+      "autopareto_299",
+      "autopareto_294"
+    ],
+    "4": [
+      "autopareto_292",
+      "autopareto_294",
+      "motpe_quality",
+      "baseline",
+      "autopareto_299",
+      "autoresearch_compatible",
+      "tpe_quality"
+    ],
+    "5": [
+      "autopareto_299",
+      "tpe_quality",
+      "autopareto_294",
+      "autoresearch_compatible",
+      "motpe_quality",
+      "autopareto_292",
+      "baseline"
+    ]
+  },
+  "runs": [
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "baseline",
+      "model_order_position": 1,
+      "retried": false,
+      "run_id": "phase1-baseline-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autoresearch_compatible",
+      "model_order_position": 2,
+      "retried": false,
+      "run_id": "phase1-autoresearch_compatible-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "tpe_quality",
+      "model_order_position": 3,
+      "retried": false,
+      "run_id": "phase1-tpe_quality-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "motpe_quality",
+      "model_order_position": 4,
+      "retried": false,
+      "run_id": "phase1-motpe_quality-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_292",
+      "model_order_position": 5,
+      "retried": false,
+      "run_id": "phase1-autopareto_292-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_299",
+      "model_order_position": 6,
+      "retried": false,
+      "run_id": "phase1-autopareto_299-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_294",
+      "model_order_position": 7,
+      "retried": false,
+      "run_id": "phase1-autopareto_294-seed3",
+      "scientific": true,
+      "seed": 3,
+      "seed_label": "seed3",
+      "stage": "B"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_292",
+      "model_order_position": 1,
+      "retried": false,
+      "run_id": "phase1-autopareto_292-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_294",
+      "model_order_position": 2,
+      "retried": false,
+      "run_id": "phase1-autopareto_294-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "motpe_quality",
+      "model_order_position": 3,
+      "retried": false,
+      "run_id": "phase1-motpe_quality-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "baseline",
+      "model_order_position": 4,
+      "retried": false,
+      "run_id": "phase1-baseline-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_299",
+      "model_order_position": 5,
+      "retried": false,
+      "run_id": "phase1-autopareto_299-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autoresearch_compatible",
+      "model_order_position": 6,
+      "retried": false,
+      "run_id": "phase1-autoresearch_compatible-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "tpe_quality",
+      "model_order_position": 7,
+      "retried": false,
+      "run_id": "phase1-tpe_quality-seed4",
+      "scientific": true,
+      "seed": 4,
+      "seed_label": "seed4",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_299",
+      "model_order_position": 1,
+      "retried": false,
+      "run_id": "phase1-autopareto_299-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "tpe_quality",
+      "model_order_position": 2,
+      "retried": false,
+      "run_id": "phase1-tpe_quality-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_294",
+      "model_order_position": 3,
+      "retried": false,
+      "run_id": "phase1-autopareto_294-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autoresearch_compatible",
+      "model_order_position": 4,
+      "retried": false,
+      "run_id": "phase1-autoresearch_compatible-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "motpe_quality",
+      "model_order_position": 5,
+      "retried": false,
+      "run_id": "phase1-motpe_quality-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "autopareto_292",
+      "model_order_position": 6,
+      "retried": false,
+      "run_id": "phase1-autopareto_292-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    },
+    {
+      "expected_checkpoint_sha256": null,
+      "model_id": "baseline",
+      "model_order_position": 7,
+      "retried": false,
+      "run_id": "phase1-baseline-seed5",
+      "scientific": true,
+      "seed": 5,
+      "seed_label": "seed5",
+      "stage": "C"
+    }
+  ],
+  "scientific_question": "When representative baseline, AutoResearch, TPE, MOTPE, and AutoPareto recipes process exactly the same training tokens, compare quality and A40 time.",
+  "scope": {
+    "fixed_wall_clock_comparison_remains_valid": true,
+    "gpu": "one NVIDIA A40",
+    "gpu_compute_spent": false,
+    "scientific_recipe_changes": false,
+    "training_jobs_launched": false,
+    "wall_clock_schedule_translation": true
+  },
+  "seed_audit": {
+    "autopareto_selection_seeds": [
+      0,
+      1,
+      2,
+      42
+    ],
+    "database_autopareto_rows_on_phase1_seeds": 0,
+    "phase1_seeds_used_to_select_autopareto_recipes": [],
+    "verified_fresh_for_recipe_selection": true
+  },
+  "seeds": [
+    3,
+    4,
+    5
+  ],
+  "smoke": {
+    "excluded_from_scientific_analysis": true,
+    "label_prefix": "NON-SCIENTIFIC",
+    "milestone_count": 4,
+    "model_ids": [
+      "baseline",
+      "autopareto_299"
+    ],
+    "overhead_acceptance": {
+      "block_bootstrap_upper_limit": 0.02,
+      "checkpoint_hashes_must_validate": true,
+      "median_relative_overhead_limit": 0.01
+    },
+    "paired_order": [
+      [
+        "baseline:disabled",
+        "autopareto_299:enabled",
+        "baseline:enabled",
+        "autopareto_299:disabled",
+        "baseline:enabled",
+        "autopareto_299:disabled",
+        "baseline:disabled",
+        "autopareto_299:enabled"
+      ]
+    ],
+    "profiles": [
+      "disabled_control",
+      "enabled_instrumented"
+    ],
+    "regimes": {
+      "autopareto_299": {
+        "gradient_accumulation": 1,
+        "optimizer_steps": 128,
+        "tokens_per_optimizer_step": 131072
+      },
+      "baseline": {
+        "gradient_accumulation": 4,
+        "optimizer_steps": 32,
+        "tokens_per_optimizer_step": 524288
+      }
+    },
+    "scientific": false,
+    "token_budget": 16777216
+  },
+  "source_artifacts": {
+    "artifact_sha256": {
+      "evaluation/motpe_seed42_case_study.json": "0b870ae01523dbc4e4de08f66fd2b8146b3f907d84c3608855c32420d823fcb7",
+      "evaluation/phase1_token_stream_audit.json": "6e4e9a2f67517f002cad45216b4798dbe7f249a4d55d45b3a0bc5fb0b882b61a",
+      "evaluation/seed42_case_study.json": "2cf5503212e18a5c1a7f7cc614c1c5c146ef12b23735107a976389119b000969",
+      "evaluation/tpe_seed42_case_study.json": "6c63c9534bdfc4c9eedd92c54cbcf323c07c98d6f3930da3ae05303f517e1d25",
+      "results/autopareto_confirmation_selection.json": "72d5866426b3aadf49599161442ecb85ecdc182399b25380180a6502821b7e2f",
+      "results/autopareto_primary_confirmation_analysis.json": "623d0ebc54636097d1ea965e1b373541f188b508ae8148769f5f699a6800b833",
+      "results/autopareto_primary_confirmation_plan.json": "08f123ea565ebae57794eedab0443b62f7f64c73d291b398683f5632a492567f",
+      "results/discovery-freeze-20260810.json": "ca4cac83b7eaad782b39a1944e89b8ad44b89e0ea1cb224f825b8a5e583b7a5a",
+      "results/downstream_selection.json": "7288574bf565ef2710afe7e81b85c0c6340cea893e9d5f79308c7b406005b65a"
+    },
+    "database": "results/results.db",
+    "database_sha256_at_preflight": "2c1a2cabd3abb7d6a9dc4082dc776f167bfd7346e6977026d3f0a68a9cfaf0e4"
+  },
+  "status": "PREPARING / PREFLIGHT",
+  "telemetry_sampling_interval_seconds": 2.0,
+  "timing": {
+    "checkpoint_save_timing": "checkpoint writes occur after the synchronized per-step timing boundary and are excluded from total_scientific_step_wall_seconds",
+    "common_token_boundary": "supporting sensitivity boundary excludes 5767168 tokens: 11 baseline optimizer steps or 44 accumulation-1 optimizer steps",
+    "cuda_event_policy": "CUDA events disabled in scientific timing because per-step event instrumentation has unequal overhead; diagnostic-only artifacts may use events",
+    "cuda_stream_step_seconds": "diagnostic CUDA-event duration; does not include all CPU work or checkpoint I/O",
+    "duration_clock": "time.perf_counter_ns()",
+    "end_to_end_seconds": "process monotonic runtime from launcher start through final training contract; evaluator runtimes are separate files",
+    "scientific_interval_seconds": "continuous monotonic interval from first step start through final step end; may include between-step bookkeeping",
+    "steady_state_boundary_text": "Steps 0\u201310 are scientifically executed but excluded from the historical steady-state timing boundary. Steady-state timing begins at step index 11.",
+    "steady_state_equivalent_seconds": "201326592 / steady_state_training_tokens_per_second",
+    "steady_state_start_step_index": 11,
+    "steady_state_tokens": "(final_step_count - 11) * tokens_per_optimizer_step",
+    "steady_state_training_seconds": "sum of synchronized per-step monotonic durations for step indices 11 through final",
+    "steady_state_training_tokens_per_second": "steady_state_tokens / steady_state_training_seconds",
+    "total_scientific_step_wall_seconds": "sum of synchronized per-step monotonic durations for all scientific optimizer steps"
+  },
+  "token_accounting": {
+    "common_milestone_tokens": [
+      50331648,
+      100663296,
+      150994944,
+      201326592
+    ],
+    "milestone_rule": "LCM-compatible common token counts; exact for both 524288 and 131072 batches",
+    "sequence_length": 2048,
+    "tokens_per_microbatch": 131072,
+    "total_microbatches": 1536
+  },
+  "token_budget": 201326592
+}

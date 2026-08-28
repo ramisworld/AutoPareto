@@ -1,0 +1,1152 @@
+{
+  "format": "autopareto_phase1_equal_token_results_v1",
+  "inference_note": "median of 30 stabilized synchronized-wall-clock repetitions; maximum is diagnostic only",
+  "models": [
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.097355192326774,
+        "mean": 1.0934377315789343,
+        "median": 1.093268971726509,
+        "minimum": 1.0896890306835203,
+        "sample_standard_deviation": 0.003835866069216476,
+        "values": [
+          1.0896890306835203,
+          1.097355192326774,
+          1.093268971726509
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.1519004871954783,
+        "mean": 1.1465895336014258,
+        "median": 1.144757650043697,
+        "minimum": 1.1431104635651022,
+        "sample_standard_deviation": 0.004672577113590637,
+        "values": [
+          1.1431104635651022,
+          1.1519004871954783,
+          1.144757650043697
+        ]
+      },
+      "model_id": "baseline",
+      "role": "untouched original train.py baseline",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 4,
+      "source_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 199.60937030061908,
+        "mean": 196.82072149558223,
+        "median": 195.8172392695405,
+        "minimum": 195.03555491658713,
+        "sample_standard_deviation": 2.446462594295708,
+        "values": [
+          199.60937030061908,
+          195.03555491658713,
+          195.8172392695405
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 689.1614728232494,
+        "mean": 688.5000888831314,
+        "median": 688.6266087151528,
+        "minimum": 687.712185110992,
+        "sample_standard_deviation": 0.7328807332343406,
+        "values": [
+          688.6266087151528,
+          689.1614728232494,
+          687.712185110992
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 824.915908637,
+        "mean": 809.6880954320001,
+        "median": 805.307011628,
+        "minimum": 798.841366031,
+        "sample_standard_deviation": 13.578139213503476,
+        "values": [
+          824.915908637,
+          798.841366031,
+          805.307011628
+        ]
+      }
+    },
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.0332243863061068,
+        "mean": 1.0326613661907098,
+        "median": 1.0325878153902854,
+        "minimum": 1.032171896875737,
+        "sample_standard_deviation": 0.0005300856444409234,
+        "values": [
+          1.0325878153902854,
+          1.0332243863061068,
+          1.032171896875737
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.100928774575567,
+        "mean": 1.099803115598075,
+        "median": 1.100920623285839,
+        "minimum": 1.0975599489328192,
+        "sample_standard_deviation": 0.0019426435923677486,
+        "values": [
+          1.100920623285839,
+          1.100928774575567,
+          1.0975599489328192
+        ]
+      },
+      "model_id": "autoresearch_compatible",
+      "paired_candidate_minus_baseline": {
+        "heldout_bpb": {
+          "maximum": -0.04218984027926309,
+          "mean": -0.04678641800335074,
+          "median": -0.04719770111087773,
+          "minimum": -0.0509717126199114,
+          "sample_standard_deviation": 0.004405358759257157,
+          "values": [
+            -0.04218984027926309,
+            -0.0509717126199114,
+            -0.04719770111087773
+          ]
+        },
+        "stabilized_decode_tokens_per_second": {
+          "maximum": -1.5984896856441821,
+          "mean": -3.887493616358313,
+          "median": -4.444618252062639,
+          "minimum": -5.619372911368117,
+          "sample_standard_deviation": 2.0675266318740704,
+          "values": [
+            -5.619372911368117,
+            -1.5984896856441821,
+            -4.444618252062639
+          ]
+        },
+        "steady_state_equivalent_seconds": {
+          "maximum": 7.792440937091897,
+          "mean": 7.663162704645667,
+          "median": 7.605899367795473,
+          "minimum": 7.59114780904963,
+          "sample_standard_deviation": 0.1122009276239466,
+          "values": [
+            7.605899367795473,
+            7.59114780904963,
+            7.792440937091897
+          ]
+        }
+      },
+      "role": "strongest frozen AutoResearch compatible representative",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 68,
+      "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 193.98999738925096,
+        "mean": 192.93322787922392,
+        "median": 193.43706523094295,
+        "minimum": 191.37262101747785,
+        "sample_standard_deviation": 1.3795121694350754,
+        "values": [
+          193.98999738925096,
+          193.43706523094295,
+          191.37262101747785
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 696.752620632299,
+        "mean": 696.163251587777,
+        "median": 696.2325080829482,
+        "minimum": 695.5046260480839,
+        "sample_standard_deviation": 0.6268731667172533,
+        "values": [
+          696.2325080829482,
+          696.752620632299,
+          695.5046260480839
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 825.127081079,
+        "mean": 819.5330304113334,
+        "median": 818.076239533,
+        "minimum": 815.395770622,
+        "sample_standard_deviation": 5.0265575247903085,
+        "values": [
+          825.127081079,
+          818.076239533,
+          815.395770622
+        ]
+      }
+    },
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.0591052239640468,
+        "mean": 1.057198643058262,
+        "median": 1.0587501157156307,
+        "minimum": 1.0537405894951088,
+        "sample_standard_deviation": 0.0030000210501346684,
+        "values": [
+          1.0537405894951088,
+          1.0587501157156307,
+          1.0591052239640468
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.122378990918381,
+        "mean": 1.1194015812978206,
+        "median": 1.1213174081582233,
+        "minimum": 1.1145083448168578,
+        "sample_standard_deviation": 0.004270780014603397,
+        "values": [
+          1.1145083448168578,
+          1.122378990918381,
+          1.1213174081582233
+        ]
+      },
+      "model_id": "tpe_quality",
+      "paired_candidate_minus_baseline": {
+        "heldout_bpb": {
+          "maximum": -0.023440241885473556,
+          "mean": -0.027187952303605083,
+          "median": -0.028602118748244365,
+          "minimum": -0.029521496277097325,
+          "sample_standard_deviation": 0.0032780045445009115,
+          "values": [
+            -0.028602118748244365,
+            -0.029521496277097325,
+            -0.023440241885473556
+          ]
+        },
+        "stabilized_decode_tokens_per_second": {
+          "maximum": 66.89228964179978,
+          "mean": 62.07347019683309,
+          "median": 61.055591772266354,
+          "minimum": 58.27252917643315,
+          "sample_standard_deviation": 4.399105020964289,
+          "values": [
+            58.27252917643315,
+            61.055591772266354,
+            66.89228964179978
+          ]
+        },
+        "steady_state_equivalent_seconds": {
+          "maximum": -147.50437134536833,
+          "mean": -147.97388247754972,
+          "median": -147.55179074907278,
+          "minimum": -148.86548533820803,
+          "sample_standard_deviation": 0.772514657344762,
+          "values": [
+            -147.55179074907278,
+            -148.86548533820803,
+            -147.50437134536833
+          ]
+        }
+      },
+      "role": "strongest frozen TPE quality representative",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 183,
+      "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 262.70952891134027,
+        "mean": 258.89419169241535,
+        "median": 257.88189947705223,
+        "minimum": 256.0911466888535,
+        "sample_standard_deviation": 3.4233459447879104,
+        "values": [
+          257.88189947705223,
+          256.0911466888535,
+          262.70952891134027
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 541.07481796608,
+        "mean": 540.5262064055817,
+        "median": 540.2959874850413,
+        "minimum": 540.2078137656237,
+        "sample_standard_deviation": 0.4771526322187654,
+        "values": [
+          541.07481796608,
+          540.2959874850413,
+          540.2078137656237
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 695.90702385,
+        "mean": 665.251952824,
+        "median": 663.980100665,
+        "minimum": 635.868733957,
+        "sample_standard_deviation": 30.03934535329856,
+        "values": [
+          663.980100665,
+          635.868733957,
+          695.90702385
+        ]
+      }
+    },
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.0819624261820278,
+        "mean": 1.079265836837078,
+        "median": 1.0791088329722855,
+        "minimum": 1.0767262513569205,
+        "sample_standard_deviation": 0.0026216157918241313,
+        "values": [
+          1.0791088329722855,
+          1.0767262513569205,
+          1.0819624261820278
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.1508093608896621,
+        "mean": 1.1482527567273162,
+        "median": 1.1491464505468767,
+        "minimum": 1.1448024587454098,
+        "sample_standard_deviation": 0.0031015697356332984,
+        "values": [
+          1.1508093608896621,
+          1.1491464505468767,
+          1.1448024587454098
+        ]
+      },
+      "model_id": "motpe_quality",
+      "paired_candidate_minus_baseline": {
+        "heldout_bpb": {
+          "maximum": 0.007698897324559972,
+          "mean": 0.0016632231258904007,
+          "median": 4.4808701712861776e-05,
+          "minimum": -0.002754036648601632,
+          "sample_standard_deviation": 0.005411137227802345,
+          "values": [
+            0.007698897324559972,
+            -0.002754036648601632,
+            4.4808701712861776e-05
+          ]
+        },
+        "stabilized_decode_tokens_per_second": {
+          "maximum": 76.53154298307501,
+          "mean": 73.18568185225759,
+          "median": 72.0972917632742,
+          "minimum": 70.92821081042356,
+          "sample_standard_deviation": 2.9559732066809503,
+          "values": [
+            76.53154298307501,
+            70.92821081042356,
+            72.0972917632742
+          ]
+        },
+        "steady_state_equivalent_seconds": {
+          "maximum": -289.45515690654867,
+          "mean": -290.26749935659495,
+          "median": -290.3912899831921,
+          "minimum": -290.95605118004414,
+          "sample_standard_deviation": 0.7580659565485459,
+          "values": [
+            -290.3912899831921,
+            -290.95605118004414,
+            -289.45515690654867
+          ]
+        }
+      },
+      "role": "strongest frozen MOTPE quality representative",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 234,
+      "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 276.1409132836941,
+        "mean": 270.0064033478398,
+        "median": 267.9145310328147,
+        "minimum": 265.9637657270107,
+        "sample_standard_deviation": 5.401437811768562,
+        "values": [
+          276.1409132836941,
+          265.9637657270107,
+          267.9145310328147
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 398.2570282044433,
+        "mean": 398.2325895265364,
+        "median": 398.23531873196066,
+        "minimum": 398.2054216432052,
+        "sample_standard_deviation": 0.025911304721896955,
+        "values": [
+          398.23531873196066,
+          398.2054216432052,
+          398.2570282044433
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 544.054954991,
+        "mean": 538.8575033943333,
+        "median": 537.230835778,
+        "minimum": 535.286719414,
+        "sample_standard_deviation": 4.60489135962652,
+        "values": [
+          537.230835778,
+          535.286719414,
+          544.054954991
+        ]
+      }
+    },
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.0799093966674906,
+        "mean": 1.0777344037066554,
+        "median": 1.0767050071935633,
+        "minimum": 1.076588807258912,
+        "sample_standard_deviation": 0.0018844949962697134,
+        "values": [
+          1.076588807258912,
+          1.0799093966674906,
+          1.0767050071935633
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.148667552852964,
+        "mean": 1.141837121365997,
+        "median": 1.1396157998884338,
+        "minimum": 1.1372280113565931,
+        "sample_standard_deviation": 0.006034606800928308,
+        "values": [
+          1.1396157998884338,
+          1.148667552852964,
+          1.1372280113565931
+        ]
+      },
+      "model_id": "autopareto_292",
+      "paired_candidate_minus_baseline": {
+        "heldout_bpb": {
+          "maximum": -0.003232934342514371,
+          "mean": -0.004752412235428845,
+          "median": -0.003494663676668397,
+          "minimum": -0.007529638687103768,
+          "sample_standard_deviation": 0.0024087062157933125,
+          "values": [
+            -0.003494663676668397,
+            -0.003232934342514371,
+            -0.007529638687103768
+          ]
+        },
+        "stabilized_decode_tokens_per_second": {
+          "maximum": 192.52703513931618,
+          "mean": 186.2011044180758,
+          "median": 183.66115988192823,
+          "minimum": 182.41511823298296,
+          "sample_standard_deviation": 5.513728735182418,
+          "values": [
+            182.41511823298296,
+            183.66115988192823,
+            192.52703513931618
+          ]
+        },
+        "steady_state_equivalent_seconds": {
+          "maximum": -302.9509935291953,
+          "mean": -303.480959795635,
+          "median": -303.4657796965036,
+          "minimum": -304.02610616120603,
+          "sample_standard_deviation": 0.537717044024553,
+          "values": [
+            -303.4657796965036,
+            -304.02610616120603,
+            -302.9509935291953
+          ]
+        }
+      },
+      "role": "AutoPareto confirmed-quality recipe corresponding to confirmation 292",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 292,
+      "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 388.3442744088567,
+        "mean": 383.021825913658,
+        "median": 382.02448853360204,
+        "minimum": 378.69671479851536,
+        "sample_standard_deviation": 4.9004961989593445,
+        "values": [
+          382.02448853360204,
+          378.69671479851536,
+          388.3442744088567
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 385.16082901864917,
+        "mean": 385.0191290874964,
+        "median": 385.13536666204334,
+        "minimum": 384.7611915817967,
+        "sample_standard_deviation": 0.22374293404690163,
+        "values": [
+          385.16082901864917,
+          385.13536666204334,
+          384.7611915817967
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 546.656725022,
+        "mean": 512.6099439026667,
+        "median": 508.880264935,
+        "minimum": 482.292841751,
+        "sample_standard_deviation": 32.343627600071706,
+        "values": [
+          546.656725022,
+          482.292841751,
+          508.880264935
+        ]
+      }
+    },
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.0977878502644236,
+        "mean": 1.0971467240232013,
+        "median": 1.0972793337788,
+        "minimum": 1.0963729880263802,
+        "sample_standard_deviation": 0.0007166922621462398,
+        "values": [
+          1.0972793337788,
+          1.0963729880263802,
+          1.0977878502644236
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.1596106821487935,
+        "mean": 1.1593089589933974,
+        "median": 1.1594194075079962,
+        "minimum": 1.1588967873234026,
+        "sample_standard_deviation": 0.0003695410819012796,
+        "values": [
+          1.1594194075079962,
+          1.1588967873234026,
+          1.1596106821487935
+        ]
+      },
+      "model_id": "autopareto_299",
+      "paired_candidate_minus_baseline": {
+        "heldout_bpb": {
+          "maximum": 0.01630894394289406,
+          "mean": 0.012719425391971647,
+          "median": 0.014853032105096586,
+          "minimum": 0.006996300127924293,
+          "sample_standard_deviation": 0.005009545080228595,
+          "values": [
+            0.01630894394289406,
+            0.006996300127924293,
+            0.014853032105096586
+          ]
+        },
+        "stabilized_decode_tokens_per_second": {
+          "maximum": 301.9717917462026,
+          "mean": 291.4373733636092,
+          "median": 289.30613180475984,
+          "minimum": 283.0341965398652,
+          "sample_standard_deviation": 9.647008395684036,
+          "values": [
+            283.0341965398652,
+            289.30613180475984,
+            301.9717917462026
+          ]
+        },
+        "steady_state_equivalent_seconds": {
+          "maximum": -375.3246391003848,
+          "mean": -375.71511377929926,
+          "median": -375.451017646699,
+          "minimum": -376.36968459081396,
+          "sample_standard_deviation": 0.5703859173466699,
+          "values": [
+            -375.451017646699,
+            -376.36968459081396,
+            -375.3246391003848
+          ]
+        }
+      },
+      "role": "AutoPareto shallow-wide / fast-quality recipe corresponding to confirmation 299",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 299,
+      "source_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 497.7890310157431,
+        "mean": 488.25809485919143,
+        "median": 484.34168672134695,
+        "minimum": 482.64356684048425,
+        "sample_standard_deviation": 8.297587649289587,
+        "values": [
+          482.64356684048425,
+          484.34168672134695,
+          497.7890310157431
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 313.1755910684538,
+        "mean": 312.78497510383215,
+        "median": 312.7917882324354,
+        "minimum": 312.3875460106072,
+        "sample_standard_deviation": 0.3940667041760028,
+        "values": [
+          313.1755910684538,
+          312.7917882324354,
+          312.3875460106072
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 461.745145369,
+        "mean": 446.53333186633336,
+        "median": 455.48336201,
+        "minimum": 422.37148822,
+        "sample_standard_deviation": 21.157705428546738,
+        "values": [
+          455.48336201,
+          422.37148822,
+          461.745145369
+        ]
+      }
+    },
+    {
+      "all_cache_correctness_passed": true,
+      "final_validation_bpb": {
+        "maximum": 1.1291351316509926,
+        "mean": 1.128379470702585,
+        "median": 1.1283876791628933,
+        "minimum": 1.1276156012938687,
+        "sample_standard_deviation": 0.0007597984342381132,
+        "values": [
+          1.1276156012938687,
+          1.1283876791628933,
+          1.1291351316509926
+        ]
+      },
+      "heldout_bpb": {
+        "maximum": 1.1916783356808018,
+        "mean": 1.1900565997289696,
+        "median": 1.1909114546092532,
+        "minimum": 1.1875800088968536,
+        "sample_standard_deviation": 0.0021787962862015245,
+        "values": [
+          1.1909114546092532,
+          1.1916783356808018,
+          1.1875800088968536
+        ]
+      },
+      "model_id": "autopareto_294",
+      "paired_candidate_minus_baseline": {
+        "heldout_bpb": {
+          "maximum": 0.04780099104415103,
+          "mean": 0.04346706612754373,
+          "median": 0.04282235885315666,
+          "minimum": 0.03977784848532351,
+          "sample_standard_deviation": 0.004050239466013469,
+          "values": [
+            0.04780099104415103,
+            0.03977784848532351,
+            0.04282235885315666
+          ]
+        },
+        "stabilized_decode_tokens_per_second": {
+          "maximum": 300.4464817622885,
+          "mean": 298.67058285053616,
+          "median": 298.1874073773324,
+          "minimum": 297.3778594119876,
+          "sample_standard_deviation": 1.5903473474750236,
+          "values": [
+            300.4464817622885,
+            298.1874073773324,
+            297.3778594119876
+          ]
+        },
+        "steady_state_equivalent_seconds": {
+          "maximum": -385.51723595166425,
+          "mean": -392.81754182447696,
+          "median": -395.21336384192443,
+          "minimum": -397.72202567984215,
+          "sample_standard_deviation": 6.445478681348952,
+          "values": [
+            -385.51723595166425,
+            -397.72202567984215,
+            -395.21336384192443
+          ]
+        }
+      },
+      "role": "AutoPareto efficiency-boundary recipe corresponding to confirmation 294",
+      "seeds": [
+        3,
+        4,
+        5
+      ],
+      "source_experiment_id": 294,
+      "source_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "stabilized_decode_tokens_per_second": {
+        "maximum": 500.05585206290755,
+        "mean": 495.4913043461184,
+        "median": 493.2229622939195,
+        "minimum": 493.19509868152807,
+        "sample_standard_deviation": 3.9530388297305894,
+        "values": [
+          500.05585206290755,
+          493.2229622939195,
+          493.19509868152807
+        ]
+      },
+      "steady_state_equivalent_seconds": {
+        "maximum": 303.1093727634885,
+        "mean": 295.68254705865445,
+        "median": 292.49882126906755,
+        "minimum": 291.4394471434072,
+        "sample_standard_deviation": 6.453593837701436,
+        "values": [
+          303.1093727634885,
+          291.4394471434072,
+          292.49882126906755
+        ]
+      },
+      "total_scientific_wall_seconds": {
+        "maximum": 443.220802698,
+        "mean": 413.8336075093333,
+        "median": 405.733614488,
+        "minimum": 392.546405342,
+        "sample_standard_deviation": 26.290322403076026,
+        "values": [
+          443.220802698,
+          392.546405342,
+          405.733614488
+        ]
+      }
+    }
+  ],
+  "primary_outcomes": {
+    "deployment": "final protected cached-decode throughput under the frozen headline workload/protocol",
+    "quality": "final held-out BPB at exactly 201326592 training tokens",
+    "training_efficiency": "steady_state_equivalent_seconds for exactly 201326592 tokens, computed from synchronized post-step-11 throughput"
+  },
+  "runs": [
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "894950386f9d642e53b75b0452e4d3bf8a8e97d58c6061a6551979730e146c0b",
+      "final_inference_sha256": "2b8c116a35a1d525974b739a5186821e7b22a3273654947de23c50eb82da64e7",
+      "final_validation_bpb": 1.0896890306835203,
+      "heldout_bpb": 1.1431104635651022,
+      "model_id": "baseline",
+      "optimizer_steps": 384,
+      "peak_inference_cuda_memory_mb": 250.8818359375,
+      "role": "untouched original train.py baseline",
+      "run_id": "phase1-baseline-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 199.60937030061908,
+      "steady_state_equivalent_seconds": 688.6266087151528,
+      "steady_state_tokens_per_second": 292359.58856663614,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 824.915908637,
+      "training_metrics_sha256": "eb23da3fecccf308fc6f174e439a445f9a69a2e2c77646e5acb87cd3eb1c926a"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "390e1785775bfa8665c29ab693e458227546527971037c47ece13a771524215d",
+      "final_inference_sha256": "fbe3603933462c0c197d2abbb8e7645fae1f35fe2d2fe6e9fe00e1c8b3b67519",
+      "final_validation_bpb": 1.0325878153902854,
+      "heldout_bpb": 1.100920623285839,
+      "model_id": "autoresearch_compatible",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 250.8818359375,
+      "role": "strongest frozen AutoResearch compatible representative",
+      "run_id": "phase1-autoresearch_compatible-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 193.98999738925096,
+      "steady_state_equivalent_seconds": 696.2325080829482,
+      "steady_state_tokens_per_second": 289165.7451536495,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 825.127081079,
+      "training_metrics_sha256": "45704a53218a029c539e42b4a12258499a63bd5abb5dd6c2bbe29e8ae0f39d1c"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "2818c9b7d452f5357aefb4a3f6e249ff8905a06a920033a4c0f594be7101a6ce",
+      "final_inference_sha256": "22723b2c65021b43ec83cf2340e634cc080ea197ac35433956cf31fb08368a42",
+      "final_validation_bpb": 1.0537405894951088,
+      "heldout_bpb": 1.1145083448168578,
+      "model_id": "tpe_quality",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 205.880859375,
+      "role": "strongest frozen TPE quality representative",
+      "run_id": "phase1-tpe_quality-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 257.88189947705223,
+      "steady_state_equivalent_seconds": 541.07481796608,
+      "steady_state_tokens_per_second": 372086.42005701544,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 663.980100665,
+      "training_metrics_sha256": "acc2d5abcebddb8216de3e60f6b7fd6ed35ff6d2f34125fbb8a2bc813e404806"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "e1527a4904ebc2370867186e88cd69f6417897d474cc872d665189c3c570cf4a",
+      "final_inference_sha256": "76e3fd782fabdb3f9480a0d1ef20c4320cde47a7f08be23880e50445e4f40bff",
+      "final_validation_bpb": 1.0791088329722855,
+      "heldout_bpb": 1.1508093608896621,
+      "model_id": "motpe_quality",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 145.568359375,
+      "role": "strongest frozen MOTPE quality representative",
+      "run_id": "phase1-motpe_quality-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 276.1409132836941,
+      "steady_state_equivalent_seconds": 398.23531873196066,
+      "steady_state_tokens_per_second": 505546.80243091757,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 537.230835778,
+      "training_metrics_sha256": "0ebe1fd70113b3e086337e9a62d2ccffbce940f350787820ec302452a5f8ee07"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "4d73f38f73d77d13e5d083db053f1b871ea052a89ffd8a32ee0eafcf278a7c4b",
+      "final_inference_sha256": "69d10eb081dfbc0563a9b968aff53df930e1eee852367355aed6fb8c142001ad",
+      "final_validation_bpb": 1.076588807258912,
+      "heldout_bpb": 1.1396157998884338,
+      "model_id": "autopareto_292",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 162.8798828125,
+      "role": "AutoPareto confirmed-quality recipe corresponding to confirmation 292",
+      "run_id": "phase1-autopareto_292-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 382.02448853360204,
+      "steady_state_equivalent_seconds": 385.16082901864917,
+      "steady_state_tokens_per_second": 522707.8582029221,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 546.656725022,
+      "training_metrics_sha256": "c24345e08e3ae898f44a0f5c45b7f3534598c0479ab3671bbd1ca0fbf7a57c54"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "a10eb2e3d62bd842d27e4ce8326e8a77c60bff63bfa48a07c3559f01d6e5f7bc",
+      "final_inference_sha256": "53cc369d59426601dd6b0aca883d49a5f89bee3bc639540872e525036eeaa5d2",
+      "final_validation_bpb": 1.0972793337788,
+      "heldout_bpb": 1.1594194075079962,
+      "model_id": "autopareto_299",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 142.3798828125,
+      "role": "AutoPareto shallow-wide / fast-quality recipe corresponding to confirmation 299",
+      "run_id": "phase1-autopareto_299-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 482.64356684048425,
+      "steady_state_equivalent_seconds": 313.1755910684538,
+      "steady_state_tokens_per_second": 642855.311019415,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 455.48336201,
+      "training_metrics_sha256": "881c9b332a0ff2337c2c14914ba0bd3107191d8c6550e0b6f9aa402356fadb37"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "86ac0f383b5889a7197f9028233b5d65c01e46125c8bb1a01946a7d189c1d1f1",
+      "final_inference_sha256": "b627aeb4ae18b3e95c9272d9001ce700914dbcdabcf0a330889342de90cd6850",
+      "final_validation_bpb": 1.1276156012938687,
+      "heldout_bpb": 1.1909114546092532,
+      "model_id": "autopareto_294",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 106.9423828125,
+      "role": "AutoPareto efficiency-boundary recipe corresponding to confirmation 294",
+      "run_id": "phase1-autopareto_294-seed3",
+      "seed": 3,
+      "stabilized_decode_tokens_per_second": 500.05585206290755,
+      "steady_state_equivalent_seconds": 303.1093727634885,
+      "steady_state_tokens_per_second": 664204.4426553975,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 443.220802698,
+      "training_metrics_sha256": "198dbe3eaf060705af268390c7455c16159526a265adb65f8f3f8747721b8af3"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "f4976a1615ea2fd34bf5c123696db2192a9ac7bf8412616acc1827ebafc93890",
+      "final_inference_sha256": "1cbd6ce27c9b0ad26f9e3b3de82a03f9af05a387d23714a1df02c48384c90c0a",
+      "final_validation_bpb": 1.0799093966674906,
+      "heldout_bpb": 1.148667552852964,
+      "model_id": "autopareto_292",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 162.8798828125,
+      "role": "AutoPareto confirmed-quality recipe corresponding to confirmation 292",
+      "run_id": "phase1-autopareto_292-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 378.69671479851536,
+      "steady_state_equivalent_seconds": 385.13536666204334,
+      "steady_state_tokens_per_second": 522742.41585469426,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 482.292841751,
+      "training_metrics_sha256": "ae3217e3f4163b16790dbde3ca292ca8d44c11a7a76e130d3afb539e404e62da"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "b58192b13444c81d470bbfd6b897197f03bd6bdb8430db0141f43a2c1bbe08c0",
+      "final_inference_sha256": "e9b3db52c31c8190dfb73dd9de4715216565132ede3a34672826dd65c489bc7e",
+      "final_validation_bpb": 1.1283876791628933,
+      "heldout_bpb": 1.1916783356808018,
+      "model_id": "autopareto_294",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 106.9423828125,
+      "role": "AutoPareto efficiency-boundary recipe corresponding to confirmation 294",
+      "run_id": "phase1-autopareto_294-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 493.2229622939195,
+      "steady_state_equivalent_seconds": 291.4394471434072,
+      "steady_state_tokens_per_second": 690800.7614389077,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 392.546405342,
+      "training_metrics_sha256": "6b2a7f69d5774366f4997abaa944c7d3e95c0ee3f28c110f59062d75c867e8ed"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "9ec14f2d00e81f2a6f177f6d8afc47958c93fb8ce0d30656d4089c4f8823f128",
+      "final_inference_sha256": "100ab2aeff362753a793e6c812c13889bd3bd928af87411be45cdd0b72ae6e03",
+      "final_validation_bpb": 1.0767262513569205,
+      "heldout_bpb": 1.1491464505468767,
+      "model_id": "motpe_quality",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 145.568359375,
+      "role": "strongest frozen MOTPE quality representative",
+      "run_id": "phase1-motpe_quality-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 265.9637657270107,
+      "steady_state_equivalent_seconds": 398.2054216432052,
+      "steady_state_tokens_per_second": 505584.7586635573,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 535.286719414,
+      "training_metrics_sha256": "115ff0776c0b7b60e33bce3be87179cd53537d57dc1f8a72a0ccc0f5e20ee8b7"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "d99356bd92b87453149430cc01e929c74a16273d18276774fe4e4ee4028de844",
+      "final_inference_sha256": "aed6c690b16a7bbd4618aac8a6de389ab57e9dfd99ce1a5ce56ba9eaf41de124",
+      "final_validation_bpb": 1.097355192326774,
+      "heldout_bpb": 1.1519004871954783,
+      "model_id": "baseline",
+      "optimizer_steps": 384,
+      "peak_inference_cuda_memory_mb": 250.8818359375,
+      "role": "untouched original train.py baseline",
+      "run_id": "phase1-baseline-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 195.03555491658713,
+      "steady_state_equivalent_seconds": 689.1614728232494,
+      "steady_state_tokens_per_second": 292132.6857916717,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 798.841366031,
+      "training_metrics_sha256": "171acb504e7f7a0c395faac4dc21c2e2331f8de4e0a4d40837771f872badb706"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "1501599740b5f642506d83fe2f62c61c78388a6091511385ebef3f7212942523",
+      "final_inference_sha256": "18fd32db272d3e2ab35fbc964e3729de1d686ac51c2c256dbe91f5edf38f5e9e",
+      "final_validation_bpb": 1.0963729880263802,
+      "heldout_bpb": 1.1588967873234026,
+      "model_id": "autopareto_299",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 142.3798828125,
+      "role": "AutoPareto shallow-wide / fast-quality recipe corresponding to confirmation 299",
+      "run_id": "phase1-autopareto_299-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 484.34168672134695,
+      "steady_state_equivalent_seconds": 312.7917882324354,
+      "steady_state_tokens_per_second": 643644.1095134963,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 422.37148822,
+      "training_metrics_sha256": "2869221b47dcebe75bc6dfa5e3e552a4d415133a5611d1fa32e064bbc7fd832d"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "b12ebf1307b300974d8f0f7a59a5dc01f7a2b7878bffd7ff196fa331eb5c5285",
+      "final_inference_sha256": "a8b7c50bab59a2e10b899e01136e874d2f596e3cd48cc6c8e415410c15c67c9b",
+      "final_validation_bpb": 1.0332243863061068,
+      "heldout_bpb": 1.100928774575567,
+      "model_id": "autoresearch_compatible",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 250.8818359375,
+      "role": "strongest frozen AutoResearch compatible representative",
+      "run_id": "phase1-autoresearch_compatible-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 193.43706523094295,
+      "steady_state_equivalent_seconds": 696.752620632299,
+      "steady_state_tokens_per_second": 288949.8884371576,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 818.076239533,
+      "training_metrics_sha256": "72d051271e0d085724756542c17bd38a4f86d16b02cdaa93c45c46c77381de9f"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "f49999aa7d0433b72bd67ddfa9652b004f9f203c5b117f974ddedae5798a5984",
+      "final_inference_sha256": "9c16a96f0ddc009d7eaea54944646264e3d07fb818fb29b056a751f8a9e93b98",
+      "final_validation_bpb": 1.0587501157156307,
+      "heldout_bpb": 1.122378990918381,
+      "model_id": "tpe_quality",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 205.880859375,
+      "role": "strongest frozen TPE quality representative",
+      "run_id": "phase1-tpe_quality-seed4",
+      "seed": 4,
+      "stabilized_decode_tokens_per_second": 256.0911466888535,
+      "steady_state_equivalent_seconds": 540.2959874850413,
+      "steady_state_tokens_per_second": 372622.7783721491,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 635.868733957,
+      "training_metrics_sha256": "3dbb3d4ee6a674b7cdc9f1308d061540d78f3c912aa83948db053b440fd8885b"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "d69678b43d03539dacfde5abd30f135de086b93ec3998053c0558030331068c0",
+      "final_inference_sha256": "e6fa11eb787357a1616866a94a413ce0f6e342f1b5a7497c9dbd1ff22241b1ba",
+      "final_validation_bpb": 1.0977878502644236,
+      "heldout_bpb": 1.1596106821487935,
+      "model_id": "autopareto_299",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 142.3798828125,
+      "role": "AutoPareto shallow-wide / fast-quality recipe corresponding to confirmation 299",
+      "run_id": "phase1-autopareto_299-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 497.7890310157431,
+      "steady_state_equivalent_seconds": 312.3875460106072,
+      "steady_state_tokens_per_second": 644477.0112351531,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 461.745145369,
+      "training_metrics_sha256": "edb728668ebbfb866cade67e5acc8414cdf39de05eb4ce0e4c2fb1a6cae4b01b"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "5c4f4097f0dda98b7fa4f0a3d96004c2a022b34eac11de71f24e3933bf7b4e4e",
+      "final_inference_sha256": "723a4f0cebb801bd415d89a9df7728610126599cfc063ae950ee2302356564a5",
+      "final_validation_bpb": 1.0591052239640468,
+      "heldout_bpb": 1.1213174081582233,
+      "model_id": "tpe_quality",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 205.880859375,
+      "role": "strongest frozen TPE quality representative",
+      "run_id": "phase1-tpe_quality-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 262.70952891134027,
+      "steady_state_equivalent_seconds": 540.2078137656237,
+      "steady_state_tokens_per_second": 372683.5985518496,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 695.90702385,
+      "training_metrics_sha256": "c3a280b23259d0e5ac4537718feb3224cb004491ee874db7d65a6ed3337a6cc3"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "5d1642090c7034432ffbe061ffdacaec8d6c9a41e40300bfde943a14e891e01d",
+      "final_inference_sha256": "cf9ed513ffa1e6db9d751caa1472df1a8a94d8c53f4fe876d70dc8960f6e7da9",
+      "final_validation_bpb": 1.1291351316509926,
+      "heldout_bpb": 1.1875800088968536,
+      "model_id": "autopareto_294",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 106.9423828125,
+      "role": "AutoPareto efficiency-boundary recipe corresponding to confirmation 294",
+      "run_id": "phase1-autopareto_294-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 493.19509868152807,
+      "steady_state_equivalent_seconds": 292.49882126906755,
+      "steady_state_tokens_per_second": 688298.8147661666,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 405.733614488,
+      "training_metrics_sha256": "237cc56b32ade194d4526d1d65e86950a9d97aad4253025a267331859e0c4a01"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "210555921b255d11984c435843413b64f3709dd09d242db00fd1e9679ab99ae5",
+      "final_inference_sha256": "b98e5af50ff8d0dc9ba8e681076039fccb95572359be126a7b85b5dd82dafbab",
+      "final_validation_bpb": 1.032171896875737,
+      "heldout_bpb": 1.0975599489328192,
+      "model_id": "autoresearch_compatible",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 250.8818359375,
+      "role": "strongest frozen AutoResearch compatible representative",
+      "run_id": "phase1-autoresearch_compatible-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 191.37262101747785,
+      "steady_state_equivalent_seconds": 695.5046260480839,
+      "steady_state_tokens_per_second": 289468.3722579312,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 815.395770622,
+      "training_metrics_sha256": "aa641461932bd347e7e250c4cf2e51c6715ebb2afcc3c446d66c97b848383e88"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "0ceb177ae5323a7045e3838b67f18aa068519dee255bc650f596780c209f0714",
+      "final_inference_sha256": "b92383e405efa570701b5b9d1ac80f95b06850ffe0bde220c3c22876cb25f850",
+      "final_validation_bpb": 1.0819624261820278,
+      "heldout_bpb": 1.1448024587454098,
+      "model_id": "motpe_quality",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 145.568359375,
+      "role": "strongest frozen MOTPE quality representative",
+      "run_id": "phase1-motpe_quality-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 267.9145310328147,
+      "steady_state_equivalent_seconds": 398.2570282044433,
+      "steady_state_tokens_per_second": 505519.2444630255,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 544.054954991,
+      "training_metrics_sha256": "46a641dfe2e56646cbd5ea84928a4419a4e37144240e058579ae423253851d01"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "3aaff9b0d9962fc33b4d90a6497dab2631133a7b5c5642aa5525c8ed540d7ff2",
+      "final_inference_sha256": "a15971db4ad48534e6e0037cf2b2d23cf8226ebaa03e94ab8bbfa6f0dc1f0abe",
+      "final_validation_bpb": 1.0767050071935633,
+      "heldout_bpb": 1.1372280113565931,
+      "model_id": "autopareto_292",
+      "optimizer_steps": 1536,
+      "peak_inference_cuda_memory_mb": 162.8798828125,
+      "role": "AutoPareto confirmed-quality recipe corresponding to confirmation 292",
+      "run_id": "phase1-autopareto_292-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 388.3442744088567,
+      "steady_state_equivalent_seconds": 384.7611915817967,
+      "steady_state_tokens_per_second": 523250.7758184334,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 508.880264935,
+      "training_metrics_sha256": "4b9bbd33b2669648ff701cd2d5d0112475983b35392a1c6cd863c8ccf543cb3a"
+    },
+    {
+      "cache_correctness_passed": true,
+      "checkpoint_evaluations_sha256": "1c65724766d535ef8191b1902a32a40b855b75db597ad39d633106c2e060f71c",
+      "final_inference_sha256": "2dca10f6f39e17ee17d84af0fabe459f5910a82f52b55bc78c009ab8e26daa91",
+      "final_validation_bpb": 1.093268971726509,
+      "heldout_bpb": 1.144757650043697,
+      "model_id": "baseline",
+      "optimizer_steps": 384,
+      "peak_inference_cuda_memory_mb": 250.8818359375,
+      "role": "untouched original train.py baseline",
+      "run_id": "phase1-baseline-seed5",
+      "seed": 5,
+      "stabilized_decode_tokens_per_second": 195.8172392695405,
+      "steady_state_equivalent_seconds": 687.712185110992,
+      "steady_state_tokens_per_second": 292748.32751074096,
+      "tokens": 201326592,
+      "total_scientific_wall_seconds": 805.307011628,
+      "training_metrics_sha256": "7fe887d2177d0f667f614cea74301bc279486c67fcc390f450e7beeb77f1963e"
+    }
+  ],
+  "seeds": [
+    3,
+    4,
+    5
+  ],
+  "status": "COMPLETED_INTEGRITY_VERIFIED",
+  "timing_note": "total_scientific_wall_seconds includes every scientific optimizer step; steady_state_equivalent_seconds extrapolates the post-step-11 sustained rate to the full common token budget",
+  "token_budget": 201326592
+}

@@ -1,0 +1,142 @@
+{
+  "format": "autopareto_phase1_stabilized_inference_rebenchmark_v1",
+  "status": "REGISTERED_BEFORE_REBENCHMARK",
+  "purpose": "Pre-Stage-B measurement-protocol correction; inference-only standardized rebenchmark of the seven frozen Phase 1 representatives.",
+  "historical_preservation": "Historical discovery, confirmation, deployment, and Phase 1 smoke measurements remain unchanged. This artifact registers a new stabilized comparison.",
+  "protocol": {
+    "version": "autopareto_inference_stabilized_v2",
+    "evaluator": "deployment_benchmark.py",
+    "stability_policy": {
+      "warmup_block_size": 5,
+      "required_stable_adjacent_blocks": 2,
+      "max_warmups_per_pass": 30,
+      "adjacent_median_relative_tolerance": 0.02,
+      "within_block_coefficient_of_variation_limit": 0.05
+    },
+    "measurement_passes": 3,
+    "repetitions_per_pass": 10,
+    "headline_summary": "median of all 30 stabilized synchronized-wall-clock decode repetitions; maximum is diagnostic only",
+    "measured_block_gate": "each pass also requires its first and second five-measurement blocks to satisfy the same 2% median-drift and 5% CV rule",
+    "failure_policy": "a pass or model that does not stabilize is explicitly unresolved and has no canonical throughput value"
+  },
+  "workload": {
+    "hardware": "NVIDIA A40",
+    "precision": "bfloat16",
+    "input_tokens": 256,
+    "generated_tokens": 256,
+    "batch_size": 1,
+    "generation_mode": "greedy",
+    "metric_mode": "cached_decode",
+    "prompt": "benchmark_config.FIXED_INPUT_TEXT",
+    "selection_rationale": "Phase 1 protected headline workload; the timing protocol is corrected without changing the frozen Phase 1 workload."
+  },
+  "models": [
+    {
+      "model_id": "baseline",
+      "role": "untouched original train.py baseline",
+      "source_experiment_id": 4,
+      "discovery_source_experiment_id": null,
+      "source_path": "results/candidates/baseline-a40-seed0/0002-train.py",
+      "source_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "checkpoint_path": "results/checkpoints/baseline-a40-seed0/0002.pt",
+      "checkpoint_provenance": "historical selected checkpoint for experiment 4",
+      "checkpoint_experiment_id": 4,
+      "checkpoint_sha256": "d8d03b3ef3df27ea1fe25a5a199b62a9e70ea246f2b443420434f2fb7d1302e9",
+      "historical_value": 158.3153909482479,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator"
+    },
+    {
+      "model_id": "autoresearch_compatible",
+      "role": "strongest/frozen AutoResearch representative",
+      "source_experiment_id": 68,
+      "discovery_source_experiment_id": null,
+      "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "checkpoint_path": "results/checkpoints/confirmation-exp68-seeds012-20260725/0003.pt",
+      "checkpoint_provenance": "exact-recipe recovery/confirmation checkpoint for source experiment 68; original checkpoint unavailable",
+      "checkpoint_experiment_id": 77,
+      "checkpoint_sha256": "87f5094983f7c3ae78685aee7121e8c3b5ebe11cfbe51eb71334cf9337710dc8",
+      "historical_value": 161.4235396941305,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute for source experiment 68; legacy fixed warm-up evaluator"
+    },
+    {
+      "model_id": "tpe_quality",
+      "role": "strongest/frozen TPE representative",
+      "source_experiment_id": 183,
+      "discovery_source_experiment_id": null,
+      "source_path": "results/candidates/tpe-seed42-20260805/0021-train.py",
+      "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "checkpoint_path": "results/checkpoints/tpe-seed42-20260805/0021.pt",
+      "checkpoint_provenance": "historical selected checkpoint for source experiment 183",
+      "checkpoint_experiment_id": 183,
+      "checkpoint_sha256": "c931ca261d018c433b7a69b4130413c6ef1e7d881317d2dc00f5dc08f9d92509",
+      "historical_value": 212.29453004307547,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator"
+    },
+    {
+      "model_id": "motpe_quality",
+      "role": "strongest/frozen MOTPE representative",
+      "source_experiment_id": 234,
+      "discovery_source_experiment_id": null,
+      "source_path": "results/candidates/motpe-seed42-20260805/0022-train.py",
+      "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "checkpoint_path": "results/checkpoints/downstream-recovery-motpe-exp234-seed42-20260812/0001.pt",
+      "checkpoint_provenance": "exact-recipe recovery checkpoint for source experiment 234; original checkpoint unavailable",
+      "checkpoint_experiment_id": 300,
+      "checkpoint_sha256": "8865fdaa7aea062e56e344b72b7e275b3446d74414f2dc66aba0bd4f2640a76b",
+      "historical_value": 226.08480692471505,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute for source experiment 234; legacy fixed warm-up evaluator"
+    },
+    {
+      "model_id": "autopareto_292",
+      "role": "AutoPareto confirmed-quality recipe",
+      "source_experiment_id": 292,
+      "discovery_source_experiment_id": 134,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "checkpoint_path": "results/checkpoints/autopareto-primary-best-quality-exp134-seed1-20260810/0001.pt",
+      "checkpoint_provenance": "confirmed selected checkpoint for experiment 292, exact recipe sourced from discovery experiment 134",
+      "checkpoint_experiment_id": 292,
+      "checkpoint_sha256": "e913acf38c74f731471248abfe78a7516edd3e1adf7719187a4a85cad37f5ccd",
+      "historical_value": 318.27445787057286,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator"
+    },
+    {
+      "model_id": "autopareto_299",
+      "role": "AutoPareto shallow-wide / fast-quality recipe",
+      "source_experiment_id": 299,
+      "discovery_source_experiment_id": 137,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0025-train.py",
+      "source_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "checkpoint_path": "results/checkpoints/autopareto-primary-fastest-within-1pct-quality-exp137-seed2-20260810/0001.pt",
+      "checkpoint_provenance": "confirmed selected checkpoint for experiment 299, exact recipe sourced from discovery experiment 137",
+      "checkpoint_experiment_id": 299,
+      "checkpoint_sha256": "8a297f127ed3a2d5e0978eb2b8fac6cafbed32b4b4c773841e2ddf7356ea3653",
+      "historical_value": 361.1765124935292,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator; smoke showed later timing drift"
+    },
+    {
+      "model_id": "autopareto_294",
+      "role": "AutoPareto efficiency-boundary recipe",
+      "source_experiment_id": 294,
+      "discovery_source_experiment_id": 136,
+      "source_path": "results/candidates/autopareto-seed0-20260731/0024-train.py",
+      "source_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "checkpoint_path": "results/checkpoints/autopareto-primary-largest-exclusive-hypervolume-contribution-exp136-seed0-20260810/0001.pt",
+      "checkpoint_provenance": "confirmed selected checkpoint for experiment 294, exact recipe sourced from discovery experiment 136",
+      "checkpoint_experiment_id": 294,
+      "checkpoint_sha256": "d5c29a5b3fede97fd485e4e5be59fe29f336d20a45cdb8806e4f300dafc0eb26",
+      "historical_value": 404.9996000762904,
+      "historical_value_provenance": "Phase 1 manifest historical_five_minute; legacy fixed warm-up evaluator"
+    }
+  ],
+  "implementation_hashes": {
+    "deployment_benchmark.py": "e3f8c8beef537a8a2195b6c1178498d960500103496c80a117bc4c1b86e82e8d",
+    "benchmark_stability.py": "15eec967240c4b60bea3d731d19d56834cd665a5b779fb1f36205c54f31a8e0f"
+  },
+  "analysis_policy": {
+    "primary_metric": "median_cached_decode_tokens_per_second from the 30 stabilized measured repetitions",
+    "maximum_throughput": "diagnostic only; never substituted for the primary metric",
+    "historical_values": "preserve and label by original evaluator/provenance; do not overwrite"
+  }
+}

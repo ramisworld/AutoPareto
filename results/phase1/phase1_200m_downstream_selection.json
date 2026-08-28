@@ -1,0 +1,238 @@
+{
+  "format": "autopareto_phase1_200m_downstream_selection_v1",
+  "model_count": 21,
+  "models": [
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "candidate_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_292-seed3/final.pt",
+      "checkpoint_sha256": "9dbea197499a5be43814e1eeb6c649f2cb0591189f8d7de1af6d80cc9e65f8f7",
+      "display_name": "autopareto_292 seed 3 200M",
+      "experiment_id": 301,
+      "model_id": "autopareto_292",
+      "run_name": "phase1-autopareto_292-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "candidate_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_292-seed4/final.pt",
+      "checkpoint_sha256": "a4017dccc96f7f3eac9d56bd5fe33778f9254bee5568e8cbacbdd2645f2aad8e",
+      "display_name": "autopareto_292 seed 4 200M",
+      "experiment_id": 302,
+      "model_id": "autopareto_292",
+      "run_name": "phase1-autopareto_292-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "candidate_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_292-seed5/final.pt",
+      "checkpoint_sha256": "1559944fb2c95c365118d08bae980cbf811f7140d7cc305203b6f64977f3b255",
+      "display_name": "autopareto_292 seed 5 200M",
+      "experiment_id": 303,
+      "model_id": "autopareto_292",
+      "run_name": "phase1-autopareto_292-seed5",
+      "seed": 5
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0024-train.py",
+      "candidate_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_294-seed3/final.pt",
+      "checkpoint_sha256": "6995a113c2534db8824a6d2fe936397e90a16c63e42d3291d9da3f52513325e8",
+      "display_name": "autopareto_294 seed 3 200M",
+      "experiment_id": 304,
+      "model_id": "autopareto_294",
+      "run_name": "phase1-autopareto_294-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0024-train.py",
+      "candidate_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_294-seed4/final.pt",
+      "checkpoint_sha256": "2dd54695f4010b1b28ad6ad1710d80ba9d7b8ee73208ef93812f9cf260d1d894",
+      "display_name": "autopareto_294 seed 4 200M",
+      "experiment_id": 305,
+      "model_id": "autopareto_294",
+      "run_name": "phase1-autopareto_294-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0024-train.py",
+      "candidate_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_294-seed5/final.pt",
+      "checkpoint_sha256": "bbe87bb5f5e4b2da76d2558e24a68436fe0e5bddb80608b693532c8bd0cc56ff",
+      "display_name": "autopareto_294 seed 5 200M",
+      "experiment_id": 306,
+      "model_id": "autopareto_294",
+      "run_name": "phase1-autopareto_294-seed5",
+      "seed": 5
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0025-train.py",
+      "candidate_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_299-seed3/final.pt",
+      "checkpoint_sha256": "ca1e408910f59bc713fe72ea78c3046ac6608c65a37447cc747235e539276ca5",
+      "display_name": "autopareto_299 seed 3 200M",
+      "experiment_id": 307,
+      "model_id": "autopareto_299",
+      "run_name": "phase1-autopareto_299-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0025-train.py",
+      "candidate_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_299-seed4/final.pt",
+      "checkpoint_sha256": "75cdff650d747703223d803cd44d9569e9e77617a62f42f6e54c7616b5797765",
+      "display_name": "autopareto_299 seed 4 200M",
+      "experiment_id": 308,
+      "model_id": "autopareto_299",
+      "run_name": "phase1-autopareto_299-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autopareto-seed0-20260731/0025-train.py",
+      "candidate_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_299-seed5/final.pt",
+      "checkpoint_sha256": "d9c2b88f5ea8483107a77759bb9abcd05df6fc4cfbf6a58cce839bb32a9a646d",
+      "display_name": "autopareto_299 seed 5 200M",
+      "experiment_id": 309,
+      "model_id": "autopareto_299",
+      "run_name": "phase1-autopareto_299-seed5",
+      "seed": 5
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "candidate_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autoresearch_compatible-seed3/final.pt",
+      "checkpoint_sha256": "846877696a4c3074cfc0a247ef6d90446754c9b3b3bf941034dcdc11a801484e",
+      "display_name": "autoresearch_compatible seed 3 200M",
+      "experiment_id": 310,
+      "model_id": "autoresearch_compatible",
+      "run_name": "phase1-autoresearch_compatible-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "candidate_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autoresearch_compatible-seed4/final.pt",
+      "checkpoint_sha256": "e0ac7756517e5d5f59534511ff9583b013b65d104485e839cc9daa2cf8accd91",
+      "display_name": "autoresearch_compatible seed 4 200M",
+      "experiment_id": 311,
+      "model_id": "autoresearch_compatible",
+      "run_name": "phase1-autoresearch_compatible-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "candidate_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-autoresearch_compatible-seed5/final.pt",
+      "checkpoint_sha256": "7183ab49444a8b74ec0104352c9caff2a4010168054066ae798e6bbaad296cfb",
+      "display_name": "autoresearch_compatible seed 5 200M",
+      "experiment_id": 312,
+      "model_id": "autoresearch_compatible",
+      "run_name": "phase1-autoresearch_compatible-seed5",
+      "seed": 5
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/baseline-a40-seed0/0002-train.py",
+      "candidate_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-baseline-seed3/final.pt",
+      "checkpoint_sha256": "f958f8704dd24f7905ba45de6a208783cddb94e193ebcc90a19f060cd6f1aa84",
+      "display_name": "baseline seed 3 200M",
+      "experiment_id": 313,
+      "model_id": "baseline",
+      "run_name": "phase1-baseline-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/baseline-a40-seed0/0002-train.py",
+      "candidate_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-baseline-seed4/final.pt",
+      "checkpoint_sha256": "2c857112790d98a3e49054d1b6bb7c27c30851516039ca029cf9d692fbbbddd3",
+      "display_name": "baseline seed 4 200M",
+      "experiment_id": 314,
+      "model_id": "baseline",
+      "run_name": "phase1-baseline-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/baseline-a40-seed0/0002-train.py",
+      "candidate_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-baseline-seed5/final.pt",
+      "checkpoint_sha256": "13c4953fd81596180db1809ddd4493ce8c609b7ea851e6a077f98266b74c41db",
+      "display_name": "baseline seed 5 200M",
+      "experiment_id": 315,
+      "model_id": "baseline",
+      "run_name": "phase1-baseline-seed5",
+      "seed": 5
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/motpe-seed42-20260805/0022-train.py",
+      "candidate_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-motpe_quality-seed3/final.pt",
+      "checkpoint_sha256": "7d0a98bbcfa648b8b9c5f4167199a8b90b14c02a5b9716b51e419dbf70474915",
+      "display_name": "motpe_quality seed 3 200M",
+      "experiment_id": 316,
+      "model_id": "motpe_quality",
+      "run_name": "phase1-motpe_quality-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/motpe-seed42-20260805/0022-train.py",
+      "candidate_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-motpe_quality-seed4/final.pt",
+      "checkpoint_sha256": "cf009ea7c929b92b964406d6f73b8a65dc0bcf99608e0a465af8532b50e0925b",
+      "display_name": "motpe_quality seed 4 200M",
+      "experiment_id": 317,
+      "model_id": "motpe_quality",
+      "run_name": "phase1-motpe_quality-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/motpe-seed42-20260805/0022-train.py",
+      "candidate_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-motpe_quality-seed5/final.pt",
+      "checkpoint_sha256": "c0e7088421c97125837bd8c8e3bda7861ee1a5e4e6fe47cb054565b9253d5ba2",
+      "display_name": "motpe_quality seed 5 200M",
+      "experiment_id": 318,
+      "model_id": "motpe_quality",
+      "run_name": "phase1-motpe_quality-seed5",
+      "seed": 5
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/tpe-seed42-20260805/0021-train.py",
+      "candidate_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-tpe_quality-seed3/final.pt",
+      "checkpoint_sha256": "0bbe0882b5b139465cc43be2a20ef101ed7e72f5dbdfe3654b056916e23b42a0",
+      "display_name": "tpe_quality seed 3 200M",
+      "experiment_id": 319,
+      "model_id": "tpe_quality",
+      "run_name": "phase1-tpe_quality-seed3",
+      "seed": 3
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/tpe-seed42-20260805/0021-train.py",
+      "candidate_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-tpe_quality-seed4/final.pt",
+      "checkpoint_sha256": "99e08dc34497b3eabde32573c42c378596da4f8dbe6f53878c940071eb9c9a00",
+      "display_name": "tpe_quality seed 4 200M",
+      "experiment_id": 320,
+      "model_id": "tpe_quality",
+      "run_name": "phase1-tpe_quality-seed4",
+      "seed": 4
+    },
+    {
+      "candidate": "/workspace/autopareto/results/candidates/tpe-seed42-20260805/0021-train.py",
+      "candidate_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+      "checkpoint": "/workspace/autopareto/results/phase1/runs/phase1-tpe_quality-seed5/final.pt",
+      "checkpoint_sha256": "67a7d3854eeb808a2f7b9e71a68cee6d3abb2ed909328b0245fc0c501b888616",
+      "display_name": "tpe_quality seed 5 200M",
+      "experiment_id": 321,
+      "model_id": "tpe_quality",
+      "run_name": "phase1-tpe_quality-seed5",
+      "seed": 5
+    }
+  ],
+  "selection_sha256": "226c381fef6d6cd2711e23d8b3d266818f6c7fdd5a281823303db4daf79cf477"
+}
