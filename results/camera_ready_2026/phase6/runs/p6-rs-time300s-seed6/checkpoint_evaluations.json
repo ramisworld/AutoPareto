@@ -1,0 +1,38 @@
+{
+  "candidate_path": "/root/phase6_local/runs/p6-rs-time300s-seed6/isolate/train.py",
+  "candidate_sha256": "a30482c38ad719131dcfef99ca9ba507ae1ec04eee33039e984f55b2cf029bba",
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 106968625,
+      "checkpoint_path": "/root/phase6_local/runs/p6-rs-time300s-seed6/final.pt",
+      "checkpoint_sha256": "102e6dedfda9f92f183a04cfaca57457ff831ad7455697f4510442e7172b52fd",
+      "evaluator": "prepare.evaluate_bpb",
+      "historical_steady_state_training_seconds": 300.2350444793701,
+      "optimizer_step": 900,
+      "token_count": 117964800,
+      "validation_bpb": 1.1080768308949254
+    }
+  ],
+  "format": "autopareto_phase1_checkpoint_evaluations_v1",
+  "heldout_bpb": {
+    "confidence_high": 1.1640129973884854,
+    "confidence_low": 1.1510208232526793,
+    "dataset_config": "shard_06541.parquet",
+    "dataset_name": "karpathy/climbmix-400b-shuffle",
+    "dataset_revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+    "higher_is_better": false,
+    "metric_name": "bits_per_byte",
+    "metric_standard_error": null,
+    "metric_value": 1.1572944931271243,
+    "raw": {
+      "evaluated_tokens": 5242880,
+      "segments": 2560,
+      "shard_sha256": "51da1a9bc052dfd5a77988d6ca4d1cbe62b89eedb247b56850fc1b9b45e56c73"
+    },
+    "sample_count": 2560,
+    "split": "heldout",
+    "task_name": "heldout_climbmix_bpb"
+  },
+  "milestone_manifest": "/root/phase6_local/runs/p6-rs-time300s-seed6/fixed_time_checkpoint_manifest.json",
+  "milestone_manifest_sha256": "12663204eefbf74a0d8a295b041164e1e3f05d461878e35dbbb3736f4b672526"
+}

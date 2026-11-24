@@ -1,0 +1,196 @@
+{
+  "records": [
+    {
+      "id": "phase1-autopareto_292-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_292-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_292-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_294-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_294-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_294-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_299-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_299-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autopareto_299-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autoresearch_compatible-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autoresearch_compatible-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-autoresearch_compatible-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-baseline-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-baseline-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-baseline-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-motpe_quality-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-motpe_quality-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-motpe_quality-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-tpe_quality-seed3",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-tpe_quality-seed4",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    },
+    {
+      "id": "phase1-tpe_quality-seed5",
+      "checks": {
+        "token_sum": true,
+        "step_wall_sum": true,
+        "steady_equivalent": true,
+        "derived_source_hash": true
+      }
+    }
+  ],
+  "public_summary_comparison": "three principal metrics at full precision, all downstream metrics to published rounding",
+  "errors": [],
+  "passed": true
+}

@@ -1,0 +1,8 @@
+{"a2_plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b", "event": "stage_started", "stage": "train", "utc": "2026-11-17T03:23:37.735579+00:00"}
+{"attempt": 3, "event": "attempt_started", "load": ["2.36", "2.27", "2.33"], "run_id": "p6-motpe-tokens201326592-seed8", "utc": "2026-11-17T03:23:44.799147+00:00"}
+{"attempt": 3, "event": "attempt_finished", "failures": [], "run_id": "p6-motpe-tokens201326592-seed8", "status": "completed", "timing_anomaly_s": 0, "utc": "2026-11-17T03:35:38.808814+00:00"}
+{"event": "stage_finished", "exit": 0, "stage": "train", "utc": "2026-11-17T03:35:38.849896+00:00"}
+{"a2_plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b", "event": "stage_started", "stage": "downstream", "utc": "2026-11-17T03:35:38.857967+00:00"}
+{"event": "stage_finished", "exit": 0, "stage": "downstream", "utc": "2026-11-17T03:39:36.269466+00:00"}
+{"a2_plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b", "event": "stage_started", "stage": "inference", "utc": "2026-11-17T03:39:36.272447+00:00"}
+{"event": "stage_finished", "exit": 0, "stage": "inference", "utc": "2026-11-17T03:44:01.801777+00:00"}

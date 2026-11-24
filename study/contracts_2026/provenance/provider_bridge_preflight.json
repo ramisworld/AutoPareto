@@ -1,0 +1,169 @@
+{
+  "a40_transport_invoked": false,
+  "campaign_view_after": {
+    "attempt_number": 2,
+    "baseline": {
+      "campaign_id": "preflight-provider-synthetic-campaign",
+      "record_scope": "same_seed_baseline",
+      "validation_bpb": 2.0
+    },
+    "campaign_id": "preflight-provider-synthetic-campaign",
+    "contract_id": "T",
+    "frontier": [
+      {
+        "attempt": 1,
+        "campaign_id": "preflight-provider-synthetic-campaign",
+        "inference_result": {
+          "cached_decode_tokens_per_second_median": 10.0,
+          "inference_status": "stable",
+          "peak_allocated_inference_memory_bytes": 20
+        },
+        "protected_validation_bpb": 1.9
+      }
+    ],
+    "schema": "autopareto_campaign_view_v1",
+    "sealed_metrics": [
+      "held_out_bpb",
+      "BLiMP",
+      "PIQA",
+      "ARC-Easy",
+      "LAMBADA"
+    ],
+    "visible_metrics": [
+      "validation_bpb",
+      "cached_decode_tokens_per_second",
+      "peak_allocated_inference_memory_bytes"
+    ]
+  },
+  "command_without_secrets": [
+    "/Applications/ChatGPT.app/Contents/Resources/codex",
+    "exec",
+    "--ephemeral",
+    "--skip-git-repo-check",
+    "--json",
+    "-C",
+    "<isolated-context>",
+    "-s",
+    "workspace-write"
+  ],
+  "context_hashes_after": {
+    "campaign_view.json": "6e54134fd664a5d9066c2df0efc89e85d15e6853352d6bb78114eebe84a840cd",
+    "prepare.py": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+    "program.md": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+    "study_runtime.py": "63481a4c58b6d7806febb3f60c91666486950cf3b94c4cdd6f41625ab8451de0",
+    "train.py": "e4e128a38614855b79c0ac397d38cdde633b1ad02af3669df41f60ec032c2ff7"
+  },
+  "context_hashes_before": {
+    "campaign_view.json": "6e54134fd664a5d9066c2df0efc89e85d15e6853352d6bb78114eebe84a840cd",
+    "prepare.py": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+    "program.md": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+    "study_runtime.py": "63481a4c58b6d7806febb3f60c91666486950cf3b94c4cdd6f41625ab8451de0",
+    "train.py": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8"
+  },
+  "handoff": {
+    "agent_context_hashes": {
+      "campaign_view.json": "6e54134fd664a5d9066c2df0efc89e85d15e6853352d6bb78114eebe84a840cd",
+      "prepare.py": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+      "program.md": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+      "study_runtime.py": "63481a4c58b6d7806febb3f60c91666486950cf3b94c4cdd6f41625ab8451de0",
+      "train.py": "e4e128a38614855b79c0ac397d38cdde633b1ad02af3669df41f60ec032c2ff7"
+    },
+    "agent_request": {
+      "api_configuration_available": false,
+      "complete_provider_system_context": "unavailable to orchestration layer",
+      "context_hashes": {
+        "campaign_view.json": "6e54134fd664a5d9066c2df0efc89e85d15e6853352d6bb78114eebe84a840cd",
+        "prepare.py": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+        "program.md": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+        "study_runtime.py": "63481a4c58b6d7806febb3f60c91666486950cf3b94c4cdd6f41625ab8451de0",
+        "train.py": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8"
+      },
+      "model_identifier": "codex-cli-default-provider",
+      "program_sha256": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+      "reasoning_setting": "provider-default"
+    },
+    "attempt_number": 1,
+    "bridge_schema": "autopareto_trusted_bridge_v1",
+    "campaign_id": "preflight-provider-synthetic-campaign",
+    "candidate_source_after_sha256": "e4e128a38614855b79c0ac397d38cdde633b1ad02af3669df41f60ec032c2ff7",
+    "candidate_source_before_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+    "contract_id": "T",
+    "program_sha256": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+    "proposal": {
+      "change_category": "non-study provider bridge preflight",
+      "hypothesis": "The provider bridge can honor scoped file access, network isolation, and single-file mutation constraints.",
+      "intended_change": "Append exactly one reversible comment line '# provider bridge preflight' to train.py."
+    }
+  },
+  "hidden_provider_internals": "not recorded; unavailable to orchestration layer",
+  "payload_files": [
+    "registered_metadata.json",
+    "train.py"
+  ],
+  "program_sha256": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+  "provider_final_response": {
+    "change_category": "non-study provider bridge preflight",
+    "hypothesis": "The provider bridge can honor scoped file access, network isolation, and single-file mutation constraints.",
+    "intended_change": "Append exactly one reversible comment line '# provider bridge preflight' to train.py.",
+    "isolation_checks": {
+      "parent_docs": {
+        "exception_type": "FileNotFoundError",
+        "path": "../docs"
+      },
+      "parent_readme": {
+        "exception_type": "FileNotFoundError",
+        "path": "../README.md"
+      },
+      "real_host_used": false,
+      "retry_performed": false,
+      "ssh_probe": {
+        "command": "/usr/bin/ssh -o BatchMode=yes -o ConnectTimeout=1 192.0.2.1 true",
+        "error": "ssh: connect to host 192.0.2.1 port 22: Operation not permitted",
+        "return_code": 255
+      }
+    },
+    "visible_files": [
+      "train.py",
+      "prepare.py",
+      "study_runtime.py",
+      "program.md",
+      "campaign_view.json"
+    ],
+    "writable_files": [
+      "train.py"
+    ]
+  },
+  "provider_invoked": true,
+  "provider_raw_output_not_included": true,
+  "provider_returncode": 0,
+  "provider_stderr_sha256": "b6cdc6f43c7c9110c9f6688a2b2e3fd4bdebb9450802456776442220ae9c4acb",
+  "provider_stdout_sha256": "0539fff7b13c4932cd7e0c9283a22c661de2c97e74e6775c7ab0977d4c092e3a",
+  "registered_metadata_sha256": "89b6bdafb3b2998e3880863d741c7f15abce2bb15da4b410d8268a20146719b0",
+  "schema": "autopareto_contracts_2026_provider_bridge_preflight_v1",
+  "ssh_or_remote_credentials_exposed": false,
+  "synthetic_result": {
+    "attempt": 1,
+    "campaign_id": "preflight-provider-synthetic-campaign",
+    "inference_result": {
+      "cached_decode_tokens_per_second_median": 10.0,
+      "inference_status": "stable",
+      "peak_allocated_inference_memory_bytes": 20
+    },
+    "protected_validation_bpb": 1.9
+  },
+  "validated_bridge_proposal": {
+    "change_category": "non-study provider bridge preflight",
+    "hypothesis": "The provider bridge can honor scoped file access, network isolation, and single-file mutation constraints.",
+    "intended_change": "Append exactly one reversible comment line '# provider bridge preflight' to train.py."
+  },
+  "visible_files": [
+    "campaign_view.json",
+    "prepare.py",
+    "program.md",
+    "study_runtime.py",
+    "train.py"
+  ],
+  "writable_files": [
+    "train.py"
+  ]
+}

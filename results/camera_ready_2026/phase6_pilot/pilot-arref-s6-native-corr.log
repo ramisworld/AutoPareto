@@ -1,0 +1,1 @@
+{"label": "pilot-arref-s6-native-corr", "mode": "native", "status": "correctness_only", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 18.8}

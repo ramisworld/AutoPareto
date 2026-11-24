@@ -1,0 +1,548 @@
+[
+  {
+    "key": "ferreira",
+    "url": "https://arxiv.org/abs/2603.24647v5",
+    "title": "Can LLMs Beat Classical Hyperparameter Optimization Algorithms? A Study on autoresearch",
+    "authors": [
+      "Ferreira, Fabio",
+      "Wobbe, Lucca",
+      "Krishnakumar, Arjun",
+      "Hutter, Frank",
+      "Zela, Arber"
+    ],
+    "year": "2026",
+    "venue": "arXiv preprint",
+    "source_sha256": "3b8e8a00eacb9c827eebb489a9dbacc06d04e66631ffc55c4d7e5351c819adfd",
+    "metadata": {
+      "citation_title": [
+        "Can LLMs Beat Classical Hyperparameter Optimization Algorithms? A Study on autoresearch"
+      ],
+      "citation_author": [
+        "Ferreira, Fabio",
+        "Wobbe, Lucca",
+        "Krishnakumar, Arjun",
+        "Hutter, Frank",
+        "Zela, Arber"
+      ],
+      "citation_date": [
+        "2026/03/25"
+      ],
+      "citation_online_date": [
+        "2026/04/17"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2603.24647"
+      ],
+      "citation_arxiv_id": [
+        "2603.24647"
+      ],
+      "citation_abstract": [
+        "The autoresearch repository enables an LLM agent to optimize hyperparameters by editing training code directly. We use it as a testbed to compare classical HPO algorithms against LLM-based methods on tuning the hyperparameters of a small language model under a fixed compute budget. When defining a fixed search space over autoresearch, classical methods such as CMA-ES and TPE consistently outperform LLM-based agents, where avoiding out-of-memory failures matters more than search diversity. Allowing the LLM to directly edit source code narrows the gap to the classical methods but does not close it, even with frontier models available at the time of writing such as Claude Opus 4.6 and Gemini 3.1 Pro Preview. We observe that LLMs struggle to track optimization state across trials. In contrast, classical methods lack the domain knowledge of LLMs. To combine the strengths of both, we introduce Centaur, a hybrid that shares CMA-ES's interpretable internal state, including mean vector, step-size, and covariance matrix, with an LLM. Centaur achieves the best result in our experiments, and a 0.8B LLM already suffices to outperform all classical and pure LLM methods. Unconstrained code editing requires larger models to be competitive with classical methods. We further analyze search diversity, model scaling from 0.8B to frontier models, and ablate the fraction of LLM-proposed trials in Centaur. All in all, our results suggest that LLMs are most effective as a complement to classical optimizers, not as a replacement. Code is available at https://github.com/ferreirafabio/autoresearch-automl & interactive demo at https://ferreirafabio.github.io/autoresearch-automl."
+      ]
+    }
+  },
+  {
+    "key": "primer",
+    "url": "https://papers.nips.cc/paper_files/paper/2021/hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html",
+    "title": "Searching for Efficient Transformers for Language Modeling",
+    "authors": [
+      "So, David",
+      "Mańke, Wojciech",
+      "Liu, Hanxiao",
+      "Dai, Zihang",
+      "Shazeer, Noam",
+      "Le, Quoc V"
+    ],
+    "year": "2021",
+    "venue": "Advances in Neural Information Processing Systems",
+    "source_sha256": "5012a330e0952abd6011e8841e7045094865f30748d9ea29131b6862dc537ec6",
+    "metadata": {
+      "citation_title": [
+        "Searching for Efficient Transformers for Language Modeling"
+      ],
+      "citation_author": [
+        "So, David",
+        "Mańke, Wojciech",
+        "Liu, Hanxiao",
+        "Dai, Zihang",
+        "Shazeer, Noam",
+        "Le, Quoc V"
+      ],
+      "citation_journal_title": [
+        "Advances in Neural Information Processing Systems"
+      ],
+      "citation_volume": [
+        "34"
+      ],
+      "citation_firstpage": [
+        "6010"
+      ],
+      "citation_lastpage": [
+        "6022"
+      ],
+      "citation_pdf_url": [
+        "https://proceedings.neurips.cc/paper_files/paper/2021/file/2f3c6a4cd8af177f6456e7e51a916ff3-Paper.pdf"
+      ],
+      "citation_publication_date": [
+        "2021-12-06"
+      ]
+    }
+  },
+  {
+    "key": "mote",
+    "url": "https://proceedings.neurips.cc/paper_files/paper/2024/hash/b6e118c759c16f2424997bbb6a1ffd61-Abstract-Conference.html",
+    "title": "MOTE-NAS: Multi-Objective Training-based Estimate for Efficient Neural Architecture Search",
+    "authors": [
+      "Zhang, Yu-Ming",
+      "Hsieh, Jun-Wei",
+      "Li, Xin",
+      "Chang, Ming-Ching",
+      "Lee, Chun-Chieh",
+      "Fan, Kuo-Chin"
+    ],
+    "year": "2024",
+    "venue": "Advances in Neural Information Processing Systems",
+    "source_sha256": "7670e7e8f1cb4026ac458101315310e1160507d4528b4fffa9385176534ac191",
+    "metadata": {
+      "citation_title": [
+        "MOTE-NAS: Multi-Objective Training-based Estimate for Efficient Neural Architecture Search"
+      ],
+      "citation_author": [
+        "Zhang, Yu-Ming",
+        "Hsieh, Jun-Wei",
+        "Li, Xin",
+        "Chang, Ming-Ching",
+        "Lee, Chun-Chieh",
+        "Fan, Kuo-Chin"
+      ],
+      "citation_journal_title": [
+        "Advances in Neural Information Processing Systems"
+      ],
+      "citation_volume": [
+        "37"
+      ],
+      "citation_doi": [
+        "10.52202/079017-3198"
+      ],
+      "citation_firstpage": [
+        "100845"
+      ],
+      "citation_lastpage": [
+        "100869"
+      ],
+      "citation_pdf_url": [
+        "https://proceedings.neurips.cc/paper_files/paper/2024/file/b6e118c759c16f2424997bbb6a1ffd61-Paper-Conference.pdf"
+      ],
+      "citation_publication_date": [
+        "2024-12-16"
+      ]
+    }
+  },
+  {
+    "key": "einspace",
+    "url": "https://papers.nips.cc/paper_files/paper/2024/hash/0382cb76309820f71c6eacd47b36ce71-Abstract-Conference.html",
+    "title": "einspace: Searching for Neural Architectures from Fundamental Operations",
+    "authors": [
+      "Ericsson, Linus",
+      "Espinosa, Miguel",
+      "Yang, Chenhongyi",
+      "Antoniou, Antreas",
+      "Storkey, Amos",
+      "Cohen, Shay B.",
+      "McDonagh, Steven",
+      "Crowley, Elliot J."
+    ],
+    "year": "2024",
+    "venue": "Advances in Neural Information Processing Systems",
+    "source_sha256": "1d4462a6c811df48d0257d80ae3ffabd241e8cb50a9255f2c3ce42ee1a7f9e85",
+    "metadata": {
+      "citation_title": [
+        "einspace: Searching for Neural Architectures from Fundamental Operations"
+      ],
+      "citation_author": [
+        "Ericsson, Linus",
+        "Espinosa, Miguel",
+        "Yang, Chenhongyi",
+        "Antoniou, Antreas",
+        "Storkey, Amos",
+        "Cohen, Shay B.",
+        "McDonagh, Steven",
+        "Crowley, Elliot J."
+      ],
+      "citation_journal_title": [
+        "Advances in Neural Information Processing Systems"
+      ],
+      "citation_volume": [
+        "37"
+      ],
+      "citation_doi": [
+        "10.52202/079017-0061"
+      ],
+      "citation_firstpage": [
+        "1919"
+      ],
+      "citation_lastpage": [
+        "1953"
+      ],
+      "citation_pdf_url": [
+        "https://proceedings.neurips.cc/paper_files/paper/2024/file/0382cb76309820f71c6eacd47b36ce71-Paper-Conference.pdf"
+      ],
+      "citation_publication_date": [
+        "2024-12-16"
+      ]
+    }
+  },
+  {
+    "key": "autodiscovery",
+    "url": "https://papers.neurips.cc/paper_files/paper/2025/hash/23b127521af7ca7a42f5cdb7507be4f2-Abstract-Conference.html",
+    "title": "AutoDiscovery: Open-ended Scientific Discovery via Bayesian Surprise",
+    "authors": [
+      "Agarwal, Dhruv",
+      "Majumder, Bodhisattwa Prasad",
+      "Adamson, Reece",
+      "Chakravorty, Megha",
+      "Gavireddy, Satvika Reddy",
+      "Parashar, Aditya",
+      "Surana, Harshit",
+      "Dalvi Mishra, Bhavana",
+      "McCallum, Andrew",
+      "Sabharwal, Ashish",
+      "Clark, Peter"
+    ],
+    "year": "2026",
+    "venue": "Advances in Neural Information Processing Systems",
+    "source_sha256": "e61f28e2814c1475b370f7fa9bb5e17911d9133d9e77df0b6600525e45d248b9",
+    "metadata": {
+      "citation_title": [
+        "AutoDiscovery: Open-ended Scientific Discovery via Bayesian Surprise"
+      ],
+      "citation_author": [
+        "Agarwal, Dhruv",
+        "Majumder, Bodhisattwa Prasad",
+        "Adamson, Reece",
+        "Chakravorty, Megha",
+        "Gavireddy, Satvika Reddy",
+        "Parashar, Aditya",
+        "Surana, Harshit",
+        "Dalvi Mishra, Bhavana",
+        "McCallum, Andrew",
+        "Sabharwal, Ashish",
+        "Clark, Peter"
+      ],
+      "citation_journal_title": [
+        "Advances in Neural Information Processing Systems"
+      ],
+      "citation_volume": [
+        "38"
+      ],
+      "citation_doi": [
+        "10.52202/085713-0847"
+      ],
+      "citation_firstpage": [
+        "25181"
+      ],
+      "citation_lastpage": [
+        "25219"
+      ],
+      "citation_pdf_url": [
+        "https://proceedings.neurips.cc/paper_files/paper/2025/file/23b127521af7ca7a42f5cdb7507be4f2-Paper-Conference.pdf"
+      ],
+      "citation_publication_date": [
+        "2026-04-23"
+      ]
+    }
+  },
+  {
+    "key": "mlestar",
+    "url": "https://papers.nips.cc/paper_files/paper/2025/hash/a9619dd0f0d54a5cf7734add1dc38cd1-Abstract-Conference.html",
+    "title": "MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement",
+    "authors": [
+      "Nam, Jaehyun",
+      "Yoon, Jinsung",
+      "Chen, Jiefeng",
+      "Shin, Jinwoo",
+      "Arik, Sercan",
+      "Pfister, Tomas"
+    ],
+    "year": "2026",
+    "venue": "Advances in Neural Information Processing Systems",
+    "source_sha256": "36560db04b384cd7177094c02665d19b11150c0e9c67e8da910154eab3e6fdc1",
+    "metadata": {
+      "citation_title": [
+        "MLE-STAR: Machine Learning Engineering Agent via Search and Targeted Refinement"
+      ],
+      "citation_author": [
+        "Nam, Jaehyun",
+        "Yoon, Jinsung",
+        "Chen, Jiefeng",
+        "Shin, Jinwoo",
+        "Arik, Sercan",
+        "Pfister, Tomas"
+      ],
+      "citation_journal_title": [
+        "Advances in Neural Information Processing Systems"
+      ],
+      "citation_volume": [
+        "38"
+      ],
+      "citation_doi": [
+        "10.52202/085713-3889"
+      ],
+      "citation_firstpage": [
+        "116692"
+      ],
+      "citation_lastpage": [
+        "116712"
+      ],
+      "citation_pdf_url": [
+        "https://proceedings.neurips.cc/paper_files/paper/2025/file/a9619dd0f0d54a5cf7734add1dc38cd1-Paper-Conference.pdf"
+      ],
+      "citation_publication_date": [
+        "2026-04-23"
+      ]
+    }
+  },
+  {
+    "key": "airesearcher",
+    "url": "https://arxiv.org/abs/2505.18705",
+    "title": "AI-Researcher: Autonomous Scientific Innovation",
+    "authors": [
+      "Tang, Jiabin",
+      "Xia, Lianghao",
+      "Li, Zhonghang",
+      "Huang, Chao"
+    ],
+    "year": "2025",
+    "venue": "arXiv preprint",
+    "source_sha256": "9a1ce96184fe782f7961714e6598d9190324f816c257a55bea13cb3b8eeaa4f8",
+    "metadata": {
+      "citation_title": [
+        "AI-Researcher: Autonomous Scientific Innovation"
+      ],
+      "citation_author": [
+        "Tang, Jiabin",
+        "Xia, Lianghao",
+        "Li, Zhonghang",
+        "Huang, Chao"
+      ],
+      "citation_date": [
+        "2025/05/24"
+      ],
+      "citation_online_date": [
+        "2025/05/24"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2505.18705"
+      ],
+      "citation_arxiv_id": [
+        "2505.18705"
+      ],
+      "citation_abstract": [
+        "The powerful reasoning capabilities of Large Language Models (LLMs) in mathematics and coding, combined with their ability to automate complex tasks through agentic frameworks, present unprecedented opportunities for accelerating scientific innovation. In this paper, we introduce AI-Researcher, a fully autonomous research system that transforms how AI-driven scientific discovery is conducted and evaluated. Our framework seamlessly orchestrates the complete research pipeline--from literature review and hypothesis generation to algorithm implementation and publication-ready manuscript preparation--with minimal human intervention. To rigorously assess autonomous research capabilities, we develop Scientist-Bench, a comprehensive benchmark comprising state-of-the-art papers across diverse AI research domains, featuring both guided innovation and open-ended exploration tasks. Through extensive experiments, we demonstrate that AI-Researcher achieves remarkable implementation success rates and produces research papers that approach human-level quality. This work establishes new foundations for autonomous scientific innovation that can complement human researchers by systematically exploring solution spaces beyond cognitive limitations."
+      ]
+    }
+  },
+  {
+    "key": "mledojo",
+    "url": "https://arxiv.org/abs/2505.07782",
+    "title": "MLE-Dojo: Interactive Environments for Empowering LLM Agents in Machine Learning Engineering",
+    "authors": [
+      "Qiang, Rushi",
+      "Zhuang, Yuchen",
+      "Li, Yinghao",
+      "K, Dingu Sagar V",
+      "Zhang, Rongzhi",
+      "Li, Changhao",
+      "Wong, Ian Shu-Hei",
+      "Yang, Sherry",
+      "Liang, Percy",
+      "Zhang, Chao",
+      "Dai, Bo"
+    ],
+    "year": "2025",
+    "venue": "arXiv preprint",
+    "source_sha256": "67e41c7cab886e21e4c7836801e1f232740fb6674dc494a1e78f9e7af8c584f2",
+    "metadata": {
+      "citation_title": [
+        "MLE-Dojo: Interactive Environments for Empowering LLM Agents in Machine Learning Engineering"
+      ],
+      "citation_author": [
+        "Qiang, Rushi",
+        "Zhuang, Yuchen",
+        "Li, Yinghao",
+        "K, Dingu Sagar V",
+        "Zhang, Rongzhi",
+        "Li, Changhao",
+        "Wong, Ian Shu-Hei",
+        "Yang, Sherry",
+        "Liang, Percy",
+        "Zhang, Chao",
+        "Dai, Bo"
+      ],
+      "citation_date": [
+        "2025/05/12"
+      ],
+      "citation_online_date": [
+        "2025/05/12"
+      ],
+      "citation_pdf_url": [
+        "https://arxiv.org/pdf/2505.07782"
+      ],
+      "citation_arxiv_id": [
+        "2505.07782"
+      ],
+      "citation_abstract": [
+        "We introduce MLE-Dojo, a Gym-style framework for systematically reinforcement learning, evaluating, and improving autonomous large language model (LLM) agents in iterative machine learning engineering (MLE) workflows. Unlike existing benchmarks that primarily rely on static datasets or single-attempt evaluations, MLE-Dojo provides an interactive environment enabling agents to iteratively experiment, debug, and refine solutions through structured feedback loops. Built upon 200+ real-world Kaggle challenges, MLE-Dojo covers diverse, open-ended MLE tasks carefully curated to reflect realistic engineering scenarios such as data processing, architecture search, hyperparameter tuning, and code debugging. Its fully executable environment supports comprehensive agent training via both supervised fine-tuning and reinforcement learning, facilitating iterative experimentation, realistic data sampling, and real-time outcome verification. Extensive evaluations of eight frontier LLMs reveal that while current models achieve meaningful iterative improvements, they still exhibit significant limitations in autonomously generating long-horizon solutions and efficiently resolving complex errors. Furthermore, MLE-Dojo's flexible and extensible architecture seamlessly integrates diverse data sources, tools, and evaluation protocols, uniquely enabling model-based agent tuning and promoting interoperability, scalability, and reproducibility. We open-source our framework and benchmarks to foster community-driven innovation towards next-generation MLE agents."
+      ]
+    }
+  },
+  {
+    "key": "monaq",
+    "url": "https://aclanthology.org/2025.findings-emnlp.918/",
+    "title": "MONAQ: Multi-Objective Neural Architecture Querying for Time-Series Analysis on Resource-Constrained Devices",
+    "authors": [
+      "Patara Trirat",
+      "Jae-Gil Lee"
+    ],
+    "year": "2025",
+    "venue": "Findings of the Association for Computational Linguistics: EMNLP 2025",
+    "source_sha256": "c367bf38d942d9907265e7e2fed9bab08b743974571fdff51e08546178ad3e41",
+    "metadata": {
+      "citation_title": [
+        "MONAQ: Multi-Objective Neural Architecture Querying for Time-Series Analysis on Resource-Constrained Devices"
+      ],
+      "citation_author": [
+        "Patara Trirat",
+        "Jae-Gil Lee"
+      ],
+      "citation_conference_title": [
+        "Findings of the Association for Computational Linguistics: EMNLP 2025"
+      ],
+      "citation_publication_date": [
+        "2025/11"
+      ],
+      "citation_pdf_url": [
+        "https://aclanthology.org/2025.findings-emnlp.918.pdf"
+      ],
+      "citation_firstpage": [
+        "16922"
+      ],
+      "citation_lastpage": [
+        "16950"
+      ],
+      "citation_doi": [
+        "10.18653/v1/2025.findings-emnlp.918"
+      ]
+    }
+  },
+  {
+    "key": "hyperband",
+    "url": "https://jmlr.org/papers/v18/16-558.html",
+    "title": "Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization",
+    "authors": [
+      "Lisha Li",
+      "Kevin Jamieson",
+      "Giulia DeSalvo",
+      "Afshin Rostamizadeh",
+      "Ameet Talwalkar"
+    ],
+    "year": "2018",
+    "venue": "Journal of Machine Learning Research",
+    "source_sha256": "a5a664eb44e6cd7d5d95d9d69259c20c967019af46f4ce5675c2e4a287c34460",
+    "metadata": {
+      "citation_title": [
+        "Hyperband: A Novel Bandit-Based Approach to Hyperparameter Optimization"
+      ],
+      "citation_author": [
+        "Lisha Li",
+        "Kevin Jamieson",
+        "Giulia DeSalvo",
+        "Afshin Rostamizadeh",
+        "Ameet Talwalkar"
+      ],
+      "citation_journal_title": [
+        "Journal of Machine Learning Research"
+      ],
+      "citation_volume": [
+        "18"
+      ],
+      "citation_issue": [
+        "185"
+      ],
+      "citation_firstpage": [
+        "1"
+      ],
+      "citation_lastpage": [
+        "52"
+      ],
+      "citation_pdf_url": [
+        "http://jmlr.org/papers/volume18/16-558/16-558.pdf"
+      ],
+      "citation_publication_date": [
+        "2018"
+      ],
+      "citation_public_url": [
+        "http://jmlr.org/papers/v18/16-558.html"
+      ],
+      "citation_abstract_html_url": [
+        "http://jmlr.org/papers/v18/16-558.html"
+      ],
+      "citation_issn": [
+        "1533-7928"
+      ]
+    }
+  },
+  {
+    "key": "bohb",
+    "url": "https://proceedings.mlr.press/v80/falkner18a.html",
+    "title": "BOHB: Robust and Efficient Hyperparameter Optimization at Scale",
+    "authors": [
+      "Stefan Falkner",
+      "Aaron Klein",
+      "Frank Hutter"
+    ],
+    "year": "2018",
+    "venue": "International Conference on Machine Learning",
+    "source_sha256": "9d11af6744875161f0582922fc875125e4545923e5d546d3557e0ef7bb5ccfb3",
+    "metadata": {
+      "citation_publisher": [
+        "PMLR"
+      ],
+      "citation_title": [
+        "BOHB: Robust and Efficient Hyperparameter Optimization at Scale"
+      ],
+      "citation_language": [
+        "en"
+      ],
+      "citation_abstract_html_url": [
+        "https://proceedings.mlr.press/v80/falkner18a.html"
+      ],
+      "citation_pdf_url": [
+        "http://proceedings.mlr.press/v80/falkner18a/falkner18a.pdf"
+      ],
+      "citation_firstpage": [
+        "1437"
+      ],
+      "citation_lastpage": [
+        "1446"
+      ],
+      "citation_author": [
+        "Stefan Falkner",
+        "Aaron Klein",
+        "Frank Hutter"
+      ],
+      "citation_publication_date": [
+        "2018/07/03"
+      ],
+      "citation_inbook_title": [
+        "International Conference on Machine Learning"
+      ],
+      "citation_conference_title": [
+        "International Conference on Machine Learning"
+      ],
+      "citation_issn": [
+        "2640-3498"
+      ]
+    }
+  }
+]

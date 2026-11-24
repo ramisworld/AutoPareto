@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/root/phase6_local/runs/p6-opus_a23-time300s-seed6/final.pt",
+  "measured_training_tokens": 196739072,
+  "parameter_count": 26214675,
+  "peak_training_cuda_memory_mb": 10125.823226928711,
+  "total_runtime_seconds": 367.3376040458679,
+  "total_training_tokens": 198180864,
+  "training_seconds": 300.078715801239,
+  "training_seed": 6,
+  "training_tokens_per_second": 655624.8798742283,
+  "val_bpb": 1.0974386705949686
+}

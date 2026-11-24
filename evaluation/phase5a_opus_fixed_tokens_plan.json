@@ -1,0 +1,290 @@
+{
+ "format": "autopareto_phase5a_opus_fixed_tokens_preregistration_v1",
+ "prepared_on": "2026-11-08",
+ "title": "Phase 5A: the three Opus 5.5 frontier recipes at 201,326,592 training tokens, seeds 6-8, paired with E1",
+ "prose": "evaluation/PHASE5_PREREG.md",
+ "relation_to_earlier_plans": {
+  "E1_OPUS_EXTENSION_PREREG.md": "Frozen 2026-11-02 for the single Opus winner at all four E1 cells. Its frozen adapter (scripts/pair_a_to_phase1_source.py) refuses all three Opus sources; under its rule that extension is 'not executable' and stays unrun. This plan is a new, separately pre-registered study authorised on 2026-11-08: one cell (201,326,592 tokens), three frontier recipes, a documented driver mapping and a deployment step.",
+  "camera_ready_e0_e1_plan_amendment1.json": "unchanged; supplies the comparator runs, the environment checks, the data identity gate and the integrity gates"
+ },
+ "comparator_plan": {
+  "path": "evaluation/camera_ready_e0_e1_plan_amendment1.json",
+  "sha256_prefix": "89f2901588fceec1"
+ },
+ "output_root": "results/camera_ready_2026/phase5/A",
+ "token_budget": 201326592,
+ "optimizer_updates": 1536,
+ "TOTAL_BATCH_SIZE": 131072,
+ "DEVICE_BATCH_SIZE": 64,
+ "milestone_tokens": [
+  50331648,
+  100663296,
+  150994944,
+  201326592
+ ],
+ "telemetry_sampling_interval_seconds": 2.0,
+ "seeds": [
+  6,
+  7,
+  8
+ ],
+ "recipes": {
+  "OPUS-A23": {
+   "label": "Claude Opus 5.5 Contract-T attempt 23",
+   "frontier_role": "winner (lowest protected validation BPB; role 1 of CLAUDE_CAMPAIGN_CONFIRMATION_PREREG.md)",
+   "phase1_model_id": "opus55_t_attempt23",
+   "pair_a_source_path": "results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt23.train.py",
+   "pair_a_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+   "source_path": "evaluation/phase5a_sources/opus_attempt23.phase1.train.py",
+   "source_sha256": "5035e4d4c805b2382f7610c988e12eb53daa142366f4cda678bb17c2fd93ac79",
+   "mapping_diff": "evaluation/phase5a_sources/opus_attempt23.mapping.diff",
+   "pair_a_checkpoint_sha256": "f098e0bd5b19fcc7cbfdf8f41d464cdd7297c392224560f4a053ccf516436941",
+   "pair_a_protected_validation_bpb_seed3_300s": 1.096197965,
+   "pair_a_tokens_300s": "197.1M",
+   "architecture": {
+    "depth": 3,
+    "width": 512,
+    "heads": 4,
+    "kv_heads": 4,
+    "windows": [
+     256,
+     256,
+     2048
+    ]
+   }
+  },
+  "OPUS-A24": {
+   "label": "Claude Opus 5.5 Contract-T attempt 24",
+   "frontier_role": "extended Pareto frontier (lowest peak inference memory among the frontier at 97 MiB)",
+   "phase1_model_id": "opus55_t_attempt24",
+   "pair_a_source_path": "results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt24.train.py",
+   "pair_a_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+   "source_path": "evaluation/phase5a_sources/opus_attempt24.phase1.train.py",
+   "source_sha256": "169d4761e624257a4f2d70175e253135eabecaa991fe418fe7f60c701001b6f2",
+   "mapping_diff": "evaluation/phase5a_sources/opus_attempt24.mapping.diff",
+   "pair_a_checkpoint_sha256": "e5687149ac6243e48b6691d2aa595687a0a2c2404288d02e221c258039cf1d6b",
+   "pair_a_protected_validation_bpb_seed3_300s": 1.099463627,
+   "pair_a_tokens_300s": "198.4M",
+   "architecture": {
+    "depth": 3,
+    "width": 512,
+    "heads": 4,
+    "kv_heads": 4,
+    "windows": [
+     256,
+     256,
+     2048
+    ]
+   }
+  },
+  "OPUS-A27": {
+   "label": "Claude Opus 5.5 Contract-T attempt 27",
+   "frontier_role": "extended Pareto frontier (int8 gather-only tables)",
+   "phase1_model_id": "opus55_t_attempt27",
+   "pair_a_source_path": "results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt27.train.py",
+   "pair_a_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+   "source_path": "evaluation/phase5a_sources/opus_attempt27.phase1.train.py",
+   "source_sha256": "83310e48b1d117832ce58de84df571a3c01121ef852f447fc707be11427c2dc3",
+   "mapping_diff": "evaluation/phase5a_sources/opus_attempt27.mapping.diff",
+   "pair_a_checkpoint_sha256": "520af249fd6d1d157596a039a44b6402d2ebe8ae7ca0fcefe99c4e11dfc84d35",
+   "pair_a_protected_validation_bpb_seed3_300s": 1.0962273901,
+   "pair_a_tokens_300s": "198.0M",
+   "architecture": {
+    "depth": 3,
+    "width": 512,
+    "heads": 4,
+    "kv_heads": 4,
+    "windows": [
+     256,
+     256,
+     2048
+    ]
+   }
+  }
+ },
+ "comparator_runs": [
+  {
+   "run_id": "e1-apq-tokens201326592-seed6",
+   "recipe": "AP-Q",
+   "seed": 6,
+   "checkpoint_sha256": "f604859e1982163fd4d2c9b36e2954172bf45dd4124b4b56035d055a912b2ab6"
+  },
+  {
+   "run_id": "e1-apq-tokens201326592-seed7",
+   "recipe": "AP-Q",
+   "seed": 7,
+   "checkpoint_sha256": "94f6611889cbb94330b7868c6b231f7a88b952a26f8d0d1cdbd3f73bb4a73494"
+  },
+  {
+   "run_id": "e1-apq-tokens201326592-seed8",
+   "recipe": "AP-Q",
+   "seed": 8,
+   "checkpoint_sha256": "3202ecc0e822402382799c4ddfc8d83be9b737c7a9ef608da45c847085e2bfc5"
+  },
+  {
+   "run_id": "e1-arref-tokens201326592-seed6",
+   "recipe": "AR-ref",
+   "seed": 6,
+   "checkpoint_sha256": "3aa6bd106237d3d62a346c638da2762423bce4f517aac1096d80a0c59ca77aed"
+  },
+  {
+   "run_id": "e1-arref-tokens201326592-seed7",
+   "recipe": "AR-ref",
+   "seed": 7,
+   "checkpoint_sha256": "762c150c1a4674260f8bca5348eaa3d2999c7a73003f93dee4f860783a891a59"
+  },
+  {
+   "run_id": "e1-arref-tokens201326592-seed8",
+   "recipe": "AR-ref",
+   "seed": 8,
+   "checkpoint_sha256": "59bc64f474dca8bde138bd150dd7b6b9acd2c417f1f51310f13eeacd426e27e4"
+  }
+ ],
+ "runs": [
+  {
+   "order": 1,
+   "run_id": "p5a-arref-tokens201326592-seed6-control",
+   "recipe": "AR-ref",
+   "role": "drift_control",
+   "cell": "tokens_201326592",
+   "seed": 6,
+   "compare_to": "e1-arref-tokens201326592-seed6"
+  },
+  {
+   "order": 2,
+   "run_id": "p5a-opus23-tokens201326592-seed6",
+   "recipe": "OPUS-A23",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 6
+  },
+  {
+   "order": 3,
+   "run_id": "p5a-opus24-tokens201326592-seed6",
+   "recipe": "OPUS-A24",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 6
+  },
+  {
+   "order": 4,
+   "run_id": "p5a-opus27-tokens201326592-seed6",
+   "recipe": "OPUS-A27",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 6
+  },
+  {
+   "order": 5,
+   "run_id": "p5a-opus24-tokens201326592-seed7",
+   "recipe": "OPUS-A24",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 7
+  },
+  {
+   "order": 6,
+   "run_id": "p5a-opus27-tokens201326592-seed7",
+   "recipe": "OPUS-A27",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 7
+  },
+  {
+   "order": 7,
+   "run_id": "p5a-opus23-tokens201326592-seed7",
+   "recipe": "OPUS-A23",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 7
+  },
+  {
+   "order": 8,
+   "run_id": "p5a-opus27-tokens201326592-seed8",
+   "recipe": "OPUS-A27",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 8
+  },
+  {
+   "order": 9,
+   "run_id": "p5a-opus23-tokens201326592-seed8",
+   "recipe": "OPUS-A23",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 8
+  },
+  {
+   "order": 10,
+   "run_id": "p5a-opus24-tokens201326592-seed8",
+   "recipe": "OPUS-A24",
+   "role": "treatment",
+   "cell": "tokens_201326592",
+   "seed": 8
+  }
+ ],
+ "order_design": "Drift control first. Then seed blocks 6, 7, 8; within a block the three Opus recipes follow a cyclic Latin square (seed 6: 23, 24, 27; seed 7: 24, 27, 23; seed 8: 27, 23, 24).",
+ "held_constant_vs_E1": [
+  "token stream (DEVICE_BATCH_SIZE 64, TOTAL_BATCH_SIZE 131,072, grad_accum 1: the identical loader call sequence)",
+  "1,536 optimizer updates",
+  "LR progress = optimizer_step x 131,072 / 201,326,592 (protected transform)",
+  "seed forcing by the protected launcher",
+  "Phase-1 checkpoint evaluator, validation split, held-out shard_06541 @ 915333b4 (5,242,880 tokens)",
+  "A40 GPU-3adf8a47 and the E1 environment (re-validated by the E1 executor's validate(strict=True) before launch)"
+ ],
+ "changes_required_by_the_fixed_token_protocol": {
+  "driver_mapping": "scripts/opus_contract_t_to_phase1_source.py: Contract-T driver lines (contract_progress call, perf_counter clock, fallback time stop, NaN val_bpb placeholder, Contract-T constants and prints) restored to the panel baseline's text; the recipe's own post-training storage lines moved verbatim before the restored final evaluation. Gates: definitions byte-identical except the prepare import; statement-level changes limited to the expected set; protected transform accepts seeds 6-8; one identical driver edit for all three sources.",
+  "deployment_step": "scripts/phase5a_export_deployed_checkpoints.py: each milestone checkpoint is converted by the recipe's own post-training storage statements (bf16 matrices; attempt 27 also int8 tables), bit-exact load/reload gates; for matrices-only recipes (23, 24) the protected loader's direct load must equal the deployed model bit for bit.",
+  "lr_schedule_semantics": "Contract T computed LR progress as measured time / 300 s with every step counted; the fixed-token cell uses token fraction, exactly as AR-ref and AP-Q did in E1."
+ },
+ "primary_outcome": "held-out BPB (final checkpoint, Phase-1 evaluator)",
+ "secondary_outcomes": [
+  "validation BPB (deployed checkpoint)",
+  "in-process validation BPB",
+  "steady-state training tokens/s and seconds",
+  "peak training memory",
+  "milestone validation BPB at 25/50/75/100% of tokens",
+  "frozen downstream suite (LAMBADA, BLiMP, PIQA, ARC-Easy) on the final checkpoints"
+ ],
+ "integrity_gates": "every E1 fixed-token gate (gate_token_run, unchanged) with one substitution: the evaluator scores the deployed manifest, so the manifest-hash check is replaced by deployed-manifest provenance (each deployed checkpoint derives from this run's training milestone by sha256; deployment gates pass; evaluator hash = deployed manifest hash)",
+ "retry_policy": "one retry on the same seed in a new directory; otherwise reported as failed; no seeds added",
+ "drift_control": {
+  "run": "AR-ref, 201,326,592 tokens, seed 6, through the E1 executor unchanged",
+  "rule": "if |held-out or validation BPB - E1 cell| > 0.005, or tokens/updates differ, every Opus-vs-comparator contrast is labelled session-confounded and reported descriptively only"
+ },
+ "downstream": {
+  "evaluator": "downstream_evaluator.py",
+  "evaluator_sha256": "696f9c4677d3f6538c8b92cedec08691175aa30e8b8e48e96b080f2d43c107d5",
+  "suite": "evaluation/downstream_suite.json",
+  "suite_sha256": "3dce2c736a7108a855d1150e1f39e2d3d13ca50cfadfff4f568dfed80ed72ef3",
+  "checkpoints": "the 9 Opus final (deployed) checkpoints and the 6 E1 201.3M final checkpoints (AP-Q and AR-ref, seeds 6-8); new database results/camera_ready_2026/phase5/A/downstream/phase5a_downstream.db"
+ },
+ "analysis_plan": {
+  "primary": "For each Opus recipe r: paired delta_r = heldout(r) - heldout(AR-ref) over seeds 6-8 (E1 AR-ref runs), mean and t-based 95% CI (n = 3, df = 2, t = 4.303). Holm adjustment across the 3 recipes. CI excluding 0 = confirmed difference at 201.3M tokens; otherwise inconclusive.",
+  "secondary": [
+   "the same contrasts on validation BPB",
+   "paired delta vs AP-Q (E1, seeds 6-8)",
+   "mean, sd and 95% CI of every recipe at 201.3M",
+   "the August panel (seeds 3-5) as an unpaired descriptive reference only",
+   "downstream: per-recipe mean, sd and paired differences vs AR-ref and AP-Q (descriptive, no significance claims)",
+   "drift-control comparison"
+  ],
+  "throughput_tradeoff": "steady-state training tokens/s per recipe (training_metrics) and rho_r = tok/s(r) / tok/s(AR-ref, E1 seeds 6-8). Exploratory exchange rate: k_r = the token multiple AR-ref needs to match r's held-out BPB, read from AR-ref's E1 token-response curve (88.6M, 157.3M, 201.3M; piecewise linear in ln tokens, per seed). If r's BPB lies outside AR-ref's measured range, k is reported as a bound. A recipe with rho_r > k_r would be expected to win under a fixed-time contract; this is a prediction, not a fixed-time measurement.",
+  "fixed_time_vs_fixed_token": "No fixed-time Opus run is made in the Phase-1 harness. Fixed-time statements cite the Pair-A campaign (seed 3, one run each) and are never called confirmed.",
+  "selection_note": "All three frontier recipes are reported; no selection among them."
+ },
+ "implementation_sha256": {
+  "scripts/run_phase5a_opus_fixed_tokens.py": "3916ae96afea15503cd915fc665ea7533e8625266601b185b4926000e3e8e9fc",
+  "scripts/opus_contract_t_to_phase1_source.py": "2ee23eac1e556f11a797c148c0f14210616fee099e349c33f5268d0d38d66a24",
+  "scripts/phase5a_export_deployed_checkpoints.py": "33b06896ee13c1bf2ba817aea2f6dffa3407236225ac26126a7c1d13328a84dc",
+  "scripts/pair_a_to_phase1_source.py": "b1f7737b6aa18e75e5eba0e8cd9075f7dfcc3cb4a1cf349591917fc0e29b70ce",
+  "autopareto_db.py": "f75a4ca9d2aa0864f6d51fb634c696183be698f2e76c3ef9362bde75b0d32672"
+ },
+ "cost_estimate": {
+  "rate_usd_per_hour": 0.44,
+  "training": "9 Opus runs x ~13 min + 1 AR-ref control ~23 min = ~2.3 A40-h",
+  "downstream": "15 checkpoints x ~3 min = ~0.75 A40-h",
+  "total_A40_h": 3.1,
+  "total_usd": 1.4
+ }
+}

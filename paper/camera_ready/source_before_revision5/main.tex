@@ -1,0 +1,340 @@
+% =====================================================================================
+% AutoPareto -- CAMERA-READY (NeurIPS 2026 AutoMLR workshop, poster)
+% Source of truth: this file + generated/camera_ready/* (see camera_ready/BUILD.md).
+% Revision 4 (2026-11-14): reader-first restructure answering the four reviews (Area Chair, NDEA,
+% tKK, wwml): plain-language abstract and opening, "How AutoPareto works", Opus decision lineage
+% (cr_v3.py), inference-mechanism figure, compact results table, chronological selection funnel,
+% reproducibility levels.  Numbers come from generated/camera_ready/cr_macros*.tex.  Do NOT run
+% refresh_paper.sh.  Part 2 passages drafted or changed for the camera-ready are wrapped in
+% \humanauthor[ID]{...}; the workshop expects Part 2 to be human-written.
+% Pre-revision-4 source: camera_ready/source_before_revision4/main.tex.
+% =====================================================================================
+\documentclass{article}
+\usepackage[dblblindworkshop,final]{neurips_2026}
+\workshoptitle{Workshop for Autonomous ML Research}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref,url,booktabs,amsfonts,amsmath,microtype,xcolor,graphicx,float}
+\usepackage{array}
+\usepackage{capt-of}
+\usepackage[most]{tcolorbox}
+\setlength{\textfloatsep}{7pt plus 2pt minus 2pt}
+\setlength{\intextsep}{7pt plus 2pt minus 2pt}
+\setlength{\floatsep}{5pt plus 2pt minus 2pt}
+\setlength{\abovecaptionskip}{3pt}
+\setlength{\belowcaptionskip}{0pt}
+\renewcommand{\topfraction}{.92}
+\renewcommand{\bottomfraction}{.7}
+\renewcommand{\textfraction}{.06}
+\renewcommand{\floatpagefraction}{.85}
+\hypersetup{pdfauthor={},pdftitle={AutoPareto: Auditing Fixed-Time Autonomous Transformer Search with Matched-Exposure Verification},colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue}
+\input{generated/camera_ready/cr_macros.tex}
+\input{generated/camera_ready/cr_macros_v2.tex}
+\input{generated/camera_ready/cr_macros_v3.tex}
+
+% ---- Human-authorship markers (Part 2) -------------------------------------------
+\newif\ifshowhumanmarkers \showhumanmarkersfalse
+\definecolor{humanframe}{HTML}{B2412A}
+\newcommand{\humantag}[1]{{\color{humanframe}\sffamily\scriptsize\bfseries HUMAN AUTHOR MUST REWRITE/VERIFY [#1]}\ }
+\newtcolorbox{humanbox}{breakable,enhanced,colback=humanframe!4,colframe=humanframe,boxrule=0.4pt,arc=0pt,
+  left=2pt,right=2pt,top=1pt,bottom=1pt,boxsep=0.5pt,before skip=3pt,after skip=3pt,parbox=false}
+\newcommand{\humanauthor}[2][]{\ifshowhumanmarkers\begin{humanbox}\humantag{#1}#2\end{humanbox}\else #2\par\fi}
+\newcommand{\humancaption}[1]{\ifshowhumanmarkers\humantag{#1}\fi}
+\newcommand{\releasepending}{\ifshowhumanmarkers{\color{humanframe}\sffamily\scriptsize\bfseries[RELEASE PENDING]}\ \fi}
+\newcommand{\authortodo}[1]{{\color{humanframe}[#1]}}
+
+\title{AutoPareto: Auditing Fixed-Time Autonomous Transformer Search\\with Matched-Exposure Verification}
+\author{Rami Alobaidy\\ \authortodo{affiliation: author to confirm}\\ \texttt{rameonix@gmail.com}}
+\begin{document}
+\maketitle
+\begin{abstract}
+AI agents that run machine-learning experiments on their own are usually scored after a fixed amount of GPU time, so a program that trains faster also sees more data: an agent can raise its score with a better model or with a faster one.
+In AutoPareto a coding agent edits a small language model's training script, a protected harness trains each edit for 300 seconds on one GPU, and the agent is scored on text-prediction quality (bits per byte, BPB), generation speed and memory.
+Agents from two model families made the same discovery: shrink the model so that more training fits into 300 seconds.
+AutoPareto's best-quality recipe (AP-Q) trains \CREOneRho$\times$ faster than a quality-only agent's best recipe (AR-ref). Retrained on fresh seeds at matched budgets of 88.6M to 201.3M tokens (pre-registered), it is worse by \CREOneMatchedLoAbs--\CREOneMatchedHiAbs{} held-out BPB in all \CREOnePairs{} seed--budget pairs; at equal time the difference is not resolved (\CREOneTimeHeldThree; 95\% CI \CREOneTimeHeldLo{} to \CREOneTimeHeldHi).
+Claude Opus 5.5 went further: \CRMTRhoLo--\CRMTRhoHi$\times$ faster training and \CRMTDLoAbs--\CRMTDHiAbs{} worse BPB at 201.3M matched tokens.
+The efficiency is real: AP-Q generates \CRDecodeRatio$\times$ faster than AR-ref with \CRParamReduction\% fewer parameters and \CRMemoryReduction\% less memory, and Opus decodes about \CRIATotalMed$\times$ faster than its baseline, mostly through CUDA-graph replay and kernel fusion; because the graph is recorded in the untimed prompt step, a full generation is only \CRIAEtoEMed$\times$ faster.
+What a contract trains and what it times decide what an autonomous researcher is rewarded for.
+\end{abstract}
+
+\noindent\textbf{Keywords:} autonomous ML research; neural architecture search; Transformer efficiency; multi-objective optimization; reproducibility
+
+\section{Autonomous research result}\label{partone}
+
+\subsection{The question}\label{sec:question}
+An autonomous ML research agent edits code, runs an experiment and uses the result to choose its next edit. Karpathy's autoresearch \citep{autoresearch} gives every candidate training script the same 300 seconds on one GPU and scores the resulting model, which couples two things: a program that runs faster also trains on more data. \textbf{We ask whether agents find models that learn better or models that train faster, and whether their gains survive when the coupling is removed.}
+
+\textbf{Terms.} Quality is \emph{bits per byte} (BPB): the average number of bits the model needs to encode each byte of unseen text; lower is better. Agents saw \emph{validation BPB}; we confirm results on \emph{held-out BPB}, from a separate pinned shard that no agent saw. A \emph{fixed-time contract} gives every candidate 300\,s of training, so faster code processes more \emph{tokens} (text pieces) and makes more \emph{optimizer updates} (one weight update per batch; halving the batch doubles the updates for the same tokens). A \emph{fixed-token contract} gives every candidate the same number of tokens, however long it takes. A model's \emph{exposure} is the number of tokens it trained on. Appendix~\ref{app:glossary} is a glossary.
+
+\subsection{How AutoPareto works}\label{sec:brief}
+\textbf{The human sets the rules.} Train a small decoder-only Transformer language model (baseline: 8 layers, width 512, 50.3M parameters) on web text (ClimbMix) for 300\,s on one NVIDIA A40, scored on validation BPB, \emph{cached-decode throughput} (tokens per second when generating one at a time) and peak generation memory. The agent may edit only \texttt{train.py} (model, optimizer, training loop and, later, inference code); a protected controller does all training and measurement.
+
+\textbf{The agent runs the loop} (Figure~\ref{fig:loop}). In each \emph{attempt} it reads every earlier attempt's hypothesis, code change and measurements, picks a \emph{parent} recipe, states a hypothesis and the trade-off it expects \emph{before} editing, and edits \texttt{train.py}; the controller checks that only \texttt{train.py} changed, trains, measures and records everything, failures included. Any eligible earlier recipe can be a parent, so the search is a tree. A recipe is on the \emph{Pareto frontier} if no other recipe is at least as good on all three objectives and better on one. Historical parents had to be on the frontier; in the later Pair-A harness any quality-valid attempt could be a parent.
+
+\textbf{Example.} Opus hypothesized that fewer layers make each update cheaper, so more training fits into 300\,s, at a cost in capacity; the measurements decide which effect wins (\S\ref{sec:search}).
+
+\begin{figure}[t]
+\centering\includegraphics[width=.72\linewidth]{figures/research_loop.pdf}
+\caption{The AutoPareto loop. The agent reads the campaign history, picks a parent, states a hypothesis and edits \texttt{train.py}; protected code (dashed box) validates, trains, measures and records each attempt.}\label{fig:loop}
+\end{figure}
+
+\textbf{What we ran.} \emph{Historical campaigns} (July--August 2026): three 25-attempt AutoPareto campaigns (seeds 0, 1, 42) by \texttt{gpt-5.6-sol} through Codex, whose best-quality recipe is \emph{AP-Q} (4 layers, 29.4M parameters); a quality-only AutoResearch campaign scored on BPB alone (best recipe: \emph{AR-ref}, 8 layers, 50.3M); and five classical optimizers (random search, TPE, MOTPE, NSGA-II, CMA-ES). \emph{Pair-A} (September--November): a frozen harness in which the agent may also rewrite inference code; from the same baseline, seed 3 and prompts, Codex ran \CRCxAttempts{} attempts and Claude Opus 5.5 ran \CROpAttempts{} (\CROpValid{} valid; extended from 25 attempts to 25 valid results; its best recipe is among the first 25). We claim no firsts (related work: Appendix~\ref{app:related}) and no search-policy ranking \citep[cf.][]{ferreira}.
+
+\subsection{What the agents discovered}\label{sec:search}
+
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{figures/cr_opus_lineage.pdf}
+\caption{Claude Opus 5.5's research trajectory (Pair-A, seed 3, 300\,s). Top: validation BPB of every attempt; lines are recorded parent links, so branches are real (A7 builds on A5). Bottom: speed over the baseline on the path to the best recipe, decode only (filled; scored) and end to end (hollow; not scored); faded: speed-uncertain.}\label{fig:opus}
+\end{figure}
+
+\textbf{Phase A: train more in 300\,s.} Opus's first hypothesis reads ``The model is therefore optimizer-update-limited, not token-limited.'' Halving the batch (A1) gave \CRThreeOneUpd{} updates instead of 163, and validation BPB fell from 1.200 to 1.179 (Figure~\ref{fig:opus}). Cutting from 8 to 3 layers (A3--A5) shrank the model to \CRThreeFiveParams M parameters, so \CRThreeFiveTok M tokens fit into 300\,s instead of \CRThreeOneTok M. At 2 layers capacity loss won (A6; Opus recorded that ``the quality prediction was falsified''), so Opus returned to the 3-layer parent and halved the batch again (A7: \CRThreeSevenUpd{} updates, BPB \CROpBestSeven). A third halving cost tokens and quality (A12). These failures bracket a viable size.
+
+\textbf{Phase B: engineer the decode path.} \CROpLateInf{} of the \CROpLateDone{} later valid attempts were labelled inference changes, and each stayed within 0.0015 BPB of its parent. A10 introduced CUDA-graph replay (``the only lever that can raise speed without a quality cost''), then came fused kernels (A14, A22), a ring K/V cache (A18) and a custom attention kernel (A19): decode-only speed rose from \CROpPreAdapterDecode$\times$ to about 31$\times$ the baseline, end-to-end speed stayed near 5$\times$ (\S\ref{sec:inference}). After A7, \CRThreeLateValid{} valid attempts improved BPB by only \CRThreeLateGain{} in total; the best is A23 (\CROpBestBPB).
+
+\textbf{The other agents found the same lever.} On AP-Q's path (Appendix Table~\ref{tab:apqpath}) a batch cut expecting ``roughly four times as many optimizer updates within the fixed training window'' gave the largest gain ($-0.108$ BPB), and depth cuts followed, for decode speed, memory and because ``the smaller model processes more tokens in the fixed training time'' (A8); the last three learning-rate edits each moved BPB by at most 0.002, within seed noise (SD \CRPooledSD). In Pair-A, Codex expected ``higher token throughput within Contract T'' to offset a shallower model; with one seed per agent we do not rank the agents (Appendix~\ref{app:agents}).
+
+\subsection{Did they find better models? Matched-exposure verification}\label{sec:verify}
+\textbf{Why a new test was needed.} The submitted version compared 300\,s discovery runs (seed 0, validation shard) with a 201.3M-token retraining (seeds 3--5, held-out shard), so seeds, evaluation data and exposure changed together. \textbf{E1} (pre-registered 2026-11-04) varies only the budget: frozen AP-Q and AR-ref are retrained on fresh seeds 6--8 with the same data order and held-out shard, at 88.6M, 157.3M and 201.3M tokens (equal updates) and at 300\,s (24 runs). Opus's frontier (A23, A24, A27) was retrained at 201.3M tokens against E1's AR-ref runs (pre-registered 2026-11-08), within 3\% of its own 300\,s exposure (\CROpTokLo--\CROpTokHi M tokens).
+
+\begin{figure}[t]
+\begin{minipage}[b]{.585\linewidth}\centering
+\captionof{table}{Main results: held-out BPB, recipe minus AR-ref, paired by seed (negative: recipe better; seeds 6--8; 95\% $t$ intervals). Tokens: AR-ref / recipe. All rows pre-registered. Full statistics: Appendix Table~\ref{tab:e1full}.}\label{tab:results}
+\vspace{2pt}\scriptsize\setlength{\tabcolsep}{3pt}\input{generated/camera_ready/table_results.tex}
+\end{minipage}\hfill
+\begin{minipage}[b]{.395\linewidth}\centering
+\includegraphics[width=\linewidth]{figures/cr_e1_curve.pdf}
+\caption{E1 held-out BPB vs tokens (hollow: seeds; diamonds: 300\,s runs). AP-Q loses at every matched budget.}\label{fig:e1}
+\end{minipage}
+\end{figure}
+
+\textbf{Results.} At equal 300\,s AP-Q trains on \CREOneTokRatio$\times$ AR-ref's tokens and the held-out difference, \CREOneTimeHeldThree{} \CREOneTimeHeldCI, is not resolved (which is not evidence of equivalence). At every matched budget AP-Q is worse, by \CREOneMatchedLoAbs--\CREOneMatchedHiAbs, in all \CREOnePairs{} seed--budget pairs, against seed SDs of at most \CREOneMaxSD{} (Table~\ref{tab:results}, Figure~\ref{fig:e1}). The pre-registered prediction that AP-Q is no worse at the discovery-scale budget is contradicted; the 201.3M gap replicates the original panel on new seeds and another GPU; its growth with tokens is inconclusive. Opus's recipes are worse than AR-ref by \CRMTDLoAbs--\CRMTDHiAbs{} (9 of 9 pairs) and than AP-Q by \CRMTDAPLo--\CRMTDAPHi. Of four zero-shot tasks only BLiMP separates recipes, and it tracks BPB (Appendix Table~\ref{tab:bench}).
+
+\textbf{Mechanism (exploratory).} Interpolating each seed's token curve splits the 300\,s gap into AP-Q's extra tokens (\CREOneExposure{} BPB) and its smaller architecture at equal tokens (\CREOneArch), which cancel (Appendix Figure~\ref{fig:e1split}): AP-Q trains \CREOneRho$\times$ faster but needs about \CREOneK$\times$ AR-ref's tokens to match it. Opus's recipes need over \CRMTKBound$\times$, about their speed advantage; post hoc, Opus at 201.3M tokens does not differ resolvably from AR-ref at 300\,s (95\% CIs span zero). The split was specified after the plan; it separates neither tokens from updates nor architecture from optimizer edits.
+
+\subsection{Why Opus decodes 31$\times$ faster, but generates only 5$\times$ faster}\label{sec:inference}
+A language model processes the prompt once (\emph{prefill}), storing attention keys and values in a \emph{K/V cache}, then generates one token per small \emph{decode} step; the score times only the 127 decode steps after a 1{,}024-token prompt. At batch size 1 a small model's decode step is dominated by launching tiny GPU programs (\emph{kernels}) from the CPU: \CRIAKernBase{} per token for the baseline. A \emph{CUDA graph} records the sequence once and replays it with one call; \emph{kernel fusion} merges small kernels (\CRIAKernEager{} to \CRIAKernFused{} per token here).
+
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{figures/cr_inference.pdf}
+\caption{Opus's speed-up in pre-registered ablations of A23, A24 and A27 (medians; whiskers: range). (a) One mechanism removed at a time; factors interact, so they do not multiply. (b) One generation (1{,}024-token prompt, 128 new tokens) to scale: the graph is recorded in the untimed prefill. All variants passed the correctness check.}\label{fig:inference}
+\end{figure}
+
+\textbf{What the ablations show} (Figure~\ref{fig:inference}a; \CRIARuns{} runs). Graph replay accounts for \CRIAGraphLo--\CRIAGraphHi$\times$ of decode speed and fusion for \CRIAFusionLo--\CRIAFusionHi$\times$; without either, the smaller model alone gives \CRIAArchLo--\CRIAArchHi$\times$; custom attention adds \CRIAAttnLo$\times$ and the ring cache \CRIARingLo$\times$. \textbf{What the score does not time} (Figure~\ref{fig:inference}b). From A10 on, Opus recorded the graph inside prefill for every prompt, noting that ``Prefill time rose from 6.4 ms to 81 ms'' (A11); its program calls prefill ``diagnostic''. Prefill grows from \CRThreePreBase{} to \CRThreePreOpus{} ms while decoding shrinks from \CRThreeDecBase{} to \CRThreeDecOpus{} ms, so a generation is \CRThreeEtoEX$\times$, not \CRThreeDecX$\times$, faster. Fusion also lengthens prefill (\CRThreePreNoFusion{} to \CRThreePreOpus{} ms), so end to end it gains at most \CRIAFusionEtoEHi$\times$. Outputs were unchanged, so this is within the rules. \textbf{Limits.} One workload and GPU type; graph and fusion were not applied to the baseline or AR-ref, so 31$\times$ does not isolate the architecture; timed-window outputs were not checked, and the 64- and 256-token correctness prefixes do not reach the ring cache at 1{,}024 tokens. AP-Q's \CRDecodeRatio$\times$ uses another protocol.
+
+\subsection{Primary Result}
+Every agent pulled the 300\,s contract's speed lever, and pre-registered matched-exposure retraining shows this did not buy better learning per token (AP-Q $+$\CREOneMatchedLoAbs{} to $+$\CREOneMatchedHiAbs, Opus $+$\CRMTDLoAbs{} to $+$\CRMTDHiAbs{} held-out BPB). Efficiency survives: AP-Q generates \CRDecodeRatio$\times$ faster with \CRParamReduction\% fewer parameters; Opus's \CRIATotalMed$\times$ scored decode speed-up is \CRIAEtoEMed$\times$ end to end.
+\label{partoneend}
+
+\clearpage
+\section{System Design and Meta-Analysis}\label{parttwo}
+% Part 2 must be human-written (workshop rule). Every passage drafted or changed for the
+% camera-ready is wrapped in \humanauthor[P2-xx]{...}; camera_ready/PART2_HUMAN_AUTHORSHIP.md
+% lists the facts, evidence paths and guidance for each ID.
+
+\subsection{Agent and Harness}\label{sec:agent}
+% P2-02: written with and approved by the author (2026-11-10).
+My role was to design the research framework, define the objectives, compute budgets and evaluation rules, and maintain the experimental infrastructure. The AI agents independently proposed hypotheses, modified Transformer architectures and training settings, and selected which candidates to explore. Every historical AutoPareto and AutoResearch attempt was proposed by \texttt{gpt-5.6-sol} at high reasoning effort, which operated the protected runner on the GPU pod over SSH, through the Codex desktop app or, for five seed-42 attempts, Cursor's agent (Appendix~\ref{app:repro}). In the Pair-A harness (\S\ref{sec:pilot}), Codex CLI 0.153.0 ran \texttt{gpt-5.6-sol} at high reasoning in a fresh container for every call (600-second timeout), seeing five staged files and writing only \texttt{train.py}. The Opus arm ran \texttt{claude-opus-5-5} (effort \texttt{xhigh}) through Claude Code 2.1.318 on the host, with file tools only, no shell, and the same prompts, output schemas and two calls per attempt; it was isolated by CLI permissions, file modes and hash checks, tested by a canary before the campaign. Historical isolation relied on instructions plus hash checks: protected files were hashed before and after every attempt, and any change outside \texttt{train.py} rejected the run. No agent saw downstream results. All agent session logs are retained privately and not publicly released.
+
+\subsection{Tools}
+% P2-03: written with and approved by the author (2026-11-10).
+All training and measurement ran in BF16 on NVIDIA A40 GPUs (several physical cards across eras); software per era is in Appendix Table~\ref{tab:env}. The panel, E1 and the Opus retraining used Python 3.10.18 with PyTorch 2.9.1+cu128. The Pair-A campaigns ran in a separate Python 3.12 runtime with PyTorch 2.8.0+cu128 (2.9.1 in the September pilot), and the inference ablations also used PyTorch 2.8.0. The discovery-era environment was not logged at run time; the repository's lockfile then pinned PyTorch 2.9.1+cu128. A trusted controller stages each candidate, checks source and parent SHA-256 hashes, runs training, verifies the checkpoint, calls the protected BPB and inference evaluators, and appends the outcome to the registry and lineage.
+
+\subsection{Research Loop}\label{sec:loop}
+% P2-04: written with and approved by the author (2026-11-10).
+Each attempt follows the loop below (historical campaigns: runner functions \texttt{validate\_autopareto\_proposal} and \texttt{raw\_pareto\_rows}; Pair-A: \texttt{campaign\_controller.py}, \texttt{campaign.py}).
+{\small\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}
+\item Stage the campaign view (this campaign's records and current frontier) and the parent source.
+\item The agent returns a hypothesis, intended change, change category, parent identifier and a patch to \texttt{train.py}.
+\item Validate: the parent must be on the current frontier (historical) or parent-eligible in the same arm (Pair-A); protected-file and source hashes must match; only \texttt{train.py} may change.
+\item Train under the contract (300\,s; or $N^\star$ counted tokens in the Pair-A fixed-token arm).
+\item Protected evaluation: validation BPB, cached/full-logit correctness, cached-decode throughput, peak allocated memory.
+\item Append an immutable record (hypothesis, patch, hashes, metrics, failure text); failures consume the attempt.
+\item Update the archive: historically, a completed candidate is retained if neither another completed candidate nor the registered same-seed baseline dominates it on raw BPB, decode and memory (no noise margin); the agent labelled each outcome, and the runner rejected any label that disagreed with this rule.
+\item The next attempt chooses its parent among retained (historical) or parent-eligible (Pair-A) records.
+\end{enumerate}}
+Without noise margins the archive admits noise-level trade-offs: A09 and A10 build the same model, yet A10 was retained. In Pair-A every quality-valid record was parent-eligible even when its speed was uncertain.
+\humanauthor[P2-05b]{Figure~\ref{fig:loop} in Part~1 shows this loop and its protected boundary. Because any eligible record can be a parent, every campaign is a tree: Opus's branches are drawn from its recorded parent links in Figure~\ref{fig:opus} and AP-Q's in Appendix Figure~\ref{fig:lineagefull}.}
+
+\subsection{Human Interventions}\label{sec:interventions}
+% P2-06: written with and approved by the author (2026-11-12).
+I chose the objectives, the 300-second contract, the matched-exposure design, the panel, E1 and Opus-test recipes, the comparators and the interpretation. I made or approved each intervention below; AI coding assistants carried out several at my instruction. (i) \emph{Seed-42 AutoPareto rollback.} Attempt 4 failed the cache-correctness check and was labelled dominated, and attempts 5--8 ran on 2026-07-28. When the check was found faulty and repaired, I discarded attempts 5--8 because they had followed a frontier that wrongly excluded attempt 4 (ids 88--90 are absent); attempt 4 was re-measured on a recreated checkpoint and changed to retained, and attempt 5 was replayed. Attempt 10 was re-adjudicated after an FP32 evaluator amendment, and the program text changed after attempt 4. I started seeds 0 and 1 after reviewing seed 42. (ii) \emph{AutoResearch.} In the 50-attempt campaign 27 trained candidates were discarded by a cache-correctness check later found faulty; AR-ref comes from a 5-attempt follow-up under a revised program. (iii) \emph{Pair-A, Codex.} Inference-adapter amendments, requeues after pod or provider failures, configuration changes before launch, and inconsistent failure adjudication in a later restart. (iv) \emph{Pair-A, Opus.} A defect in the protected FP32 correctness adjudication was fixed mid-campaign and the affected attempt re-run; the agent-call timeout was raised from 600 to 900\,s from attempt 9 (Codex ran at 600\,s); attempt 9 was charged as a candidate failure; the arm was extended from 25 attempts to 25 valid results (27 attempts; we also report the frozen first 25); timed-out agent calls before any candidate were requeued; its recorded attempts ran on two A40s (A1; A2--A27), as Codex's did (A1--A9; A10--A22). (v) \emph{Failure accounting.} A17's tokenizer failure consumed a seed-0 attempt; the identical seed-42 failure was relabelled as setup. (vi) \emph{E1} ran on a different A40 from the environment check (E0), as disclosed in its record. (vii) \emph{Opus retraining}: a scripted driver mapping and storage export, registered with the plan. The AP-Q lineage (seed 0) has no recorded scientific intervention: its program, evaluator and records were not changed. Interventions whose authorship cannot be reconstructed are excluded from claims of autonomous contribution.
+
+\subsection{Verification}\label{sec:verification}
+\humanauthor[P2-07]{A separate audit pipeline re-derives reported numbers from frozen records without launching experiments; for each of the 21 panel runs it checks the source hash against the training record and public manifest, the exact token total, updates against tokens per update, checkpoint-to-downstream pairing and metric direction. E1 was analysed by its pre-registered script; the exploratory split reproduces its paired differences exactly. Opus's frontier was re-measured on a fresh A40, where protected BPB reproduced bit for bit and an AP-Q checkpoint reproduced all nine August downstream metrics. The Opus tests' pre-registered analysis reproduces byte for byte from the archived raw records. Every result number in Part~1, every table and every data figure is generated by scripts in \texttt{analysis/}, which also check each quoted agent excerpt verbatim against its attempt record and every drawn lineage edge against a recorded parent link; \CRNCrossChecked{} panel quantities were cross-checked against an independent audit (agreement to $10^{-15}$). Figure~\ref{fig:loop}, the glossary and the discovery and canary environment rows are hand-authored.}
+
+\begin{table}[t]
+\caption{\humancaption{P2-08}Selection funnel from discovery to the reported recipes, in time order. Step 2's rule was fixed before the first AutoPareto attempt; steps 3 and 4 were chosen after the agents' scores (and, for step 4, the seeds 0--2 re-runs) were known; step 5 was pre-registered. Counts and dates: Appendix Table~\ref{tab:funnelfull}.}\label{tab:funnel}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}\input{generated/camera_ready/table_funnel_v3.tex}
+\end{table}
+
+\humanauthor[P2-09]{\textbf{Selection and the winner's curse.} Picking the best of many noisy discovery scores favours recipes that were lucky, so a discovery winner is expected to look worse when re-run. It did: every re-run candidate scored \CROptMin--\CROptMax{} BPB worse than at discovery. This is why independent confirmation was needed. The representative rule was committed on 2026-07-27, before AutoPareto's first attempt, and yields 11 representatives (Table~\ref{tab:funnel}). On 2026-08-10, after discovery, a global four-role selector cut these to four seed-0 recipes; the confirmation campaigns were created on 2026-08-11/12 UTC, so selection preceded the seeds-0--2 confirmation. The 201M panel was assembled around 2026-08-21--25, after those results were known, and kept three of the four roles; no rule was recorded for omitting the lowest-memory role (exp 124). Exp 109, the best seed-42 recipe, keeps the full 50.3M-parameter model at batch 65,536 and reached \CRExpOneZeroNineBPB{} on \CRExpOneZeroNineTokens M tokens (AR-ref: \CRSeedFortyTwoAR{} on \CRExpSixEightTokens M); it was a pre-registered representative but was never confirmed, and is the most plausible exposure-neutral AutoPareto quality candidate. E1 tests AP-Q, not the best possible AutoPareto recipe, and our conclusions do not extend to unconfirmed recipes. AR-ref replaced exp 65, which failed a cache-correctness check under a reference later judged faulty; their fixed-time re-runs are indistinguishable (\CRFixedSixtyFive{} and \CRFixedSixtyEight).}
+
+\humanauthor[P2-10]{\textbf{Variability.} Within the agent campaigns, best-to-second gaps are at most \CRGapTwoMax{} BPB and best-to-fifth gaps at most \CRGapFiveMax, against a pooled fixed-time seed SD of \CRPooledSD, so ``best'' within a campaign is not resolvable. The unchanged baseline differs by \CRBaseSeedEffect{} BPB between seeds 0 and 42, and by \CRSessionLo--\CRSessionHi{} BPB at the same seed between sessions; under the fixed-time contract one recipe processed up to \CRTokenSpreadMax\% different token counts across sessions. In E1 within-recipe seed SD is at most \CREOneMaxSD{} BPB, an order of magnitude below the matched-token gap. In Pair-A, \CROpUncertain{} of Opus's \CROpValid{} valid results and \CRCxUncertain{} of Codex's \CRCxValid{} were speed-uncertain; in the Opus arm the drift came from the baseline brackets on noisier hosts, not from the candidates. In the re-measurement of Opus's frontier \CROpStableRepeats{} of \CROpRepeats{} repeats passed the drift rule; in the ablations \CRIAUnstable{} of \CRIARuns{} runs, all host-bound runs without the graph, failed the frozen stability rule; they are reported, not re-run.}
+
+\humanauthor[P2-11]{\textbf{Data integrity.} The canonical validation value for panel runs is the panel results file; database rows differ from it by at most $2.4\times10^{-5}$ and held-out values agree exactly. Held-out BPB exceeds validation BPB by \CRHeldValOffLo--\CRHeldValOffHi{} depending on the recipe, so recipes are compared only within one metric. Experiment ids 88--90 are missing, consistent with the seed-42 rollback. Identical token streams across panel recipes were verified at run time, and E1's 24 runs and the Opus retraining's \CRMTRuns{} passed every pre-registered integrity gate on the first attempt.}
+
+\subsection{Reproducibility}\label{sec:reproduce}
+\humanauthor[P2-17]{We separate three levels; commands are in Appendix~\ref{app:howto}. \emph{Level 1, artifact reproduction} (no GPU): one script, \texttt{paper/build\_camera\_ready.sh}, regenerates every number, table and figure from the archived records and checks them against the committed audit; it needs the full evidence tree, part of which (database snapshot, campaign histories) awaits the public release, while the pre-registered E1 and Opus analyses already rerun from committed records. \emph{Level 2, recipe reproduction} (one A40): the frozen recipe sources, hashed plans and executors retrain AP-Q, AR-ref and Opus's recipes under the recorded token or time contract; the training-shard revision and one GPU kernel are not pinned in code, so exact losses may differ slightly. \emph{Level 3, agent-campaign reproduction}: the Pair-A controller, prompts, output schemas and permission checks run a comparable campaign with Codex CLI or Claude Code, but proprietary model state means a new campaign will not repeat the same attempts, and pod setup is partly manual. The historical campaigns were operated by hand through desktop agents and have no single entry point.}
+
+\subsection{Significance of result}
+\humanauthor[P2-12]{Matched-exposure verification shows that the quality ranking depends on the contract, while the efficiency result survives every contract we tested. The pre-registered token sweep finds no budget at which AP-Q is better per token, so its fixed-time standing reflects its extra exposure, not better learning per token. Agents from two model families found the same lever and wrote it into their hypotheses: under a time budget, a smaller program trains on more data. The second pushed it further, was worse still per token, and took most of its decode gain from graph replay whose recording the metric did not time. A benchmark that ranks agents under a throughput-coupled budget is partly ranking how fast their candidates train; reported quality gains should be rechecked under controlled exposure and speed gains under end-to-end timing.}
+
+\subsection{Interpretability}
+\humanauthor[P2-13]{Every preserved attempt record retains the agent's stated hypothesis, its intended change, the applied patch, the parent identifier, source and parent hashes, the status, the raw metrics and the failure text, so a headline number can be traced to a source file, to the edit that produced it and to the hypothesis recorded before it (Figure~\ref{fig:opus}; Appendix~\ref{app:decisions}). We separate what the agent predicted (its hypothesis), what it changed (the patch), what the evaluator measured, and what our retrospective analysis concludes; agent motives are quoted, not inferred. Agent session logs survive for every campaign (privately for the historical ones, which contain infrastructure access details). The record also exposes gaps between intent and execution: the recorded intended changes for A7 and A8 predict widths 384$\to$320$\to$256, whereas the width rounding kept A7 at 384 and took A8 from 384 to 256.}
+
+\subsection{Limitations}
+\humanauthor[P2-14]{\emph{Addressed since review:} the confounded reversal (E1 holds seeds and evaluation data fixed and varies only the budget), the single matched horizon (three budgets plus 300\,s) and the fixed-time variability (E1 seeds, session and seed effects above). \emph{Remaining:} one GPU type (A40) and small models; no scale-transfer, cross-GPU or energy claim. Matched-token verification compares complete recipes, so architecture and optimizer changes stay bundled, and in E1 tokens and updates change together (a batch-varied follow-up was not run). E1 resolves the gap with three seeds but not its slope with tokens, and its exposure--architecture split is exploratory. Selection narrowed after discovery, and a pre-registered full-size candidate (exp 109) was never confirmed. Each Pair-A agent ran one seed, so we do not rank agents; the Codex arm stopped after 22 attempts, and the Opus arm had a longer agent timeout and two extra attempts (neither changes a conclusion; Appendix~\ref{app:faq}). The Opus retraining covers one budget and replaces its time-fraction learning-rate progress with the token fraction; the ablations measure one workload on one host, and graph replay and fusion were not applied to the baseline or AR-ref. The fixed-time versus fixed-token pilot (\S\ref{sec:pilot}) is too small for a behavioural conclusion. Historical comparators differ in search space, budget, seed and failure history, so they support no search-policy ranking. Proprietary agent behaviour limits exact reproduction.}
+
+\subsection{Pair-A: controlled agent campaigns}\label{sec:pilot}
+\humanauthor[P2-15]{We piloted a prospective test of H2, whether the contract changes what an agent pursues. Two arms whose programs differ only in the contract paragraph (T: 300\,s; N: $N^\star=88{,}604{,}672$ counted tokens, the largest multiple of 524,288 not above the median of three baseline calibration runs) started from identical bytes at seed 3. Five Codex launch lineages ran between 2026-09-05 and 2026-09-17, with protocol changes between them; Part~\ref{partone} reports the 2026-09-14 restart (22 attempts). In the earlier lineage reported at submission, 2 of its 4 fixed-time attempts are invalid: when a candidate's training loop ended before the trusted stop, the harness re-executed the training body and checkpointed a freshly initialized model (candidate-reported step 0 against 1,264 observed updates; BPB 3.2159). The controller still marked these runs quality-valid and parent-eligible, and the agent's next hypothesis blamed its learning rates. Later restarts disagree on whether either arm explores batch size, so no contract effect on agent behaviour can be estimated. The harness used for the Opus arm treats an early normal exit as a candidate failure.}
+
+\humanauthor[P2-16]{\textbf{What the speed metric does not time.} The Opus arm inherited the Codex arm's frozen contract, schedule, baseline, data, evaluator and Pareto rule; besides the agent backend, its isolation, call timeout and attempt budget (\S\ref{sec:interventions}), only the early-exit repair and a mid-campaign FP32 adjudication fix changed. Its largest decode gains came from inference-code edits that record the decode CUDA graph, and later compiled regions, inside \texttt{prefill}, which the decode-only metric leaves untimed (\S\ref{sec:inference}). This is within the permitted surface, so we report both speeds rather than relabel it. A scored end-to-end or prefill-inclusive metric, and output checks inside timed windows, belong in the harness.}
+\label{parttwoend}
+
+\clearpage
+\section{Broader Impact}\label{partthree}
+Resource contracts are part of the scientific specification of autonomous research. Neither contract is wrong: a time budget asks which program gives the best model per GPU-second, a token budget which gives the best model per training token, and a paper should say which question its scores answer. When an agent controls architecture and training together, a time allowance changes how much data a faster candidate sees; a token allowance removes that pathway while letting update count and compute vary. The measurement contract matters in the same way: an agent rewarded for a decode-only number will improve the decode-only number, here largely by moving graph recording into the untimed prefill. Agents read a contract the way an optimizer reads a loss: agents from both model families pulled the throughput lever within their first three attempts, and Opus moved work into the untimed prefill while noting its cost. Contract designers should assume that an agent will find every degree of freedom the contract leaves open.
+
+\textbf{A contract card.} We propose that autonomous-ML papers report, for every scored result: (1) the stopping rule and the learning-rate progress variable; (2) the seeds used for discovery and for comparison; (3) tokens, optimizer updates and FLOPs per scored run; (4) session-throughput variation under time contracts; (5) what each speed or memory metric times and excludes (for example prefill); (6) the selection funnel from attempts to reported recipes, with dates; and (7) harness invariants such as checkpoint lineage and failure semantics. Our own harness once accepted a checkpoint of an untrained model as quality-valid; invariant checks belong in the protected boundary, not in post-hoc audits.
+
+\textbf{Future direction: agents that ask for their own confirmation.} Here humans noticed the coupling and ran matched-resource retraining after the search. A natural next step, which we have not built or tested, is to let the agent request it: before claiming a quality gain under a time contract, the agent would ask the harness for a matched-token retraining against its parent on fresh seeds, and an end-to-end timing before claiming a speed gain. Other open follow-ups: a batch-varied test that separates tokens from updates; a matched-token test of exp 109; a replicated, seed-paired contract study under one frozen harness with prefill-inclusive speed scoring; and a scaling pilot.
+
+Efficiency may reduce the cost of an individual experiment or deployment, yet cheaper experiments can increase total experimentation; we report no energy benefit because the artifacts contain no campaign-wide energy accounting. Small-model benchmark results do not establish safe or reliable use in consequential settings. Human accountability grows with experiment volume: humans set objectives, repair infrastructure, decide which failures are scientific and interpret evidence, and an auditable record should keep the human question, the agent's prediction, the source edit, the measured outcome and the retrospective explanation distinguishable.
+\label{partthreeend}
+
+\clearpage
+\appendix
+\raggedbottom
+\raggedright
+\setlength{\parskip}{4pt}
+\section{Glossary}\label{app:glossary}
+\humanauthor[P2-01 Glossary]{\textbf{Bits per byte (BPB)}: average bits needed to encode each byte of unseen text under the model; lower is better. \emph{Validation} BPB is the discovery score; \emph{held-out} BPB uses a separate pinned shard used only for confirmation; the two are never compared with each other.\par
+\textbf{Contract}: the rule that stops training; \emph{fixed time} (300\,s of measured training) or \emph{fixed tokens} (a set number of counted training tokens).\par
+\textbf{Exposure}: training tokens processed before evaluation. \textbf{Optimizer update}: one change of the weights from one batch of tokens.\par
+\textbf{Matched-exposure retraining}: retraining frozen recipes to the same token count (for AP-Q, AR-ref and Opus's recipes also the same updates and batch).\par
+\textbf{E1}: the pre-registered token-response experiment (seeds 6--8; 88.6M, 157.3M, 201.3M tokens and 300\,s).\par
+\textbf{Campaign / attempt}: one agent's sequence of attempts under one seed; an attempt is one proposal (hypothesis and patch), trained and measured once; failures count.\par
+\textbf{Parent}: the archived attempt whose source an attempt edits; historical parents had to be retained, Pair-A parents only quality-valid (\emph{parent-eligible}).\par
+\textbf{Pareto frontier / retained}: recipes that no other recipe matches or beats on all of BPB, decode speed and memory while beating on one; in Pair-A, speed-uncertain records are not on the frontier but remain parent-eligible.\par
+\textbf{Autoregressive decoding, prefill, K/V cache}: generating one token at a time; prefill processes the prompt once and fills the cache of attention keys and values so that each new token needs one small step.\par
+\textbf{Decode-only vs end-to-end speed}: cached single-token steps after an untimed prefill, vs prefill plus generation.\par
+\textbf{CUDA graph}: a recorded sequence of GPU kernels replayed with one CPU call. \textbf{Kernel fusion}: merging small GPU kernels into fewer, larger ones.\par
+\textbf{Ablation}: removing one component to measure its effect. \textbf{95\% confidence interval (CI)}: a range computed from the data that expresses uncertainty about an effect; a CI spanning zero means the sign is not resolved.\par
+\textbf{Recipe names}: AP-Q = A22 = exp 134 (AP292 in the submitted version); AP-F = A25 = exp 137 (AP299); AP-S = A24 = exp 136 (AP294); AR-ref = exp 68; Opus A23, A24, A27 = Pair-A Opus attempts; T and N are the fixed-time and fixed-token arms of Pair-A.}
+
+\section{Related work}\label{app:related}
+Operator-level, grammar-based and multi-objective architecture search \citep{primer,einspace,mote,monaq}, multi-fidelity allocation \citep{hyperband,bohb} and agentic research systems \citep{autodiscovery,mlestar,airesearcher,mledojo} are established, as are budget effects on model rankings \citep{dehghani2022efficiency,geiping2023cramming,hoffmann2022chinchilla}; the classical comparators are random search, TPE \citep{bergstra2011tpe}, MOTPE \citep{ozaki2020motpe}, NSGA-II \citep{deb2002nsga2} and CMA-ES \citep{hansen2001cmaes} over a fixed parameter vector, and \citet{ferreira} compare LLM agents with such optimizers on autoresearch. Primer searches compositions of low-level operations and finds stronger operator-level novelty than our numerical edits; our architectural changes (fewer layers, smaller batches, attention windows) are not novel in themselves. Our contribution is an audit of what a resource contract rewards, with matched-exposure verification. The zero-shot suite is ARC-Easy \citep{clark2018arc}, PIQA \citep{bisk2020piqa}, LAMBADA \citep{paperno2016lambada} and BLiMP \citep{warstadt2020blimp}.
+
+\section{Reproducibility Statement}\label{app:repro}
+\paragraph{Code and artifacts.} \releasepending The public artifact for this paper contains the frozen recipe sources and protocol manifests; the per-experiment registry with hypotheses, patches, parents, decisions and failures; the fixed-time confirmation and ablation records; the per-run records of the 21-run panel and the 24 E1 runs with the E1 plan and analysis; the Opus retraining and ablation plans, run records (raw benchmark records archived), analysis and audit record; the Pair-A histories of both agents, including failures; the Opus frontier re-verification and downstream records; the selection manifests (\texttt{autopareto\_confirmation\_selection.json}, SHA-256 prefix \texttt{72d58664}, and \texttt{autopareto\_primary\_confirmation\_plan.json}); the analysis and audit scripts; and environment pins. Provider-side agent state, the dataset cache and large checkpoints remain private; checkpoint hashes are published.
+
+\paragraph{How to run it.}\label{app:howto} \input{howto_reproduce.tex}
+
+\paragraph{Model panel and sources.} Each recipe is identified by the SHA-256 of its exact \texttt{train.py} (panel manifest \path{evaluation/phase1_public_manifest.json}): baseline \texttt{428e22f1}, AR-ref \texttt{b3a961ee}, TPE \texttt{8547b278}, MOTPE \texttt{62882a20}, AP-Q \texttt{55a7fd8b}, AP-F \texttt{36e3ad91} and AP-S \texttt{6d0d8d1d} (first four bytes). AP-Q has 29,360,392 parameters at depth 4, width 512, 4 query and 4 key-value heads and window pattern SSSL; AR-ref has 50,332,176 parameters at depth 8, width 512, 4 and 4 heads and window pattern SSSS.
+
+\paragraph{Data.} Training shards were read from the \texttt{main} branch of \texttt{karpathy/climbmix-400b-shuffle}; their revision is not pinned in code. Only the held-out shard is pinned: \texttt{shard\_06541.parquet} at revision \texttt{915333b4f8b8684f39aeaafea600fea6f43fb703} (SHA-256 recorded per run), 2,560 segments and 5,242,880 evaluated tokens. Sequences are 2,048-token packed with a project tokenizer of 8,192 entries, hashed for the panel, E1 and Pair-A (\texttt{tokenizer.pkl} \texttt{888c9fa8}) but rebuilt on each pod and unhashed during discovery; downstream datasets are pinned by revision.
+
+\paragraph{Training protocol.} Panel seeds are 3, 4 and 5. Each run processes exactly \CRPanelBudget{} counted tokens, and every optimizer update, including the first eleven, is counted training; the first eleven updates (1,441,792 tokens) are excluded only from the steady-state timing estimate. AP-Q, AP-F, AP-S, AR-ref, TPE and MOTPE use total batch 131,072 with device batch 64 and no gradient accumulation (1,536 updates); the baseline uses total batch 524,288 with accumulation 4 (384 updates). Learning-rate and weight-decay progress is the fraction of the token budget consumed; the Muon \citep{jordan2024muon} momentum warm-up stays step-based (300 updates). Software per era is in Table~\ref{tab:env}.
+
+\paragraph{E1.} Plan \path{evaluation/camera_ready_e0_e1_plan_amendment1.json} (SHA-256 \texttt{89f29015}, committed 2026-11-04) is amendment 1 of plan \texttt{806a6397}, written after the original E0 halted on one run's update count (666 against a window of 669--681 on an A40 about 1\% slower) and approved by the PI; it made that window diagnostic and re-ran E0 in full, leaving gates, tolerances, cells, seeds and analysis unchanged. It fixes the recipes, budgets (88,604,672, 157,286,400 and 201,326,592 tokens; 300\,s), seeds (6, 7, 8), integrity gates, retry policy, analysis script and decision rules; held-out BPB is primary and validation BPB secondary. Its hypotheses: \emph{H-E1a}, $\Delta=\mathrm{BPB}(\text{AP-Q})-\mathrm{BPB}(\text{AR-ref})$ increases monotonically with training tokens; \emph{H-E1b}, $\Delta\le0$ at the discovery-scale budget (88.6M tokens, 676 updates). H1, that AP-Q's fixed-time lead reverses at matched tokens on new seeds, was formulated retrospectively after the historical campaigns. The executor requires a recorded E0 pass under the same plan hash. E1 ran on 2026-11-07 on one A40 (24 of 24 runs passed on the first attempt; \CREOneHours{} A40-hours). Deviation: the plan's hardware note names the A40 on which E0 passed, which was no longer available; E1 ran on another A40 with the same driver, where training throughput matched E0 (AR-ref \CREOneTputAR{} and AP-Q \CREOneTputAP{} tokens/s across runs, against \CREZeroTputAR{} and \CREZeroTputAP{} at E0).
+
+\paragraph{Opus retraining and inference ablations.} Plans \path{evaluation/phase5a_opus_fixed_tokens_plan.json} (SHA-256 \texttt{a47f81b7}) and \path{evaluation/phase5b_inference_ablation_plan.json} (\texttt{94727990}) and the prose pre-registration \path{evaluation/PHASE5_PREREG.md} were committed on 2026-11-08 before any run; the primary test is each recipe's $\Delta$ against AR-ref. An E1 extension registered on 2026-11-02 for the single Opus winner, at all four E1 cells including 300\,s, was not executable: its frozen adapter refuses all three Opus sources, whose training-loop driver Opus rewrote for the time contract, so it stays unrun. The new plan has no 300\,s cell, so the fixed-time Opus--AR-ref comparison is post hoc. The retraining used two scripted, gated changes. (i) A mapping restores the panel baseline's text for exactly the contract-T driver lines (progress call, clock, time stop, constants and prints) and moves the recipe's post-training storage lines before the final evaluation; model and optimizer definitions stay byte-identical, and the unchanged protected transform then sets token-fraction learning-rate progress and the exact-token stop (Opus's own runs used time-fraction progress). (ii) An export applies each recipe's own post-training storage conversion (bf16 matrices; also int8 tables for A27) to the in-loop checkpoint with bit-exact load gates, so the evaluator scores the deployed model as in Pair-A. An AR-ref drift control ran first (rule: within 0.005 BPB of E1; observed \CRMTDriftAbs), then seeds 6, 7 and 8 with a Latin square over recipes; all \CRMTRuns{} runs passed on the first attempt (\CRMTHours{} A40-hours with the downstream suite). The ablations replace only \texttt{build\_inference\_adapter} in the frozen sources and run the frozen protected benchmark (SHA-256 equal to the re-verification's) in candidate-only mode: each of 18 checkpoint--variant cells twice, forward then reversed, with the same-session baseline at the start, middle and end (\CRIARuns{} runs, \CRIAHours{} A40-hours, over the estimate but inside the pre-registered $2\times$ stop rule). Correctness passed in every run; \CRIAUnstable{} graph-free runs failed the frozen stability rule and are reported as measured. A diagnostic \texttt{torch.profiler} census counted kernels and launches per decode token (32 tokens after 8 warm-up). End-to-end throughput in the ablations and Table~\ref{tab:agents} is the median over measured repetitions; the campaign records (Figure~\ref{fig:agents}b) store one generation per attempt. The recorded end-to-end rate equals 128 tokens divided by prefill plus 127 decode steps to within 1.5\% in every ablation cell, which is how Figure~\ref{fig:inference}b decomposes it.
+
+\begin{table}[H]
+\caption{Recorded software environment by era. Panel, Pair-A, E1 and Opus-test rows are read from their run records; other rows are from the provenance audit.}\label{tab:env}
+\centering\scriptsize\input{generated/camera_ready/table_env_v2.tex}
+\end{table}
+
+\paragraph{Inference and memory protocol.} Historical and panel protocol \texttt{autopareto\_inference\_stabilized\_v2}: BF16, batch one, a fixed protected prompt of 256 input tokens, 256 generated tokens, greedy decoding, adaptive stabilization followed by 30 measured repetitions in three passes, with a full-prefix versus cached correctness check before measurement; throughput is the per-run median, averaged over seeds. Pair-A protocol \texttt{autopareto\_search\_inference\_bracketed\_v2}: 1,024 input and 128 generated tokens; decode-only throughput over 127 cached transitions, normalized by baseline measurements bracketing the candidate, is scored and must pass a 2\% drift rule to be speed-valid; prefill and end-to-end speed are recorded but not scored. Peak memory is \texttt{torch.cuda.max\_memory\_allocated()} after \texttt{reset\_peak\_memory\_stats()}, with weights resident and reserved memory excluded.
+
+\paragraph{Agents and harness.} Pair-A Codex: Codex CLI 0.153.0, \texttt{gpt-5.6-sol}, reasoning high, 600-second call timeout, containerized headless execution. Pair-A Opus: Claude Code 2.1.318, \texttt{claude-opus-5-5}, effort \texttt{xhigh}, file tools only, 900-second call timeout from attempt 9. Both: one writable file, per-arm histories, training seed 3, contract T at 300.000 protected seconds; contract N at $N^\star=88{,}604{,}672$ counted tokens (calibration runs 88,604,672, 88,080,384 and 88,604,672; \path{runs/pair-a/provenance/final_pre_study_manifest_repaired_20260903.json}). The frozen first 25 Opus attempts (\CROpValidFrozen{} valid) give frontier \CROpFrontierFrozen{} and best BPB \CROpBestFrozen; all \CROpAttempts{} give \CROpFrontierExtended. Historical campaigns: \texttt{gpt-5.6-sol} at high reasoning effort through the Codex desktop app (core 0.145--0.146 alpha), except seed-42 attempts 1--5, proposed in Cursor's agent with the same model and setting while Codex usage was exhausted. After the seed-42 rollback, attempt 5 (exp 92) re-ran the original attempt-5 change unchanged on a new pod, operated from a Codex thread set to medium effort; it is a replay, not a new proposal. Per-attempt attribution from the author's session logs: \path{audit/camera_ready_2026/25_HISTORICAL_AGENT_PROVENANCE.md}; instruction-based history isolation, hash-checked protected files.
+
+\section{Full statistics, panel and benchmarks}\label{app:panel}
+\begin{table}[H]
+\caption{Full statistics: recipe minus AR-ref in BPB (negative: recipe better), paired by seed, 95\% $t$ intervals (2 df); tokens: AR-ref / recipe. E1 and Opus rows are pre-registered (E1's seeds and AR-ref runs). Seeds 0--2: the original fixed-time re-runs, validation only. Panel: the submitted version's 201.3M-token test (seeds 3--5). Better: seeds with $\Delta<0$ on the bold metric.}\label{tab:e1full}
+\centering\scriptsize\setlength{\tabcolsep}{2.8pt}\input{generated/camera_ready/table_e1.tex}
+\end{table}
+\begin{figure}[H]
+\centering\includegraphics[width=.95\linewidth]{figures/cr_e1_main.pdf}
+\caption{E1 in detail. (a) Held-out BPB against training tokens, seeds 6--8 (hollow: seeds; filled: means; diamonds: 300\,s runs, where AP-Q trains on \CREOneTokAP M tokens and AR-ref on \CREOneTokAR M). (b) Exploratory split of the 300\,s gap (means, 95\% intervals, seeds): AP-Q's extra tokens are worth about as much as its smaller architecture costs at equal tokens; specified after the plan, before E1 results.}\label{fig:e1split}
+\end{figure}
+\begin{table}[H]
+\caption{Panel: \CRPanelBudget{} counted training tokens per recipe on one A40; means $\pm$ sample SD over seeds 3--5. Decode: cached-decode tokens/s (256 input, 256 generated tokens). Memory: peak allocated MiB, identical across seeds. Train s: steady-state estimate of training time, not end-to-end runtime.}\label{tab:main}
+\centering\footnotesize\setlength{\tabcolsep}{4pt}\input{generated/camera_ready/table_main.tex}
+\end{table}
+\begin{table}[H]
+\caption{Every benchmark at 201.3M matched training tokens: held-out BPB and zero-shot accuracy in \% (LAMBADA: exact final word), means over three seeds. The two blocks use different seeds; AR-ref and AP-Q appear in both. Codex's recipes were not retrained at matched tokens. An accuracy cell's seed SD is typically \CRBenchSDMed{} points (at most \CRBenchSDMax), so ARC-Easy, PIQA and LAMBADA barely separate recipes, while BLiMP tracks held-out BPB (panel $r=\CRCorrBLiMPHeld$). Chance is about 25\% on ARC-Easy and 50\% on PIQA and BLiMP.}\label{tab:bench}
+\centering\footnotesize\setlength{\tabcolsep}{5pt}\input{generated/camera_ready/table_bench.tex}
+\end{table}
+\begin{table}[H]
+\caption{Selection funnel with per-comparator counts (dates 2026), as recorded in the selection manifests.}\label{tab:funnelfull}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}\input{generated/camera_ready/table_funnel.tex}
+\end{table}
+\begin{figure}[H]
+\centering\includegraphics[width=.55\linewidth]{figures/cr_pareto.pdf}
+\caption{Held-out BPB against cached-decode throughput at 201M tokens (seeds 3--5); hollow points are seeds, filled points means, marker area is peak inference memory. Six of seven recipes are nondominated on every seed (only the baseline is dominated), so we report trade-off sizes, not frontier membership.}\label{fig:pareto}
+\end{figure}
+
+\section{Pair-A campaigns}\label{app:agents}
+\begin{table}[H]
+\caption{Two agents under the identical fixed-time contract (Pair-A, seed 3). Opus rows: its frontier re-measured on a fresh A40 (protected BPB identical; medians of three repeats; end to end: median over repetitions of a 1{,}024+128-token generation against the baseline recipe's \CRAgEtoERefRep{} tok/s). Codex row: campaign record (stopped after \CRCxAttempts{} of 25 scheduled attempts). Baseline row: the registration calibration run.}\label{tab:agents}
+\centering\scriptsize\setlength{\tabcolsep}{3.2pt}\input{generated/camera_ready/table_agents.tex}
+\end{table}
+\begin{figure}[H]
+\centering\includegraphics[width=.9\linewidth]{figures/cr_agents.pdf}
+\caption{Codex and Claude Opus 5.5 under the same contract (valid attempts). (a) Tokens trained in each 300\,s attempt; the registered baseline trained \CRAgBaseTok M. (b) Speed-up over the baseline from campaign records: decode-only (solid, scored) and end-to-end (dashed, recorded but unscored).}\label{fig:agents}
+\end{figure}
+
+\section{Agent reasoning under the time contract}\label{app:reasoning}
+\begin{table}[H]
+\caption{What the agents wrote before each attempt, next to what the attempt measured. Excerpts are verbatim from the attempt records (hypothesis, intended change or patch) and are checked against them by \texttt{analysis/cr\_v2.py}; outcomes come from the same records (parent$\to$attempt, 300\,s, validation BPB, comparable within a campaign only).}\label{tab:reasoning}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.12}\input{generated/camera_ready/table_reasoning.tex}
+\end{table}
+Read together, the records show three things. First, every campaign treated the updates and tokens a program gets in 300\,s as a design variable and predicted their effect; Opus did so quantitatively, and its A7 forecast (1,400--1,500 updates, 183--195M tokens) held while its BPB beat the forecast. Second, the agents probed the limit and backed off: AutoPareto's A8 (width 256), Opus's A6 (two layers) and A25 (an attention gate that cut training throughput) lost quality, and later attempts reverted or avoided them. Third, Opus saw the prefill cost of its graph recording and treated prefill as unscored, which the program allowed: the adapter had to compute the same outputs, and the evaluator scored decode only.
+
+\section{Research-decision record for the AP-Q lineage}\label{app:decisions}
+\begin{figure}[H]
+\centering\includegraphics[width=\linewidth]{figures/autopareto_lineage.pdf}
+\caption{Full discovery lineage of AP-Q's campaign: all 25 seed-0 attempts (300\,s) with recorded parent links. The highlighted path ends at A22 (exp 134) = AP-Q; A24, A25 = AP-S, AP-F; open: retained, gray: dominated; A17: infrastructure failure.}\label{fig:lineagefull}
+\end{figure}
+\begin{table}[H]
+\caption{Each step on the path to AP-Q (seed 0, 300\,s, validation BPB): the edit derived from the frozen source, the measured outcome and change from the parent, and the opening words of the agent's recorded hypothesis, quoted verbatim. Steps after A18 move BPB by less than the pooled seed SD (\CRPooledSD). Full hypotheses are in the public registry.}\label{tab:apqpath}
+\centering\scriptsize\setlength{\tabcolsep}{3pt}\renewcommand{\arraystretch}{1.1}\input{generated/camera_ready/table_apq_path.tex}
+\end{table}
+
+\section{Questions a reader may ask}\label{app:faq}
+\textbf{Is AP-Q simply a worse model?} Per training token, yes (Table~\ref{tab:results}). Per GPU-second its difference from AR-ref is not resolved (300\,s, E1) while it is \CRParamReduction\% smaller, decodes \CRDecodeRatio$\times$ faster and uses \CRMemoryReduction\% less inference memory. Which matters depends on whether compute time or data is the scarce resource.
+
+\textbf{Why not use a fixed-token contract from the start?} A fixed-time contract is the autoresearch standard and answers a practical question: the best model from a fixed amount of GPU time. It is not wrong, but it scores a program's throughput and its per-token quality together. A fixed-token contract isolates per-token quality but lets compute and update count vary. We report both.
+
+\textbf{Why did every agent shrink the model?} Under 300\,s, BPB improves with more updates and tokens, and a smaller model gets more of both. The agents' hypotheses say so (Table~\ref{tab:reasoning}). E1 prices the trade for AP-Q: it trains \CREOneRho$\times$ faster but needs about \CREOneK$\times$ AR-ref's tokens for equal quality, so at 300\,s the two roughly cancel.
+
+\textbf{Does E1 prove that exposure is the only cause?} No. E1 shows that at equal tokens and updates AP-Q is worse, on the same seeds and data, and its exploratory split attributes the 300\,s result to extra tokens offsetting a weaker architecture. Tokens and updates move together, and architecture and optimizer edits are bundled, so finer causes are not separated.
+
+\textbf{Are three seeds enough?} For the matched-token gap, yes: \CREOneMatchedLoAbs--\CREOneMatchedHiAbs{} held-out BPB against a within-recipe seed SD of at most \CREOneMaxSD, on all \CREOnePairs{} seed--budget pairs, and the panel result replicates on other seeds and another A40. For the slope of the gap with tokens, or to show equivalence at 300\,s, no.
+
+\textbf{Did Opus game the decode metric?} It stayed within the permitted surface: the adapter had to compute the same outputs, and every variant passed the correctness check with identical greedy tokens. Its records describe graph replay as a fix for launch-bound decode and note the prefill cost (Table~\ref{tab:reasoning}), so it was the metric's definition, not a rule violation, that rewarded the placement. We report decode-only and end-to-end speed side by side and recommend prefill-inclusive scoring.
+
+\textbf{Is the Codex--Opus comparison fair?} The arms share the baseline, seed, prompt bytes, output schemas, contract and Pareto rule; they differ in agent-call timeout (600 vs 900\,s), isolation and attempt count (\CRCxAttempts{} vs \CROpAttempts), and each ran one seed. At \CRCxAttempts{} attempts each the best validation BPBs are \CRCxBestBPB{} and \CROpBestTwentyTwo. We draw no agent ranking; the arms show the same exposure strategy and supply recipes for retraining.
+
+\textbf{Does the Opus extension to \CROpAttempts{} attempts change anything?} No. Its best validation BPB (\CROpBestFrozen) came within the frozen first 25 attempts; the frozen frontier (\CROpFrontierFrozen) shares A23 and A24 with the retrained set, and the third retrained recipe, A27, matches A23's held-out gap to AR-ref to three decimals (Table~\ref{tab:results}).
+
+\textbf{Could the time-to-token mapping handicap Opus's recipes?} The mapping changed only driver lines (clock, stop, progress); model and optimizer code stayed byte-identical. The 201.3M tokens and 1{,}536 updates are within 3\% of Opus's own 300\,s runs (\CROpTokLo--\CROpTokHi M tokens, \CROpUpdLo--\CROpUpdHi{} updates), so its recipes were scored at almost the exposure they were tuned for, and an AR-ref drift control reproduced E1 within \CRMTDriftAbs{} BPB.
+
+\textbf{Were the reported recipes cherry-picked?} The funnel and its dates are in Table~\ref{tab:funnel}: the representative rule predates the first attempt, the four-role selector preceded the seeds 0--2 confirmation, and the panel was assembled after it. A full-size candidate (exp 109) was never confirmed. E1, the Opus retraining and the ablations were pre-registered, and the Opus retraining covers its whole frontier.
+
+\textbf{Does this transfer to larger models or other GPUs?} Untested: one GPU type and recipes of 18--50M parameters.
+
+\section{Disclosure Statement}
+\authortodo{Author to verify.} This manuscript, its analysis code and its figures were prepared with AI assistance. The writing and analysis assistant was Claude (Opus 5.5, through Claude Code), in sessions separate from every research-agent campaign; under plans the author approved, it also wrote the code for and ran the pre-registered camera-ready experiments (E1, the Opus retraining and the inference ablations); it is the same model family as the Opus research agent of \S\ref{sec:pilot}, and it had no role in that agent's proposals. The research agents are \texttt{gpt-5.6-sol} through Codex CLI 0.153.0 (Pair-A Codex arm), \texttt{claude-opus-5-5} through Claude Code 2.1.318 (Pair-A Opus arm) and, for the historical campaigns including the AP-Q lineage, \texttt{gpt-5.6-sol} at high reasoning effort through the Codex desktop app (seed-42 attempts 1--5 through Cursor's agent with the same model and setting), as recorded in the author's session logs. Records identify research-agent actions separately from human actions, and interventions whose authorship cannot be reconstructed are excluded from claims of autonomous contribution. Authorship of this submission is human-only.
+
+% SOURCE NOTE FOR THE HUMAN AUTHOR (not rendered): the two statements below are the
+% workshop's required human-accountability declarations. Mark each box only after you
+% have personally performed the corresponding verification. Do not remove them.
+\noindent$\square$ I curated this work and verified every claim, figure, method detail, and reference.\\
+$\square$ I take full accountability for the submitted, human-written artifact.
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

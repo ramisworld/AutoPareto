@@ -1,0 +1,31 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "attempt": 2,
+  "attempt_wall_seconds": 65.70638680458069,
+  "cell": "tokens_201326592",
+  "display": "MOTPE",
+  "finished_utc": "2026-11-16T12:19:27.100703+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.91.07"
+  ],
+  "integrity": {
+    "failures": [
+      "Phase-1 launcher exited with 1 (see training.log)",
+      "training failed: InductorError: SubprocException: An exception occurred in a subprocess:\n\nName=triton_poi_fused_add_mul_6\nTraceback (most recent call last):\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_worker/subproc_pool.py\", line 397, in do_job\n    result = job()\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/compile_tasks.py\", line 66, in _worker_compile_triton\n    kernel.precompile(warm_cache_only=True)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 439, in precompile\n    self._precompile_worker()\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 470, in _precompile_worker\n    compile_results.append(self._precompile_config(c))\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 778, in _precompile_config\n    binary = triton.compile(*compile_args, **compile_kwargs)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/compiler/compiler.py\", line 310, in compile\n    metadata_group[ir_filename] = fn_cache_manager.put(module, ir_filename)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/runtime/cache.py\", line 112, in put\n    os.makedirs(temp_dir, exist_ok=True)\n  File \"/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/os.py\", line 225, in makedirs\n    mkdir(name, mode)\nOSError: [Errno 116] Stale file handle: '/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt2/compile_cache/triton/LYLNVEXJ3JH5P4LYRC42KSTFQFYA6KCSUGT6EGKR7NIHCDIHKPNA/tmp.pid_770532_ec81a148-35ea-4466-b082-6f5b243c7bac'\n\n\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\n"
+    ],
+    "passed": false
+  },
+  "metrics": {},
+  "order": 22,
+  "phase1_model_id": "motpe_quality",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "motpe",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt2",
+  "run_id": "p6-motpe-tokens201326592-seed8",
+  "seed": 8,
+  "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+  "stage": "train",
+  "status": "failed"
+}

@@ -1,0 +1,86 @@
+{
+  "attempt_number": 1,
+  "baseline": {
+    "baseline_experiment_id": "baseline-calibration-repaired-20260903-run1",
+    "contract_parameters": {
+      "n_star": null,
+      "time_seconds": 300.0
+    },
+    "field_provenance": {
+      "cached_decode_tokens_per_second_median": "remote_protected_result.inference_result.median_cached_decode_tokens_per_second",
+      "inference_status": "deterministic stable classification from completed result and inference_result.correctness.passed=true with 10 measured repetitions",
+      "peak_allocated_inference_memory_bytes": "remote_protected_result.inference_result.peak_inference_cuda_memory_mb * 1048576 exactly",
+      "protected_validation_bpb": "remote_protected_result.protected_validation_bpb",
+      "total_tokens": "remote_protected_result.total_tokens",
+      "training_seed": "remote_protected_result.training_seed",
+      "training_throughput_tokens_per_second": "remote_protected_result.training_throughput_tokens_per_second",
+      "validation_bpb": "remote_protected_result.validation_bpb"
+    },
+    "inference_result": {
+      "cached_decode_tokens_per_second_median": 189.6783506282053,
+      "inference_status": "stable",
+      "peak_allocated_inference_memory_bytes": 263075328
+    },
+    "protected_validation_bpb": 1.1937269041212455,
+    "record_scope": "same_seed_baseline",
+    "schema": "autopareto_pair_a_same_seed_baseline_registration_v1",
+    "source_artifacts": {
+      "release_registry": {
+        "path": "study/contracts_2026/provenance/final_inference_release_20260903.json",
+        "sha256": "ae6ef710e3970cb4c2d2305746e29c7184131569d98466b0cd3a316f33e78519"
+      },
+      "remote_protected_result": {
+        "path": "/opt/autopareto_trusted/state/calibration/run1/result.json",
+        "sha256": "29216fb33c5989d95e2dd8490131741fdb4df051a7e002de2d67a3c96bf5d435"
+      },
+      "remote_repaired_calibration": {
+        "path": "/opt/autopareto_trusted/state/calibration/baseline_calibration_repaired_20260903.run1.json",
+        "sha256": "e23d4545929c003e11b58154fa0461d2002cf91157801e16bc0f9e90a0f97063"
+      }
+    },
+    "source_transform": "candidate-compatible baseline: removed only the post-training candidate-side evaluate_bpb import/call; protected validation remains controller-owned",
+    "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+    "total_tokens": 88604672,
+    "training_seed": 3,
+    "training_throughput_tokens_per_second": 294125.11352574814,
+    "validation_bpb": 1.1937269041212455
+  },
+  "campaign_id": "pair-a-fixed-time-seed3",
+  "contract_id": "T",
+  "failures": [],
+  "frontier": [],
+  "parent_pool": [],
+  "same_arm_evidence": [],
+  "schema": "autopareto_campaign_view_v2",
+  "sealed_metrics": [
+    "held_out_bpb",
+    "BLiMP",
+    "PIQA",
+    "ARC-Easy",
+    "LAMBADA"
+  ],
+  "visible_metrics": [
+    "validation_bpb",
+    "absolute_candidate_tok_s",
+    "absolute_baseline_tok_s",
+    "baseline_before_window_tok_s",
+    "baseline_after_window_tok_s",
+    "interpolated_baseline_window_tok_s",
+    "normalized_decode_throughput",
+    "normalized_decode_throughput_ci_95pct",
+    "normalized_pairwise_ratios",
+    "decode_velocity_point_estimate",
+    "decode_velocity_95pct_interval",
+    "prefill.median_pure_prefill_latency_seconds",
+    "prefill.pure_prefill_input_throughput",
+    "ttft.median_local_ttft_seconds",
+    "peak_allocated_inference_memory_bytes",
+    "reserved_cuda_memory_bytes",
+    "autoregressive_state_bytes",
+    "kv_cache_bytes",
+    "pareto_decision",
+    "quality_status",
+    "parent_eligible",
+    "pareto_eligible"
+  ]
+}

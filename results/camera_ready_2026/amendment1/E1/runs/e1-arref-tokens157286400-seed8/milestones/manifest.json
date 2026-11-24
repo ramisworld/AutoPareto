@@ -1,0 +1,51 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 159405693,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens157286400-seed8/milestones/step-000300.pt",
+      "checkpoint_sha256": "dbc0a620319953c0afa59481076b6273c2d0fe425c370e4a987fda39cab3409a",
+      "cumulative_steady_state_seconds": 130.237301228,
+      "historical_steady_state_training_seconds": 130.23730122799998,
+      "optimizer_step": 300,
+      "token_count": 39321600,
+      "total_scientific_step_wall_seconds": 191.831324536
+    },
+    {
+      "checkpoint_bytes": 159405693,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens157286400-seed8/milestones/step-000600.pt",
+      "checkpoint_sha256": "0de9eb176753a41b45eb1fe08bfdad4f2db4267b6165b5c534d80661ad84c859",
+      "cumulative_steady_state_seconds": 266.40180385,
+      "historical_steady_state_training_seconds": 266.40180385000014,
+      "optimizer_step": 600,
+      "token_count": 78643200,
+      "total_scientific_step_wall_seconds": 327.995827158
+    },
+    {
+      "checkpoint_bytes": 159405693,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens157286400-seed8/milestones/step-000900.pt",
+      "checkpoint_sha256": "92971a33df9ecf5e999065e7cf78f7719270ac7bc787b0b0ac08c2092668475f",
+      "cumulative_steady_state_seconds": 402.644569685,
+      "historical_steady_state_training_seconds": 402.6445696849996,
+      "optimizer_step": 900,
+      "token_count": 117964800,
+      "total_scientific_step_wall_seconds": 464.238592993
+    },
+    {
+      "checkpoint_bytes": 159405297,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens157286400-seed8/final.pt",
+      "checkpoint_sha256": "0d4ddca648d4274faa1f5bddf8269fbbf495d7139681b2a0f6290829482a99a1",
+      "cumulative_steady_state_seconds": 538.953370782,
+      "historical_steady_state_training_seconds": 538.9533707819999,
+      "optimizer_step": 1200,
+      "token_count": 157286400,
+      "total_scientific_step_wall_seconds": 600.54739409
+    }
+  ],
+  "device_batch_size": 64,
+  "format": "autopareto_phase1_milestones_v1",
+  "seed": 8,
+  "sequence_length": 2048,
+  "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+  "token_budget": 157286400,
+  "total_batch_size": 131072
+}

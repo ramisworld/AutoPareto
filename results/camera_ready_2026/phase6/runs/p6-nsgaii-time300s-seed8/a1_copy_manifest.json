@@ -1,0 +1,31 @@
+{
+  "compile_cache": {
+    "local_tar": "/root/phase6_local/runs/p6-nsgaii-time300s-seed8.compile_cache.tar",
+    "members": 1653
+  },
+  "copied_utc": "2026-11-17T07:27:03.768264+00:00",
+  "files": {
+    "checkpoint_evaluations.json": "6b7fb95b5a56423dbf7d2e05d6b67304cdf181bbcdccaac4cc3780158bdc93e4",
+    "compile_cache.tar": "9cdec923f7ad865a163151c18cd57308fb884426a6d14bd70cc5f75d6fe38e6d",
+    "evaluation.log": "f8ca03dc3207f268463051908678c4e5112d877192b73148787a7ed9fef7cfe0",
+    "events.jsonl": "8e1b289efbd941325dd267e442c1acd34b10323f5d6c311b8857480f26782761",
+    "final.pt": "6be7874499706ac8aa753eff3ec99d01f32c524ccb812bdb63741fa23a47fff0",
+    "fixed_time_checkpoint_manifest.json": "64e35e523af74cfab1b4faf74aecaa2adde0b3acb7c67ae56ea9752933194336",
+    "fixed_time_training_metrics.json": "bff372254a7699f06d15b351089a5e34909dd25374968817bec8f04d9ad4d010",
+    "isolate/__pycache__/benchmark_config.cpython-310.pyc": "41847c322e273428fb962af84779a1068a9efca3f0c79f2c9e4866794567aca2",
+    "isolate/__pycache__/event_log.cpython-310.pyc": "5711110599ce4785dc2e468b5da2c34ec8726324d9cffc54f426f4fd16b45609",
+    "isolate/__pycache__/prepare.cpython-310.pyc": "0d7955133b4820d84353f26d8401eba3dc55302d33bc6e2528ce047ca1c21928",
+    "isolate/benchmark_config.py": "722131ffc44d6b10a5e7fca1862ec01dfc7702388e3fb8eb9b629cb2a52c51dc",
+    "isolate/event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac",
+    "isolate/prepare.py": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+    "isolate/protected/__pycache__/inference_adapter.cpython-310.pyc": "3f3a0c998c881b53281b3aed14e1706fb840e0f25b681f344146da429eff60dc",
+    "isolate/protected/inference_adapter.py": "80f4d8c9de365480ef0e7170f705971a0454d421ef410a5c23ff6ae8795b4dd1",
+    "isolate/protected/train_launcher.py": "aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f",
+    "isolate/train.py": "5d4ad2f660e97e09675a3b67c9e89472cc9d44ac7b84565471bef3a061394c2c",
+    "training.log": "5dc3c7939a19203a3ab137b571a587a5f22bc0dd70e8752dee505c76813f6701"
+  },
+  "format": "autopareto_phase6_a1_copy_manifest_v1",
+  "local_dir": "/root/phase6_local/runs/p6-nsgaii-time300s-seed8",
+  "verified_files": 18,
+  "volume_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-nsgaii-time300s-seed8"
+}

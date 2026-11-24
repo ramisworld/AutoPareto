@@ -1,0 +1,188 @@
+{
+  "contexts": {
+    "23/V0_as_submitted": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V0_as_submitted",
+      "original_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+      "settings": null,
+      "train_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def"
+    },
+    "23/V1_no_cuda_graph": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V1_no_cuda_graph",
+      "original_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": false,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "b6b680659e0c6b3a0e7a41411aaf1122721280201425743f830be8e712964466"
+    },
+    "23/V2_no_fusion": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V2_no_fusion",
+      "original_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+      "settings": {
+        "compile_regions": false,
+        "cuda_graph": true,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "ff6ea50b1797f88a06ca48988de2002172f41329cd1703496ad1d5072589fbc1"
+    },
+    "23/V3_sdpa_attention": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V3_sdpa_attention",
+      "original_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": true,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": true
+      },
+      "train_sha256": "f431132d51033c7e1c986e9b072bf01d77fa2f248bf8b27c5ff6f52ee4ae83cb"
+    },
+    "23/V4_eager_unfused": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V4_eager_unfused",
+      "original_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+      "settings": {
+        "compile_regions": false,
+        "cuda_graph": false,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "dd4fc697c7ded913725b1fe52cf16c5eb4e650e3a4953d0ed93c503c2239c06b"
+    },
+    "23/V5_linear_kv_cache": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V5_linear_kv_cache",
+      "original_source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": true,
+        "ring_kv_cache": false,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "cf9550d0ad7d46b9d4aba26a6ea8f93cb077ea6c01d1e560d8f61ddf4e3e4314"
+    },
+    "24/V0_as_submitted": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-24/V0_as_submitted",
+      "original_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+      "settings": null,
+      "train_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9"
+    },
+    "24/V1_no_cuda_graph": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-24/V1_no_cuda_graph",
+      "original_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": false,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "7872da5d96742cc2cad57de74c4e2188c5017d2912008586ff875918b1047875"
+    },
+    "24/V2_no_fusion": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-24/V2_no_fusion",
+      "original_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+      "settings": {
+        "compile_regions": false,
+        "cuda_graph": true,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "b69516dddbef575bce3857188bf2fcdec5b87f676007af33e15f01283335243f"
+    },
+    "24/V3_sdpa_attention": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-24/V3_sdpa_attention",
+      "original_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": true,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": true
+      },
+      "train_sha256": "2602a7e89415a2ba713005082c9b472fbf2ee92ef3d561218d5ad702f8ca5a06"
+    },
+    "24/V4_eager_unfused": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-24/V4_eager_unfused",
+      "original_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+      "settings": {
+        "compile_regions": false,
+        "cuda_graph": false,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "75c48d7d9f8959f10f725b0a3889119e72505a917052e66c54a22fed2e286162"
+    },
+    "24/V5_linear_kv_cache": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-24/V5_linear_kv_cache",
+      "original_source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": true,
+        "ring_kv_cache": false,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "7ebcd738462856365326e886293107033d8452e5fe73897ec3a9db03f03eef04"
+    },
+    "27/V0_as_submitted": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-27/V0_as_submitted",
+      "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+      "settings": null,
+      "train_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12"
+    },
+    "27/V1_no_cuda_graph": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-27/V1_no_cuda_graph",
+      "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": false,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "103bd0cee83be9adc64bb7e7ff375af95f564df48ab5cfcb8bb225964aefad27"
+    },
+    "27/V2_no_fusion": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-27/V2_no_fusion",
+      "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+      "settings": {
+        "compile_regions": false,
+        "cuda_graph": true,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "afa5414b1a7b81634eeb5b1b0282b51496b94876c99ab7e6d6af86c275c5424c"
+    },
+    "27/V3_sdpa_attention": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-27/V3_sdpa_attention",
+      "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": true,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": true
+      },
+      "train_sha256": "b99c1e20590df4249e1b06f2428cc47ba20ef9b58f00599e7b025148f0aaf91d"
+    },
+    "27/V4_eager_unfused": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-27/V4_eager_unfused",
+      "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+      "settings": {
+        "compile_regions": false,
+        "cuda_graph": false,
+        "ring_kv_cache": true,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "0eb149961e1f8369cae2087c38e5507d84d6497f32a66d985b2e561da47db3d4"
+    },
+    "27/V5_linear_kv_cache": {
+      "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-27/V5_linear_kv_cache",
+      "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+      "settings": {
+        "compile_regions": true,
+        "cuda_graph": true,
+        "ring_kv_cache": false,
+        "sdpa_decode_attention": false
+      },
+      "train_sha256": "b80f3fe1f5e201e48b808cec620fa402243f85e43d21b4d8d7bf55ddd349f8a0"
+    }
+  },
+  "format": "autopareto_phase5b_variant_contexts_v1"
+}

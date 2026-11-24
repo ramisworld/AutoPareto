@@ -1,0 +1,1 @@
+{"label": "pilot-opus23-s6-eager-corr", "mode": "native", "status": "correctness_only", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 8.8}

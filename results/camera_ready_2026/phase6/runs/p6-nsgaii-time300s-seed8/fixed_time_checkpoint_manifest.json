@@ -1,0 +1,18 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 159401323,
+      "checkpoint_path": "/root/phase6_local/runs/p6-nsgaii-time300s-seed8/final.pt",
+      "checkpoint_sha256": "6be7874499706ac8aa753eff3ec99d01f32c524ccb812bdb63741fa23a47fff0",
+      "historical_steady_state_training_seconds": 300.24006748199463,
+      "optimizer_step": 665,
+      "token_count": 87162880
+    }
+  ],
+  "device_batch_size": 64,
+  "format": "autopareto_camera_ready_fixed_time_checkpoint_manifest_v1",
+  "note": "single final checkpoint of a 300 s fixed-time run; consumed by scripts/evaluate_phase1_checkpoints.py",
+  "seed": 8,
+  "sequence_length": 2048,
+  "source_sha256": "5d4ad2f660e97e09675a3b67c9e89472cc9d44ac7b84565471bef3a061394c2c"
+}

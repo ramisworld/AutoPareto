@@ -1,0 +1,63 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "amendment": {
+    "name": "A1",
+    "plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade"
+  },
+  "attempt": 1,
+  "attempt_wall_seconds": 495.58946347236633,
+  "cell": "time_300s",
+  "copy": {
+    "manifest_sha256": "1719ca3044711858f83a845ac77a5ac66f005ca81b29a66a636950331639fba8",
+    "verified_files": 18
+  },
+  "display": "NSGA-II",
+  "executed_in": "/root/phase6_local/runs/p6-nsgaii-time300s-seed8",
+  "finished_utc": "2026-11-17T07:27:03.799575+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.112.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "6be7874499706ac8aa753eff3ec99d01f32c524ccb812bdb63741fa23a47fff0",
+    "end_to_end_training_seconds": 391.08835315704346,
+    "heldout_bpb": 1.1703917819652139,
+    "heldout_ci95": [
+      1.1641261426339917,
+      1.177084008885064
+    ],
+    "parameter_count": 50332176,
+    "peak_training_memory_mb": 22652.443069458008,
+    "steady_state_seconds": 300.24006748199463,
+    "steady_state_tokens_per_second": 285508.4889865364,
+    "timing_anomaly": {
+      "excess_seconds": 0,
+      "max_step_seconds": 0.461,
+      "median_seconds": 0.459,
+      "parsed_steps": 654,
+      "passed": true,
+      "reason": null,
+      "slow_steps": 0
+    },
+    "tokens": 87162880,
+    "updates": 665,
+    "validation_bpb": 1.1078285057571142,
+    "validation_bpb_in_process": 1.1078152545790982
+  },
+  "order": 27,
+  "phase1_model_id": "nsgaii_quality",
+  "pilot": false,
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "nsgaii",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-nsgaii-time300s-seed8",
+  "run_id": "p6-nsgaii-time300s-seed8",
+  "seed": 8,
+  "source_sha256": "5d4ad2f660e97e09675a3b67c9e89472cc9d44ac7b84565471bef3a061394c2c",
+  "stage": "fixed",
+  "status": "completed"
+}

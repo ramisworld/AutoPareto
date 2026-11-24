@@ -1,0 +1,362 @@
+{
+  "sources": {
+    "snapshot_db": {
+      "path": "results/snapshots/runpod-<pod-id>-shutdown-20260901/extracted/results/phase1/downstream_200m.db",
+      "experiments": 318
+    },
+    "main_db": {
+      "path": "results/results.db",
+      "experiments": 297,
+      "mismatching_overlap_ids": [],
+      "ids_only_in_snapshot": [
+        301,
+        302,
+        303,
+        304,
+        305,
+        306,
+        307,
+        308,
+        309,
+        310,
+        311,
+        312,
+        313,
+        314,
+        315,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321
+      ]
+    },
+    "pair_a_histories": {
+      "files": [
+        "runs/nonstudy_api_repair_validation_v4_20260912/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/nonstudy_api_repair_validation_v4_20260912/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/nonstudy_final_sol_high_smoke_20260912/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-new-a40-r2/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-new-a40-r2/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-preflight-manifest-path-bug/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-preflight-manifest-path-bug/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-preflight-path-bug/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-preflight-path-bug/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-preflight-runtime-parent-bug/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907-preflight-runtime-parent-bug/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2-continuation-20260907/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fresh/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260906-fresh/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260909-new-a40/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260909-new-a40/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260914-new-a40-continuation-20260916-r2/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260914-new-a40-continuation-20260916-r2/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260914-new-a40-continuation-20260916/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260914-new-a40-continuation-20260916/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a-official-20260914-new-a40/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a-official-20260914-new-a40/pair-a-fixed-tokens-seed3/history.jsonl",
+        "runs/pair-a/pair-a-fixed-time-seed3/history.jsonl",
+        "runs/pair-a/pair-a-fixed-tokens-seed3/history.jsonl"
+      ],
+      "unique_attempt_records": 85
+    }
+  },
+  "anomalies": [
+    {
+      "type": "missing_experiment_ids",
+      "ids": [
+        88,
+        89,
+        90
+      ],
+      "note": "absent from every retained DB snapshot (results/archive, results/snapshots); gap sits inside autopareto-seed42-20260727 id range 84-112"
+    },
+    {
+      "type": "experiments_with_multiple_training_run_rows",
+      "items": [
+        {
+          "experiment_id": 69,
+          "training_runs": [
+            23226,
+            23295,
+            23506
+          ],
+          "kinds": "confirmation:crash,discovery:crash,setup:crash",
+          "distinct_val_bpb_token_pairs": 0
+        },
+        {
+          "experiment_id": 70,
+          "training_runs": [
+            23296,
+            23366,
+            23507
+          ],
+          "kinds": "confirmation:crash,discovery:interrupted,setup:crash",
+          "distinct_val_bpb_token_pairs": 0
+        },
+        {
+          "experiment_id": 71,
+          "training_runs": [
+            23437,
+            23508
+          ],
+          "kinds": "confirmation:interrupted,setup:interrupted",
+          "distinct_val_bpb_token_pairs": 0
+        },
+        {
+          "experiment_id": 72,
+          "training_runs": [
+            23509,
+            23581
+          ],
+          "kinds": "confirmation:completed,discovery:crash",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 73,
+          "training_runs": [
+            23582,
+            23655
+          ],
+          "kinds": "confirmation:completed,discovery:crash",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 74,
+          "training_runs": [
+            23656,
+            23730
+          ],
+          "kinds": "confirmation:completed,discovery:crash",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 75,
+          "training_runs": [
+            23731,
+            23806
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 76,
+          "training_runs": [
+            23807,
+            23883
+          ],
+          "kinds": "confirmation:completed,discovery:crash",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 77,
+          "training_runs": [
+            23884,
+            23961
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 78,
+          "training_runs": [
+            23962,
+            24040
+          ],
+          "kinds": "ablation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 79,
+          "training_runs": [
+            24041,
+            24120
+          ],
+          "kinds": "ablation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 80,
+          "training_runs": [
+            24121,
+            24201
+          ],
+          "kinds": "ablation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 81,
+          "training_runs": [
+            24202,
+            24283
+          ],
+          "kinds": "ablation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 82,
+          "training_runs": [
+            24284,
+            24366
+          ],
+          "kinds": "ablation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 83,
+          "training_runs": [
+            24367,
+            24450
+          ],
+          "kinds": "ablation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 91,
+          "training_runs": [
+            30476,
+            30564
+          ],
+          "kinds": "discovery:crash,setup:crash",
+          "distinct_val_bpb_token_pairs": 0
+        },
+        {
+          "experiment_id": 288,
+          "training_runs": [
+            96838,
+            97123
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 289,
+          "training_runs": [
+            97124,
+            97410
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 290,
+          "training_runs": [
+            97411,
+            97698
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 291,
+          "training_runs": [
+            97699,
+            97987
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 292,
+          "training_runs": [
+            97988,
+            98277
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 293,
+          "training_runs": [
+            98278,
+            98568
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 294,
+          "training_runs": [
+            98569,
+            98860
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 295,
+          "training_runs": [
+            98861,
+            99153
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 296,
+          "training_runs": [
+            99154,
+            99447
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 297,
+          "training_runs": [
+            99448,
+            99742
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 298,
+          "training_runs": [
+            99743,
+            100038
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        },
+        {
+          "experiment_id": 299,
+          "training_runs": [
+            100039,
+            100335
+          ],
+          "kinds": "confirmation:completed,discovery:completed",
+          "distinct_val_bpb_token_pairs": 1
+        }
+      ]
+    },
+    {
+      "type": "training_runs_left_in_running_state",
+      "items": [
+        {
+          "id": 14973,
+          "experiment_id": 14,
+          "run_kind": "discovery",
+          "seed": 42,
+          "started_at": "2026-07-22 12:46:10"
+        },
+        {
+          "id": 16716,
+          "experiment_id": 36,
+          "run_kind": "discovery",
+          "seed": 42,
+          "started_at": "2026-07-23 04:30:48"
+        }
+      ]
+    }
+  ],
+  "row_counts": {
+    "db_experiments": 318,
+    "pair_a_unique_attempts": 85,
+    "total": 403
+  }
+}

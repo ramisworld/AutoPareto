@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E0/runs/e0-arref-time300s-seed0/final.pt",
+  "measured_training_tokens": 86114304,
+  "parameter_count": 50332176,
+  "peak_training_cuda_memory_mb": 22652.443069458008,
+  "total_runtime_seconds": 411.7678952217102,
+  "total_training_tokens": 87556096,
+  "training_seconds": 300.0802478790283,
+  "training_seed": 0,
+  "training_tokens_per_second": 286970.9173084773,
+  "val_bpb": 1.1042673349976684
+}

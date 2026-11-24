@@ -1,0 +1,18 @@
+{
+  "schema": "autopareto_contracts_2026_prompt_snapshot_v1",
+  "programs": {
+    "T": {
+      "path": "study/contracts_2026/programs/program_fixed_time.md",
+      "sha256": "8acffb40c9b203fcd18bdb276c7833f90e989256d02371421020dbc4141cd969",
+      "size_bytes": 11163
+    },
+    "N": {
+      "path": "study/contracts_2026/programs/program_fixed_tokens.md",
+      "sha256": "825e53e461fd7f75c5d1fbcd60353a9ecdc2bcca96d35b689170a7d46f9e07a8",
+      "size_bytes": 10642
+    }
+  },
+  "diff_path": "study/contracts_2026/provenance/prompt_diff.patch",
+  "comparison_rule": "remove the single Resource contract section; all remaining bytes are identical",
+  "banned_study_leaks_checked": ["AP292", "AP299", "AP294", "expected shallow/deep behavior", "paper abstract", "transfer hypotheses", "downstream outcomes"]
+}

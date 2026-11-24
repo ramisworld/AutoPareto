@@ -1,0 +1,1 @@
+{"label": "rs-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 188.27016318660782, "speedup": 1.2636677066176967, "peak_mib": 260.13916015625, "wall_s": 262.1}

@@ -1,0 +1,32 @@
+{
+  "schema": "autopareto_historical_recovery_v1",
+  "database": "results/results.db",
+  "database_program_path": "programs/program_autopareto.md",
+  "database_program_sha256": "7d6817f0aabd948024f9838657ca2b67df06c8d087670813f05b697e91a64f7e",
+  "registered_campaigns": [
+    {"campaign_id":"autopareto-seed0-20260731","training_seed":0,"starting_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","program_sha256_matches":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e"},
+    {"campaign_id":"autopareto-seed1-20260731","training_seed":1,"starting_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","program_sha256_matches":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e"},
+    {"campaign_id":"autopareto-seed42-20260727","training_seed":42,"starting_commit":"c200ccbe08b88c199e73715849187affd967eabe","program_sha256_matches":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e"}
+  ],
+  "recovered_files": [
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"runner.py","preserved_path":"study/contracts_2026/historical_reference/runner.py","sha256":"2b0a1663f22d9eab37dde7b038601d7181a2ae5cccf4624ec758eaceec97fe19","matches_database_hash":null},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"programs/program_autopareto.md","preserved_path":"study/contracts_2026/historical_reference/programs/program_autopareto.md","sha256":"7d6817f0aabd948024f9838657ca2b67df06c8d087670813f05b697e91a64f7e","matches_database_hash":true},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"scripts/run_runner.sh","preserved_path":"study/contracts_2026/historical_reference/scripts/run_runner.sh","sha256":"6f51d99e056e4fc979f70c988da837c297b21d7fb99abbb84f6d72640e9bf487","matches_database_hash":null},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"protected/train_launcher.py","preserved_path":"study/contracts_2026/historical_reference/protected/train_launcher.py","sha256":"aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f","matches_database_hash":null},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"RESEARCH_PROTOCOL.md","preserved_path":"study/contracts_2026/historical_reference/RESEARCH_PROTOCOL.md","sha256":"2db6e8c95bb596ac1e3d15f8b4ee3034141b9f6db827cec1ffccf286ae13bd06","matches_database_hash":null},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"docs/candidate_interface.md","preserved_path":"study/contracts_2026/historical_reference/docs/candidate_interface.md","sha256":"094e1b6e3e77c07ba6d14983527d1ce1632c9ec28e141d97d43f3e603c27c83c","matches_database_hash":null},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"inference_benchmark.py","preserved_path":"study/contracts_2026/historical_reference/inference_benchmark.py","sha256":"0b252757d18c79a6a6ca319df6f813e337d41c571b34f1cd538cb138a0153cc0","matches_database_hash":null},
+    {"source_commit":"b8eab2894a5f2592a3a6e80b74e9c39ced80d67e","original_path":"benchmark_config.py","preserved_path":"study/contracts_2026/historical_reference/benchmark_config.py","sha256":"5f48229d16c1cfd6f55f7f628251ac03af9f3a0fd0afa40caa640689baf18a99","matches_database_hash":null},
+    {"source_commit":"5ea452c9d86a43ad4bebd507c5872f18249627ce","original_path":"train.py","preserved_path":"study/contracts_2026/historical_reference/baseline_source/train.py","sha256":"428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8","matches_database_hash":null},
+    {"source_commit":"5ea452c9d86a43ad4bebd507c5872f18249627ce","original_path":"prepare.py","preserved_path":"study/contracts_2026/historical_reference/baseline_source/prepare.py","sha256":"4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"runner.py","preserved_path":"study/contracts_2026/historical_reference/c200/runner.py","sha256":"bf83a7a13f3cf0335686990a3e8ee1d04ab0d5e9b6d269c3f5d3f09b9c42b2fe","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"programs/program_autopareto.md","preserved_path":"study/contracts_2026/historical_reference/c200/programs/program_autopareto.md","sha256":"af42d0417ca6b98360ea6d84399290849d49f9680d38f9581de971ea586b3021","matches_database_hash":false},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"scripts/run_runner.sh","preserved_path":"study/contracts_2026/historical_reference/c200/scripts/run_runner.sh","sha256":"6f51d99e056e4fc979f70c988da837c297b21d7fb99abbb84f6d72640e9bf487","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"protected/train_launcher.py","preserved_path":"study/contracts_2026/historical_reference/c200/protected/train_launcher.py","sha256":"aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"RESEARCH_PROTOCOL.md","preserved_path":"study/contracts_2026/historical_reference/c200/RESEARCH_PROTOCOL.md","sha256":"c86a7856c1f9a2dc2a2a2be37f81f337c0d9df85d6681eaa17c45c81853792ac","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"docs/candidate_interface.md","preserved_path":"study/contracts_2026/historical_reference/c200/docs/candidate_interface.md","sha256":"b40ca55d6072c89754add5b41373fcaf44c022176b6f10edf612ca2a1362058f","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"inference_benchmark.py","preserved_path":"study/contracts_2026/historical_reference/c200/inference_benchmark.py","sha256":"62b3730c8059a34aaef8d8b3e3b95c7d488a688add89283890cc99b41012ed6b","matches_database_hash":null},
+    {"source_commit":"c200ccbe08b88c199e73715849187affd967eabe","original_path":"benchmark_config.py","preserved_path":"study/contracts_2026/historical_reference/c200/benchmark_config.py","sha256":"2807f4ec037476f09b857707d7df6469ccab457b3be89a48a72a0d9f606a2660","matches_database_hash":null}
+  ],
+  "note": "The b8 program snapshot is the one whose SHA256 is stored in all three registered AutoPareto database rows. The c200 program is preserved as the earlier seed-42 Git version but is not the database program snapshot."
+}

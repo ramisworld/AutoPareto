@@ -1,0 +1,51 @@
+{
+  "schema": "autopareto_contracts_2026_final_inference_release_v1",
+  "status": "SUPERSEDED_PAIR_A_SEARCH_TIME",
+  "superseded_by": "study/contracts_2026/provenance/pair_a_active_inference_config_20260904.json",
+  "superseded_reason": "The 256/256 release snapshot is retained for possible post-selection robustness use but is inactive for Pair-A search-time evaluation.",
+  "authority": "last_known_good_stabilized_inference_semantics",
+  "created_at": "2026-09-03",
+  "git_head_at_snapshot": "6bcb69e6036d64bb0eca9b5b07d0b0fde1c58abf",
+  "registered_baseline_source_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+  "inference_contract": {
+    "official_precision": "bfloat16_autocast_flashattention",
+    "adjudication": "float32_protected_sdpa",
+    "input_tokens": 256,
+    "generated_tokens": 256,
+    "warmup_iterations": 2,
+    "measured_repetitions": 10,
+    "decode_transitions_measured": 255,
+    "synchronization": "cuda_synchronize_before_and_after_prefill_and_decode",
+    "cache_correctness": "historical_protected_adapter",
+    "memory": "cuda_peak_allocated_reserved_and_validated_cache_bytes"
+  },
+  "preserved_study_controls": [
+    "disposable_warmup_fresh_scientific_state",
+    "contract_T_N_isolation",
+    "canonical_baseline_source",
+    "campaign_provenance",
+    "resource_contracts"
+  ],
+  "retired_inference_components": [
+    "study/contracts_2026/inference_model_host.py",
+    "study/contracts_2026/inference_ipc.py",
+    "strict_v2_checkpoint_source_config_requirement"
+  ],
+  "files": {
+    "study/contracts_2026/inference_benchmark.py": "8e41dd6a72e1f68407bce69f96121e36c2d11ac2bb0361bb9d9f33cfe3af3806",
+    "study/contracts_2026/train_launcher.py": "e8c8b329d11581b92dfa4bb14cd74b193e097d8ece7010b98d7baa491d89fba1",
+    "study/contracts_2026/remote_runner.py": "c5221f6fbd614d58f39d1f85038629e226228ba3fac79c6def3221611416ce82",
+    "study/contracts_2026/candidate_process.py": "1a249cb12adc3a62514bfa6f790d8fedc4a89d4b976c481c82017ff508064783",
+    "study/contracts_2026/candidate_sandbox.py": "3590bbddfe134a4d1ddd8550122b4e7c3ad66da3036263b625efc92eca8a7073",
+    "study/contracts_2026/study_runtime.py": "451e55fad68e77da6261af5374ae93a4f2f53ddc34c5b39222ae457b60c8d962",
+    "study/contracts_2026/runner.py": "604bb409c2f8ca3fc1c2af29c80b931890516b29286ee043b3bfcab32b7c16ca",
+    "study/contracts_2026/calibration.py": "e13971b3bbb2f554dde8a700825437b5f0bd4bdb06d576efa60301cca67cb0e2",
+    "study/contracts_2026/contracts.py": "1d4fdca79e32091c59f64e490d82cad1278e6f87b3425f5f937b666823c7f57f",
+    "study/contracts_2026/batching.py": "a5d80c8f28c0f35f781434fd1118c86dabc51b77d595bcdd1be05a34aee013e6",
+    "study/contracts_2026/provenance.py": "0db7b6fe448fbfa8134c4b61bbaa687001d175d80535a199a06e25d8e67d9990",
+    "protected/inference_adapter.py": "55034cc2a544ffd0dbb93be4cd1694679936b4be61fe64c6c7c9ca2743c79d5c",
+    "study/contracts_2026/historical_reference/benchmark_config.py": "5f48229d16c1cfd6f55f7f628251ac03af9f3a0fd0afa40caa640689baf18a99",
+    "study/contracts_2026/historical_reference/baseline_source/train.py": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+    "study/contracts_2026/historical_reference/baseline_source/prepare.py": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+  }
+}

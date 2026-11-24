@@ -1,0 +1,52 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "attempt": 1,
+  "attempt_wall_seconds": 1003.4914119243622,
+  "cell": "tokens_201326592",
+  "display": "TPE",
+  "finished_utc": "2026-11-16T07:59:58.546610+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.91.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "b6760773e2f8cbfac16956b4756e2bbe194e1e94f0b19909522e915aaa9d4be4",
+    "derived_source_sha256": "01b319eba06f8e7cb4ece58617a3284d9f853a5ebfefae8ee57bffaadf9ab70f",
+    "end_to_end_training_seconds": 679.375977633,
+    "heldout_bpb": 1.121006220022935,
+    "heldout_ci95": [
+      1.1148337792951666,
+      1.1277804651159304
+    ],
+    "milestone_validation_bpb": {
+      "100663296": 1.1590456516916559,
+      "150994944": 1.1181023060519228,
+      "201326592": 1.0570789886019556,
+      "50331648": 1.2232573316442772
+    },
+    "parameter_count": 39846284,
+    "peak_training_memory_mb": 17562.400390625,
+    "steady_state_seconds": 538.595582471,
+    "steady_state_tokens_per_second": 371122.24181816896,
+    "tokens": 201326592,
+    "total_scientific_step_wall_seconds": 609.147914512,
+    "updates": 1536,
+    "validation_bpb": 1.0570789886019556,
+    "validation_bpb_in_process": 1.057073256506346
+  },
+  "order": 4,
+  "phase1_model_id": "tpe_quality",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "tpe",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-tpe-tokens201326592-seed6",
+  "run_id": "p6-tpe-tokens201326592-seed6",
+  "seed": 6,
+  "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+  "stage": "train",
+  "status": "completed"
+}

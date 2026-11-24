@@ -1,0 +1,932 @@
+{
+  "arms": {
+    "T": {
+      "attempts": 4,
+      "quality_valid": 4,
+      "pareto_eligible": 0,
+      "failures": 0,
+      "best_bpb": 1.1034022374372043,
+      "parameters": {
+        "n": 4,
+        "mean": 50332176,
+        "sd": 0.0,
+        "min": 50332176,
+        "max": 50332176
+      },
+      "categories": {
+        "batching": 4,
+        "learning-rate/schedule": 1
+      }
+    },
+    "N": {
+      "attempts": 4,
+      "quality_valid": 4,
+      "pareto_eligible": 0,
+      "failures": 0,
+      "best_bpb": 1.1243123343687433,
+      "parameters": {
+        "n": 4,
+        "mean": 98206605,
+        "sd": 24707250.0,
+        "min": 85852980,
+        "max": 135267480
+      },
+      "categories": {
+        "capacity/depth/width": 2,
+        "batching": 4
+      }
+    }
+  },
+  "controls": {
+    "train.py": {
+      "equal_bytes": true,
+      "T_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "N_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab"
+    },
+    "prepare.py": {
+      "equal_bytes": true,
+      "T_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+      "N_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+    },
+    "study_runtime.py": {
+      "equal_bytes": true,
+      "T_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "N_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98"
+    }
+  },
+  "unit": "one incomplete matched adaptive pair; no independent replication",
+  "current_namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+  "rows": [
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:T:1",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "T",
+      "attempt": 1,
+      "status": "completed",
+      "parameters": 50332176,
+      "tokens": 87818240,
+      "steps": 335,
+      "seconds": 300.462172414,
+      "bpb": 1.1748071659697361,
+      "speed": 184.13949538267076,
+      "normalized_speed": 1.0037149782536647,
+      "memory": 518213120,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "a1ea17a98dc5657062f4990f71b7b36a6f8ae694f33892a4a40a05c3813e0abb",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "baseline-calibration-repaired-20260903-run1",
+      "hypothesis": "Halving the baseline's effective batch should improve validation BPB by roughly doubling optimizer-update frequency within the fixed 300-second budget, while preserving most training throughput because the physical microbatch and model are unchanged.",
+      "intended_change": "Set TOTAL_BATCH_SIZE from 524288 to 262144, reducing accumulation from four to two microbatches per update. Retain the architecture and learning rates, enforce seed 3, and align progress, timing, and counters with Contract T.",
+      "category": "optimization",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 262144,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 8,
+        "DEVICE_BATCH_SIZE": 64,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 64,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-01.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/history.jsonl",
+      "history_line": 1,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -24,6 +24,7 @@\n fa3 = get_kernel(repo).flash_attn_interface\n \n from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader\n+from study_runtime import contract_progress\n \n # ---------------------------------------------------------------------------\n # GPT Model\n@@ -435,7 +436,7 @@\n WINDOW_PATTERN = \"SSSL\" # sliding window pattern: L=full, S=half context\n \n # Optimization\n-TOTAL_BATCH_SIZE = 2**19 # ~524K tokens per optimizer step\n+TOTAL_BATCH_SIZE = 2**18 # ~262K tokens per optimizer step; more updates under fixed time\n EMBEDDING_LR = 0.6      # learning rate for token embeddings (Adam)\n UNEMBEDDING_LR = 0.004  # learning rate for lm_head (Adam)\n MATRIX_LR = 0.04        # learning rate for matrix parameters (Muon)\n@@ -454,9 +455,9 @@\n # Setup: tokenizer, model, optimizer, dataloader\n # ---------------------------------------------------------------------------\n \n-t_start = time.time()\n-torch.manual_seed(42)\n-torch.cuda.manual_seed(42)\n+t_start = time.perf_counter()\n+torch.manual_seed(3)\n+torch.cuda.manual_seed(3)\n torch.set_float32_matmul_precision(\"high\")\n device = torch.device(\"cuda\")\n autocast_ctx = torch.amp.autocast(device_type=\"cuda\", dtype=torch.bfloat16)\n@@ -535,14 +536,16 @@\n # Training loop\n # ---------------------------------------------------------------------------\n \n-t_start_training = time.time()\n+t_start_training = time.perf_counter()\n smooth_train_loss = 0\n total_training_time = 0\n step = 0\n+optimizer_updates = 0\n+microbatches = 0\n \n while True:\n     torch.cuda.synchronize()\n-    t0 = time.time()\n+    t0 = time.perf_counter()\n     for micro_step in range(grad_accum_steps):\n         with autocast_ctx:\n             loss = model(x, y)\n@@ -550,9 +553,11 @@\n         loss = loss / grad_accum_steps\n         loss.backward()\n         x, y, epoch = next(train_loader)\n+        microbatches += 1\n \n     # Progress and schedules\n-    progress = min(total_training_time / TIME_BUDGET, 1.0)\n+    progress = contract_progress(\"T\", total_training_time,\n+                                 optimizer_updates * TOTAL_BATCH_SIZE, None)\n     lrm = get_lr_multiplier(progress)\n     muon_momentum = get_muon_momentum(step)\n     muon_weight_decay = get_weight_decay(progress)\n@@ -562,6 +567,7 @@\n             group[\"momentum\"] = muon_momentum\n             group[\"weight_decay\"] = muon_weight_decay\n     optimizer.step()\n+    optimizer_updates += 1\n     model.zero_grad(set_to_none=True)\n \n     train_loss_f = train_loss.item()\n@@ -572,11 +578,9 @@\n         exit(1)\n \n     torch.cuda.synchronize()\n-    t1 = time.time()\n+    t1 = time.perf_counter()\n     dt = t1 - t0\n-\n-    if step > 10:\n-        total_training_time += dt\n+    total_training_time = t1 - t_start_training\n \n     # Logging\n     ema_beta = 0.9\n@@ -599,18 +603,19 @@\n \n     step += 1\n \n-    # Time's up — but only stop after warmup steps so we don't count compilation\n-    if step > 10 and total_training_time >= TIME_BUDGET:\n+    # Time's up; the protected worker owns the authoritative update boundary.\n+    if total_training_time >= TIME_BUDGET:\n         break\n \n print()  # newline after \\r training log\n \n-total_tokens = step * TOTAL_BATCH_SIZE\n+total_tokens = optimizer_updates * TOTAL_BATCH_SIZE\n+val_bpb = float(\"nan\")  # Protected validation is controller-owned.\n \n # Final summary\n-t_end = time.time()\n+t_end = time.perf_counter()\n startup_time = t_start_training - t_start\n-steady_state_mfu = 100 * num_flops_per_token * TOTAL_BATCH_SIZE * (step - 10) / total_training_time / H100_BF16_PEAK_FLOPS if total_training_time > 0 else 0\n+steady_state_mfu = 100 * num_flops_per_token * total_tokens / total_training_time / H100_BF16_PEAK_FLOPS if total_training_time > 0 else 0\n peak_vram_mb = torch.cuda.max_memory_allocated() / 1024 / 1024\n \n print(\"---\")\n",
+      "edit_categories": [
+        "batching"
+      ],
+      "constant_changes": {
+        "TOTAL_BATCH_SIZE": {
+          "before": 524288,
+          "after": 262144
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 8,
+      "width": 512,
+      "heads": 4,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:T:2",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "T",
+      "attempt": 2,
+      "status": "completed",
+      "parameters": 50332176,
+      "tokens": 86638592,
+      "steps": 661,
+      "seconds": 300.094932144,
+      "bpb": 1.1034022374372043,
+      "speed": 188.41754958450122,
+      "normalized_speed": 1.0175938538853444,
+      "memory": 518213120,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "a1ea17a98dc5657062f4990f71b7b36a6f8ae694f33892a4a40a05c3813e0abb",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "pair-a-fixed-time-seed3-attempt-01",
+      "hypothesis": "Because halving the effective batch from 524288 to 262144 improved validation BPB by 0.0189, halving it again to 131072 should further improve BPB by roughly doubling optimizer-update frequency within the fixed 300-second budget while preserving most token throughput.",
+      "intended_change": "Set TOTAL_BATCH_SIZE from 262144 to 131072, reducing gradient accumulation from two microbatches to one per optimizer update while retaining the architecture, optimizer hyperparameters, and time-normalized schedule.",
+      "category": "optimization",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 131072,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 8,
+        "DEVICE_BATCH_SIZE": 64,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 64,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-02.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/history.jsonl",
+      "history_line": 2,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -436,7 +436,7 @@\n WINDOW_PATTERN = \"SSSL\" # sliding window pattern: L=full, S=half context\n \n # Optimization\n-TOTAL_BATCH_SIZE = 2**18 # ~262K tokens per optimizer step; more updates under fixed time\n+TOTAL_BATCH_SIZE = 2**17 # ~131K tokens per optimizer step; one microbatch per update\n EMBEDDING_LR = 0.6      # learning rate for token embeddings (Adam)\n UNEMBEDDING_LR = 0.004  # learning rate for lm_head (Adam)\n MATRIX_LR = 0.04        # learning rate for matrix parameters (Muon)\n",
+      "edit_categories": [
+        "batching"
+      ],
+      "constant_changes": {
+        "TOTAL_BATCH_SIZE": {
+          "before": 262144,
+          "after": 131072
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 8,
+      "width": 512,
+      "heads": 4,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:T:3",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "T",
+      "attempt": 3,
+      "status": "completed",
+      "parameters": 50332176,
+      "tokens": 82837504,
+      "steps": 1264,
+      "seconds": 300.622502846,
+      "bpb": 3.215914511088702,
+      "speed": 181.39640896942598,
+      "normalized_speed": 0.9991933364068463,
+      "memory": 518213120,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "a1ea17a98dc5657062f4990f71b7b36a6f8ae694f33892a4a40a05c3813e0abb",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "pair-a-fixed-time-seed3-attempt-02",
+      "hypothesis": "Because reducing the effective batch from 262144 to 131072 improved validation BPB from 1.1748 to 1.1034, halving it again should improve sample efficiency through twice as many optimizer updates while retaining most token throughput.",
+      "intended_change": "Set TOTAL_BATCH_SIZE to 65536 and DEVICE_BATCH_SIZE to 32, preserving one microbatch per optimizer update and leaving the architecture, optimizer hyperparameters, and time-normalized schedule unchanged.",
+      "category": "optimization",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 65536,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 8,
+        "DEVICE_BATCH_SIZE": 32,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 32,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-03.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/history.jsonl",
+      "history_line": 3,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -436,7 +436,7 @@\n WINDOW_PATTERN = \"SSSL\" # sliding window pattern: L=full, S=half context\n \n # Optimization\n-TOTAL_BATCH_SIZE = 2**17 # ~131K tokens per optimizer step; one microbatch per update\n+TOTAL_BATCH_SIZE = 2**16 # ~65K tokens per optimizer step; one microbatch per update\n EMBEDDING_LR = 0.6      # learning rate for token embeddings (Adam)\n UNEMBEDDING_LR = 0.004  # learning rate for lm_head (Adam)\n MATRIX_LR = 0.04        # learning rate for matrix parameters (Muon)\n@@ -449,7 +449,7 @@\n \n # Model size\n DEPTH = 8               # number of transformer layers\n-DEVICE_BATCH_SIZE = 64  # A40-compatible; total batch size remains unchanged\n+DEVICE_BATCH_SIZE = 32  # keep one microbatch per update at the smaller total batch\n \n # ---------------------------------------------------------------------------\n # Setup: tokenizer, model, optimizer, dataloader\n",
+      "edit_categories": [
+        "batching"
+      ],
+      "constant_changes": {
+        "TOTAL_BATCH_SIZE": {
+          "before": 131072,
+          "after": 65536
+        },
+        "DEVICE_BATCH_SIZE": {
+          "before": 64,
+          "after": 32
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 8,
+      "width": 512,
+      "heads": 4,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:T:4",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "T",
+      "attempt": 4,
+      "status": "completed",
+      "parameters": 50332176,
+      "tokens": 82837504,
+      "steps": 1264,
+      "seconds": 300.528091315,
+      "bpb": 3.2159010895186197,
+      "speed": 189.982248244534,
+      "normalized_speed": 1.0055607682034382,
+      "memory": 518213120,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "a1ea17a98dc5657062f4990f71b7b36a6f8ae694f33892a4a40a05c3813e0abb",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "pair-a-fixed-time-seed3-attempt-02",
+      "hypothesis": "The prior 65,536-token batch failed because retaining the parent learning rates doubled update intensity. Retrying it with square-root batch-size learning-rate scaling should improve validation BPB through more frequent, lower-variance optimizer updates without destabilizing training.",
+      "intended_change": "Reduce TOTAL_BATCH_SIZE from 131072 to 65536 and DEVICE_BATCH_SIZE from 64 to 32, retaining one microbatch per update. Scale all parameter-family learning rates by 1/sqrt(2): EMBEDDING_LR to 0.424264, UNEMBEDDING_LR to 0.002828, MATRIX_LR to 0.028284, and SCALAR_LR to 0.353553.",
+      "category": "optimization",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 65536,
+        "EMBEDDING_LR": 0.424264,
+        "UNEMBEDDING_LR": 0.002828,
+        "MATRIX_LR": 0.028284,
+        "SCALAR_LR": 0.353553,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 8,
+        "DEVICE_BATCH_SIZE": 32,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "b2db8781e1a11ce6dc362d2d69bc5ddc1235c4acc49a89eabed02eef34cae68c",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 32,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-04.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-time-seed3/history.jsonl",
+      "history_line": 4,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -436,11 +436,11 @@\n WINDOW_PATTERN = \"SSSL\" # sliding window pattern: L=full, S=half context\n \n # Optimization\n-TOTAL_BATCH_SIZE = 2**17 # ~131K tokens per optimizer step; one microbatch per update\n-EMBEDDING_LR = 0.6      # learning rate for token embeddings (Adam)\n-UNEMBEDDING_LR = 0.004  # learning rate for lm_head (Adam)\n-MATRIX_LR = 0.04        # learning rate for matrix parameters (Muon)\n-SCALAR_LR = 0.5         # learning rate for per-layer scalars (Adam)\n+TOTAL_BATCH_SIZE = 2**16 # ~65K tokens per optimizer step; one microbatch per update\n+EMBEDDING_LR = 0.424264 # sqrt-batch-scaled learning rate for token embeddings (Adam)\n+UNEMBEDDING_LR = 0.002828 # sqrt-batch-scaled learning rate for lm_head (Adam)\n+MATRIX_LR = 0.028284    # sqrt-batch-scaled learning rate for matrix parameters (Muon)\n+SCALAR_LR = 0.353553    # sqrt-batch-scaled learning rate for per-layer scalars (Adam)\n WEIGHT_DECAY = 0.2      # cautious weight decay for Muon\n ADAM_BETAS = (0.8, 0.95) # Adam beta1, beta2\n WARMUP_RATIO = 0.0      # fraction of time budget for LR warmup\n@@ -449,7 +449,7 @@\n \n # Model size\n DEPTH = 8               # number of transformer layers\n-DEVICE_BATCH_SIZE = 64  # A40-compatible; total batch size remains unchanged\n+DEVICE_BATCH_SIZE = 32  # one physical microbatch per optimizer update\n \n # ---------------------------------------------------------------------------\n # Setup: tokenizer, model, optimizer, dataloader\n",
+      "edit_categories": [
+        "batching",
+        "learning-rate/schedule"
+      ],
+      "constant_changes": {
+        "TOTAL_BATCH_SIZE": {
+          "before": 131072,
+          "after": 65536
+        },
+        "EMBEDDING_LR": {
+          "before": 0.6,
+          "after": 0.424264
+        },
+        "UNEMBEDDING_LR": {
+          "before": 0.004,
+          "after": 0.002828
+        },
+        "MATRIX_LR": {
+          "before": 0.04,
+          "after": 0.028284
+        },
+        "SCALAR_LR": {
+          "before": 0.5,
+          "after": 0.353553
+        },
+        "DEVICE_BATCH_SIZE": {
+          "before": 64,
+          "after": 32
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 8,
+      "width": 512,
+      "heads": 4,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:N:1",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "N",
+      "attempt": 1,
+      "status": "completed",
+      "parameters": 85852980,
+      "tokens": 88604672,
+      "steps": 169,
+      "seconds": 526.599159589,
+      "bpb": 1.163068402045889,
+      "speed": 151.0842423158038,
+      "normalized_speed": 0.7890123180895174,
+      "memory": 704732160,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "65a304a20b1a8e5116b958ed3d32d52370ae41119fbee943aa037e00bf509945",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "baseline-calibration-repaired-20260903-run1",
+      "hypothesis": "Scaling the transformer from 8×512 to 10×640 at the same fixed token budget will materially improve validation BPB by increasing model capacity, while preserving the global batch and optimization regime.",
+      "intended_change": "Increase DEPTH from 8 to 10, yielding width 640 and 5 attention heads; reduce DEVICE_BATCH_SIZE from 64 to 32 and increase accumulation from 4 to 8 to preserve TOTAL_BATCH_SIZE=524288 and memory safety. Enforce the 88604672-token Contract N schedule for exactly 169 updates using seed 3 and protected contract_progress boundaries.",
+      "category": "architecture_scaling",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 524288,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 10,
+        "DEVICE_BATCH_SIZE": 32,
+        "N_STAR": 88604672,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "fc3ca38a08719556c9e317425613f135738e0d9f40c4663efde4417649fefb90",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "fc3ca38a08719556c9e317425613f135738e0d9f40c4663efde4417649fefb90",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 32,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/sources/pair-a-fixed-tokens-seed3-attempt-01.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/history.jsonl",
+      "history_line": 1,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -23,7 +23,8 @@\n repo = \"varunneal/flash-attention-3\" if cap == (9, 0) else \"kernels-community/flash-attn3\"\n fa3 = get_kernel(repo).flash_attn_interface\n \n-from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader\n+from prepare import MAX_SEQ_LEN, Tokenizer, make_dataloader\n+from study_runtime import contract_progress, validate_batch_config\n \n # ---------------------------------------------------------------------------\n # GPT Model\n@@ -447,16 +448,19 @@\n FINAL_LR_FRAC = 0.0     # final LR as fraction of initial\n \n # Model size\n-DEPTH = 8               # number of transformer layers\n-DEVICE_BATCH_SIZE = 64  # A40-compatible; total batch size remains unchanged\n+DEPTH = 10              # scale depth and width together (640d, 5 heads)\n+DEVICE_BATCH_SIZE = 32  # leave activation headroom for the larger model\n+\n+# Fixed-token Contract N (the registered baseline processed exactly 169 batches)\n+N_STAR = 88_604_672\n \n # ---------------------------------------------------------------------------\n # Setup: tokenizer, model, optimizer, dataloader\n # ---------------------------------------------------------------------------\n \n t_start = time.time()\n-torch.manual_seed(42)\n-torch.cuda.manual_seed(42)\n+torch.manual_seed(3)\n+torch.cuda.manual_seed(3)\n torch.set_float32_matmul_precision(\"high\")\n device = torch.device(\"cuda\")\n autocast_ctx = torch.amp.autocast(device_type=\"cuda\", dtype=torch.bfloat16)\n@@ -495,6 +499,7 @@\n tokens_per_fwdbwd = DEVICE_BATCH_SIZE * MAX_SEQ_LEN\n assert TOTAL_BATCH_SIZE % tokens_per_fwdbwd == 0\n grad_accum_steps = TOTAL_BATCH_SIZE // tokens_per_fwdbwd\n+validate_batch_config(TOTAL_BATCH_SIZE, DEVICE_BATCH_SIZE, grad_accum_steps, MAX_SEQ_LEN)\n \n optimizer = model.setup_optimizer(\n     unembedding_lr=UNEMBEDDING_LR,\n@@ -510,10 +515,10 @@\n train_loader = make_dataloader(tokenizer, DEVICE_BATCH_SIZE, MAX_SEQ_LEN, \"train\")\n x, y, epoch = next(train_loader)  # prefetch first batch\n \n-print(f\"Time budget: {TIME_BUDGET}s\")\n+print(f\"Token budget: {N_STAR:,}\")\n print(f\"Gradient accumulation steps: {grad_accum_steps}\")\n \n-# Schedules (all based on progress = training_time / TIME_BUDGET)\n+# Schedules (all based on counted-token progress under Contract N)\n \n def get_lr_multiplier(progress):\n     if progress < WARMUP_RATIO:\n@@ -539,8 +544,11 @@\n smooth_train_loss = 0\n total_training_time = 0\n step = 0\n-\n-while True:\n+total_tokens = 0\n+optimizer_updates = 0\n+microbatches = 0\n+\n+while total_tokens < N_STAR:\n     torch.cuda.synchronize()\n     t0 = time.time()\n     for micro_step in range(grad_accum_steps):\n@@ -550,9 +558,11 @@\n         loss = loss / grad_accum_steps\n         loss.backward()\n         x, y, epoch = next(train_loader)\n-\n-    # Progress and schedules\n-    progress = min(total_training_time / TIME_BUDGET, 1.0)\n+        microbatches += 1\n+\n+    # Declare the protected update boundary after exactly one complete global batch.\n+    total_tokens += TOTAL_BATCH_SIZE\n+    progress = min(total_tokens / N_STAR, 1.0)\n     lrm = get_lr_multiplier(progress)\n     muon_momentum = get_muon_momentum(step)\n     muon_weight_decay = get_weight_decay(progress)\n@@ -561,7 +571,9 @@\n         if group['kind'] == 'muon':\n             group[\"momentum\"] = muon_momentum\n             group[\"weight_decay\"] = muon_weight_decay\n+    contract_progress(\"N\", total_training_time, total_tokens, N_STAR)\n     optimizer.step()\n+    optimizer_updates += 1\n     model.zero_grad(set_to_none=True)\n \n     train_loss_f = train_loss.item()\n@@ -575,8 +587,7 @@\n     t1 = time.time()\n     dt = t1 - t0\n \n-    if step > 10:\n-        total_training_time += dt\n+    total_training_time += dt\n \n     # Logging\n     ema_beta = 0.9\n@@ -585,9 +596,9 @@\n     pct_done = 100 * progress\n     tok_per_sec = int(TOTAL_BATCH_SIZE / dt)\n     mfu = 100 * num_flops_per_token * TOTAL_BATCH_SIZE / dt / H100_BF16_PEAK_FLOPS\n-    remaining = max(0, TIME_BUDGET - total_training_time)\n-\n-    print(f\"\\rstep {step:05d} ({pct_done:.1f}%) | loss: {debiased_smooth_loss:.6f} | lrm: {lrm:.2f} | dt: {dt*1000:.0f}ms | tok/sec: {tok_per_sec:,} | mfu: {mfu:.1f}% | epoch: {epoch} | remaining: {remaining:.0f}s    \", end=\"\", flush=True)\n+    remaining = max(0, N_STAR - total_tokens)\n+\n+    print(f\"\\rstep {step:05d} ({pct_done:.1f}%) | loss: {debiased_smooth_loss:.6f} | lrm: {lrm:.2f} | dt: {dt*1000:.0f}ms | tok/sec: {tok_per_sec:,} | mfu: {mfu:.1f}% | epoch: {epoch} | tokens remaining: {remaining:,}    \", end=\"\", flush=True)\n \n     # GC management (Python's GC causes ~500ms stalls)\n     if step == 0:\n@@ -599,19 +610,17 @@\n \n     step += 1\n \n-    # Time's up — but only stop after warmup steps so we don't count compilation\n-    if step > 10 and total_training_time >= TIME_BUDGET:\n-        break\n-\n print()  # newline after \\r training log\n \n-total_tokens = step * TOTAL_BATCH_SIZE\n+assert total_tokens == N_STAR\n+assert optimizer_updates == step\n \n # Final summary\n t_end = time.time()\n startup_time = t_start_training - t_start\n-steady_state_mfu = 100 * num_flops_per_token * TOTAL_BATCH_SIZE * (step - 10) / total_training_time / H100_BF16_PEAK_FLOPS if total_training_time > 0 else 0\n+steady_state_mfu = 100 * num_flops_per_token * total_tokens / total_training_time / H100_BF16_PEAK_FLOPS if total_training_time > 0 else 0\n peak_vram_mb = torch.cuda.max_memory_allocated() / 1024 / 1024\n+val_bpb = float(\"nan\")  # protected validation is controller-owned\n \n print(\"---\")\n print(f\"training_seconds: {total_training_time:.1f}\")\n",
+      "edit_categories": [
+        "capacity/depth/width",
+        "batching"
+      ],
+      "constant_changes": {
+        "DEPTH": {
+          "before": 8,
+          "after": 10
+        },
+        "DEVICE_BATCH_SIZE": {
+          "before": 64,
+          "after": 32
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 10,
+      "width": 640,
+      "heads": 5,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:N:2",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "N",
+      "attempt": 2,
+      "status": "completed",
+      "parameters": 135267480,
+      "tokens": 88604672,
+      "steps": 169,
+      "seconds": 810.958101714,
+      "bpb": 1.1642579472667223,
+      "speed": 116.11417766075456,
+      "normalized_speed": 0.6642038385291182,
+      "memory": 987971072,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "65a304a20b1a8e5116b958ed3d32d52370ae41119fbee943aa037e00bf509945",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "pair-a-fixed-tokens-seed3-attempt-01",
+      "hypothesis": "Extending the quality-positive scaling trend from 10×640 to 12×768 will further improve validation BPB under the same fixed-token budget.",
+      "intended_change": "Increase DEPTH from 10 to 12, producing a 768-wide, 6-head transformer. Reduce DEVICE_BATCH_SIZE from 32 to 16 and increase derived gradient accumulation from 8 to 16, preserving TOTAL_BATCH_SIZE=524288 and the exact 88604672-token schedule.",
+      "category": "architecture_scaling",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 524288,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 12,
+        "DEVICE_BATCH_SIZE": 16,
+        "N_STAR": 88604672,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "281d8035da36047ec8e1e868eeda15781de246c2428219613ccba36ddf23d795",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "281d8035da36047ec8e1e868eeda15781de246c2428219613ccba36ddf23d795",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 16,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/sources/pair-a-fixed-tokens-seed3-attempt-02.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/history.jsonl",
+      "history_line": 2,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -448,8 +448,8 @@\n FINAL_LR_FRAC = 0.0     # final LR as fraction of initial\n \n # Model size\n-DEPTH = 10              # scale depth and width together (640d, 5 heads)\n-DEVICE_BATCH_SIZE = 32  # leave activation headroom for the larger model\n+DEPTH = 12              # continue the quality-positive scaling trend (768d, 6 heads)\n+DEVICE_BATCH_SIZE = 16  # preserve memory headroom at 12x768; accumulation keeps global batch fixed\n \n # Fixed-token Contract N (the registered baseline processed exactly 169 batches)\n N_STAR = 88_604_672\n",
+      "edit_categories": [
+        "capacity/depth/width",
+        "batching"
+      ],
+      "constant_changes": {
+        "DEPTH": {
+          "before": 10,
+          "after": 12
+        },
+        "DEVICE_BATCH_SIZE": {
+          "before": 32,
+          "after": 16
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 12,
+      "width": 768,
+      "heads": 6,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:N:3",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "N",
+      "attempt": 3,
+      "status": "completed",
+      "parameters": 85852980,
+      "tokens": 88604672,
+      "steps": 338,
+      "seconds": 529.794828783,
+      "bpb": 1.1243123343687433,
+      "speed": 151.69020033828326,
+      "normalized_speed": 0.7944792066478962,
+      "memory": 704732160,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "65a304a20b1a8e5116b958ed3d32d52370ae41119fbee943aa037e00bf509945",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "pair-a-fixed-tokens-seed3-attempt-01",
+      "hypothesis": "Halving the global batch for the quality-leading 10×640 model will improve validation BPB by providing twice as many parameter updates over the same fixed token budget, while leaving inference throughput and memory unchanged.",
+      "intended_change": "Reduce TOTAL_BATCH_SIZE from 524288 to 262144 while retaining DEVICE_BATCH_SIZE=32, changing gradient accumulation from 8 to 4 and increasing the exact Contract-N schedule from 169 to 338 optimizer updates.",
+      "category": "optimization_batching",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 262144,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 10,
+        "DEVICE_BATCH_SIZE": 32,
+        "N_STAR": 88604672,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "fc3ca38a08719556c9e317425613f135738e0d9f40c4663efde4417649fefb90",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "fc3ca38a08719556c9e317425613f135738e0d9f40c4663efde4417649fefb90",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 32,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/sources/pair-a-fixed-tokens-seed3-attempt-03.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/history.jsonl",
+      "history_line": 3,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -436,7 +436,7 @@\n WINDOW_PATTERN = \"SSSL\" # sliding window pattern: L=full, S=half context\n \n # Optimization\n-TOTAL_BATCH_SIZE = 2**19 # ~524K tokens per optimizer step\n+TOTAL_BATCH_SIZE = 2**18 # ~262K tokens per optimizer step; 338 updates under Contract N\n EMBEDDING_LR = 0.6      # learning rate for token embeddings (Adam)\n UNEMBEDDING_LR = 0.004  # learning rate for lm_head (Adam)\n MATRIX_LR = 0.04        # learning rate for matrix parameters (Muon)\n",
+      "edit_categories": [
+        "batching"
+      ],
+      "constant_changes": {
+        "TOTAL_BATCH_SIZE": {
+          "before": 524288,
+          "after": 262144
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 10,
+      "width": 640,
+      "heads": 5,
+      "lineage_verified": true
+    },
+    {
+      "id": "runs/pair-a-official-20260906-fixed-warmup-v2:N:4",
+      "namespace": "runs/pair-a-official-20260906-fixed-warmup-v2",
+      "current": true,
+      "condition": "N",
+      "attempt": 4,
+      "status": "completed",
+      "parameters": 85852980,
+      "tokens": 88604672,
+      "steps": 676,
+      "seconds": 536.275079707,
+      "bpb": 1.140167140433094,
+      "speed": 151.48725914501404,
+      "normalized_speed": 0.8177497278089985,
+      "memory": 704732160,
+      "speed_status": "unstable",
+      "decision": {
+        "decision": "quality_valid_speed_uncertain",
+        "parent_eligible": true,
+        "pareto_eligible": false,
+        "quality_status": "quality_valid_speed_uncertain",
+        "reason": "quality and cache correctness passed; protected throughput is uncertain"
+      },
+      "protocol": "autopareto_search_inference_bracketed_v2",
+      "manifest_sha256": "35ea95fad1f3e4f345852d03eb1daadb1e348e352c57fa9a2fd11dff8ed9d12c",
+      "program_sha256": "65a304a20b1a8e5116b958ed3d32d52370ae41119fbee943aa037e00bf509945",
+      "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+      "agent": "gpt-5.6-sol",
+      "reasoning": "high",
+      "seed": 3,
+      "runtime_sha256": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+      "parent": "pair-a-fixed-tokens-seed3-attempt-03",
+      "hypothesis": "Halving the quality-leading 10×640 model’s global batch again will further improve validation BPB by doubling optimizer updates under the fixed-token budget, while preserving architecture, inference throughput, and inference memory.",
+      "intended_change": "Reduce TOTAL_BATCH_SIZE from 262144 to 131072 while retaining DEVICE_BATCH_SIZE=32, changing gradient accumulation from 4 to 2 and increasing the exact Contract-N schedule from 338 to 676 optimizer updates.",
+      "category": "optimization_batching",
+      "constants": {
+        "ASPECT_RATIO": 64,
+        "HEAD_DIM": 128,
+        "WINDOW_PATTERN": "SSSL",
+        "TOTAL_BATCH_SIZE": 131072,
+        "EMBEDDING_LR": 0.6,
+        "UNEMBEDDING_LR": 0.004,
+        "MATRIX_LR": 0.04,
+        "SCALAR_LR": 0.5,
+        "WEIGHT_DECAY": 0.2,
+        "ADAM_BETAS": [
+          0.8,
+          0.95
+        ],
+        "WARMUP_RATIO": 0.0,
+        "WARMDOWN_RATIO": 0.5,
+        "FINAL_LR_FRAC": 0.0,
+        "DEPTH": 10,
+        "DEVICE_BATCH_SIZE": 32,
+        "N_STAR": 88604672,
+        "H100_BF16_PEAK_FLOPS": 989500000000000.0
+      },
+      "warmup": {
+        "initial_state_match": true,
+        "same_worker_process": true,
+        "scientific_initial_state_sha256": "fc3ca38a08719556c9e317425613f135738e0d9f40c4663efde4417649fefb90",
+        "scientific_state_reconstructed": true,
+        "warmup_initial_state_sha256": "fc3ca38a08719556c9e317425613f135738e0d9f40c4663efde4417649fefb90",
+        "warmup_model_discarded": true
+      },
+      "validation_provenance": {
+        "batch_size": 32,
+        "checkpoint_format_version": 2,
+        "evaluation_tokens": 20971520,
+        "evaluator": "historical_protected_in_process_evaluate_bpb",
+        "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150"
+      },
+      "error": null,
+      "checks": {
+        "completed": true,
+        "tokens": true,
+        "finite_outcomes": true,
+        "integer_counts": true,
+        "source_hash": true,
+        "correctness": true,
+        "cutoff_bound": true
+      },
+      "quality_eligible": true,
+      "pareto_eligible": false,
+      "source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/sources/pair-a-fixed-tokens-seed3-attempt-04.train.py",
+      "history_source": "runs/pair-a-official-20260906-fixed-warmup-v2/pair-a-fixed-tokens-seed3/history.jsonl",
+      "history_line": 4,
+      "observed_by_utc": "2026-09-06T06:15:52.249977+00:00",
+      "timestamp_basis": "first audit observation upper bound; no authoritative completion timestamp",
+      "candidate_patch": "--- train.py.before\n+++ train.py.after\n@@ -436,7 +436,7 @@\n WINDOW_PATTERN = \"SSSL\" # sliding window pattern: L=full, S=half context\n \n # Optimization\n-TOTAL_BATCH_SIZE = 2**18 # ~262K tokens per optimizer step; 338 updates under Contract N\n+TOTAL_BATCH_SIZE = 2**17 # ~131K tokens per optimizer step; 676 updates under Contract N\n EMBEDDING_LR = 0.6      # learning rate for token embeddings (Adam)\n UNEMBEDDING_LR = 0.004  # learning rate for lm_head (Adam)\n MATRIX_LR = 0.04        # learning rate for matrix parameters (Muon)\n",
+      "edit_categories": [
+        "batching"
+      ],
+      "constant_changes": {
+        "TOTAL_BATCH_SIZE": {
+          "before": 262144,
+          "after": 131072
+        }
+      },
+      "human_classification_verified": false,
+      "depth": 10,
+      "width": 640,
+      "heads": 5,
+      "lineage_verified": true
+    }
+  ]
+}

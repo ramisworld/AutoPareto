@@ -1,0 +1,51 @@
+{
+  "schema": "autopareto_search_inference_design_b_v1",
+  "status": "SUPERSEDED_UNRECOVERABLE_PROMPT_SOURCE",
+  "superseded_by": "study/contracts_2026/provenance/pair_a_active_inference_config_20260904.json",
+  "superseded_reason": "The registered raw eight-prompt token source could not be recovered; this hash-only workload registration is inactive for Pair-A.",
+  "protocol_version": "autopareto_search_inference_design_b_v1",
+  "metric_name": "BF16 batch-1 cached greedy decode output-token velocity at 1024 input / 128 output tokens on NVIDIA A40",
+  "input_tokens": 1024,
+  "generated_tokens": 128,
+  "cached_decode_transitions": 127,
+  "batch_size": 1,
+  "concurrency": 1,
+  "prompt_count": 8,
+  "precision": "bfloat16",
+  "decoding": "greedy",
+  "prefix_caching": false,
+  "warmup": {"minimum_pure_decode_seconds": 20.0, "fixed": true},
+  "prefill": {"blocks": 5, "prompts_per_block": 8, "diagnostic_only": true},
+  "decode": {"blocks": 8, "minimum_pure_decode_seconds_per_block": 8.0, "headline": "median block velocity"},
+  "timing": {
+    "authoritative_clock": "synchronized_monotonic_perf_counter",
+    "cuda_event_clock": "diagnostic_only",
+    "prefill_boundary": "prefill start after synchronization through synchronized logits/state ready",
+    "ttft_boundary": "request start after synchronization through synchronized y1 argmax ready",
+    "decode_boundary": "after y1/state ready through synchronized y128 argmax ready",
+    "decode_formula": "D_r=t128-t1; V_r=127/D_r; V_j=sum(127)/sum(D_r)"
+  },
+  "uncertainty": {
+    "bootstrap": "whole_decode_blocks",
+    "confidence": 0.95,
+    "process_component": "additive variance on log velocity, to be estimated from development fresh-process runs before holdout; not frozen because remote isolation blocked execution",
+    "noise_rejection": false,
+    "practical_equivalence_margin": 0.02
+  },
+  "memory": {
+    "pareto_metric": "peak_allocated_inference_memory_bytes",
+    "diagnostics": ["peak_reserved_cuda_memory_bytes", "parameter_bytes", "autoregressive_state_bytes", "kv_cache_bytes"]
+  },
+  "prompt_text_set_sha256": "2173dd2807d22091f3aa3df4c2c99292a39c0836f3ccfdc56ddb21786d41e1f8",
+  "prompt_set_token_sha256": "117d3bf723e4f3e376caa20bb497bf5791d4fa6bbfeb2a61458ac86c804db684",
+  "prompt_token_hashes": [
+    "0de230239f18c2d822605c0df32d83682225a4f0c5d60a65537c2b664c12307d",
+    "307c61ee36eeea8611e50b094d82a713d4d9fd455a168822a3ad861e61ca9d61",
+    "167e4d3e3d39e09f8745f2f4748ea2aab3ded17562fbab352b3a5efb5eb28e7a",
+    "43f05f10b22957d168a8d949df1fa52b1c920e9c6c2ba89dbed0735e3a813e49",
+    "78956319e35fd92ed2ccd0c6928d60aab7cc77ce3a0695c0c076304fe6aef5bf",
+    "d01039adeb09650776136fa53739895267fc0d1f58544d14a5700a66de082224",
+    "80b115af1e98d50092b16ee1744dfdd5dd9ba9152384f6c79dee95c295f2a19c",
+    "2339674a650dc11827330b9b24106c5a3bb934cc57967e468c18bed4214c534e"
+  ]
+}

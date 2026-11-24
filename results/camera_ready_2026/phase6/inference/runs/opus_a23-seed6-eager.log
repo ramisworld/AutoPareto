@@ -1,0 +1,1 @@
+{"label": "opus_a23-seed6-eager", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 334.37007036757916, "speedup": 2.2279265663899475, "peak_mib": 101.13818359375, "wall_s": 254.2}

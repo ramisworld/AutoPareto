@@ -1,0 +1,18 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 159401323,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-time300s-seed8/final.pt",
+      "checkpoint_sha256": "4b90bb9eee998b12cd6e291917bf060bf2145ced15d06bab0f251b392f5eed15",
+      "historical_steady_state_training_seconds": 300.3602249622345,
+      "optimizer_step": 672,
+      "token_count": 88080384
+    }
+  ],
+  "device_batch_size": 64,
+  "format": "autopareto_camera_ready_fixed_time_checkpoint_manifest_v1",
+  "note": "single final checkpoint of a 300 s fixed-time run; consumed by scripts/evaluate_phase1_checkpoints.py",
+  "seed": 8,
+  "sequence_length": 2048,
+  "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1"
+}

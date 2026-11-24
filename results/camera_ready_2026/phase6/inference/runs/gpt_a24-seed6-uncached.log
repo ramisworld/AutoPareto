@@ -1,0 +1,1 @@
+{"label": "gpt_a24-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 267.81241858525016, "speedup": 1.9146314296674922, "peak_mib": 435.24072265625, "wall_s": 256.6}

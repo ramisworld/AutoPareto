@@ -1,179 +1,152 @@
 # AutoPareto
 
-AutoPareto is an auditable autonomous research loop for discovering language-model
-training recipes on a quality–inference-speed–memory Pareto frontier.
+An AI research agent edits a small Transformer's `train.py`, trains each version for 300 s on one NVIDIA A40, and is
+scored on three objectives at once: quality (bits per byte), decode speed and memory. We ran it with GPT-5.6 (Codex CLI)
+and Claude Opus 5.5 (Claude Code). Opus shrank the model and rewrote the inference engine: about 32× faster decoding and
+4.6× faster generation.
 
-## Research question
+**Paper:** [OpenReview](https://openreview.net/forum?id=U9ICjFvtN8) · **Poster:** [PDF](poster/out_v7/autopareto_poster_v7_A1.pdf) ·
+NeurIPS 2026 AutoMLR workshop
 
-Can an autonomous coding agent discover substantially smaller, faster, lower-memory
-language-model recipes while preserving useful language quality under a fixed training
-budget?
+## Replicate it in five steps
 
-## Current headline result
-
-The safest result to show today is the equal-token AP292 verification. At exactly
-`201,326,592` training tokens on an NVIDIA A40, AutoPareto 292 averaged across seeds
-3–5:
-
-- 29.36M parameters;
-- 385.019 s steady-state-equivalent training time and 522,900.35 training tokens/s;
-- 383.02 cached decode tokens/s;
-- 1.141837 held-out BPB.
-
-The equal-size AutoResearch reference averaged 50.33M parameters, 696.163 s,
-289,194.67 training tokens/s, 192.933 cached decode tokens/s, and 1.099803 held-out BPB.
-Thus AP292 is materially smaller and faster, but it gives up held-out BPB. This is an
-efficiency–quality trade-off, not evidence that AutoPareto universally beats
-AutoResearch.
-
-![Main Pareto frontier: 201.3M-token verification](plots/main_pareto_frontier.png)
-
-*Figure 1. Means ± sample SD across seeds 3–5. Lower held-out BPB and higher cached
-decode throughput are better. AP292 is highlighted as the current balanced candidate;
-AP299 and AP294 are more aggressive efficiency points.*
-
-## What the autonomous agent did
-
-The agent edited candidate training programs, trained each candidate, measured
-validation quality, protected cached inference speed and memory, recorded a hypothesis
-and decision, and retained or rejected candidates using a three-objective Pareto rule.
-It searched architecture, attention layout, optimizer/schedule, and batching choices
-under a fixed five-minute discovery budget. The agent did not see downstream benchmark
-results during search; those were frozen for post-search characterization.
-
-The research workspace preserves candidate code, experiment lineage, checkpoints,
-failures, evaluator hashes, and raw measurements. This public branch intentionally
-packages the reproducibility code, aggregate results, and documentation without
-publishing checkpoint weights, databases, raw logs, or private caches.
-
-## Two evidence phases
-
-### 1. Five-minute discovery campaign
-
-AutoPareto, AutoResearch, and classical controls searched the small model space under
-the original five-minute training budget. This phase discovered distinct quality,
-speed, and memory recipes, including AP292, AP299, and AP294. The original downstream
-panel evaluated 11 selected representatives with the frozen suite: 99 aggregate task
-metrics and 198 fixed qualitative generations.
-
-These are historical discovery/selection results. They are not equal-token comparisons
-because model size and tokens processed varied during the five-minute budget.
-
-### 2. Equal-token verification
-
-Seven frozen recipes—Baseline, AutoResearch, TPE, MOTPE, AP292, AP299, and AP294—were
-trained for exactly `201,326,592` tokens at seeds 3, 4, and 5. All 21 runs completed.
-The same frozen downstream suite was then run on all 21 checkpoints. The full results
-are in [docs/PHASE1_200M_RESULTS.md](docs/PHASE1_200M_RESULTS.md), with protocol details
-in [docs/DOWNSTREAM_EVALUATION.md](docs/DOWNSTREAM_EVALUATION.md).
-
-## Equal-token verification summary
-
-Means across seeds 3–5; SDs and all per-seed values are in the full Phase 1 report.
-
-| Model | Params | Held-out BPB ↓ | Steady training s ↓ | Train tok/s ↑ | Cached decode tok/s ↑ | ARC-Easy ↑ | PIQA ↑ | LAMBADA EM ↑ | BLiMP ↑ |
-|---|---:|---:|---:|---:|---:|---:|---:|---:|---:|
-| Baseline | 50.33M | 1.146590 | 688.500 | 292,413 | 196.821 | 35.28% | 57.36% | 20.47% | 71.37% |
-| AutoResearch | 50.33M | **1.099803** | 696.163 | 289,195 | 192.933 | 36.50% | 58.67% | 20.44% | **74.56%** |
-| TPE | 39.85M | 1.119402 | 540.526 | 372,464 | 258.894 | 35.70% | 57.64% | 21.42% | 73.30% |
-| MOTPE | 26.35M | 1.148253 | 398.233 | 505,550 | 270.006 | 35.41% | 57.45% | 21.53% | 72.47% |
-| **AutoPareto 292** | **29.36M** | 1.141837 | **385.019** | **522,900** | **383.022** | **36.91%** | **58.29%** | **21.50%** | 72.02% |
-| AutoPareto 299 | 26.21M | 1.159309 | 312.785 | 643,659 | 488.258 | 35.68% | 57.27% | 20.76% | 70.47% |
-| AutoPareto 294 | 17.89M | 1.190057 | 295.683 | 681,101 | 495.491 | 34.83% | 56.91% | 19.92% | 69.33% |
-
-AP292 is smaller and much faster than AutoResearch. Relative to AutoResearch, its
-observed ARC-Easy, PIQA, and LAMBADA results are close, while held-out BPB and BLiMP
-are worse. LAMBADA perplexity is a separate lower-is-better metric: AP292 is 14.2085
-versus AutoResearch at 14.1518. No combined downstream quality score is used.
-
-## Current status
-
-### Complete
-
-- Three AutoPareto discovery campaigns and the historical five-minute comparison panel.
-- Multi-seed AutoPareto confirmation and causal ablation records.
-- Classical-search controls under the registered small-model search space.
-- The 21-run equal-token verification campaign at exactly 201,326,592 tokens.
-- The frozen nine-metric downstream suite on all 21 equal-token checkpoints.
-- A40 cached-inference, training-time, memory, KV-cache, and stabilized decode records.
-- Raw JSON, SQLite provenance, checkpoint/candidate hashes, and failure history.
-
-### Verified
-
-- AP292 is a reproducible efficiency point across seeds 3–5: 383.02 ± 4.90 cached
-  decode tok/s, 1.141837 ± 0.006035 held-out BPB, and 1.992 MiB incremental KV memory.
-- AP299 and AP294 extend the throughput/memory frontier, with progressively worse
-  held-out BPB and downstream quality.
-- AutoResearch remains the strongest measured quality reference on held-out BPB and
-  BLiMP in the equal-token panel.
-
-### Still uncertain
-
-- Which AP292 changes are causal after controlling for architecture/depth, parameter
-  count, and the remaining optimizer/schedule differences. AP292 and AutoResearch
-  already share total batch size 131,072, device batch size 64, and gradient
-  accumulation 1 in the equal-token verification, so batch size is not a confound in
-  that central comparison.
-- Whether the frontier transfers beyond the A40.
-- Whether the ranking survives a new untouched data shard and larger model scale.
-- Per-example benchmark probabilities are not recoverable: the evaluator persisted
-  aggregates, not individual logits or choices.
-
-### AutoMLR abstract target
-
-The defensible contribution is that an autonomous multi-objective agent discovered and
-verified a smaller, faster, lower-memory recipe with near-reference results on several
-downstream tasks, while exposing a measurable quality cost rather than hiding it. The
-current draft is [docs/ABSTRACT_DRAFT.md](docs/ABSTRACT_DRAFT.md).
-
-### Final-paper requirements
-
-The main remaining evidence is a controlled architecture/training ablation, transfer
-to another GPU, fair repeated classical comparisons, a final untouched-shard test, and
-possibly a 100–300M scale-transfer pilot. See
-[docs/NEXT_EXPERIMENTS.md](docs/NEXT_EXPERIMENTS.md).
-
-## Figures and supporting evidence
-
-- [Main Pareto frontier](plots/main_pareto_frontier.png) · [SVG](plots/main_pareto_frontier.svg)
-- [AP292 vs AutoResearch](plots/ap292_vs_autoresearch.png) · [SVG](plots/ap292_vs_autoresearch.svg)
-- [Downstream comparison](plots/downstream_comparison.png) · [SVG](plots/downstream_comparison.svg)
-- [Discovery → verification context](plots/discovery_to_verification.png) · [SVG](plots/discovery_to_verification.svg)
-- [Full equal-token results](docs/PHASE1_200M_RESULTS.md)
-- [Exact downstream protocol](docs/DOWNSTREAM_EVALUATION.md)
-- [Public aggregate downstream data](results/phase1/public_downstream_metrics.json)
-- [Public 201.3M protocol manifest](evaluation/phase1_public_manifest.json)
-- [Public figure-data manifest](results/phase1/phase1_equal_token_results.json)
-
-The older discovery plots inherited from the release branch remain available under
-`plots/` and are labelled historical in [plots/README.md](plots/README.md). The four
-figures above use only the checked-in aggregate JSON/CSV summaries; no checkpoint or
-database is required to regenerate them.
-
-## Important limitations
-
-- The models are small discovery-scale transformers; this is not evidence about
-  frontier-scale capability.
-- The equal-token comparison is one A40 environment and uses three seeds.
-- The held-out BPB is one fixed sequential prefix of one shard, not a complete corpus.
-- BLiMP uses its `train` split and must be described that way.
-- The original and equal-token downstream evaluator SHAs differ because of the tensor
-  layout correction; their provenance must remain separate.
-- Qualitative generations are stochastic illustrations, not a quality metric.
-- Quantization and cross-GPU transfer are not complete.
-
-## Reproduction map
-
-Start with [docs/ABSTRACT_DRAFT.md](docs/ABSTRACT_DRAFT.md), then read
-[docs/PHASE1_200M_RESULTS.md](docs/PHASE1_200M_RESULTS.md) and
-[docs/DOWNSTREAM_EVALUATION.md](docs/DOWNSTREAM_EVALUATION.md). All four current
-figures can be regenerated without a GPU using:
+### 1. Clone
 
 ```bash
-uv run --no-project --with matplotlib --with numpy \
-  python3 scripts/generate_publication_figures.py
+git clone https://github.com/ramisworld/autopareto.git
+cd autopareto
 ```
 
-The command reads existing aggregate artifacts; it does not train models or run
-benchmarks. The public branch excludes model weights, SQLite databases, raw run logs,
-telemetry, deployment dumps, and private dataset caches.
+### 2. Check the paper's numbers (no GPU, one minute)
+
+```bash
+pip install uv
+uv run --no-project --python 3.10 python analysis/cr_p6.py
+git diff --stat
+```
+
+This recomputes the paper's 13-recipe test from the run records in `results/` and prints one line per recipe, for
+example `Opus A27  bpb=1.1580±0.0020 fixed=1.159 decode=4583 x32.01 …`. `git diff` prints nothing: the recomputed numbers
+are identical to the published ones. Newer Pythons can differ in the last digit of a few standard deviations.
+
+### 3. Rent one A40 and set it up
+
+Rent **one NVIDIA A40 (48 GB)**. On RunPod use the image `runpod/pytorch:1.0.2-cu1281-torch280-ubuntu2404`, a 60 GB
+container disk and a 150 GB volume on `/workspace`. Then, on the GPU machine as root:
+
+```bash
+git clone https://github.com/ramisworld/autopareto.git /workspace/autopareto-camera-ready   # the setup expects this path
+cd /workspace/autopareto-camera-ready
+bash scripts/pod/fresh_a40_bootstrap.sh check     # one A40, CUDA 12.8 or newer, enough disk
+bash scripts/pod/fresh_a40_bootstrap.sh env-b     # the runtime the agent's training runs use
+AP_PYTHON=/opt/autopareto_runtime/bin/python bash assets/build_assets.sh /workspace/assets   # data and kernel, 2.6 GB
+bash scripts/pod/fresh_a40_bootstrap.sh assets    # installs them
+bash scripts/pod/fresh_a40_bootstrap.sh env-a     # the pinned environment from uv.lock
+```
+
+The data and the flash-attention kernel are downloaded from pinned Hugging Face revisions, and every file is checked
+against its recorded SHA-256. Any mismatch stops the setup.
+
+### 4. Retrain the recipes
+
+```bash
+mv results/camera_ready_2026/phase6 results/camera_ready_2026/phase6.published   # keep the published runs to compare
+export HF_HUB_OFFLINE=1
+.venv/bin/python scripts/run_phase6.py                       # checks only; changes nothing
+.venv/bin/python scripts/run_phase6.py --stage train --execute --run-ids p6-arref-tokens201326592-seed6-drift
+python3 scripts/compare_with_published.py p6-arref-tokens201326592-seed6-drift
+```
+
+That run retrains the AutoResearch reference recipe (AR-ref, seed 6) for 201.3M tokens, which takes about 20 minutes.
+The study's pre-registered rule accepts a rerun whose held-out BPB is within 0.005 of the original run's 1.0947; our own
+rerun gave 1.0968.
+
+To retrain all 27 runs (about 8 A40-hours):
+
+```bash
+.venv/bin/python scripts/run_phase6.py --stage train --execute
+```
+
+The inference, 300 s and downstream stages are described in [evaluation/PHASE6_PREREG.md](evaluation/PHASE6_PREREG.md).
+
+### 5. Run your own agent campaign (GPT or Opus)
+
+Rehearse the whole loop first. This needs no GPU and makes no model calls; it takes a few seconds:
+
+```bash
+python3 -m study.contracts_2026.tools.dry_run_claude_campaign --state-root /tmp/autopareto-dry-run
+```
+
+A real campaign needs three things: the A40 from step 3, your laptop with Claude Code or Codex CLI logged in, and SSH
+access from the laptop to the A40.
+
+**On the A40:**
+
+```bash
+bash scripts/pod/fresh_a40_bootstrap.sh pair-a     # sandbox user, read-only data, trusted copy of the harness
+G2_STATE=/var/lib/autopareto/my_baseline bash scripts/pod/g2_reregister_pair_a_baseline.sh   # registers the starting model
+nvidia-smi -L                                      # note the GPU UUID
+```
+
+The second command prints the paths and SHA-256 hashes of two baseline checkpoints. You need them below.
+
+**On your laptop, for Claude Opus 5.5:**
+
+<details>
+<summary>Freeze the campaign settings for your A40, then launch 25 attempts</summary>
+
+```bash
+git clone https://github.com/ramisworld/autopareto.git && cd autopareto
+B=/var/lib/autopareto/my_baseline/nonstudy_tests
+PYTHONPATH=$PWD python3 study/contracts_2026/tools/derive_claude_campaign_manifest.py \
+  --base study/contracts_2026/provenance/public_base_manifest_opus_campaign.json \
+  --output runs/opus/manifest.json --state-root runs/opus --trusted-state-root /var/lib/autopareto/my_baseline \
+  --scientist-bin "$(which claude)" --model claude-opus-5-5 --reasoning xhigh --scientist-timeout-seconds 900 \
+  --a40-ssh-host root@<A40 address> --a40-gpu-uuid <GPU UUID> \
+  --a40-paired-baseline-t $B/t_smoke_artifacts/result.checkpoint.pt:<its sha256> \
+  --a40-paired-baseline-n $B/n_smoke_artifacts/result.checkpoint.pt:<its sha256>
+
+PYTHONPATH=$PWD python3 -B -m study.contracts_2026.campaign_controller run --execute \
+  --contracts T --agent-backend claude --model claude-opus-5-5 --reasoning xhigh --scientist-timeout-seconds 900 \
+  --scientist-bin "$(which claude)" --state-root runs/opus \
+  --manifest runs/opus/manifest.json --manifest-sha256 <sha256 printed by the previous command> \
+  --baseline-record study/contracts_2026/provenance/baseline_registration_new_a40.json \
+  --a40-host root@<A40 address> --a40-port <SSH port> --a40-identity ~/.ssh/id_ed25519 \
+  --a40-repository /opt/autopareto_trusted --a40-python /opt/autopareto_runtime/bin/python \
+  --a40-study-venv /opt/autopareto_runtime --a40-cache /var/cache/autopareto/pair_a_registered_cache \
+  --a40-state-root /var/lib/autopareto/my_opus_campaign \
+  --a40-paired-baseline-t-checkpoint $B/t_smoke_artifacts/result.checkpoint.pt \
+  --a40-paired-baseline-n-checkpoint $B/n_smoke_artifacts/result.checkpoint.pt
+```
+
+- **Results:** each attempt's code, hypothesis and scores are written to `runs/opus/`.
+- **Resume:** rerun the same command.
+- **Our settings:** the paper's Opus campaign used Claude Code 2.1.318 at effort `xhigh`. Its timeout was 600 s at
+  first and was raised to 900 s from attempt 9.
+
+</details>
+
+**For GPT-5.6:**
+- **Command:** use the same controller with `--agent-backend codex --model gpt-5.6-sol --reasoning high`.
+- **Codex image:** Codex runs inside a Docker image. Build it with
+  `docker build -f study/contracts_2026/scientist_runtime.Dockerfile -t autopareto-scientist-codex:0.153.0 study/contracts_2026`.
+- **Settings file:** the step that freezes campaign settings for a new A40 is automated only for Claude so far
+  (`derive_claude_campaign_manifest.py`).
+- **Our settings:** the paper's GPT campaign used codex-cli 0.153.0 at `high` with a 600 s timeout.
+
+Agent campaigns are comparable, not identical: provider models change over time.
+
+## What is where
+
+| Folder | Contents |
+|---|---|
+| `study/contracts_2026/` | the agent loop: controller, sandbox, prompts (`programs/`), schemas, tests |
+| `scripts/` | experiment runners; each only validates unless given `--execute` |
+| `results/camera_ready_2026/` | every run record behind the paper |
+| `analysis/` | scripts that recompute the paper's numbers, tables and figures |
+| `paper/`, `poster/` | the paper sources and the poster |
+
+- **Every runner, and what is and is not reproducible:** [paper/camera_ready/REPRODUCE.md](paper/camera_ready/REPRODUCE.md).
+- **What was removed or redacted for this public release:** [docs/PUBLIC_RELEASE_NOTES.md](docs/PUBLIC_RELEASE_NOTES.md).
+- **The August 2026 release README:** [docs/README_AUGUST_2026_RELEASE.md](docs/README_AUGUST_2026_RELEASE.md).
+- **License:** Apache-2.0.

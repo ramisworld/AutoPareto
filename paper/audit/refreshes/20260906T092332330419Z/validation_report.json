@@ -1,0 +1,14 @@
+{
+  "cutoff": "2026-09-06T23:59:00+12:00",
+  "issues": [
+    {
+      "path": "results/candidates/baseline-a40-seed0/0003-train.py",
+      "error": "source code string cannot contain null bytes",
+      "use": "historical constants missing; raw record retained"
+    }
+  ],
+  "panel_eligible": 21,
+  "panel_total": 21,
+  "current_attempts": 8,
+  "current_quality_eligible": 8
+}

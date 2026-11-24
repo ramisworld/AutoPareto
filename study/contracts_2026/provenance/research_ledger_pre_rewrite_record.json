@@ -1,0 +1,21 @@
+{
+  "schema": "autopareto_research_ledger_pre_rewrite_v1",
+  "captured_at_utc": "2026-09-02T00:40:31Z",
+  "repository": "/Users/Rami/Documents/dev/autopareto",
+  "git_head": "6bcb69e6036d64bb0eca9b5b07d0b0fde1c58abf",
+  "ledger_path": "docs/RESEARCH_LEDGER.md",
+  "old_sha256": "691ac32a97d323334effeae3fffbb459ef2993bec5459d853b3aad428337070a",
+  "old_size_bytes": 56532,
+  "old_line_count": 940,
+  "old_mtime": "2026-08-28T15:09:28+1200",
+  "immutable_copy": {
+    "path": "study/contracts_2026/provenance/research_ledger_pre_rewrite_20260902.md",
+    "sha256": "691ac32a97d323334effeae3fffbb459ef2993bec5459d853b3aad428337070a",
+    "byte_for_byte_verified": true
+  },
+  "git_status_at_capture": {
+    "tracked_modified": ["protected/inference_adapter.py"],
+    "untracked_evidence_preserved": true,
+    "cleanup_or_reset_performed": false
+  }
+}

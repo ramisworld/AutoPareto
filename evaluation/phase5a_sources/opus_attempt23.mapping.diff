@@ -1,0 +1,104 @@
+--- opus_attempt23.train.py (Pair-A Contract-T source)
++++ opus_attempt23.train.py (Phase-1 recipe format)
+@@ -25,3 +25,3 @@
+ 
+-from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader
++from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader, evaluate_bpb
+ 
+@@ -1387,13 +1387,2 @@
+ 
+-from study_runtime import contract_progress
+-
+-CONTRACT_ID = "T"
+-CONTRACT_TIME_BUDGET_S = 300.0  # protected Contract-T measured training budget
+-# Margin on the candidate-side fallback stop. The candidate clock can run
+-# slightly ahead of the parent's observer clock, so a fallback break exactly at
+-# 300 s can return before the protected boundary stop (attempt-02's
+-# CandidateExitedBeforeStop). With this margin the protected stop always ends
+-# training under protected execution; the fallback only matters standalone.
+-STOP_GUARD_S = 10.0
+-
+ t_start = time.time()
+@@ -1461,3 +1450,3 @@
+ 
+-print(f"Time budget: {CONTRACT_TIME_BUDGET_S}s (Contract {CONTRACT_ID}; prepare.TIME_BUDGET={TIME_BUDGET})")
++print(f"Time budget: {TIME_BUDGET}s")
+ print(f"Gradient accumulation steps: {grad_accum_steps}")
+@@ -1488,14 +1477,8 @@
+ smooth_train_loss = 0
++total_training_time = 0
+ step = 0
+ 
+-# Contract-T measured training clock: synchronized perf_counter started
+-# immediately before the first scientific forward. Every step counts (no
+-# warm-up exclusion); the trusted parent's clock remains authoritative.
+-torch.cuda.synchronize()
+-t_train_start = time.perf_counter()
+-measured_training_time = 0.0  # synchronized elapsed time at the last completed update
+-total_training_time = 0.0
+-
+ while True:
+-    t0 = time.perf_counter()
++    torch.cuda.synchronize()
++    t0 = time.time()
+     for micro_step in range(grad_accum_steps):
+@@ -1508,6 +1491,4 @@
+ 
+-    # Protected contract boundary: declare the next optimizer update and use
+-    # the returned progress for all progress-based schedules.
+-    tokens_so_far = (step + 1) * TOTAL_BATCH_SIZE
+-    progress = contract_progress("T", measured_training_time, tokens_so_far)
++    # Progress and schedules
++    progress = min(total_training_time / TIME_BUDGET, 1.0)
+     lrm = get_lr_multiplier(progress)
+@@ -1531,6 +1512,7 @@
+     torch.cuda.synchronize()
+-    t1 = time.perf_counter()
++    t1 = time.time()
+     dt = t1 - t0
+-    measured_training_time = t1 - t_train_start
+-    total_training_time = measured_training_time
++
++    if step > 10:
++        total_training_time += dt
+ 
+@@ -1543,3 +1525,3 @@
+     mfu = 100 * num_flops_per_token * TOTAL_BATCH_SIZE / dt / H100_BF16_PEAK_FLOPS
+-    remaining = max(0, CONTRACT_TIME_BUDGET_S - measured_training_time)
++    remaining = max(0, TIME_BUDGET - total_training_time)
+ 
+@@ -1557,6 +1539,4 @@
+ 
+-    # Fallback candidate-side stop after a completed update, unreachable under
+-    # protected execution (protected stop fires at 300 s on the parent clock).
+-    # The protected boundary stop is intentionally never caught here.
+-    if measured_training_time >= CONTRACT_TIME_BUDGET_S + STOP_GUARD_S:
++    # Time's up — but only stop after warmup steps so we don't count compilation
++    if step > 10 and total_training_time >= TIME_BUDGET:
+         break
+@@ -1568,3 +1548,12 @@
+ microbatches = step * grad_accum_steps
+-val_bpb = float('nan')  # diagnostic only; trusted parent owns validation
++
++# Inference storage precision: after the last completed update and outside the
++# measured clock, store the block/lm_head matrices in bf16 (the dtype every
++# inference matmul already uses). A fresh model host declares the same dtype.
++getattr(model, "_orig_mod", model).set_matrix_dtype(torch.bfloat16)
++
++# Final eval
++model.eval()
++with autocast_ctx:
++    val_bpb = evaluate_bpb(model, tokenizer, DEVICE_BATCH_SIZE)
+ 
+@@ -1577,2 +1566,3 @@
+ print("---")
++print(f"val_bpb:          {val_bpb:.6f}")
+ print(f"training_seconds: {total_training_time:.1f}")
+@@ -1590,7 +1580,2 @@
+ 
+-# Inference storage precision: after the last completed update and outside the
+-# measured clock, store the block/lm_head matrices in bf16 (the dtype every
+-# inference matmul already uses). A fresh model host declares the same dtype.
+-getattr(model, "_orig_mod", model).set_matrix_dtype(torch.bfloat16)
+-
+ # Protected launch-interface exports (val_bpb is diagnostic only).

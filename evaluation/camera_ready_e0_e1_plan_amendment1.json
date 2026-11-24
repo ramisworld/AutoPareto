@@ -1,0 +1,1088 @@
+{
+  "format": "autopareto_camera_ready_e0_e1_preregistration_v1",
+  "status": "PREREGISTERED - NOT EXECUTED (amendment 1; the original plan's E0 executed on 2026-11-04 and halted)",
+  "prepared_on": "2026-11-02",
+  "amended_on": "2026-11-04",
+  "amendment": {
+    "number": 1,
+    "amends": {
+      "path": "evaluation/camera_ready_e0_e1_plan.json",
+      "sha256": "806a63970258627092d929d4602e54e36a2412e0656a63298e17307c6c829340",
+      "kept_unchanged": true
+    },
+    "approved_by": "PI, in the session chat on 2026-11-04, after reading the original E0 verdict",
+    "post_hoc": "Yes. This amendment was written after the original E0 results were seen, and is disclosed as such.",
+    "original_e0": {
+      "verdict": "results/camera_ready_2026/E0/e0_verdict.json",
+      "verdict_sha256": "bd95348071313621cd3bfbd69f3cab65d9b20898ca927fb97b612809fa9ff8d9",
+      "data_identity_sha256": "f396d906c93e5baf809280f12a1692a352b8e81be7ba4f7a698aca9df49d3d69",
+      "status": "HALT",
+      "halt_reasons": [
+        "e0-arref-time300s-seed0: updates 666 outside [669, 681]"
+      ],
+      "kept": "unchanged, and reported alongside the amended result",
+      "diagnosis": "audit/camera_ready_2026/14_E0_RESULT.md"
+    },
+    "reason": "The only halting failure was a throughput outcome. Run 2 (AR-ref, 300 s) made 666 updates against the [669, 681] window because this A40 trains about 1% slower: AR-ref -1.33%, AP-Q -0.98%, with a uniform shift in step time. Data, Python, torch, uv.lock and the flash-attn3 kernel are identical to the panel's, and every BPB check passed (largest |delta| 0.00125 against a 0.005 tolerance). The original rule already records throughput and memory as diagnostics only; the update window was the one halting criterion that measured speed rather than quality.",
+    "changes": [
+      "E0.acceptance.e0-arref-time300s-seed0: the halting key 'updates_range' [669, 681] is removed; the update count is recorded under 'diagnostics' (reference 675), and the old window is kept as 'updates_range_v1_diagnostic_only' for reporting.",
+      "E0.halt_rule: the clause 'or if run 2's updates fall outside [669, 681]' is removed, and the sentence on diagnostics names the update count.",
+      "output_root, run_directory_layout and E0.verdict_file: results/camera_ready_2026 -> results/camera_ready_2026/amendment1, so no original E0 file is touched and E0 runs again in full under this plan.",
+      "implementation_sha256: scripts/run_camera_ready_e0_e1.py and scripts/analyze_camera_ready_e1.py change only their PLAN_PATH constant, docstrings and analysis --runs-root default, to point at this file.",
+      "status, amended_on, amendment and deviations_and_operational_choices record this amendment."
+    ],
+    "unchanged": [
+      "the data identity gate",
+      "every integrity gate and the retry rule",
+      "the BPB tolerances (0.005) and references for both E0 runs",
+      "run 1's exact 201,326,592 tokens in 1,536 updates",
+      "the recipes, cells, seeds, run order and the whole E1 section",
+      "the analysis plan",
+      "every protected and Phase-1 implementation file hash"
+    ],
+    "rerun": "E0 runs again in full (data gate, run 1, run 2) under this plan's sha256. E1 requires that amended E0 verdict to PASS under this sha256, and E1 still needs separate PI approval.",
+    "hardware_note": "E1 under this plan runs on the A40 GPU-4702993a-fd40-d985-292e-6398bd236183 (driver 595.91.07), a third hardware epoch, about 1% slower than the July and September A40s. Fixed-token cells are throughput-independent. The 300 s cells' token counts are reported with every result, and the 300 s comparison with the seeds 0-2 history spans hardware epochs."
+  },
+  "title": "AutoPareto camera-ready E0 (environment reproduction smoke) and E1 (token-response crossover)",
+  "source_plan": {
+    "path": "audit/camera_ready_2026/08_EXPERIMENT_PLAN.md",
+    "sections": [
+      "Global preconditions",
+      "E0",
+      "E1",
+      "Stopping and integrity rules"
+    ],
+    "sha256": "de5b298077f2a223816a47f982cf24d236637b2bc9ad31876800a2ceb33c3420"
+  },
+  "plan_hash_policy": "The sha256 of this file is recorded in evaluation/CAMERA_READY_E0_E1.md and in every run record and verdict; it is not stored inside this file. Commit this file before launch (P3).",
+  "scope": {
+    "gpu": "one NVIDIA A40 (RunPod)",
+    "agent_api_calls": 0,
+    "recipe_source_changes": false,
+    "protected_code_changes": false,
+    "total_runs": {
+      "E0": 2,
+      "E1": 24
+    }
+  },
+  "output_root": "results/camera_ready_2026/amendment1",
+  "run_directory_layout": {
+    "run": "results/camera_ready_2026/amendment1/{stage}/runs/{run_id}/",
+    "retry": "results/camera_ready_2026/amendment1/{stage}/runs/{run_id}-attempt2/",
+    "record": "camera_ready_run_record.json in each run directory",
+    "stage_files": [
+      "stage_manifest-<UTC>.json",
+      "stage_events.jsonl",
+      "E0/data_identity.json",
+      "E0/e0_verdict.json",
+      "E1/e1_execution_summary-<UTC>.json",
+      "E1/analysis/"
+    ],
+    "never_written": [
+      "results/phase1",
+      "results/results.db",
+      "evaluation/",
+      "anything outside results/camera_ready_2026/amendment1",
+      "results/camera_ready_2026/E0 (the original plan's halted E0)"
+    ]
+  },
+  "batch": {
+    "TOTAL_BATCH_SIZE": 131072,
+    "DEVICE_BATCH_SIZE": 64,
+    "sequence_length": 2048,
+    "gradient_accumulation": 1
+  },
+  "recipes": {
+    "AR-ref": {
+      "label": "AutoResearch reference recipe (exp 68)",
+      "phase1_model_id": "autoresearch_compatible",
+      "discovery_experiment_id": 68,
+      "discovery_campaign": "autoresearch-diagnostic5-seed42-20260724 (attempt 5)",
+      "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+      "parameter_count": 50332176,
+      "architecture": {
+        "depth": 8,
+        "width": 512,
+        "heads": 4,
+        "kv_heads": 4,
+        "window_pattern": "SSSS"
+      },
+      "byte_identity": {
+        "phase1_panel_model_autoresearch_compatible": "same path and sha256 in evaluation/phase1_equal_token_preflight.json",
+        "fixed_time_confirmations_exp_75_77": "results/candidates/confirmation-exp68-seeds012-20260725/000{1,2,3}-train.py: sha256 identical (checked 2026-11-02 in the main checkout)"
+      }
+    },
+    "AP-Q": {
+      "label": "AutoPareto confirmed-quality recipe (exp 134; Phase-1 autopareto_292)",
+      "phase1_model_id": "autopareto_292",
+      "discovery_experiment_id": 134,
+      "discovery_campaign": "autopareto-seed0-20260731 (attempt 22)",
+      "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+      "parameter_count": 29360392,
+      "architecture": {
+        "depth": 4,
+        "width": 512,
+        "heads": 4,
+        "kv_heads": 4,
+        "window_pattern": "SSSL"
+      },
+      "byte_identity": {
+        "phase1_panel_model_autopareto_292": "identical: the Phase-1 plan registers this exact path and sha256; the panel runs phase1-autopareto_292-seed{3,4,5} record source_path .../autopareto-seed0-20260731/0022-train.py and source_sha256 55a7fd8b...",
+        "fixed_time_confirmations_exp_291_293": "results/candidates/autopareto-primary-best-quality-exp134-seed{0,1,2}-20260810/0001-train.py: sha256 identical (checked 2026-11-02 in the main checkout)",
+        "verdict": "exp 134 source is byte-identical to the Phase-1 autopareto_292 source (it is the same file)"
+      }
+    }
+  },
+  "cells": {
+    "tokens_088604672": {
+      "contract": "fixed_tokens",
+      "token_budget": 88604672,
+      "optimizer_updates": 676,
+      "milestone_tokens": [
+        22151168,
+        44302336,
+        66453504,
+        88604672
+      ],
+      "milestone_updates": [
+        169,
+        338,
+        507,
+        676
+      ],
+      "lr_progress": "optimizer_step x TOTAL_BATCH_SIZE / token_budget (Phase-1 transform)",
+      "note": "discovery-scale exposure: 676 updates, about AR-ref's 300 s exposure (675 updates)"
+    },
+    "tokens_157286400": {
+      "contract": "fixed_tokens",
+      "token_budget": 157286400,
+      "optimizer_updates": 1200,
+      "milestone_tokens": [
+        39321600,
+        78643200,
+        117964800,
+        157286400
+      ],
+      "milestone_updates": [
+        300,
+        600,
+        900,
+        1200
+      ],
+      "lr_progress": "optimizer_step x TOTAL_BATCH_SIZE / token_budget (Phase-1 transform)",
+      "note": "1,200 updates, about AP-Q's 300 s exposure (1,161-1,215 updates)"
+    },
+    "tokens_201326592": {
+      "contract": "fixed_tokens",
+      "token_budget": 201326592,
+      "optimizer_updates": 1536,
+      "milestone_tokens": [
+        50331648,
+        100663296,
+        150994944,
+        201326592
+      ],
+      "milestone_updates": [
+        384,
+        768,
+        1152,
+        1536
+      ],
+      "lr_progress": "optimizer_step x TOTAL_BATCH_SIZE / token_budget (Phase-1 transform)",
+      "note": "the Phase-1 panel budget (1,536 updates)"
+    },
+    "time_300s": {
+      "contract": "fixed_time",
+      "time_budget_seconds": 300,
+      "lr_progress": "min(measured_training_time / 300, 1) exactly as in the unchanged frozen source",
+      "measured_time": "sum of synchronized step durations for step indices >= 11 (steps 0-10, including compilation, are excluded by the frozen source)",
+      "historical_updates": {
+        "AR-ref": "675 (exp 75-77)",
+        "AP-Q": "1,161-1,215 (exp 291-293)"
+      },
+      "note": "tokens and updates are outcomes of A40 throughput"
+    }
+  },
+  "seeds": {
+    "E0": {
+      "e0-apq-tokens201326592-seed3": 3,
+      "e0-arref-time300s-seed0": 0
+    },
+    "E1": [
+      6,
+      7,
+      8
+    ],
+    "excluded_from_E1": {
+      "discovery": [
+        0,
+        1,
+        42
+      ],
+      "fixed_time_confirmations": [
+        0,
+        1,
+        2
+      ],
+      "phase1_panel": [
+        3,
+        4,
+        5
+      ]
+    },
+    "seed_mechanism": "Both launchers wrap torch.manual_seed / torch.cuda.manual_seed(_all) so the frozen source's manual_seed(42) calls receive the run seed (_force_seed in protected/phase1_train_launcher.py and the historical protected/train_launcher.py). The training data loader has no RNG: the token stream is seed-independent and every budget consumes a prefix of the same stream."
+  },
+  "execution": {
+    "executor": "scripts/run_camera_ready_e0_e1.py (validate-only by default; --stage E0|E1 --execute on the pod)",
+    "interpreter": "phase1 command_prefix(): `uv run --locked python` when uv is on PATH (requires uv.lock sha256 262a4d55...), else the executor's interpreter",
+    "gpu_lock": "results/camera_ready_2026/gpu.lock (exclusive, non-blocking) plus an nvidia-smi idle check before every attempt",
+    "minimum_free_disk_gb": 25,
+    "token_cells": {
+      "runner": "run_one() then evaluate_one() from scripts/run_phase1_equal_tokens.py, unchanged; PHASE1_ROOT is pointed at results/camera_ready_2026/<stage> for the duration of each call and a per-run plan view supplies token_budget, seed and model order position",
+      "launcher": "-m protected.phase1_train_launcher --source --source-sha256 --token-budget --seed --run-dir --transformed --checkpoint --milestone-dir --metrics --event-log --model-id --telemetry-interval-seconds 2.0 --telemetry-mode enabled --model-order-position [--retried]",
+      "evaluator": "-m scripts.evaluate_phase1_checkpoints --candidate <run>/phase1_train.py --milestone-manifest <run>/milestones/manifest.json --output <run>/checkpoint_evaluations.json --heldout",
+      "telemetry_sampling_interval_seconds": 2.0,
+      "parent_environment_must_not_set": [
+        "PYTORCH_CUDA_ALLOC_CONF",
+        "PYTORCH_ALLOC_CONF"
+      ],
+      "panel_derived_source_reproduction": [
+        {
+          "panel_run_id": "phase1-autopareto_292-seed3",
+          "recipe": "AP-Q",
+          "panel_run_dir": "/workspace/autopareto/results/phase1/runs/phase1-autopareto_292-seed3",
+          "token_budget": 201326592,
+          "seed": 3,
+          "derived_source_sha256": "c8a802ba8527b803204ec04a5e3581c38e34f626147967bb999612b4a0863935"
+        },
+        {
+          "panel_run_id": "phase1-autoresearch_compatible-seed3",
+          "recipe": "AR-ref",
+          "panel_run_dir": "/workspace/autopareto/results/phase1/runs/phase1-autoresearch_compatible-seed3",
+          "token_budget": 201326592,
+          "seed": 3,
+          "derived_source_sha256": "aa74738ab41ea77c3c17352c83e78b6466c42c541f5178d6367b0e975d4aa353"
+        }
+      ],
+      "budget_and_seed_compatibility": [
+        "protected/phase1_source_transform.py: requires budget % TOTAL_BATCH_SIZE == 0 -> 676, 1200 and 1536 updates; no seed restriction",
+        "protected/phase1_runtime.py Phase1MilestoneRecorder: milestones at budget/4, /2, 3/4, 1 are recorded only when they fall on an optimizer step; all three budgets are multiples of 4 x 131,072, so each run writes 4 milestones (169/338/507/676, 300/600/900/1200, 384/768/1152/1536 updates)",
+        "Phase1StepTimingRecorder: the common 5,767,168-token boundary is 44 updates at batch 131,072 (valid); steady_state_equivalent_seconds is normalized to 201,326,592 tokens (COMMON_PHASE1_TOKEN_BUDGET) for every budget, so E1 reports steady_state_training_seconds (the run's own) as 'steady-state seconds'",
+        "protected/phase1_train_launcher.py: validates exact steps/tokens for the given budget; no 201M or seed assumption",
+        "scripts/run_phase1_equal_tokens.py: seeds {3,4,5}, the 201M budget, the 201M milestone list and the seed-3/4/5 token-stream verification are asserted only in load_plan/ordered_runs/integrity_gate/require_token_stream_verification/main, none of which E0/E1 call; run_one/evaluate_one have no such assertion (PHASE1_ROOT is the only global they read)",
+        "token-stream verification: seed-independent by construction (no RNG in make_dataloader); E0 re-runs the CPU replay for seeds 3 and 6 into results/camera_ready_2026/E0/data_identity.json and requires the panel's 1,536-microbatch stream hash; shorter budgets consume a prefix of that stream",
+        "conclusion: no budget or seed blocker; protected/ is not edited"
+      ]
+    },
+    "fixed_time_cell": {
+      "historical_runner": "runner.py execute_experiment (private branch autopareto/research-infrastructure): copy the repository to an isolate, copy the candidate to <isolate>/train.py, run `sys.executable protected/train_launcher.py --train train.py --checkpoint ... --metrics ... --seed N --event-log ...` with cwd=<isolate>, PYTORCH_CUDA_ALLOC_CONF=backend:cudaMallocAsync, timeout 900 s; validation BPB = the frozen source's own call to prepare.evaluate_bpb after training",
+      "why_runner_py_itself_is_not_used": "runner.py rejects confirmation seeds outside 0..2 (E1 needs 6-8) and writes into results/results.db (historical evidence). Its training path is only the protected launcher, which has no seed restriction.",
+      "launcher_sha256": "aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f",
+      "launcher_git_blob": "8f100f4ce89bb3c7c45a25b376be2fa1ead36670",
+      "launcher_commit": "c200ccb (2026-07-27); unchanged through 7813202, which ran AP-Q confirmations exp 291-293",
+      "launcher_local_copies": [
+        "study/contracts_2026/historical_reference/protected/train_launcher.py",
+        "study/contracts_2026/historical_reference/c200/protected/train_launcher.py"
+      ],
+      "ar_ref_historical_launcher": {
+        "sha256": "42e828a0da37f443848641b542492ffc9c2e86014ee00b50e18069c2f592950d",
+        "git_blob": "655804be2e8d6f677bf7cfa4fe2718d1fd4e1a96",
+        "commit": "86cafb0 (ran exp 75-77, including training_run 23731)",
+        "difference_to_used_launcher": "86cafb0 lacks validate_training_contract (protected validation captured exactly once, measured time within [300, 315] s); seed forcing, runpy execution, checkpoint save and metrics are identical"
+      },
+      "isolate_files": [
+        "prepare.py",
+        "benchmark_config.py",
+        "event_log.py",
+        "protected/inference_adapter.py"
+      ],
+      "isolate_note": "minimal isolate (historical runner copied the whole repository): the launcher and the frozen source import only these modules; each copy is sha256-checked against implementation_sha256",
+      "environment": {
+        "PYTORCH_CUDA_ALLOC_CONF": "backend:cudaMallocAsync"
+      },
+      "compile_cache": "per-run TORCHINDUCTOR_CACHE_DIR / TRITON_CACHE_DIR / CUDA_CACHE_PATH under the run directory, as in Phase 1 (the historical runner used the default shared cache); compilation happens in steps 0-10, outside the 300 s measured budget",
+      "timeout_seconds": 900,
+      "training_seconds_window": [
+        300,
+        315
+      ],
+      "protected_constants": {
+        "benchmark_config.TRAINING_BUDGET_SECONDS": 300,
+        "benchmark_config.TRAINING_TIMEOUT_SECONDS": 900,
+        "benchmark_config.TRAINING_MAX_OVERRUN_SECONDS": 15,
+        "benchmark_config.CUDA_ALLOCATOR": "backend:cudaMallocAsync",
+        "prepare.TIME_BUDGET": 300,
+        "prepare.MAX_SEQ_LEN": 2048,
+        "prepare.EVAL_TOKENS": 20971520
+      },
+      "evaluation": "the same Phase-1 evaluator: -m scripts.evaluate_phase1_checkpoints --candidate <isolate>/train.py (the unchanged frozen source) --milestone-manifest <run>/fixed_time_checkpoint_manifest.json (one entry: the final checkpoint) --output <run>/checkpoint_evaluations.json --heldout",
+      "validation_quantities": {
+        "validation_bpb_in_process": "prepare.evaluate_bpb called by the frozen source at the end of training (the quantity of SNAPDB 23731 and of the seeds 0-2 -0.0067 contrast)",
+        "validation_bpb": "prepare.evaluate_bpb on the reloaded final checkpoint by scripts/evaluate_phase1_checkpoints.py (the quantity of the fixed-token cells)",
+        "heldout_bpb": "downstream_evaluator.evaluate_heldout_bpb, shard_06541.parquet at revision 915333b4 (same as fixed-token cells)",
+        "same_validation_split": "both validation quantities use prepare.evaluate_bpb on the pinned validation shard shard_06542 with EVAL_TOKENS = 40 x 524,288; in the panel they differed by 8e-6 (AP-Q seed 3: 1.0765808 in-process vs 1.0765888 checkpoint)"
+      },
+      "conclusion": "the 300 s cell runs with the historical protected launcher and is scored by the same evaluator as the token cells, without editing protected code"
+    }
+  },
+  "implementation_sha256": {
+    "prepare.py": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+    "benchmark_config.py": "722131ffc44d6b10a5e7fca1862ec01dfc7702388e3fb8eb9b629cb2a52c51dc",
+    "event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac",
+    "protected/inference_adapter.py": "80f4d8c9de365480ef0e7170f705971a0454d421ef410a5c23ff6ae8795b4dd1",
+    "protected/phase1_train_launcher.py": "1808f371c6e24e5ded4437ccf7317b845ed440dd45b0bdc690df92237f7e0a67",
+    "protected/phase1_runtime.py": "527c1093867ee36d8021cf0156b3766aff9c8c3b97a6f97d6ed532a90cae94fd",
+    "protected/phase1_source_transform.py": "efb993cd97fd8cb6e62d0e56d682dfed4bd07a62fa4088310a4db2d9e77a1e01",
+    "scripts/run_phase1_equal_tokens.py": "e4e5d530de55745df43e250e18f4b324513858d50b4b94c9a24587f4a030af0f",
+    "scripts/evaluate_phase1_checkpoints.py": "e2de6aae0eb07bf2fb3e91845431c281e437f4bc857063b8d595afaf456b23b8",
+    "scripts/verify_phase1_token_stream.py": "5f5d1867c9e49aa5d38e16621730df836f99b79f36ecec4c86faa9b4fa762e4a",
+    "scripts/ensure_persistent_cache.py": "12ca3c487458ed2a74dc2b76f743fe5ba1f2e36e844c5cb5ac5a91fca84c3b3a",
+    "scripts/ensure_persistent_checkpoint_storage.py": "1f99aae5552b05858a7ac1a36d339994d0d3b39ee91cb0fd4b27e57cac3286e2",
+    "downstream_evaluator.py": "696f9c4677d3f6538c8b92cedec08691175aa30e8b8e48e96b080f2d43c107d5",
+    "inference_benchmark.py": "0b252757d18c79a6a6ca319df6f813e337d41c571b34f1cd538cb138a0153cc0",
+    "evaluation/downstream_suite.json": "3dce2c736a7108a855d1150e1f39e2d3d13ca50cfadfff4f568dfed80ed72ef3",
+    "evaluation/phase1_equal_token_preflight.json": "a0ab7f0cfd238dcb7896a2f38dacd11b9fc54ed8adb4a61ad3693c51fc189233",
+    "pyproject.toml": "147f82fd794a8d0e689af41583c80acf0628400461b1adc03e433c826cbf2d6d",
+    ".python-version": "7a41a41354ab8049091ef1a00253ca00567f5a1d3f9aef5502c0b4b5ce9ae707",
+    "scripts/run_camera_ready_e0_e1.py": "aee0ab387e977146bc6cdf9895087ead966b42374f8243a8758fe39560fd47bb",
+    "scripts/analyze_camera_ready_e1.py": "1be6e8e5862e6a6c07fc248dd69600a2932c12cd6b288483603237969c7116c2"
+  },
+  "implementation_notes": [
+    "protected/phase1_train_launcher.py and scripts/evaluate_phase1_checkpoints.py differ from the hashes recorded in the 2026-08-25 Phase-1 preflight (REPRO M13); the versions that ran the panel are not preserved in git. protected/phase1_source_transform.py and protected/phase1_runtime.py match, and the current transform reproduces the panel's executed derived sources byte for byte (c8a802ba..., aa74738a...). E0 run 1 is the empirical check of the remaining difference.",
+    "protected/inference_adapter.py here (80f4d8c9...) is the version that is uncommitted in the main checkout (P5); it is used only to save and load checkpoints."
+  ],
+  "environment_expectations": {
+    "python": "3.10.18",
+    "torch": "2.9.1+cu128",
+    "cuda": "12.8",
+    "gpu_name_contains": "A40",
+    "uv_lock_sha256": "262a4d55eaa24f47c98ca44cc82ff1660d5daba73df0b1e78246cceac2c429b4",
+    "uv_lock_source": "git show autopareto/research-infrastructure:uv.lock (commit e74771d)",
+    "pyproject_sha256": "147f82fd794a8d0e689af41583c80acf0628400461b1adc03e433c826cbf2d6d",
+    "panel_reference": {
+      "root": "/workspace/autopareto",
+      "git_commit": "5bf86b57 (dirty pod checkout)",
+      "python": "3.10.18",
+      "torch": "2.9.1+cu128",
+      "driver": "570.211.01",
+      "source": "results/phase1/runs/*/run_metadata.json in the 2026-09-01 pod snapshot"
+    },
+    "not_gated_but_recorded": "kernels-community/flash-attn3 is fetched by kernels.get_kernel() at import without a pinned revision; the executor records the cached revision per stage (Pair-A recorded e29f138f...)"
+  },
+  "data_identity_gate": {
+    "when": "E0, before any GPU run; E0 halts if it fails (operationalizes precondition P2)",
+    "runtime_cache": "~/.cache/autoresearch",
+    "persistent_cache": "/workspace/.cache/autoresearch",
+    "files": [
+      {
+        "path": "data/shard_00000.parquet",
+        "sha256": "054ddbd98abf30d773c54de578fc9d579bafeb6c14e04e97bd36aa90e825bf9b",
+        "size_bytes": 92291918,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00001.parquet",
+        "sha256": "d4cfe1de19f4fd976022a9047458655968bc5583582ec5fa714801ec2be2c93c",
+        "size_bytes": 92124317,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00002.parquet",
+        "sha256": "5e80d7596d53be648d841ea5811082747281c39f6851e10dd90375a84bc509a7",
+        "size_bytes": 91803619,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00003.parquet",
+        "sha256": "b349c85d4b993d98e2328833ecfd3734692e0395a592d89858bae34a4ba73c59",
+        "size_bytes": 91793972,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00004.parquet",
+        "sha256": "87dae96fe1a6116c54c7873aadb81832178a36755991befd1b3b641c76244474",
+        "size_bytes": 91428652,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00005.parquet",
+        "sha256": "3d9aebf138ef69cff2585a686d7f21585b7ffc0de4655f8e7723590418583bd6",
+        "size_bytes": 91845922,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00006.parquet",
+        "sha256": "6a3f2afde8f1a39f9283ea9d9e9ee6431634d6881b63798176bf64efc3f33576",
+        "size_bytes": 91455616,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00007.parquet",
+        "sha256": "731eea337d941e5b18a9a4e2bbe73a517dac45d91bb93ae2e69346c68c5f37f6",
+        "size_bytes": 91202032,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00008.parquet",
+        "sha256": "e78379132451838afabed9034b5483a2f3bc5a422bed8b55b99f2bbb9a128755",
+        "size_bytes": 91155507,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_00009.parquet",
+        "sha256": "f22410fe8f13b6976a2860a8a82ee71e838f4ee9b605d61584aaa963f966e120",
+        "size_bytes": 92072356,
+        "split": "train"
+      },
+      {
+        "path": "data/shard_06542.parquet",
+        "sha256": "769fe59d108dfd2cfa186c63173b83fbfb90a7adb3519519ba6eaa6ca9889f94",
+        "size_bytes": 91699537,
+        "split": "validation"
+      },
+      {
+        "path": "tokenizer/token_bytes.pt",
+        "sha256": "23517e0590d6aa9389c3263fab1f6062b2810b7c398a7b380291857639ac8d98",
+        "size_bytes": 34373,
+        "split": "tokenizer"
+      },
+      {
+        "path": "tokenizer/tokenizer.pkl",
+        "sha256": "888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629",
+        "size_bytes": 94590,
+        "split": "tokenizer"
+      }
+    ],
+    "files_source": "study/contracts_2026/provenance/data_manifest.json (aggregate 1211827090aa7e66...; sizes equal the panel's token_stream_verification.json)",
+    "stream_sha256": "180e0a5b9e2aab797bc8c29bb998fe5f813f988664653fe9fe8b20baca346954",
+    "stream_microbatches": 1536,
+    "stream_check_seeds": [
+      3,
+      6
+    ],
+    "stream_reference": "results/phase1/token_stream_verification.json in the 2026-09-01 pod snapshot (sha256 a0c9ec42dc8b6f11...), seeds 3/4/5 identical",
+    "tokenizer_sha256": {
+      "tokenizer.pkl": "888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629",
+      "token_bytes.pt": "23517e0590d6aa9389c3263fab1f6062b2810b7c398a7b380291857639ac8d98"
+    },
+    "heldout_dataset_revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+    "heldout_filename": "shard_06541.parquet",
+    "heldout_sha256": "51da1a9bc052dfd5a77988d6ca4d1cbe62b89eedb247b56850fc1b9b45e56c73",
+    "heldout_evaluated_tokens": 5242880,
+    "heldout_cache_path": "~/.cache/autopareto/downstream/915333b4f8b8684f39aeaafea600fea6f43fb703-shard_06541.parquet"
+  },
+  "integrity_gates": {
+    "applies_to": "every E0 and E1 attempt (P4)",
+    "bpb_sanity_upper_bound": 1.7,
+    "in_process_vs_checkpoint_validation_tolerance": 0.002,
+    "fixed_token_cells": [
+      "training_metrics.json format v3, no failure_reason; source_sha256 = recipe; training_seed = seed",
+      "total_training_tokens = budget exactly; optimizer_steps = budget / 131,072 exactly; steady_state_tokens = (steps - 11) x 131,072",
+      "step_timing.jsonl has one row per optimizer step; telemetry interval 2.0 s with samples; CUDA events disabled",
+      "4 milestones at the registered token counts, each optimizer_step = tokens / batch; the final milestone is final.pt at the observed final step (checkpoint step = observed updates)",
+      "final.pt sha256 = training_metrics.checkpoint_sha256; evaluator candidate_sha256 = derived source sha256; evaluator manifest sha256 = milestone manifest",
+      "held-out BPB present at revision 915333b4, shard_06541.parquet, recorded shard sha256 51da1a9b... and 5,242,880 evaluated tokens",
+      "checkpoint validation BPB within 0.002 of the in-process validation BPB (catches untrained or mis-saved checkpoints, harness bug class 06 B.1)",
+      "validation and held-out BPB in (0.5, 1.7)",
+      "every implementation_sha256 unchanged at gate time"
+    ],
+    "fixed_time_cell": [
+      "launcher exit 0 within 900 s; isolate train.py = recipe sha256; isolate launcher = historical sha256",
+      "measured training seconds within [300, 315]; training_seed = seed",
+      "tokens a positive multiple of 131,072; updates = tokens / 131,072 = num_steps printed by the frozen source; measured_training_tokens = (updates - 11) x 131,072",
+      "one-entry manifest hash = final.pt; evaluator scored exactly that checkpoint with the frozen source as candidate",
+      "held-out BPB present at revision 915333b4 with shard sha256 51da1a9b...; checkpoint vs in-process validation within 0.002; BPB in (0.5, 1.7)",
+      "every implementation_sha256 unchanged at gate time"
+    ]
+  },
+  "retry_policy": {
+    "rule": "A run that fails any integrity gate (or crashes, times out or is interrupted) is re-run once on the same seed in a new directory <run_id>-attempt2 (token cells pass --retried). If the second attempt fails, the run is reported as failed. No seeds or runs are added in response to results.",
+    "max_attempts": 2,
+    "existing_directories": "never reused; --resume continues an interrupted stage, skips runs that already passed, and counts an unfinished directory as a failed attempt"
+  },
+  "E0": {
+    "question": "Does the restored environment reproduce a known panel cell and a known fixed-time cell within seed-level noise?",
+    "runs": [
+      {
+        "order": 1,
+        "run_id": "e0-apq-tokens201326592-seed3",
+        "stage": "E0",
+        "recipe": "AP-Q",
+        "cell": "tokens_201326592",
+        "seed": 3,
+        "reproduces": "phase1-autopareto_292-seed3",
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 2,
+        "run_id": "e0-arref-time300s-seed0",
+        "stage": "E0",
+        "recipe": "AR-ref",
+        "cell": "time_300s",
+        "seed": 0,
+        "reproduces": "SNAPDB training_run 23731 (experiment 75, confirmation-exp68-seeds012-20260725, seed 0)",
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      }
+    ],
+    "order": "data identity gate, then run 1, then run 2, then the verdict",
+    "acceptance": {
+      "e0-apq-tokens201326592-seed3": {
+        "reference_record": "phase1-autopareto_292-seed3 (results/phase1/phase1_equal_token_results.json; training_metrics sha256 c24345e0..., checkpoint_evaluations sha256 4d73f38f...)",
+        "bpb": {
+          "heldout_bpb": {
+            "reference": 1.1396157998884338,
+            "tolerance": 0.005
+          },
+          "validation_bpb": {
+            "reference": 1.076588807258912,
+            "tolerance": 0.005
+          }
+        },
+        "exact_tokens": 201326592,
+        "exact_updates": 1536,
+        "diagnostics": {
+          "steady_state_tokens_per_second": 522707.8582029221,
+          "peak_training_memory_mb": 12473.35205078125,
+          "validation_bpb_in_process": 1.0765807647533765
+        }
+      },
+      "e0-arref-time300s-seed0": {
+        "reference_record": "SNAPDB training_run 23731 = experiment 75 (campaign confirmation-exp68-seeds012-20260725, seed 0): validation 1.102901, 88,473,600 tokens, 675 updates, 300.27 s",
+        "bpb": {
+          "validation_bpb_in_process": {
+            "reference": 1.102901075499148,
+            "tolerance": 0.005
+          }
+        },
+        "historical_updates": 675,
+        "historical_tokens": 88473600,
+        "updates_range_v1_diagnostic_only": [
+          669,
+          681
+        ],
+        "updates_range_rationale": "a fixed-time run's update count is a throughput outcome; +/-1% of 675 (the four historical exp-68 runs gave 675, 675, 675, 678). A larger deviation means the restored A40 environment runs at a different speed, which would change every fixed-time token count.",
+        "amendment_1": "Not halting. The update count is a throughput outcome and is reported as a diagnostic, like throughput and memory. The original E0 halted on this window with 666 updates.",
+        "diagnostics": {
+          "steady_state_tokens_per_second": 289842.1194596029,
+          "peak_training_memory_mb": 22652.4,
+          "validation_bpb": 1.102901075499148,
+          "updates": 675
+        }
+      }
+    },
+    "halt_rule": "HALT (and do not start E1) if the data identity gate fails; if either E0 run fails its integrity gates twice; if |held-out or validation BPB - reference| > 0.005 for run 1 or |in-process validation BPB - 1.102901| > 0.005 for run 2; or if run 1 does not process exactly 201,326,592 tokens in 1,536 updates. Throughput, memory and run 2's update count (historical 675) are recorded as diagnostics only (amendment 1). Diagnose drift (data revision, torch version, kernels) before anything else.",
+    "verdict_file": "results/camera_ready_2026/amendment1/E0/e0_verdict.json (status PASS or HALT); E1 --execute requires PASS under the same plan sha256"
+  },
+  "E1": {
+    "question": "At equal tokens and updates, on the same fresh seeds and the same evaluation data, how does AP-Q - AR-ref change as training tokens grow? Where does the sign flip?",
+    "hypotheses": {
+      "H-E1a": "Delta = BPB(AP-Q) - BPB(AR-ref) increases monotonically with training tokens.",
+      "H-E1b": "At 88.6M tokens with equal updates (676), Delta <= 0: AP-Q is at least as good when exposure is matched at the discovery scale. If Delta > 0 already at 88.6M, AP-Q's fixed-time advantage came entirely from extra exposure."
+    },
+    "alternatives": [
+      "seed-set effect: ruled in or out by using fresh seeds 6-8 for every cell",
+      "schedule-variable effect: the 300 s cell versus the 157.3M cell for AP-Q (similar token count) and versus the 88.6M cell for AR-ref (similar update count)"
+    ],
+    "design": "2 recipes x 4 cells (88,604,672 / 157,286,400 / 201,326,592 tokens and 300 s fixed time) x seeds 6, 7, 8 = 24 runs",
+    "held_constant": [
+      "recipe source bytes",
+      "batch 131,072",
+      "device batch 64",
+      "LR progress = token fraction (fixed-time cell: time fraction, as in the frozen source)",
+      "evaluator version",
+      "validation split shard_06542",
+      "held-out shard shard_06541.parquet @ 915333b4",
+      "one A40",
+      "token stream (prefix of the verified stream)"
+    ],
+    "order_design": "Seed blocks 6, 7, 8. Within a block the budget order is a cyclic Latin square (seed 6: 88.6M, 157.3M, 201.3M, 300 s; seed 7: 157.3M, 201.3M, 300 s, 88.6M; seed 8: 201.3M, 300 s, 88.6M, 157.3M). The two recipes of a (budget, seed) pair run back to back so paired runs share GPU conditions; the first recipe alternates from pair to pair (each recipe leads 6 of 12 pairs).",
+    "runs": [
+      {
+        "order": 1,
+        "run_id": "e1-arref-tokens088604672-seed6",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_088604672",
+        "seed": 6,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 88604672,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 676
+      },
+      {
+        "order": 2,
+        "run_id": "e1-apq-tokens088604672-seed6",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_088604672",
+        "seed": 6,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 88604672,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 676
+      },
+      {
+        "order": 3,
+        "run_id": "e1-apq-tokens157286400-seed6",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_157286400",
+        "seed": 6,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 157286400,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1200
+      },
+      {
+        "order": 4,
+        "run_id": "e1-arref-tokens157286400-seed6",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_157286400",
+        "seed": 6,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 157286400,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1200
+      },
+      {
+        "order": 5,
+        "run_id": "e1-arref-tokens201326592-seed6",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_201326592",
+        "seed": 6,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 6,
+        "run_id": "e1-apq-tokens201326592-seed6",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_201326592",
+        "seed": 6,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 7,
+        "run_id": "e1-apq-time300s-seed6",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "time_300s",
+        "seed": 6,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      },
+      {
+        "order": 8,
+        "run_id": "e1-arref-time300s-seed6",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "time_300s",
+        "seed": 6,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      },
+      {
+        "order": 9,
+        "run_id": "e1-apq-tokens157286400-seed7",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_157286400",
+        "seed": 7,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 157286400,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1200
+      },
+      {
+        "order": 10,
+        "run_id": "e1-arref-tokens157286400-seed7",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_157286400",
+        "seed": 7,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 157286400,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1200
+      },
+      {
+        "order": 11,
+        "run_id": "e1-arref-tokens201326592-seed7",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_201326592",
+        "seed": 7,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 12,
+        "run_id": "e1-apq-tokens201326592-seed7",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_201326592",
+        "seed": 7,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 13,
+        "run_id": "e1-apq-time300s-seed7",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "time_300s",
+        "seed": 7,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      },
+      {
+        "order": 14,
+        "run_id": "e1-arref-time300s-seed7",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "time_300s",
+        "seed": 7,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      },
+      {
+        "order": 15,
+        "run_id": "e1-arref-tokens088604672-seed7",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_088604672",
+        "seed": 7,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 88604672,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 676
+      },
+      {
+        "order": 16,
+        "run_id": "e1-apq-tokens088604672-seed7",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_088604672",
+        "seed": 7,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 88604672,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 676
+      },
+      {
+        "order": 17,
+        "run_id": "e1-arref-tokens201326592-seed8",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_201326592",
+        "seed": 8,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 18,
+        "run_id": "e1-apq-tokens201326592-seed8",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_201326592",
+        "seed": 8,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 201326592,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1536
+      },
+      {
+        "order": 19,
+        "run_id": "e1-apq-time300s-seed8",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "time_300s",
+        "seed": 8,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      },
+      {
+        "order": 20,
+        "run_id": "e1-arref-time300s-seed8",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "time_300s",
+        "seed": 8,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_time",
+        "token_budget": null,
+        "time_budget_seconds": 300,
+        "expected_optimizer_updates": null
+      },
+      {
+        "order": 21,
+        "run_id": "e1-arref-tokens088604672-seed8",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_088604672",
+        "seed": 8,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 88604672,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 676
+      },
+      {
+        "order": 22,
+        "run_id": "e1-apq-tokens088604672-seed8",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_088604672",
+        "seed": 8,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 88604672,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 676
+      },
+      {
+        "order": 23,
+        "run_id": "e1-apq-tokens157286400-seed8",
+        "stage": "E1",
+        "recipe": "AP-Q",
+        "cell": "tokens_157286400",
+        "seed": 8,
+        "source_path": "results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+        "contract": "fixed_tokens",
+        "token_budget": 157286400,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1200
+      },
+      {
+        "order": 24,
+        "run_id": "e1-arref-tokens157286400-seed8",
+        "stage": "E1",
+        "recipe": "AR-ref",
+        "cell": "tokens_157286400",
+        "seed": 8,
+        "source_path": "results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+        "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+        "contract": "fixed_tokens",
+        "token_budget": 157286400,
+        "time_budget_seconds": null,
+        "expected_optimizer_updates": 1200
+      }
+    ],
+    "outputs_per_run": [
+      "validation BPB (checkpoint evaluator)",
+      "validation BPB (in-process)",
+      "held-out BPB with bootstrap CI",
+      "tokens",
+      "updates",
+      "steady-state seconds and tokens/s",
+      "peak training memory",
+      "milestone validation BPB (token cells)"
+    ],
+    "decode": "not measured (optional in the source plan; deterministic in architecture and already measured)",
+    "precondition": "E0 verdict PASS under this plan's sha256"
+  },
+  "analysis_plan": {
+    "script": "scripts/analyze_camera_ready_e1.py",
+    "treatment_recipe": "AP-Q",
+    "control_recipe": "AR-ref",
+    "delta": "BPB(AP-Q) - BPB(AR-ref), paired by seed within a cell",
+    "primary_metric": "heldout_bpb",
+    "secondary_metrics": [
+      "validation_bpb"
+    ],
+    "metric_choice_rationale": "held-out BPB is the Phase-1 panel's primary quality metric; validation BPB (same evaluator) is reported in full; the 300 s comparison with the seeds 0-2 result uses in-process validation BPB, the quantity behind -0.0067",
+    "token_cells_in_order": [
+      "tokens_088604672",
+      "tokens_157286400",
+      "tokens_201326592"
+    ],
+    "fixed_time_cell": "time_300s",
+    "confidence_level": 0.95,
+    "interval": "t-based: mean +/- t(0.975, n-1) x sd / sqrt(n); n = 3 -> t = 4.3027",
+    "crossover": "zero crossing of the piecewise-linear mean Delta curve over x = ln(tokens) at the three token budgets (linear interpolation between adjacent budgets whose mean Deltas differ in sign); 'none in range' with the curve's sign otherwise",
+    "bootstrap": {
+      "unit": "seed; each resampled seed carries its full Delta curve (all three budgets); only seeds with all three token cells complete enter",
+      "exact_enumeration_max_seeds": 7,
+      "random_resamples": 10000,
+      "random_seed": 20261102,
+      "reported": [
+        "fraction of resamples whose mean curve crosses zero inside [88.6M, 201.3M]",
+        "fractions all-positive / all-negative",
+        "2.5/50/97.5 percentiles of the first crossing (conditional on crossing)"
+      ]
+    },
+    "decision_rules": {
+      "approximately_zero_margin_bpb": 0.005,
+      "cell_category": "AP-Q_better if CI upper < 0; AR-ref_better if CI lower > 0; approximately_zero if the CI includes 0 and |mean| < 0.005; otherwise inconclusive",
+      "H_E1a": "supported if the three mean Deltas are strictly increasing in tokens AND the per-seed contrast Delta(201.3M) - Delta(88.6M) has CI lower > 0; contradicted if that contrast's CI upper < 0; otherwise inconclusive",
+      "H_E1b": "on Delta(88.6M): supported if AP-Q_better; not rejected if approximately_zero, or inconclusive with mean <= 0; contradicted if AR-ref_better",
+      "outcome_table": {
+        "crossover": "Delta(88.6M) is AP-Q_better and Delta(201.3M) is AR-ref_better -> 'AP-Q is better below about X M tokens and worse above' (X from the mean-curve crossover)",
+        "exposure_explains_fixed_time_advantage": "Delta(88.6M) is approximately_zero or AR-ref_better -> 'the fixed-time advantage is explained by extra exposure'",
+        "unresolved": "anything else; report the intervals"
+      },
+      "schedule_effect": "detected if the per-seed difference BPB(recipe, 300 s) - BPB(recipe, matched token cell) has a CI excluding 0 and |mean| > 0.005; token counts of the 300 s runs are reported alongside because they are not equal to the token cell",
+      "fixed_time_vs_history": "Welch 95% CI for mean Delta(300 s, seeds 6-8) - mean Delta(300 s, seeds 0-2): consistent if it includes 0, differs otherwise; also report whether the seeds 6-8 CI contains -0.0067"
+    },
+    "historical_fixed_time": {
+      "metric": "validation_bpb_in_process",
+      "per_seed_delta": {
+        "0": -0.005364992292277382,
+        "1": -0.005052709959857182,
+        "2": -0.009622902068576744
+      },
+      "reported_mean": -0.006680201440237103,
+      "recomputed_ci95": [
+        -0.013022782145568169,
+        -0.00033762073490603735
+      ],
+      "sources": "SNAPDB confirmation_runs 13-15 (exp 291-293, AP-Q, seeds 0-2) vs 7-9 (exp 75-77, AR-ref, seeds 0-2); audit/camera_ready_2026/05 section 1.2"
+    },
+    "schedule_checks": [
+      {
+        "recipe": "AP-Q",
+        "fixed_time_cell": "time_300s",
+        "token_cell": "tokens_157286400"
+      },
+      {
+        "recipe": "AR-ref",
+        "fixed_time_cell": "time_300s",
+        "token_cell": "tokens_088604672"
+      }
+    ],
+    "missing_data": "Only runs that passed their integrity gates enter. A failed pair drops that seed from that cell (n < 3 is reported); the crossover bootstrap uses seeds with all three token cells. No imputation, no outlier deletion.",
+    "secondary_descriptive": [
+      "mean tokens, updates, steady-state seconds and tokens/s, and peak memory per recipe and cell",
+      "milestone validation BPB is recorded but not analysed (mid-schedule checkpoints are not annealed)"
+    ],
+    "outputs": [
+      "results/camera_ready_2026/E1/analysis/e1_analysis.json",
+      "e1_analysis.md",
+      "e1_delta_vs_tokens.pdf",
+      "e1_delta_vs_tokens.png"
+    ],
+    "validated_on": "synthetic records only (scripts/analyze_camera_ready_e1.py --self-test, temporary directory outside results/)"
+  },
+  "cost_estimate": {
+    "assumptions": {
+      "steady_tokens_per_second": {
+        "AR-ref": 289194.0,
+        "AP-Q": 522900.0
+      },
+      "per_run_non_steady_training_overhead_seconds": {
+        "AR-ref": 226.0,
+        "AP-Q": 222.0,
+        "source": "Phase-1 end_to_end_runtime_seconds - steady_state_training_seconds (cold per-run compile ~100-160 s, startup, in-process validation, 4 checkpoint writes)"
+      },
+      "evaluation_seconds_4_milestones_plus_heldout": {
+        "AR-ref": 470.0,
+        "AP-Q": 300.0,
+        "source": "spacing of checkpoint_evaluations.json timestamps in the panel (AR 440-489 s, AP-Q 218-375 s)"
+      },
+      "evaluation_seconds_1_checkpoint_plus_heldout": {
+        "AR-ref": 230.0,
+        "AP-Q": 160.0,
+        "source": "estimate"
+      },
+      "fixed_time_training_seconds": 520.0,
+      "launch_overhead_seconds_per_run": 30.0,
+      "data_identity_gate_seconds": 900,
+      "price_usd_per_a40_hour": 0.44
+    },
+    "E0_a40_hours": 0.73,
+    "E1_a40_hours": 6.44,
+    "E1_a40_hours_per_seed_block": 2.15,
+    "total_a40_hours": 7.17,
+    "total_usd_at_0.44": 3.15,
+    "retry_reserve": "each retried run adds 0.15-0.35 A40-h",
+    "difference_from_08_plan": "08 estimated ~4.1 A40-h for E1 assuming ~4 min overhead per run; the panel records show ~3.7 min of non-steady training overhead plus 4-8 min of milestone and held-out evaluation per run"
+  },
+  "deviations_and_operational_choices": [
+    "Primary E1 metric is held-out BPB (the panel's primary); 08 does not name one. Validation BPB is reported in full.",
+    "E0 run 2 uses an update window of [669, 681] instead of literal equality: fixed-time update counts are throughput outcomes.",
+    "A data identity gate (training shards, tokenizer, 1,536-microbatch stream hash) runs first in E0 to operationalize P2; training still reads the cache, not the network.",
+    "The fixed-time cell uses the c200ccb launcher for both recipes; AR-ref's historical runs used the 86cafb0 launcher, which differs only by post-run contract validation.",
+    "The fixed-time cell uses a minimal isolate and per-run compile caches instead of a whole-repository copy and the shared default compile cache.",
+    "Token cells reuse run_one/evaluate_one, which evaluate all four milestones; this costs evaluation time but leaves the evaluator invocation unchanged.",
+    "The A40-hour estimate is revised upward from 08 (see cost_estimate).",
+    "Amendment 1 (2026-11-04, post hoc, PI-approved): E0 run 2's update window [669, 681] is no longer a halt condition; it is reported as a diagnostic. This supersedes the second item above. The original E0 HALT verdict is kept."
+  ]
+}

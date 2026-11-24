@@ -1,0 +1,32 @@
+{
+ "format": "autopareto_phase6_amendment_a4_plan_v1",
+ "created_utc": "2026-11-17T11:45:32.751458+00:00",
+ "approval": "Author choice, 2026-11-17 (UTC): \"Approve A4, run it\". The lm-eval cross-check gate compares ARC-Easy, PIQA and LAMBADA (0.5 points); BLiMP is reported with the template explanation in PHASE6_AMENDMENT_A4.md; then run the 39-checkpoint lm-eval (7 tasks), measured at about 3 minutes per checkpoint, within the 37.5 A40-hour cap.",
+ "parent_plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+ "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+ "implementation_sha256": {
+  "evaluation/PHASE6_AMENDMENT_A4.md": "c42737f0c975264b6c338f28db2e4bcfc9d4a82c093f20d95565c7c890ff9e5d",
+  "scripts/run_phase6_a4.py": "8882e7e5950ececf7f2a13c9979bf8763c63d1bc68b2e670a0bc91233c41e18f",
+  "scripts/make_phase6_amendment_a4.py": "7bab5ed0f1b783a0e1cc6f3bb7335f6e9ec00e2281123fe15cae180b86bec60b",
+  "scripts/phase6_a4_blimp_diagnostic.py": "daefed179e8626db8c3d63021835850a3369e620c2abe17f45725e02091e3941",
+  "evaluation/phase6_a4_blimp_diagnostic.json": "38aa191b54260b9400c91dc1baf95d66287acec08398d0c3e38a2fd52e522276",
+  "scripts/run_phase6_p2.py": "cd2b1ed7060ff181f42a4f965309a925fc776b9be88a1210d006df64f2d0dae4"
+ },
+ "original_crosscheck_report": {
+  "path": "results/camera_ready_2026/phase6/lmeval/crosscheck_report.json",
+  "sha256": "0ea3fa2899ecccfe5c5ee3e7bda9f4df2cb9cdb2f05b1893e32e889c3ca60b71",
+  "passed": false,
+  "recorded_utc": "2026-11-17T10:17:33.538262+00:00"
+ },
+ "gate": {
+  "compared": [
+   "arc_easy",
+   "lambada_openai",
+   "piqa"
+  ],
+  "excluded": [
+   "blimp"
+  ],
+  "tolerance_points": 0.5
+ }
+}

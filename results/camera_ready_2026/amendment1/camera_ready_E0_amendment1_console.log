@@ -1,0 +1,80 @@
+{"complete": true, "missing_files": [], "persistent_cache": "/workspace/.cache/autoresearch", "required_files": ["tokenizer/tokenizer.pkl", "tokenizer/token_bytes.pt", "data/shard_06542.parquet"], "runtime_cache": "/root/.cache/autoresearch", "runtime_resolves_to": "/workspace/.cache/autoresearch", "status": "ok", "training_shards": 10}
+{"checkpoint_root": "/workspace/autopareto-camera-ready/results/checkpoints", "mode": "runpod_persistent", "status": "ok"}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"attempt": 1, "failures": [], "run_id": "e0-apq-tokens201326592-seed3", "status": "completed"}
+{"attempt": 1, "failures": [], "run_id": "e0-arref-time300s-seed0", "status": "completed"}
+{
+  "comparisons": {
+    "e0-apq-tokens201326592-seed3": {
+      "diagnostics_not_halting": {
+        "peak_training_memory_mb": {
+          "observed": 12473.35205078125,
+          "reference": 12473.35205078125,
+          "relative_difference": 0.0
+        },
+        "steady_state_tokens_per_second": {
+          "observed": 521827.25080308114,
+          "reference": 522707.8582029221,
+          "relative_difference": -0.0016847028144334475
+        },
+        "validation_bpb_in_process": {
+          "observed": 1.076601686236758,
+          "reference": 1.0765807647533765,
+          "relative_difference": 1.9433268795499004e-05
+        }
+      },
+      "heldout_bpb": {
+        "delta": -0.000470619071332834,
+        "observed": 1.139145180817101,
+        "reference": 1.1396157998884338,
+        "tolerance": 0.005
+      },
+      "tokens": {
+        "observed": 201326592,
+        "required": 201326592
+      },
+      "updates": {
+        "observed": 1536,
+        "required": 1536
+      },
+      "validation_bpb": {
+        "delta": 2.230538644587554e-05,
+        "observed": 1.076611112645358,
+        "reference": 1.076588807258912,
+        "tolerance": 0.005
+      }
+    },
+    "e0-arref-time300s-seed0": {
+      "diagnostics_not_halting": {
+        "peak_training_memory_mb": {
+          "observed": 22652.443069458008,
+          "reference": 22652.4,
+          "relative_difference": 1.9013198604422854e-06
+        },
+        "steady_state_tokens_per_second": {
+          "observed": 286970.9173084773,
+          "reference": 289842.1194596029,
+          "relative_difference": -0.009906090103394494
+        },
+        "updates": {
+          "observed": 668,
+          "reference": 675,
+          "relative_difference": -0.010370370370370363
+        },
+        "validation_bpb": {
+          "observed": 1.1042768237058675,
+          "reference": 1.102901075499148,
+          "relative_difference": 0.001247390393646075
+        }
+      },
+      "validation_bpb_in_process": {
+        "delta": 0.001366259498520428,
+        "observed": 1.1042673349976684,
+        "reference": 1.102901075499148,
+        "tolerance": 0.005
+      }
+    }
+  },
+  "halt_reasons": [],
+  "status": "PASS"
+}

@@ -1,0 +1,2 @@
+{"a4_plan_sha256": "852c799f349ec00e81403960be9420964f57e2d2ec058b30118708831a598e79", "event": "a4_lmeval_started", "gate": {"compared": ["arc_easy", "lambada_openai", "piqa"], "excluded": ["blimp"], "tolerance_points": 0.5}, "utc": "2026-11-17T11:45:54.992519+00:00"}
+{"event": "a4_lmeval_finished", "exit": 0, "utc": "2026-11-17T12:40:20.070239+00:00"}

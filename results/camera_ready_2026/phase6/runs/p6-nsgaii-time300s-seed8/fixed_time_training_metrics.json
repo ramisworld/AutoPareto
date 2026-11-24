@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/root/phase6_local/runs/p6-nsgaii-time300s-seed8/final.pt",
+  "measured_training_tokens": 85721088,
+  "parameter_count": 50332176,
+  "peak_training_cuda_memory_mb": 22652.443069458008,
+  "total_runtime_seconds": 391.08835315704346,
+  "total_training_tokens": 87162880,
+  "training_seconds": 300.24006748199463,
+  "training_seed": 8,
+  "training_tokens_per_second": 285508.4889865364,
+  "val_bpb": 1.1078152545790982
+}

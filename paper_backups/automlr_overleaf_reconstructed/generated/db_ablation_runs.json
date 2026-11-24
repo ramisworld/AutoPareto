@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "source_experiment_id": 68,
+    "training_run_id": 23962,
+    "ablation_name": "batch_only",
+    "isolated_change": "Root A40 baseline with only TOTAL_BATCH_SIZE changed from 2**19 to 2**17.",
+    "hypothesis": "The smaller total batch explains most of the observed quality improvement.",
+    "status": "completed",
+    "created_at": "2026-07-27 03:47:32",
+    "failure_reason": null
+  },
+  {
+    "id": 2,
+    "source_experiment_id": 68,
+    "training_run_id": 24041,
+    "ablation_name": "batch_only",
+    "isolated_change": "Root A40 baseline with only TOTAL_BATCH_SIZE changed from 2**19 to 2**17.",
+    "hypothesis": "The smaller total batch explains most of the observed quality improvement.",
+    "status": "completed",
+    "created_at": "2026-07-27 03:56:49",
+    "failure_reason": null
+  },
+  {
+    "id": 3,
+    "source_experiment_id": 68,
+    "training_run_id": 24121,
+    "ablation_name": "batch_only",
+    "isolated_change": "Root A40 baseline with only TOTAL_BATCH_SIZE changed from 2**19 to 2**17.",
+    "hypothesis": "The smaller total batch explains most of the observed quality improvement.",
+    "status": "completed",
+    "created_at": "2026-07-27 04:04:45",
+    "failure_reason": null
+  },
+  {
+    "id": 4,
+    "source_experiment_id": 68,
+    "training_run_id": 24202,
+    "ablation_name": "nonbatch_only",
+    "isolated_change": "Experiment 68 recipe with TOTAL_BATCH_SIZE restored from 2**17 to 2**19.",
+    "hypothesis": "The retained non-batch recipe improves quality independently of the smaller batch.",
+    "status": "completed",
+    "created_at": "2026-07-27 04:12:37",
+    "failure_reason": null
+  },
+  {
+    "id": 5,
+    "source_experiment_id": 68,
+    "training_run_id": 24284,
+    "ablation_name": "nonbatch_only",
+    "isolated_change": "Experiment 68 recipe with TOTAL_BATCH_SIZE restored from 2**17 to 2**19.",
+    "hypothesis": "The retained non-batch recipe improves quality independently of the smaller batch.",
+    "status": "completed",
+    "created_at": "2026-07-27 04:20:46",
+    "failure_reason": null
+  },
+  {
+    "id": 6,
+    "source_experiment_id": 68,
+    "training_run_id": 24367,
+    "ablation_name": "nonbatch_only",
+    "isolated_change": "Experiment 68 recipe with TOTAL_BATCH_SIZE restored from 2**17 to 2**19.",
+    "hypothesis": "The retained non-batch recipe improves quality independently of the smaller batch.",
+    "status": "completed",
+    "created_at": "2026-07-27 04:29:06",
+    "failure_reason": null
+  }
+]

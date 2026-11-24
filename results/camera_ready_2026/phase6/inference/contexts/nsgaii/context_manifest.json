@@ -1,0 +1,9 @@
+{
+  "derived_definitions_equal_source": true,
+  "mode": "native",
+  "prepare_sha256": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+  "recipe": "nsgaii",
+  "source": "results/candidates/nsgaii-seed42-20260805/0013-train.py",
+  "source_sha256": "5d4ad2f660e97e09675a3b67c9e89472cc9d44ac7b84565471bef3a061394c2c",
+  "train_sha256": "5d4ad2f660e97e09675a3b67c9e89472cc9d44ac7b84565471bef3a061394c2c"
+}

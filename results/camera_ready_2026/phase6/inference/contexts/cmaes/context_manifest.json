@@ -1,0 +1,9 @@
+{
+  "derived_definitions_equal_source": true,
+  "mode": "native",
+  "prepare_sha256": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+  "recipe": "cmaes",
+  "source": "results/candidates/cmaes-seed42-20260805/0015-train.py",
+  "source_sha256": "7163c7b2ea29d1c0dc42bcade4d229b7b82e4e4bfdb4c27a8092d622d56e6f93",
+  "train_sha256": "7163c7b2ea29d1c0dc42bcade4d229b7b82e4e4bfdb4c27a8092d622d56e6f93"
+}

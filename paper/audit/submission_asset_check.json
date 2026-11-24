@@ -1,0 +1,19 @@
+{
+  "files": {
+    "figures/autopareto_lineage.pdf": "c0c422deb08844635aeb813c897c9e20370ce2ac91da240a62b948133cdc075e",
+    "figures/pareto_front.pdf": "8d0e915c23d75a17b348f821a1efecc83eee6761a402900f5a903c2f1d1c31d0",
+    "figures/research_loop.pdf": "322e3430343125a5f55d31ab62aa0ef8b675d60345b866a7298e1d20e4c0e8ce",
+    "generated/abstract.tex": "a0a2dade31d9e84f971dce4f5ccab28bc245d5e97c66f686719a8013d3b6066c",
+    "generated/controls_table.tex": "a733f85047f0ae20ef7ef2f5351434b26d7ad58b58fe96483f0df46228ad2795",
+    "generated/main_results_table.tex": "e7e1476bd891d8ba10e24b49511949bfefe430981a7545fb22fdd1c4886f0da9",
+    "generated/primary_result.tex": "77ac569b35863c50539afa66eedfadefe801947d8889eb68656ce4af246e9ce5",
+    "generated/results_macros.tex": "9e85ac6ac6db67d7d6f9f757365f12940560b777e27bb7b6db8afaa6628a26c6",
+    "main.pdf": "17be82cb677126a99ad5985cc96c30ace0a8fb02a479f5b1d20b151e53532660",
+    "main.tex": "492f2cf4eccba54223143939532f4bc40f838e988abdb1d820c190fee740eb0c",
+    "neurips_2026.sty": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+    "references.bib": "bdfd33e34fbed92a2782384819bbc794e6e95dba6e3644c07887a4bc889ecb7c"
+  },
+  "source_scan_failures": [],
+  "scope": "PDF text and metadata checked by pdf_qa.py; source bundle excludes internal audit",
+  "bundle_sha256": "88ceafe31b07a63d79c6cf6f860da7944f569028a085e9767426846661162af3"
+}

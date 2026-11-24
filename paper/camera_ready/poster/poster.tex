@@ -1,0 +1,116 @@
+% AutoPareto poster -- DRAFT (NeurIPS 2026 AutoMLR workshop).  Build: cd paper/camera_ready/poster && tectonic poster.tex
+% Size is a placeholder (A0 landscape); change \geometry once the workshop's poster size is confirmed.
+% Every number comes from the camera-ready macros (analysis/cr_tables.py, analysis/cr_v2.py).
+\documentclass{article}
+\usepackage[paperwidth=46.8in,paperheight=33.1in,margin=1.1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{graphicx,xcolor,booktabs,amsmath}
+\usepackage[most]{tcolorbox}
+\input{../../generated/camera_ready/cr_macros.tex}
+\input{../../generated/camera_ready/cr_macros_v2.tex}
+\pagestyle{empty}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0.45em}
+\definecolor{ink}{HTML}{0B0B0B}
+\definecolor{ink2}{HTML}{52514E}
+\definecolor{apq}{HTML}{2A78D6}
+\definecolor{arref}{HTML}{EB6834}
+\definecolor{opus}{HTML}{6250D6}
+\definecolor{rule}{HTML}{D8D6D0}
+\definecolor{todo}{HTML}{B2412A}
+\newtcolorbox{panel}[1]{enhanced,breakable=false,colback=white,colframe=rule,boxrule=2pt,arc=6pt,
+  left=22pt,right=22pt,top=16pt,bottom=18pt,fonttitle=\sffamily\bfseries\fontsize{40}{46}\selectfont,
+  coltitle=ink,colbacktitle=white,title={#1},attach boxed title to top left={yshift=-8pt,xshift=14pt},
+  boxed title style={colframe=white,colback=white}}
+\newcommand{\statnum}[2]{{\color{#1}\sffamily\bfseries\fontsize{60}{66}\selectfont #2}}
+\newcommand{\todo}[1]{{\color{todo}[#1]}}
+\begin{document}
+\fontsize{31}{39}\selectfont\color{ink}
+% ---------------------------------------------------------------- header
+\begin{minipage}[t]{0.82\linewidth}
+{\sffamily\bfseries\fontsize{86}{96}\selectfont AutoPareto: what a fixed-time contract pays for}\\[18pt]
+{\fontsize{40}{48}\selectfont Auditing autonomous Transformer search with matched-exposure verification}\\[14pt]
+{\fontsize{34}{40}\selectfont Rami Alobaidy \quad \todo{affiliation} \quad rameonix@gmail.com}
+\end{minipage}\hfill
+\begin{minipage}[t]{0.17\linewidth}\raggedleft
+{\sffamily\fontsize{28}{34}\selectfont NeurIPS 2026 Workshop for\\Autonomous ML Research\\[10pt]\todo{DRAFT: author to review}\\[6pt]\todo{QR code to paper/artifact}}
+\end{minipage}
+
+\vspace{22pt}{\color{rule}\rule{\linewidth}{3pt}}\vspace{18pt}
+
+% ---------------------------------------------------------------- three columns
+\begin{minipage}[t]{0.305\linewidth}\vspace{0pt}
+\begin{panel}{The question}
+Autonomous ML researchers are usually scored under a \textbf{fixed wall-clock budget}. A program that trains faster also sees more data before it is scored, so a discovery-stage score mixes the agent's edit with the tokens the contract hands it.
+
+\textbf{Does the agent's winning recipe hold up when exposure is matched?}
+\end{panel}
+\vspace{18pt}
+\begin{panel}{AutoPareto}
+\raggedright An LLM agent edits one file, \texttt{train.py}; a hash-checked harness trains it for 300\,s on one A40 and scores validation BPB, cached-decode speed and peak memory. Failures stay in the lineage.\\[8pt]
+\centering\includegraphics[width=\linewidth]{../poster_figures/research_loop.pdf}
+\end{panel}
+\vspace{18pt}
+\begin{panel}{What the agent found}
+\centering\includegraphics[width=0.86\linewidth]{../poster_figures/autopareto_lineage.pdf}\\[6pt]
+\raggedright AP-Q halves AR-ref's depth (4 vs 8 layers) and trains \statnum{apq}{\CREOneRho$\times$} faster. Three recorded hypotheses on its path cite the extra tokens a cheaper model gets in 300\,s.
+\end{panel}
+\end{minipage}\hfill
+% ---------------------------------------------------------------- column 2
+\begin{minipage}[t]{0.37\linewidth}\vspace{0pt}
+\begin{panel}{Pre-registered test (E1): tokens, not architecture}
+\raggedright AP-Q (\textcolor{apq}{\textbf{blue}}) vs AR-ref (\textcolor{arref}{\textbf{orange}}) at three matched token budgets and at 300\,s, fresh seeds 6--8, 24 runs (plan committed before running).\\[8pt]
+\centering\includegraphics[width=\linewidth]{../poster_figures/cr_e1.pdf}\\[10pt]
+\raggedright
+\begin{tabular}{@{}lll@{}}
+\toprule
+& $\Delta$ held-out BPB (AP-Q $-$ AR-ref) & AP-Q better \\
+\midrule
+88.6M tokens & \CREOneHeldA & 0 of 3 seeds \\
+157.3M tokens & \CREOneHeldB & 0 of 3 \\
+201.3M tokens & \CREOneHeldC & 0 of 3 \\
+300\,s (AP-Q: \CREOneTokRatio$\times$ tokens) & \CREOneTimeHeld{} \CREOneTimeHeldCI & \CREOneTimeHeldWins{} of 3 \\
+\bottomrule
+\end{tabular}\\[12pt]
+\begin{itemize}\setlength{\itemsep}{4pt}
+\item Worse at \textbf{every} matched budget, \CREOnePairs{} of 9 seed pairs; no crossover.
+\item At 300\,s: a statistical \textbf{tie}.
+\item Gap split: extra tokens \statnum{ink}{\CREOneExposure}, architecture \statnum{ink}{\CREOneArch}.
+\item AP-Q needs $\approx$\CREOneK$\times$ AR-ref's tokens for equal quality, and trains \CREOneRho$\times$ faster.
+\end{itemize}
+\end{panel}
+\vspace{18pt}
+\begin{panel}{What survives matched exposure}
+\begin{minipage}[t]{0.5\linewidth}
+\statnum{apq}{\CRDecodeRatio$\times$} cached-decode throughput\\[6pt]
+\statnum{apq}{\CRParamReduction\%} fewer parameters\\[6pt]
+\statnum{apq}{\CRMemoryReduction\%} less inference memory
+\end{minipage}\hfill
+\begin{minipage}[t]{0.48\linewidth}\vspace{0pt}
+\includegraphics[width=\linewidth]{../poster_figures/cr_pareto.pdf}
+\end{minipage}
+\end{panel}
+\end{minipage}\hfill
+% ---------------------------------------------------------------- column 3
+\begin{minipage}[t]{0.305\linewidth}\vspace{0pt}
+\begin{panel}{A second agent, same contract}
+\raggedright Codex (\texttt{gpt-5.6-sol}, \CRCxAttempts{} attempts) and \textcolor{opus}{\textbf{Claude Opus 5.5}} (\CROpAttempts{} attempts) from the same baseline, seed, prompt and Pareto rule.\\[8pt]
+\centering\includegraphics[width=\linewidth]{../poster_figures/cr_agents.pdf}\\[8pt]
+\raggedright
+\begin{itemize}\setlength{\itemsep}{4pt}
+\item Both cut batch and model size to train more tokens in 300\,s (Opus: \CROpTokRatio$\times$ the baseline).
+\item Opus: \statnum{opus}{\CROpDecodeLo--\CROpDecodeHi$\times$} decode-only, but only \statnum{opus}{\CROpEtoELo--\CROpEtoEHi$\times$} end to end: from attempt \CROpAdapterAttempt{} its adapter captured the decode graph inside the \textbf{untimed prefill}.
+\item At $\approx$ matched tokens Opus is again worse than AR-ref (held-out \CROpHeldLo--\CROpHeldHi{} vs \CROpARHeld).
+\end{itemize}
+\end{panel}
+\vspace{18pt}
+\begin{panel}{Takeaways}
+\begin{itemize}\setlength{\itemsep}{6pt}
+\item \textbf{The contract decides who wins.} Under fixed time, faster training buys tokens; matched exposure removes that.
+\item \textbf{Agents optimise what is timed.} Report decode-only next to end-to-end.
+\item \textbf{Contract card:} stopping rule, seeds, tokens/updates/FLOPs, throughput variance, what each metric times, selection funnel, harness invariants.
+\end{itemize}
+\end{panel}
+\end{minipage}
+\end{document}

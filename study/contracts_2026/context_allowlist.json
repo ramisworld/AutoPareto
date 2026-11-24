@@ -1,0 +1,28 @@
+{
+  "schema": "autopareto_agent_allowlist_v1",
+  "visible_paths": [
+    "train.py",
+    "prepare.py",
+    "study_runtime.py",
+    "program.md",
+    "campaign_view.json"
+  ],
+  "writable_paths": ["train.py"],
+  "forbidden_prefixes": [
+    ".git",
+    "results",
+    "queue",
+    "worktrees",
+    "docs",
+    "protocol",
+    "README.md",
+    "PROJECT_STATE.md",
+    "FORENSIC_RESEARCH_AUDIT.md",
+    "AUTOPARETO_TRAJECTORY_AUDIT.md"
+  ],
+  "notes": [
+    "The agent receives only its program snapshot and campaign-local view.",
+    "No existing result, database, paper, audit, downstream, or other campaign path is staged.",
+    "Protected evaluator and orchestration internals are not agent-visible."
+  ]
+}

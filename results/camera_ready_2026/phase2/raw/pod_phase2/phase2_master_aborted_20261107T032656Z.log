@@ -1,0 +1,40 @@
+[2026-11-07T03:26:56Z] PHASE2 START
+[2026-11-07T03:26:56Z] phase2A start on GPU-3adf8a47-baa4-0808-d8e8-3068de291340 -> /var/lib/autopareto/phase2_winner_verification_20261107T032656Z | load 29.99 25.81 21.01
+[2026-11-07T03:26:57Z] identity: 3 checkpoints and 3 sources match the campaign records; paired baseline f7ca17c6 verified | load 28.87 25.64 20.98
+[2026-11-07T03:26:57Z] protected BPB attempt-23 start | load 28.87 25.64 20.98
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+  File "/opt/autopareto_trusted/study/contracts_2026/train_launcher.py", line 223, in _evaluate_protected_bpb
+    module = load_candidate_definitions(train_source)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/autopareto_trusted/study/contracts_2026/inference_benchmark.py", line 146, in load_candidate_definitions
+    exec(compile(definitions, str(train_path), "exec"), module.__dict__)
+  File "/var/lib/autopareto/phase2_winner_verification_20261107T032656Z/contexts/attempt-23/train.py", line 26, in <module>
+    from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader
+ModuleNotFoundError: No module named 'prepare'
+[2026-11-07T03:26:59Z] protected BPB attempt-23 exit 1 | load 28.87 25.64 20.98
+[2026-11-07T03:26:59Z] protected BPB attempt-24 start | load 28.87 25.64 20.98
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+  File "/opt/autopareto_trusted/study/contracts_2026/train_launcher.py", line 223, in _evaluate_protected_bpb
+    module = load_candidate_definitions(train_source)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/autopareto_trusted/study/contracts_2026/inference_benchmark.py", line 146, in load_candidate_definitions
+    exec(compile(definitions, str(train_path), "exec"), module.__dict__)
+  File "/var/lib/autopareto/phase2_winner_verification_20261107T032656Z/contexts/attempt-24/train.py", line 26, in <module>
+    from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader
+ModuleNotFoundError: No module named 'prepare'
+[2026-11-07T03:27:02Z] protected BPB attempt-24 exit 1 | load 28.16 25.55 20.98
+[2026-11-07T03:27:02Z] protected BPB attempt-27 start | load 28.16 25.55 20.98
+Traceback (most recent call last):
+  File "<stdin>", line 5, in <module>
+  File "/opt/autopareto_trusted/study/contracts_2026/train_launcher.py", line 223, in _evaluate_protected_bpb
+    module = load_candidate_definitions(train_source)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/autopareto_trusted/study/contracts_2026/inference_benchmark.py", line 146, in load_candidate_definitions
+    exec(compile(definitions, str(train_path), "exec"), module.__dict__)
+  File "/var/lib/autopareto/phase2_winner_verification_20261107T032656Z/contexts/attempt-27/train.py", line 26, in <module>
+    from prepare import MAX_SEQ_LEN, TIME_BUDGET, Tokenizer, make_dataloader
+ModuleNotFoundError: No module named 'prepare'
+[2026-11-07T03:27:05Z] protected BPB attempt-27 exit 1 | load 28.16 25.55 20.98
+[2026-11-07T03:27:05Z] protected BPB pair-a baseline T start | load 28.16 25.55 20.98

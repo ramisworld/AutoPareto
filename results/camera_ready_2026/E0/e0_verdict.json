@@ -1,0 +1,85 @@
+{
+  "comparisons": {
+    "e0-apq-tokens201326592-seed3": {
+      "diagnostics_not_halting": {
+        "peak_training_memory_mb": {
+          "observed": 12473.35205078125,
+          "reference": 12473.35205078125,
+          "relative_difference": 0.0
+        },
+        "steady_state_tokens_per_second": {
+          "observed": 517571.56587059994,
+          "reference": 522707.8582029221,
+          "relative_difference": -0.00982631550629598
+        },
+        "validation_bpb_in_process": {
+          "observed": 1.0770507119298136,
+          "reference": 1.0765807647533765,
+          "relative_difference": 0.0004365182732433137
+        }
+      },
+      "heldout_bpb": {
+        "delta": 0.00028157114715288145,
+        "observed": 1.1398973710355866,
+        "reference": 1.1396157998884338,
+        "tolerance": 0.005
+      },
+      "tokens": {
+        "observed": 201326592,
+        "required": 201326592
+      },
+      "updates": {
+        "observed": 1536,
+        "required": 1536
+      },
+      "validation_bpb": {
+        "delta": 0.00046865485910818627,
+        "observed": 1.0770574621180202,
+        "reference": 1.076588807258912,
+        "tolerance": 0.005
+      }
+    },
+    "e0-arref-time300s-seed0": {
+      "diagnostics_not_halting": {
+        "peak_training_memory_mb": {
+          "observed": 22652.443069458008,
+          "reference": 22652.4,
+          "relative_difference": 1.9013198604422854e-06
+        },
+        "steady_state_tokens_per_second": {
+          "observed": 285982.1200302003,
+          "reference": 289842.1194596029,
+          "relative_difference": -0.013317593166236263
+        },
+        "validation_bpb": {
+          "observed": 1.1041587265620516,
+          "reference": 1.102901075499148,
+          "relative_difference": 0.0011403117567316823
+        }
+      },
+      "updates": {
+        "allowed": [
+          669,
+          681
+        ],
+        "historical": 675,
+        "observed": 666
+      },
+      "validation_bpb_in_process": {
+        "delta": 0.0012521969193524107,
+        "observed": 1.1041532724185004,
+        "reference": 1.102901075499148,
+        "tolerance": 0.005
+      }
+    }
+  },
+  "data_identity_status": "PASS",
+  "format": "autopareto_camera_ready_e0_verdict_v1",
+  "halt_reasons": [
+    "e0-arref-time300s-seed0: updates 666 outside [669, 681]"
+  ],
+  "plan_sha256": "806a63970258627092d929d4602e54e36a2412e0656a63298e17307c6c829340",
+  "recorded_utc": "2026-11-04T05:26:09.827429+00:00",
+  "rule": "HALT (and do not start E1) if the data identity gate fails; if either E0 run fails its integrity gates twice; if |held-out or validation BPB - reference| > 0.005 for run 1 or |in-process validation BPB - 1.102901| > 0.005 for run 2; if run 1 does not process exactly 201,326,592 tokens in 1,536 updates; or if run 2's updates fall outside [669, 681]. Throughput and memory comparisons are recorded as diagnostics only. Diagnose drift (data revision, torch version, kernels) before anything else.",
+  "status": "HALT"
+}

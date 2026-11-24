@@ -1,0 +1,319 @@
+[2026-11-16T20:31:06Z] r4 start (parent dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096, A1 2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade, A2 2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b)
+[2026-11-16T20:31:06Z] P0b labels (23, all P0b labels except motpe-seed8-native): rs-seed6-native gpt_a25-seed6-native baseline-seed6-native motpe-seed6-native gpt_a24-seed6-native nsgaii-seed6-native cmaes-seed6-native tpe-seed6-native rs-seed7-native gpt_a25-seed7-native baseline-seed7-native motpe-seed7-native gpt_a24-seed7-native nsgaii-seed7-native cmaes-seed7-native tpe-seed7-native rs-seed8-native gpt_a25-seed8-native baseline-seed8-native gpt_a24-seed8-native nsgaii-seed8-native cmaes-seed8-native tpe-seed8-native
+[2026-11-16T20:31:06Z] P0b start
+{"label": "rs-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1021, "decode_tok_s": 167.1211128796404, "speedup": 1.27919419033379, "peak_mib": 260.13916015625, "wall_s": 267.5}
+{"label": "gpt_a25-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 361.18851570339984, "speedup": 2.4970967966804887, "peak_mib": 221.26318359375, "wall_s": 258.9}
+{"label": "baseline-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 141.22383048491344, "speedup": 1.0049986714157826, "peak_mib": 337.26513671875, "wall_s": 269.1}
+{"label": "motpe-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1021, "decode_tok_s": 183.25661159894958, "speedup": 1.377314627656741, "peak_mib": 225.76416015625, "wall_s": 267.7}
+{"label": "gpt_a24-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 360.32567003085273, "speedup": 2.493815983790055, "peak_mib": 183.38818359375, "wall_s": 257.9}
+{"label": "nsgaii-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 144.06211990239746, "speedup": 1.0204626101901284, "peak_mib": 337.26513671875, "wall_s": 270.5}
+{"label": "cmaes-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 146.1462985628272, "speedup": 1.0886134682954542, "peak_mib": 209.64013671875, "wall_s": 272.4}
+{"label": "tpe-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 189.65437006695234, "speedup": 1.305928170859277, "peak_mib": 289.26416015625, "wall_s": 266.2}
+{"label": "rs-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1021, "decode_tok_s": 183.5690934967193, "speedup": 1.2648360362513784, "peak_mib": 260.13916015625, "wall_s": 267.3}
+{"label": "gpt_a25-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 374.2989949974593, "speedup": 2.4761950622352566, "peak_mib": 221.26318359375, "wall_s": 254.0}
+{"label": "baseline-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 147.544592590756, "speedup": 1.0030587257676604, "peak_mib": 337.26513671875, "wall_s": 271.4}
+{"label": "motpe-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 190.40129863457383, "speedup": 1.3615676099351295, "peak_mib": 225.76416015625, "wall_s": 259.1}
+{"label": "gpt_a24-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 365.5158070509598, "speedup": 2.4684374602274364, "peak_mib": 183.38818359375, "wall_s": 258.7}
+{"label": "nsgaii-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 148.88016988242816, "speedup": 1.0118639002379473, "peak_mib": 337.26513671875, "wall_s": 272.7}
+{"label": "cmaes-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 161.33435664324134, "speedup": 1.089022943666834, "peak_mib": 209.64013671875, "wall_s": 269.1}
+{"label": "tpe-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 194.84278334435277, "speedup": 1.3084163469333412, "peak_mib": 289.26416015625, "wall_s": 265.1}
+{"label": "rs-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 188.27016318660782, "speedup": 1.2636677066176967, "peak_mib": 260.13916015625, "wall_s": 262.1}
+{"label": "gpt_a25-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1021, "decode_tok_s": 382.2566466906684, "speedup": 2.4706290118426377, "peak_mib": 221.26318359375, "wall_s": 252.7}
+{"label": "baseline-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 146.8935173179285, "speedup": 1.002395001146446, "peak_mib": 337.26513671875, "wall_s": 274.2}
+{"label": "gpt_a24-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 367.45241429247096, "speedup": 2.4823699479871957, "peak_mib": 183.38818359375, "wall_s": 257.3}
+{"label": "nsgaii-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 151.5437472624601, "speedup": 1.0098851386525287, "peak_mib": 337.26513671875, "wall_s": 265.7}
+{"label": "cmaes-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 163.4649116987057, "speedup": 1.0873336930952564, "peak_mib": 209.64013671875, "wall_s": 268.4}
+{"label": "tpe-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1021, "decode_tok_s": 195.6171016885795, "speedup": 1.3073236112056565, "peak_mib": 289.26416015625, "wall_s": 264.0}
+[2026-11-16T22:13:58Z] P0b exit 0
+[2026-11-16T22:13:58Z] control start
+{"label": "opus_a24-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 268.5894115863067, "speedup": 1.7913913514743753, "peak_mib": 469.1904296875, "wall_s": 256.3}
+{"label": "gpt_a22-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 214.64053779116725, "speedup": 1.478409844106269, "peak_mib": 624.763671875, "wall_s": 259.1}
+{"label": "rs-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 141.5762823007843, "speedup": 1.0181904330368061, "peak_mib": 756.70361328125, "wall_s": 261.3}
+{"label": "arref-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 107.45358698374709, "speedup": 0.7719818130019944, "peak_mib": 1007.9951171875, "wall_s": 269.0}
+{"label": "gpt_a25-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 276.9638768746557, "speedup": 1.8736530010324355, "peak_mib": 532.21728515625, "wall_s": 257.1}
+{"label": "baseline-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 107.29124402404169, "speedup": 0.7767642469731348, "peak_mib": 1007.9951171875, "wall_s": 263.7}
+{"label": "motpe-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 144.61058261542715, "speedup": 0.9842873050478097, "peak_mib": 634.55615234375, "wall_s": 266.5}
+{"label": "gpt_a24-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 267.81241858525016, "speedup": 1.9146314296674922, "peak_mib": 435.24072265625, "wall_s": 256.6}
+{"label": "nsgaii-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 115.9553730742325, "speedup": 0.7706861526720976, "peak_mib": 1007.9951171875, "wall_s": 269.1}
+{"label": "cmaes-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 114.92750039434424, "speedup": 0.8741144062944652, "peak_mib": 636.45263671875, "wall_s": 274.0}
+{"label": "opus_a23-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 265.75260951035386, "speedup": 1.763735111398891, "peak_mib": 480.80322265625, "wall_s": 254.0}
+{"label": "opus_a27-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 241.60478239607042, "speedup": 1.7734546920656213, "peak_mib": 466.94921875, "wall_s": 260.6}
+{"label": "tpe-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 148.26493882407053, "speedup": 1.00842339385684, "peak_mib": 817.671875, "wall_s": 267.9}
+{"label": "opus_a23-seed6-eager", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 334.37007036757916, "speedup": 2.2279265663899475, "peak_mib": 101.13818359375, "wall_s": 254.2}
+{"label": "opus_a23-seed6-canonical", "mode": "canonical", "status": "incorrect_not_timed", "hard_mismatches": 30, "token_agreement": 978, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 9.3}
+[2026-11-17T01:11:31Z] r4 start (parent dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096, A1 2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade, A2 2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b)
+[2026-11-17T01:11:31Z] P0b labels (23, all P0b labels except motpe-seed8-native): rs-seed6-native gpt_a25-seed6-native baseline-seed6-native motpe-seed6-native gpt_a24-seed6-native nsgaii-seed6-native cmaes-seed6-native tpe-seed6-native rs-seed7-native gpt_a25-seed7-native baseline-seed7-native motpe-seed7-native gpt_a24-seed7-native nsgaii-seed7-native cmaes-seed7-native tpe-seed7-native rs-seed8-native gpt_a25-seed8-native baseline-seed8-native gpt_a24-seed8-native nsgaii-seed8-native cmaes-seed8-native tpe-seed8-native
+[2026-11-17T01:11:32Z] P0b start
+{"status": "refused", "reason": "GPU lock held"}
+[2026-11-17T01:11:33Z] P0b exit 2
+[2026-11-17T01:11:33Z] STOP after P0b
+[2026-11-17T01:12:18Z] r4 start (parent dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096, A1 2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade, A2 2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b)
+[2026-11-17T01:12:18Z] P0b labels (23, all P0b labels except motpe-seed8-native): rs-seed6-native gpt_a25-seed6-native baseline-seed6-native motpe-seed6-native gpt_a24-seed6-native nsgaii-seed6-native cmaes-seed6-native tpe-seed6-native rs-seed7-native gpt_a25-seed7-native baseline-seed7-native motpe-seed7-native gpt_a24-seed7-native nsgaii-seed7-native cmaes-seed7-native tpe-seed7-native rs-seed8-native gpt_a25-seed8-native baseline-seed8-native gpt_a24-seed8-native nsgaii-seed8-native cmaes-seed8-native tpe-seed8-native
+[2026-11-17T01:12:18Z] P0b start
+[2026-11-17T01:12:24Z] P0b exit 0
+[2026-11-17T01:12:24Z] control start
+{"label": "opus_a24-seed6-eager", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 344.6585612530359, "speedup": 2.243002244849485, "peak_mib": 93.13818359375, "wall_s": 251.5}
+{"label": "opus_a24-seed6-canonical", "mode": "canonical", "status": "incorrect_not_timed", "hard_mismatches": 20, "token_agreement": 999, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 9.2}
+{"label": "opus_a27-seed6-eager", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 297.42668593031635, "speedup": 2.1556711603952694, "peak_mib": 87.18505859375, "wall_s": 252.2}
+{"label": "opus_a27-seed6-canonical", "mode": "canonical", "status": "incorrect_not_timed", "hard_mismatches": 19, "token_agreement": 991, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 8.4}
+[2026-11-17T01:21:18Z] control exit 0
+[2026-11-17T01:21:18Z] anchor start
+{"label": "arref-seed6-native-anchor", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 149.11230502992066, "speedup": 0.9937590065939381, "peak_mib": 337.26513671875, "wall_s": 268.0}
+{"label": "gpt_a22-seed6-native-anchor", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 292.27466374674947, "speedup": 1.92642173350109, "peak_mib": 243.26318359375, "wall_s": 255.9}
+{"label": "opus_a23-seed6-native-anchor", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": 4585.163020916083, "speedup": 32.12714514667634, "peak_mib": 113.07568359375, "wall_s": 724.5}
+[2026-11-17T01:42:17Z] anchor exit 0
+[2026-11-17T01:42:17Z] PHASE6_FROZEN_INFERENCE_DONE
+[2026-11-17T01:42:17Z] waiting for /root/phase6_a3_go
+[2026-11-17T01:42:17Z] A3 plan c7a46afd38887ae93e19bf31fe8f8243687b75ccda93f734e1fb5ed5cf3be79f
+[2026-11-17T01:42:17Z] A3-validate start
+{
+ "status": "validated",
+ "a3_plan_sha256": "c7a46afd38887ae93e19bf31fe8f8243687b75ccda93f734e1fb5ed5cf3be79f",
+ "checks": [
+  {
+   "check": "parent_plan_sha256",
+   "status": "ok",
+   "detail": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096"
+  },
+  {
+   "check": "parent_plan_checks",
+   "status": "ok",
+   "detail": "5 ok"
+  },
+  {
+   "check": "a3_implementation_sha256",
+   "status": "ok",
+   "detail": "3 files match"
+  },
+  {
+   "check": "phase5a_reference_line",
+   "status": "ok",
+   "detail": {
+    "file": "scripts/run_phase5a_opus_fixed_tokens.py",
+    "line": "db.row_factory = sqlite3.Row"
+   }
+  },
+  {
+   "check": "empty_database_as_left_by_crash",
+   "status": "ok",
+   "detail": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/downstream_frozen/phase6_downstream.db"
+  }
+ ]
+}
+[2026-11-17T01:42:18Z] A3-validate exit 0
+[2026-11-17T01:42:18Z] P1-downstream-A3 start
+{"downstream": "baseline_tokens201M_seed6", "exit": 0}
+{"downstream": "autopareto_294_tokens201M_seed6", "exit": 0}
+{"downstream": "nsgaii_quality_tokens201M_seed6", "exit": 0}
+{"downstream": "tpe_quality_tokens201M_seed6", "exit": 0}
+{"downstream": "autopareto_299_tokens201M_seed6", "exit": 0}
+{"downstream": "cmaes_quality_tokens201M_seed6", "exit": 0}
+{"downstream": "random_search_quality_tokens201M_seed6", "exit": 0}
+{"downstream": "motpe_quality_tokens201M_seed6", "exit": 0}
+{"downstream": "autopareto_294_tokens201M_seed7", "exit": 0}
+{"downstream": "nsgaii_quality_tokens201M_seed7", "exit": 0}
+{"downstream": "tpe_quality_tokens201M_seed7", "exit": 0}
+{"downstream": "autopareto_299_tokens201M_seed7", "exit": 0}
+{"downstream": "cmaes_quality_tokens201M_seed7", "exit": 0}
+{"downstream": "random_search_quality_tokens201M_seed7", "exit": 0}
+{"downstream": "motpe_quality_tokens201M_seed7", "exit": 0}
+{"downstream": "baseline_tokens201M_seed7", "exit": 0}
+{"downstream": "nsgaii_quality_tokens201M_seed8", "exit": 0}
+{"downstream": "tpe_quality_tokens201M_seed8", "exit": 0}
+{"downstream": "autopareto_299_tokens201M_seed8", "exit": 0}
+{"downstream": "cmaes_quality_tokens201M_seed8", "exit": 0}
+{"downstream": "random_search_quality_tokens201M_seed8", "exit": 0}
+{"downstream": "baseline_tokens201M_seed8", "exit": 0}
+{"downstream": "autopareto_294_tokens201M_seed8", "exit": 0}
+{"status": "finished", "exit": 0, "a3_plan_sha256": "c7a46afd38887ae93e19bf31fe8f8243687b75ccda93f734e1fb5ed5cf3be79f"}
+[2026-11-17T03:23:27Z] P1-downstream-A3 exit 0
+[2026-11-17T03:23:27Z] PHASE6_P0_P1_STAGES_DONE
+[2026-11-17T03:23:27Z] A1 storage switch (A1 plan 2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade)
+{"data_files_checked": 13, "mismatched": []}
+[2026-11-17T03:23:32Z] runtime cache was /workspace/.cache/autoresearch
+[2026-11-17T03:23:32Z] runtime cache now /root/autoresearch_cache_local
+[2026-11-17T03:23:32Z] A2-validate start
+{
+ "status": "validated",
+ "a2_plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b",
+ "checks": [
+  {
+   "check": "parent_plan_sha256",
+   "status": "ok",
+   "detail": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096"
+  },
+  {
+   "check": "parent_plan_checks",
+   "status": "ok",
+   "detail": "5 ok"
+  },
+  {
+   "check": "a1_implementation_sha256",
+   "status": "ok",
+   "detail": "4 files match"
+  },
+  {
+   "check": "uv_project_environment",
+   "status": "ok",
+   "detail": "/opt/autopareto_envA"
+  },
+  {
+   "check": "uv_project",
+   "status": "ok",
+   "detail": "/workspace/autopareto-camera-ready"
+  },
+  {
+   "check": "runner_in_local_env",
+   "status": "ok",
+   "detail": "/opt/autopareto_envA"
+  },
+  {
+   "check": "env_a_freeze_equal",
+   "status": "ok",
+   "detail": "16ca2a746d86a67b15399db54c0b881ffdc4b4bb01dd712ac626552ac058ef53"
+  },
+  {
+   "check": "data_symlink",
+   "status": "ok",
+   "detail": "/root/autoresearch_cache_local"
+  },
+  {
+   "check": "persistent_cache_env",
+   "status": "ok",
+   "detail": "/root/autoresearch_cache_local"
+  },
+  {
+   "check": "data_bytes_match_e1_manifest",
+   "status": "ok",
+   "detail": "13 manifest files match (13 files present)"
+  },
+  {
+   "check": "a1_plan_sha256",
+   "status": "ok",
+   "detail": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade"
+  },
+  {
+   "check": "a2_implementation_sha256",
+   "status": "ok",
+   "detail": "4 files match"
+  },
+  {
+   "check": "run_matches_parent_plan",
+   "status": "ok",
+   "detail": {
+    "run_id": "p6-motpe-tokens201326592-seed8",
+    "recipe": "motpe",
+    "seed": 8,
+    "attempt": 3,
+    "attempt_dirname": "p6-motpe-tokens201326592-seed8-attempt3"
+   }
+  },
+  {
+   "check": "failed_attempt_1_on_record",
+   "status": "ok",
+   "detail": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/phase6_run_record.json"
+  },
+  {
+   "check": "failed_attempt_2_on_record",
+   "status": "ok",
+   "detail": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt2/phase6_run_record.json"
+  }
+ ]
+}
+[2026-11-17T03:23:35Z] A2-validate exit 0
+[2026-11-17T03:23:35Z] A2 start
+{"complete": true, "missing_files": [], "persistent_cache": "/root/autoresearch_cache_local", "required_files": ["tokenizer/tokenizer.pkl", "tokenizer/token_bytes.pt", "data/shard_06542.parquet"], "runtime_cache": "/root/.cache/autoresearch", "runtime_resolves_to": "/root/autoresearch_cache_local", "status": "ok", "training_shards": 10}
+{"checkpoint_root": "/workspace/autopareto-camera-ready/results/checkpoints", "mode": "runpod_persistent", "status": "ok"}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-motpe-tokens201326592-seed8", "attempt": 3, "status": "completed", "heldout": 1.151182245724, "tok_s": 505096.4891138215, "anomaly_s": 0, "failures": [], "wall_s": 714}
+{"downstream": "motpe_quality_tokens201M_seed8", "exit": 0}
+{"label": "motpe-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 202.51522943215434, "speedup": 1.356232770772721, "peak_mib": 225.76416015625, "wall_s": 262.4}
+{
+ "format": "autopareto_phase6_a2_execution_summary_v1",
+ "a2_plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b",
+ "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+ "parent_plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+ "stages": {
+  "train": 0,
+  "downstream": 0,
+  "inference": 0
+ },
+ "recorded_utc": "2026-11-17T03:44:01.805035+00:00"
+}
+[2026-11-17T03:44:01Z] A2 exit 0
+[2026-11-17T03:44:01Z] A2_DONE
+[2026-11-17T03:44:01Z] A1-pilot-validate start
+{
+ "status": "validated",
+ "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+ "checks": [
+  {
+   "check": "parent_plan_sha256",
+   "status": "ok",
+   "detail": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096"
+  },
+  {
+   "check": "parent_plan_checks",
+   "status": "ok",
+   "detail": "5 ok"
+  },
+  {
+   "check": "a1_implementation_sha256",
+   "status": "ok",
+   "detail": "4 files match"
+  },
+  {
+   "check": "uv_project_environment",
+   "status": "ok",
+   "detail": "/opt/autopareto_envA"
+  },
+  {
+   "check": "uv_project",
+   "status": "ok",
+   "detail": "/workspace/autopareto-camera-ready"
+  },
+  {
+   "check": "runner_in_local_env",
+   "status": "ok",
+   "detail": "/opt/autopareto_envA"
+  },
+  {
+   "check": "env_a_freeze_equal",
+   "status": "ok",
+   "detail": "16ca2a746d86a67b15399db54c0b881ffdc4b4bb01dd712ac626552ac058ef53"
+  },
+  {
+   "check": "data_symlink",
+   "status": "ok",
+   "detail": "/root/autoresearch_cache_local"
+  },
+  {
+   "check": "persistent_cache_env",
+   "status": "ok",
+   "detail": "/root/autoresearch_cache_local"
+  },
+  {
+   "check": "data_bytes_match_e1_manifest",
+   "status": "ok",
+   "detail": "13 manifest files match (13 files present)"
+  }
+ ]
+}
+[2026-11-17T03:44:03Z] A1-pilot-validate exit 0
+[2026-11-17T03:44:03Z] A1-pilot start
+{"complete": true, "missing_files": [], "persistent_cache": "/root/autoresearch_cache_local", "required_files": ["tokenizer/tokenizer.pkl", "tokenizer/token_bytes.pt", "data/shard_06542.parquet"], "runtime_cache": "/root/.cache/autoresearch", "runtime_resolves_to": "/root/autoresearch_cache_local", "status": "ok", "training_shards": 10}
+{"checkpoint_root": "/workspace/autopareto-camera-ready/results/checkpoints", "mode": "runpod_persistent", "status": "ok"}
+{"run_id": "a1pilot-opus_a27-time300s-seed6", "attempt": 1, "status": "completed", "tokens": 198443008, "heldout": 1.155056879286822, "anomaly_s": 0, "e1_gate": null, "failures": [], "wall_s": 436}
+{
+ "format": "autopareto_phase6_a1_execution_summary_v1",
+ "stage": "pilot",
+ "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+ "completed": [
+  "a1pilot-opus_a27-time300s-seed6"
+ ],
+ "reported_failed": [],
+ "stopped_by_e1_comparability_gate": false,
+ "recorded_utc": "2026-11-17T03:51:25.257120+00:00"
+}
+[2026-11-17T03:51:25Z] A1-pilot exit 0
+[2026-11-17T03:51:25Z] A1_PILOT_DONE

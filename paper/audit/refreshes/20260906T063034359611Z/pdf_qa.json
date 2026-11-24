@@ -1,0 +1,28 @@
+{
+  "pdf_sha256": "ef1ae275642bca8931c26d673ac0380054a4e7155529270601710e4bf6c6de90",
+  "total_pages": 9,
+  "section_bounds": {
+    "partone": 1,
+    "partoneend": 4,
+    "parttwo": 5,
+    "parttwoend": 7,
+    "partthree": 8,
+    "partthreeend": 8
+  },
+  "content_page_counts": {
+    "part1": 4,
+    "part2": 3,
+    "part3": 1
+  },
+  "content_pages_total": 8,
+  "metadata": {
+    "/Creator": "LaTeX with hyperref",
+    "/Title": "AutoPareto: Budget Contracts and Auditable Efficiency–Quality Trade-offs",
+    "/Producer": "xdvipdfmx (0.1)",
+    "/CreationDate": "D:20260906063052-00'00'"
+  },
+  "latex_diagnostics": [],
+  "failures": [],
+  "automated_pass": true,
+  "visual_review": "pending; separate rendered-page inspection required"
+}

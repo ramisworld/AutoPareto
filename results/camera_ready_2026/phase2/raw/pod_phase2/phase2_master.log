@@ -1,0 +1,78 @@
+[2026-11-07T03:28:13Z] PHASE2 START
+[2026-11-07T03:28:13Z] phase2A start on GPU-3adf8a47-baa4-0808-d8e8-3068de291340 -> /var/lib/autopareto/phase2_winner_verification_20261107T032813Z | load 22.39 24.46 20.94
+[2026-11-07T03:28:14Z] identity: 3 checkpoints and 3 sources match the campaign records; paired baseline f7ca17c6 verified | load 22.39 24.46 20.94
+[2026-11-07T03:28:14Z] protected BPB attempt-23 start | load 22.39 24.46 20.94
+  protected BPB 1.0961979650
+[2026-11-07T03:29:09Z] protected BPB attempt-23 exit 0 | load 22.70 24.30 21.09
+[2026-11-07T03:29:09Z] protected BPB attempt-24 start | load 22.70 24.30 21.09
+  protected BPB 1.0994636270
+[2026-11-07T03:30:04Z] protected BPB attempt-24 exit 0 | load 21.00 23.70 21.08
+[2026-11-07T03:30:04Z] protected BPB attempt-27 start | load 21.00 23.70 21.08
+  protected BPB 1.0962273901
+[2026-11-07T03:31:00Z] protected BPB attempt-27 exit 0 | load 20.19 23.04 21.01
+[2026-11-07T03:31:00Z] protected BPB pair-a baseline T start | load 20.19 23.04 21.01
+  protected BPB 1.2011009456
+[2026-11-07T03:32:30Z] protected BPB pair-a baseline T exit 0 | load 16.01 20.97 20.46
+[2026-11-07T03:32:30Z] bracketed attempt-23 repeat 1 start | load 16.01 20.97 20.46
+[2026-11-07T03:46:14Z] bracketed attempt-23 repeat 1 exit 0 | load 21.60 22.14 21.43
+   {'status': 'completed', 'normalized_inference_status': 'stable', 'normalized_relative_drift': 0.009619201914643875, 'cached_decode_tokens_per_second_median': 4569.889933444409, 'normalized_decode_throughput': 31.834929025672537, 'prefill_milliseconds': 178.62533299194183} {'correctness': True, 'e2e_tok_s': 654.9608783739408, 'peak_mb': 113.00537109375}
+[2026-11-07T03:46:14Z] bracketed attempt-24 repeat 1 start | load 21.60 22.14 21.43
+[2026-11-07T03:57:51Z] bracketed attempt-24 repeat 1 exit 0 | load 23.35 21.72 21.40
+   {'status': 'completed', 'normalized_inference_status': 'stable', 'normalized_relative_drift': 0.01217031532484341, 'cached_decode_tokens_per_second_median': 4577.43971880601, 'normalized_decode_throughput': 33.931451331389766, 'prefill_milliseconds': 144.45042998704594} {'correctness': True, 'e2e_tok_s': 656.7232675543772, 'peak_mb': 96.88037109375}
+[2026-11-07T03:57:51Z] bracketed attempt-27 repeat 1 start | load 23.35 21.72 21.40
+[2026-11-07T04:11:06Z] bracketed attempt-27 repeat 1 exit 0 | load 19.84 20.89 21.05
+   {'status': 'completed', 'normalized_inference_status': 'stable', 'normalized_relative_drift': 0.005334892201370982, 'cached_decode_tokens_per_second_median': 4592.672474863679, 'normalized_decode_throughput': 31.470489163618826, 'prefill_milliseconds': 169.9855100014247} {'correctness': True, 'e2e_tok_s': 647.9653866232123, 'peak_mb': 99.05224609375}
+[2026-11-07T04:11:06Z] bracketed attempt-24 repeat 2 start | load 19.84 20.89 21.05
+[2026-11-07T04:22:30Z] bracketed attempt-24 repeat 2 exit 0 | load 6.24 12.92 17.14
+   {'status': 'completed', 'normalized_inference_status': 'stable', 'normalized_relative_drift': 0.016211684101669833, 'cached_decode_tokens_per_second_median': 4587.365257385056, 'normalized_decode_throughput': 30.32962905530311, 'prefill_milliseconds': 136.85111800441518} {'correctness': True, 'e2e_tok_s': 778.8540680421072, 'peak_mb': 96.88037109375}
+[2026-11-07T04:22:30Z] bracketed attempt-27 repeat 2 start | load 6.24 12.92 17.14
+[2026-11-07T04:34:11Z] bracketed attempt-27 repeat 2 exit 0 | load 16.29 16.60 16.99
+   {'status': 'completed', 'normalized_inference_status': 'unstable', 'normalized_relative_drift': 0.058910001346120094, 'cached_decode_tokens_per_second_median': 4589.0304624484015, 'normalized_decode_throughput': 32.64596732264374, 'prefill_milliseconds': 142.78641001146752} {'correctness': True, 'e2e_tok_s': 766.8356842059686, 'peak_mb': 99.05224609375}
+[2026-11-07T04:34:12Z] bracketed attempt-23 repeat 2 start | load 16.29 16.60 16.99
+[2026-11-07T04:45:40Z] bracketed attempt-23 repeat 2 exit 0 | load 13.76 15.21 15.94
+   {'status': 'completed', 'normalized_inference_status': 'stable', 'normalized_relative_drift': 0.015027810311917869, 'cached_decode_tokens_per_second_median': 4577.348728819216, 'normalized_decode_throughput': 31.46658335197557, 'prefill_milliseconds': 138.80052299646195} {'correctness': True, 'e2e_tok_s': 746.7209122755698, 'peak_mb': 113.00537109375}
+[2026-11-07T04:45:40Z] bracketed attempt-27 repeat 3 start | load 13.76 15.21 15.94
+[2026-11-07T04:57:20Z] bracketed attempt-27 repeat 3 exit 0 | load 17.95 14.74 15.17
+   {'status': 'completed', 'normalized_inference_status': 'unstable', 'normalized_relative_drift': 0.02960353620973328, 'cached_decode_tokens_per_second_median': 4591.643483151622, 'normalized_decode_throughput': 31.44724950905369, 'prefill_milliseconds': 143.44527099456172} {'correctness': True, 'e2e_tok_s': 766.5471357758059, 'peak_mb': 99.05224609375}
+[2026-11-07T04:57:20Z] bracketed attempt-23 repeat 3 start | load 17.95 14.74 15.17
+[2026-11-07T05:08:57Z] bracketed attempt-23 repeat 3 exit 0 | load 15.84 15.61 15.57
+   {'status': 'completed', 'normalized_inference_status': 'unstable', 'normalized_relative_drift': 0.039668156897756546, 'cached_decode_tokens_per_second_median': 4569.729556763741, 'normalized_decode_throughput': 33.58879617927661, 'prefill_milliseconds': 142.18040800187737} {'correctness': True, 'e2e_tok_s': 669.3414351820339, 'peak_mb': 113.00537109375}
+[2026-11-07T05:08:57Z] bracketed attempt-24 repeat 3 start | load 15.84 15.61 15.57
+[2026-11-07T05:20:29Z] bracketed attempt-24 repeat 3 exit 0 | load 11.22 16.79 17.35
+   {'status': 'completed', 'normalized_inference_status': 'stable', 'normalized_relative_drift': 0.005937122328228589, 'cached_decode_tokens_per_second_median': 4578.056446803059, 'normalized_decode_throughput': 30.856249099630404, 'prefill_milliseconds': 140.1841065089684} {'correctness': True, 'e2e_tok_s': 790.5064034759546, 'peak_mb': 96.88037109375}
+[2026-11-07T05:20:29Z] PHASE2A DONE /var/lib/autopareto/phase2_winner_verification_20261107T032813Z | load 11.22 16.79 17.35
+phase2 downstream db created: 6 experiments
+[2026-11-07T05:20:31Z] downstream 1 opus55_t_attempt23 start (Pair-A fixed time 300 s, 197.1M tokens)
+[2026-11-07T05:23:35Z] downstream 1 opus55_t_attempt23 exit 0 (max is disabled on the fly since Inductor decides to split the reduction. Cut an issue to PyTorch if this is an important use case and you want to speed it up with online softmax.    warnings.warn( /w)
+[2026-11-07T05:23:35Z] downstream 2 opus55_t_attempt24 start (Pair-A fixed time 300 s, 198.4M tokens)
+[2026-11-07T05:26:14Z] downstream 2 opus55_t_attempt24 exit 0 (��████████| 7/7 [00:00<00:00, 17050.02it/s] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads. /w)
+[2026-11-07T05:26:14Z] downstream 3 opus55_t_attempt27 start (Pair-A fixed time 300 s, 198.0M tokens)
+[2026-11-07T05:28:57Z] downstream 3 opus55_t_attempt27 exit 0 (��████████| 7/7 [00:00<00:00, 13054.75it/s] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads. /w)
+[2026-11-07T05:28:57Z] downstream 4 pair_a_baseline_t start (Pair-A fixed time 300 s, 84.9M tokens (paired T checkpoint))
+[2026-11-07T05:32:34Z] downstream 4 pair_a_baseline_t exit 0 (��████████| 7/7 [00:00<00:00, 16176.38it/s] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads. /w)
+[2026-11-07T05:32:34Z] downstream 5 autoresearch_compatible_time300s start (Phase-1 fixed time 300 s (E0 AR-ref), 87.6M tokens)
+[2026-11-07T05:36:11Z] downstream 5 autoresearch_compatible_time300s exit 0 (��████████| 7/7 [00:00<00:00, 14918.76it/s] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads. /w)
+[2026-11-07T05:36:11Z] downstream 6 autopareto_292_tokens201M_repro start (Phase-1 matched tokens 201.3M; re-evaluation of August downstream run 14)
+[2026-11-07T05:38:42Z] downstream 6 autopareto_292_tokens201M_repro exit 0 (��████████| 7/7 [00:00<00:00, 37211.82it/s] Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads. /w)
+[2026-11-07T05:38:42Z] PHASE2B DONE
+[2026-11-07T05:38:42Z] context-position opus55_t_attempt23
+opus55_t_attempt23 overall 1.15760 [1.6904, 1.1994, 1.142, 1.1155, 1.1107] 23s
+[2026-11-07T05:39:07Z] context-position opus55_t_attempt24
+opus55_t_attempt24 overall 1.16126 [1.6853, 1.2061, 1.1476, 1.1195, 1.1144] 25s
+[2026-11-07T05:39:33Z] context-position opus55_t_attempt27
+opus55_t_attempt27 overall 1.15833 [1.6898, 1.2015, 1.1433, 1.1162, 1.1112] 24s
+[2026-11-07T05:39:59Z] context-position pair_a_baseline_t
+pair_a_baseline_t overall 1.24907 [1.6119, 1.2858, 1.2394, 1.2187, 1.2167] 29s
+[2026-11-07T05:40:29Z] context-position autoresearch_compatible_time300s_seed0
+autoresearch_compatible_time300s_seed0 overall 1.16773 [1.7429, 1.2044, 1.1485, 1.1217, 1.119] 29s
+[2026-11-07T05:41:00Z] context-position autopareto_292_tokens201M_seed3
+autopareto_292_tokens201M_seed3 overall 1.13962 [1.6805, 1.1883, 1.1265, 1.0961, 1.0909] 24s
+[2026-11-07T05:41:25Z] context-position autopareto_292_tokens201M_seed4
+autopareto_292_tokens201M_seed4 overall 1.14867 [1.729, 1.205, 1.1347, 1.1007, 1.0965] 25s
+[2026-11-07T05:41:52Z] context-position autopareto_292_tokens201M_seed5
+autopareto_292_tokens201M_seed5 overall 1.13723 [1.6478, 1.1856, 1.126, 1.0962, 1.0906] 25s
+[2026-11-07T05:42:18Z] context-position autoresearch_compatible_tokens201M_seed3
+autoresearch_compatible_tokens201M_seed3 overall 1.10092 [1.7575, 1.1335, 1.0768, 1.0493, 1.0465] 30s
+[2026-11-07T05:42:49Z] context-position blimp_map
+BLiMP map: 67 paradigms
+[2026-11-07T05:43:22Z] PHASE2 ALL DONE

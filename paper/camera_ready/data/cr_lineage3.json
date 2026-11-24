@@ -1,0 +1,351 @@
+[
+  {
+    "head": "AutoResearch, GPT-5.6",
+    "rows": [
+      {
+        "a": 0,
+        "label": "start: 8 layers, 50.3M",
+        "label2": "val 1.189"
+      },
+      {
+        "a": 4,
+        "label": "#4 short attention windows",
+        "quote": "“converting redundant attention compute into more training tokens”"
+      },
+      {
+        "a": 5,
+        "label": "#5 batch halved",
+        "label2": "val 1.172",
+        "quote": "“twice as many optimizer updates within the fixed training time”"
+      },
+      {
+        "a": 6,
+        "label": "#6 halved again",
+        "label2": "val 1.099",
+        "hi": true
+      },
+      {
+        "a": 9,
+        "label": "#9 longer LR warm-down",
+        "label2": "#13 embedding LR",
+        "also": [
+          13
+        ]
+      },
+      {
+        "a": 15,
+        "label": "#15, #16 output-head LR",
+        "also": [
+          16
+        ]
+      },
+      {
+        "a": 19,
+        "label": "#19 scalar LR",
+        "label2": [
+          "#21 weight decay",
+          "val 1.0968"
+        ],
+        "also": [
+          21
+        ]
+      },
+      {
+        "a": "g",
+        "group": [
+          22,
+          23,
+          24,
+          25,
+          26,
+          27,
+          28,
+          29,
+          30,
+          31,
+          32,
+          33,
+          34,
+          35,
+          36,
+          37,
+          38,
+          39,
+          40,
+          41,
+          42,
+          43,
+          44,
+          45,
+          46,
+          47
+        ],
+        "parent": 21,
+        "lane": 1,
+        "label": "#22 to #47: 26 tries from #21, incl. batch halved again (#41); 22 failed"
+      },
+      {
+        "a": 48,
+        "label": "#48 six Newton-Schulz steps"
+      },
+      {
+        "a": 51,
+        "label": "D1, D2 final LR floor (failed a cache check later found faulty)",
+        "also": [
+          52
+        ]
+      },
+      {
+        "a": 55,
+        "label": "D5 LR floor = AR-ref",
+        "label2": "val 1.0950",
+        "final": true
+      }
+    ]
+  },
+  {
+    "head": "AutoPareto, GPT-5.6",
+    "rows": [
+      {
+        "a": 0,
+        "label": "start: 8 layers, 50.3M",
+        "label2": "val 1.214; 90M tokens"
+      },
+      {
+        "a": 1,
+        "label": "A1 batch ¼: val 1.106",
+        "quote": "“roughly four times as many optimizer updates”",
+        "hi": true
+      },
+      {
+        "a": 4,
+        "label": "A4 depth 8 to 7",
+        "quote": "“materially improving cached decode speed”"
+      },
+      {
+        "a": 6,
+        "label": "A6 depth 6, width 384"
+      },
+      {
+        "a": 7,
+        "label": "A7 depth 5: val 1.0966",
+        "label2": "177M tokens"
+      },
+      {
+        "a": 8,
+        "label": "A8 depth 4, width 256: +0.061",
+        "quote": "“the smaller model processes more tokens”",
+        "bad": true
+      },
+      {
+        "a": 9,
+        "label": "A9, A10 width 320, 384",
+        "also": [
+          10
+        ],
+        "lane": 1
+      },
+      {
+        "a": "g",
+        "group": [
+          11,
+          12,
+          13,
+          14,
+          15,
+          16
+        ],
+        "parent": 7,
+        "lane": 2,
+        "label": "A11 to A16: learning rates"
+      },
+      {
+        "a": 17,
+        "label": "A17 depth 3",
+        "label2": "infrastructure crash",
+        "lane": 1
+      },
+      {
+        "a": 18,
+        "label": "A18 width 512: val 1.0957",
+        "quote": "“recover enough validation quality”",
+        "hi": true
+      },
+      {
+        "a": 19,
+        "label": "A19 matrix LR",
+        "label2": "A20 embedding LR",
+        "also": [
+          20
+        ]
+      },
+      {
+        "a": 21,
+        "label": "A21 embedding LR",
+        "lane": 1
+      },
+      {
+        "a": 22,
+        "label": "A22 head LR = GPT A22",
+        "label2": "val 1.0933; decode 1.9×",
+        "final": true
+      },
+      {
+        "a": 23,
+        "label": "A23 two KV heads",
+        "lane": 1
+      },
+      {
+        "a": 24,
+        "label": "A24 depth 3 = GPT A24 (17.9M)",
+        "lane": 1,
+        "ring": true
+      },
+      {
+        "a": 25,
+        "label": "A25 width 512 = GPT A25 (26.2M)",
+        "lane": 1,
+        "ring": true
+      }
+    ]
+  },
+  {
+    "head": "AutoPareto, Claude Opus 5.5",
+    "rows": [
+      {
+        "a": 0,
+        "label": "start: 8 layers, 50.3M",
+        "label2": "val 1.200; 85M tokens"
+      },
+      {
+        "a": 1,
+        "label": "A1 batch halved",
+        "quote": "“optimizer-update-limited, not token-limited”"
+      },
+      {
+        "a": 2,
+        "label": "A2 depth 6: run failed",
+        "lane": 1
+      },
+      {
+        "a": 3,
+        "label": "A3, A4 depth 6, then 4: decode 1.9×",
+        "also": [
+          4
+        ],
+        "hi": true
+      },
+      {
+        "a": 5,
+        "label": "A5 depth 3: 2.5×; 196M tokens"
+      },
+      {
+        "a": 6,
+        "label": "A6 depth 2: 3.6×, val +0.021",
+        "lane": 1,
+        "bad": true
+      },
+      {
+        "a": 7,
+        "label": "A7 from A5, batch halved: val 1.0995",
+        "quote": "“the quality prediction was falsified”"
+      },
+      {
+        "a": 8,
+        "label": "A8 own inference code: −52 MiB",
+        "quote": "“CUDA-graph decode will be the next isolated speed change”"
+      },
+      {
+        "a": 9,
+        "label": "A9 graph: accounting check failed",
+        "lane": 1
+      },
+      {
+        "a": 10,
+        "label": "A10 CUDA graph replay: 8.6×",
+        "hi": true,
+        "quote": "“the only lever that can raise speed without a quality cost”"
+      },
+      {
+        "a": 11,
+        "label": "A11 graph memory"
+      },
+      {
+        "a": 12,
+        "label": "A12 batch halved again: worse",
+        "lane": 1
+      },
+      {
+        "a": 13,
+        "label": "A13 bf16 weights: 10.1×"
+      },
+      {
+        "a": 14,
+        "label": "A14 compiled kernel fusion: 16.8×",
+        "hi": true
+      },
+      {
+        "a": 15,
+        "label": "A15, A16 LR, KV heads: worse",
+        "also": [
+          16
+        ],
+        "lane": 1
+      },
+      {
+        "a": 17,
+        "label": "A17 shorter windows"
+      },
+      {
+        "a": 18,
+        "label": "A18 ring K/V cache: 24.7×",
+        "hi": true
+      },
+      {
+        "a": 19,
+        "label": "A19 custom decode attention: 29.6×",
+        "hi": true
+      },
+      {
+        "a": 20,
+        "label": "A20, A21 QK gain; prefill logits",
+        "also": [
+          21
+        ]
+      },
+      {
+        "a": 22,
+        "label": "A22 fused decode step: 32.0×",
+        "hi": true
+      },
+      {
+        "a": 23,
+        "label": "A23 token shift = Opus A23",
+        "label2": "val 1.0962; 31.8× re-measured",
+        "final": true
+      },
+      {
+        "a": 24,
+        "label": "A24 shared table = Opus A24: 97 MiB",
+        "lane": 1,
+        "ring": true
+      },
+      {
+        "a": 25,
+        "label": "A25 output gate: worse",
+        "lane": 1
+      },
+      {
+        "a": 26,
+        "label": "A26 prefill attention kernel",
+        "lane": 2
+      },
+      {
+        "a": 27,
+        "label": "A27 int8 tables = Opus A27: 99 MiB",
+        "lane": 2,
+        "ring": true
+      }
+    ]
+  }
+]

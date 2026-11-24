@@ -1,0 +1,42 @@
+{
+  "attempt": 1,
+  "attempt_wall_seconds": 526.7653419971466,
+  "cell": "time_300s",
+  "contract": "fixed_time",
+  "finished_utc": "2026-11-04T08:06:28.745153+00:00",
+  "format": "autopareto_camera_ready_run_record_v1",
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "c034269894bfc1964bf027b0025e5ee8d573b687928ae279e69618e9ad67b9ad",
+    "end_to_end_training_seconds": 411.7678952217102,
+    "heldout_bpb": 1.1677343062254157,
+    "heldout_ci95": [
+      1.1614308182515622,
+      1.1745004077986922
+    ],
+    "parameter_count": 50332176,
+    "peak_training_memory_mb": 22652.443069458008,
+    "steady_state_seconds": 300.0802478790283,
+    "steady_state_tokens_per_second": 286970.9173084773,
+    "tokens": 87556096,
+    "updates": 668,
+    "validation_bpb": 1.1042768237058675,
+    "validation_bpb_in_process": 1.1042673349976684
+  },
+  "order": 2,
+  "phase1_model_id": "autoresearch_compatible",
+  "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+  "recipe": "AR-ref",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E0/runs/e0-arref-time300s-seed0",
+  "run_id": "e0-arref-time300s-seed0",
+  "seed": 0,
+  "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+  "stage": "E0",
+  "status": "completed",
+  "synthetic": false,
+  "time_budget_seconds": 300,
+  "token_budget": null
+}

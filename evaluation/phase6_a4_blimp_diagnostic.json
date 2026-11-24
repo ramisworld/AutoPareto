@@ -1,0 +1,23 @@
+{
+ "format": "autopareto_phase6_a4_blimp_diagnostic_v1",
+ "run_utc": "2026-11-17T10:27Z",
+ "pod_gpu": "GPU-6de81321",
+ "script": "scripts/phase6_a4_blimp_diagnostic.py",
+ "model": "gpt_a22-seed6 (E1 final.pt, staged sha256 f604859e...)",
+ "environment": "Env C /opt/autopareto_lmeval (lm-eval 0.4.13, torch 2.9.1+cu128), KERNELS_CACHE = registered HF hub cache",
+ "dataset": "nyu-mll/blimp revision 877fba0801ffb7cbd8c39c1ff314a46f053f6036 (lm-eval dataset cache)",
+ "result": {
+  "frozen_nospace_strict": 0.7254626865671642,
+  "lmeval_space_argmax": 0.7368955223880597,
+  "space_strict": 0.7367910447761195,
+  "nospace_argmax": 0.7255671641791045,
+  "configs": 67,
+  "pairs": 67000,
+  "ties": {
+   "nospace": 7,
+   "space": 7
+  },
+  "frozen_reported": 0.7254776119402985,
+  "lmeval_reported": 0.7368805970149256
+ }
+}

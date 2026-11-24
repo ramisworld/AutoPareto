@@ -1,0 +1,80 @@
+{
+  "schema": "autopareto_pair_a_active_inference_config_v1",
+  "status": "ACTIVE_PAIR_A_SEARCH_TIME",
+  "supersedes": [
+    "study/contracts_2026/provenance/inference_workload_manifest.json",
+    "study/contracts_2026/provenance/final_inference_release_20260903.json"
+  ],
+  "precision": "bfloat16",
+  "batch_size": 1,
+  "decoding": "greedy",
+  "input_tokens": 1024,
+  "generated_tokens": 128,
+  "cached_decode_transitions": 127,
+  "prompt_count": 8,
+  "warmup": {
+    "mode": "fixed_discarded_cached_decode_duration_v1",
+    "minimum_pure_decode_seconds": 20.0,
+    "candidate_and_baseline_each_warmed": true,
+    "adaptive_steady_state_gate": false,
+    "warmup_measurements_used_for_official_metric": false
+  },
+  "measurement": {
+    "windows": 8,
+    "minimum_cached_decode_seconds_per_window": 8.0,
+    "headline": "absolute candidate and contemporaneous interpolated-baseline tok/s medians plus median bracketed candidate/baseline ratio",
+    "paired_baseline": {
+      "required": true,
+      "windows": 8,
+      "protocol": "baseline_before_candidate_baseline_after_for_each_window",
+      "ratio_formula": "candidate_tok_s_i / linear_interpolation(baseline_before_i, baseline_after_i, candidate_i_timestamp)",
+      "headline_objective": "median of eight pairwise ratios against interpolated baselines",
+      "absolute_candidate_retained": true,
+      "absolute_baseline_retained": true,
+      "timestamps_required": true,
+      "baseline_before_retained": true,
+      "baseline_after_retained": true
+    },
+    "uncertainty": "95 percent bootstrap confidence interval over whole timing windows",
+    "raw_windows_preserved": true,
+    "cuda_synchronize_only_at_timing_boundaries": true,
+    "stability": {
+      "dispersion_statistic": "interquartile_range_over_window_median",
+      "dispersion_formula": "(Q3 - Q1) / median(eight aggregate window tok/s values)",
+      "maximum_relative_dispersion": 0.02,
+      "maximum_coefficient_of_variation": 0.05,
+      "raw_range_retained_as": "diagnostic_only",
+      "rationale": "The pre-study A40 evidence showed isolated window extremes with low CV and repeatable session medians; the robust statistic prevents one outlier from determining measured stability.",
+      "frozen_before_official_attempts": true
+    }
+  },
+  "memory": {
+    "pareto_objective": "peak_allocated_inference_memory_bytes",
+    "diagnostics": [
+      "reserved_cuda_memory_bytes",
+      "kv_cache_bytes",
+      "prefill_latency",
+      "first_token_latency"
+    ]
+  },
+  "correctness": {
+    "bf16_cache_check_required": true,
+    "fp32_sdpa_adjudication_allowed": true,
+    "material_bf16_cache_error_not_accepted_by_fp32": true
+  },
+  "protected_prompt_token_artifact": {
+    "path": "study/contracts_2026/provenance/pair_a_protected_prompt_tokens_v2.json",
+    "sha256": "78bba12b4f1faf6f860ca8c70547177fa9063536db263456c5364a1871b43fc3",
+    "prompt_set_token_sha256": "8166c50c11ded0eea5819a7505ff96d942134583236851ab41a8c7790023c769",
+    "prompt_token_hashes": [
+      "9085a438b548f69d6e419dbb39b4accaf90e334d3a331a3ac56a8de13b03b7e1",
+      "c585778d61a5d7bdac6144e604292df99ed5a251dce7d3b4c5031d6fb0624468",
+      "be2b33f59a20b6f7990a0b6f09dcacbd1d68daf3f2ef7064f1108570cacbfb0c",
+      "cfa632c7a0db200295361a69fe34ff8c94a27b18142809f9dd639840d80cd622",
+      "aac8fc085e492d8abf49de1794c5e96d6b0d1440f4e0af8a7e733947c9ece203",
+      "ab84d612ef88ff117935712780d8b7dd627936d99da577b671b9675527e56732",
+      "58459ffde27e828a3e8cd4fb08ccce885c9d6d9117a39d94e92c998b3323179b",
+      "dbbe296f8c046689ec786f58ce7c02eb5496ae61c64aab5be42a7e9ea4624e11"
+    ]
+  }
+}

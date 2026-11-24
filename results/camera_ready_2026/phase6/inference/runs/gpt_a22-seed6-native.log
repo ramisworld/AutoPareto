@@ -1,0 +1,1 @@
+{"label": "gpt_a22-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 275.1576597246327, "speedup": 1.9333809288584352, "peak_mib": 243.26318359375, "wall_s": 257.8}

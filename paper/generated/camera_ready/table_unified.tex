@@ -1,0 +1,25 @@
+\begin{tabular}{@{}lrrrrrrrrrr@{}}
+\toprule
+& & \multicolumn{2}{c}{Held-out BPB} & \multicolumn{3}{c}{Inference (1,024 in, 128 out)} & \multicolumn{4}{c}{Zero-shot accuracy (\%)} \\
+\cmidrule(lr){3-4}\cmidrule(lr){5-7}\cmidrule(l){8-11}
+Recipe & Params & 201.3M tok. & 300\,s & Decode & End to end & MiB & ARC-E & PIQA & LAMB. & BLiMP \\
+\midrule
+Baseline & 50.3M & 1.144{\tiny$\pm$0.005} & 1.240{\tiny$\pm$0.002} & 145 & 146 & 337 & 35.9 & 57.0 & 20.8 & 71.3 \\
+\addlinespace[1.5pt]
+AR-ref & 50.3M & \textbf{1.099{\tiny$\pm$0.004}}$^\star$ & 1.157{\tiny$\pm$0.004} & 145 & 145 & 337 & 36.2 & 58.1 & 21.9 & \textbf{74.5} \\
+\addlinespace[1.5pt]
+Random Search & 32.0M & 1.122{\tiny$\pm$0.001} & 1.158{\tiny$\pm$0.001} & 180 & 181 & 260 & 36.3 & \textbf{59.1} & 19.3 & 72.8 \\
+TPE & 39.8M & 1.121{\tiny$\pm$0.001}$^\star$ & 1.156{\tiny$\pm$0.002} & 193 & 194 & 289 & 35.4 & 56.6 & 21.0 & 74.2 \\
+MOTPE & 26.3M & 1.149{\tiny$\pm$0.006} & 1.165{\tiny$\pm$0.004} & 192 & 193 & 226 & 35.5 & 57.9 & 21.2 & 72.3 \\
+NSGA-II & 50.3M & 1.114{\tiny$\pm$0.001} & 1.171{\tiny$\pm$0.001} & 148 & 149 & 337 & 35.5 & 57.3 & 20.9 & 74.4 \\
+CMA-ES & 21.5M & 1.142{\tiny$\pm$0.001} & 1.164{\tiny$\pm$0.002} & 157 & 158 & 210 & 35.3 & 56.9 & 18.2 & 72.6 \\
+\addlinespace[1.5pt]
+GPT A22 & 29.4M & 1.141{\tiny$\pm$0.004}$^\star$ & \textbf{1.155{\tiny$\pm$0.004}} & 266 & 267 & 243 & 36.7 & 57.5 & 21.3 & 72.6 \\
+GPT A24 & 17.9M & 1.187{\tiny$\pm$0.002} & 1.186{\tiny$\pm$0.001} & 364 & 366 & 183 & \textbf{38.1} & 58.5 & 19.7 & 68.7 \\
+GPT A25 & 26.2M & 1.160{\tiny$\pm$0.006} & 1.163{\tiny$\pm$0.005} & 373 & 372 & 221 & 35.8 & 57.3 & 19.8 & 71.0 \\
+\addlinespace[1.5pt]
+Opus A23 & 26.2M & 1.158{\tiny$\pm$0.002} & 1.159{\tiny$\pm$0.003} & 4,579 & \textbf{672} & 110 & 36.5 & 58.4 & 21.7 & 71.1 \\
+Opus A24 & 22.0M & 1.160{\tiny$\pm$0.001}$^\star$ & 1.160{\tiny$\pm$0.004}$^\star$ & \textbf{4,591} & 663 & 105 & 35.4 & 57.1 & 20.8 & 70.9 \\
+Opus A27 & 26.2M & 1.158{\tiny$\pm$0.002}$^\star$ & 1.159{\tiny$\pm$0.002} & 4,583 & 664 & \textbf{96} & 36.7 & 57.9 & \textbf{22.3} & 70.7 \\
+\bottomrule
+\end{tabular}

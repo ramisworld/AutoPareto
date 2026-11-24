@@ -1,0 +1,62 @@
+{
+  "checkpoint": "/var/lib/autopareto/pair_a_claude_opus55_t_seed3_continuation_20261105c/attempts/claude-opus55-position-046-pair-a-fixed-time-seed3-763e4971d6dcc6f1226b0227/position-046-pair-a-fixed-time-seed3.checkpoint.pt",
+  "context": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V0_as_submitted",
+  "format": "autopareto_phase5b_kernel_census_v1",
+  "gpu_kernels_per_token": 78.0,
+  "host_graph_launch_calls_per_token": 1.0,
+  "host_kernel_launch_calls_per_token": 2.0,
+  "profiled_decode_tokens": 32,
+  "profiler_host_self_time_us_per_token": 252.76228125000023,
+  "top_kernels": [
+    {
+      "count_per_token": 18.0,
+      "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, floa"
+    },
+    {
+      "count_per_token": 7.0,
+      "name": "triton_per_fused__to_copy_add_mean_mul_pow_rsqrt_0"
+    },
+    {
+      "count_per_token": 6.0,
+      "name": "void at::native::index_elementwise_kernel<128, 4, at::native::index_copy_kernel_impl<at::native::OpaqueType<2> >(at::Ten"
+    },
+    {
+      "count_per_token": 4.0,
+      "name": "triton_per_fused__to_copy_mul_sum_0"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_per_fused__to_copy_add_cat_mean_mul_pow_rsqrt_0"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_red_fused_bitwise_not_masked_fill_mul_1"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_per_fused_bitwise_not_masked_fill_mul_2"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_red_fused_bitwise_not_masked_fill_mul_3"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_per_fused_bitwise_not_masked_fill_mul_4"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_per_fused__to_copy_mul_sum_5"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_per_fused__to_copy_sum_6"
+    },
+    {
+      "count_per_token": 3.0,
+      "name": "triton_poi_fused__to_copy_pow_relu_0"
+    }
+  ],
+  "torch": "2.8.0+cu128",
+  "train_py": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/B/contexts/attempt-23/V0_as_submitted/train.py"
+}

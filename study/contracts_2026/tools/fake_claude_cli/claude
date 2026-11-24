@@ -1,0 +1,86 @@
+#!/usr/bin/env python3
+"""Offline stand-in for `claude -p`, used only by AutoPareto dry runs and tests.
+
+It emits the same stream-json framing as Claude Code (one system/init event, one
+terminal result event carrying structured_output and modelUsage) and performs
+the requested phase on the staged context. It never contacts any service.
+Environment overrides let tests simulate a substituted model or API-key billing.
+"""
+
+import json
+import os
+import pathlib
+import re
+import sys
+import uuid
+
+args = sys.argv[1:]
+
+
+def value(flag):
+    return args[args.index(flag) + 1]
+
+
+VERSION = "0.0.0"
+
+if "--version" in args:
+    print(f"{VERSION} (offline fake for AutoPareto dry runs)")
+    sys.exit(0)
+
+prompt = args[args.index("-p") + 1]
+model = value("--model")
+phase = re.search(r"phase (\w+)\.", prompt).group(1)
+attempt = int(re.search(r"attempt (\d+)", prompt).group(1))
+cwd = pathlib.Path.cwd()
+session = str(uuid.uuid4())
+
+print(json.dumps({
+    "type": "system",
+    "subtype": "init",
+    "session_id": session,
+    "cwd": str(cwd),
+    "model": os.environ.get("FAKE_CLAUDE_REPORTED_MODEL", model),
+    "claude_code_version": VERSION,
+    "tools": value("--tools").split(",") + ["StructuredOutput"],
+    "permissionMode": value("--permission-mode"),
+    "apiKeySource": os.environ.get("FAKE_CLAUDE_API_KEY_SOURCE", "none"),
+    "mcp_servers": [],
+}))
+
+if phase == "select_parent":
+    view = json.loads((cwd / "campaign_view.json").read_text())
+    pool = [record for record in view.get("parent_pool", []) if record.get("parent_eligible")]
+    parent = pool[-1]["experiment_id"] if pool else view["baseline"]["baseline_experiment_id"]
+    proposal = {
+        "parent_experiment_id": parent,
+        "hypothesis": f"Dry-run hypothesis {attempt}: a one-constant edit changes validation BPB by less than 0.01.",
+        "intended_change": f"Dry-run change {attempt}: append a marker comment and keep the contract hook.",
+        "change_category": "dry_run",
+    }
+else:
+    plan = json.loads(re.search(r"plan is (\{.*?\})\. Implement", prompt).group(1))
+    train = cwd / "train.py"
+    source = train.read_text()
+    if "from study_runtime import contract_progress" not in source:
+        source = source.replace("from prepare import", "from study_runtime import contract_progress\nfrom prepare import", 1)
+    if "contract_progress(" not in source:
+        source = source.replace(
+            "    optimizer.step()",
+            "    contract_progress('T', total_training_time, (step + 1) * TOTAL_BATCH_SIZE)\n    optimizer.step()",
+            1,
+        )
+    train.write_text(source + f"\n# dry-run edit for attempt {attempt}\n")
+    proposal = {key: plan[key] for key in ("hypothesis", "intended_change", "change_category")}
+
+print(json.dumps({"type": "assistant", "message": {"model": model, "content": [{"type": "text", "text": "dry run"}]}}))
+print(json.dumps({
+    "type": "result",
+    "subtype": "success",
+    "is_error": False,
+    "session_id": session,
+    "result": json.dumps(proposal),
+    "structured_output": proposal,
+    "total_cost_usd": 0.0,
+    "usage": {"input_tokens": 0, "output_tokens": 0},
+    "modelUsage": {model: {"inputTokens": 0, "outputTokens": 0}},
+}))

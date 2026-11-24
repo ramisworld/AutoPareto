@@ -1,0 +1,43 @@
+{
+  "schema": "autopareto_n_star_v3_smoke_pareto_check_v1",
+  "n_star_freeze_sha256": "7212564a3c7eb790f70cedcde50e93f2e36b35f6185609ab4ac98fe602bc4d4f",
+  "campaign_history_written": false,
+  "smokes": [
+    {
+      "contract": "T",
+      "result_path": "recovery_evidence_20260902/smokes_v3/T_final/result.json",
+      "result_sha256": "04d1fe593d846b39a04399f389e39cd6b4756e8a75efc81493a4b036a2e8a415",
+      "status": "completed",
+      "total_tokens": 93847552,
+      "optimizer_updates": 179,
+      "protected_measured_training_seconds": 300.440020577,
+      "validation_bpb": 1.1901260032566605,
+      "inference_status": "stable",
+      "checkpoint_round_trip_hash_match": true,
+      "source_config_pairing_verified": true,
+      "pareto_decision": {
+        "decision": "retained",
+        "reason": "non-dominated within the empty non-study smoke archive"
+      }
+    },
+    {
+      "contract": "N",
+      "result_path": "recovery_evidence_20260902/smokes_v3/N_final/result.json",
+      "result_sha256": "ed96b52e52a4084422a6aa00258b46fd2720dce383cc60dbba616ed3e6cef1bf",
+      "status": "completed",
+      "total_tokens": 93847552,
+      "optimizer_updates": 179,
+      "protected_measured_training_seconds": 493.037824298,
+      "validation_bpb": 1.190113366022559,
+      "inference_status": "stable",
+      "checkpoint_round_trip_hash_match": true,
+      "source_config_pairing_verified": true,
+      "pareto_decision": {
+        "decision": "retained",
+        "reason": "non-dominated within the empty non-study smoke archive"
+      }
+    }
+  ],
+  "exact_n_rule_verified": "total_tokens == N_STAR and total_tokens == optimizer_updates * 524288",
+  "recorded_at_utc": "2026-09-01T22:51:00Z"
+}

@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/root/phase6_local/runs/p6-motpe-time300s-seed7/final.pt",
+  "measured_training_tokens": 151257088,
+  "parameter_count": 26345772,
+  "peak_training_cuda_memory_mb": 13656.85873413086,
+  "total_runtime_seconds": 372.9219889640808,
+  "total_training_tokens": 152698880,
+  "training_seconds": 300.1162233352661,
+  "training_seed": 7,
+  "training_tokens_per_second": 503995.0400516254,
+  "val_bpb": 1.0956427249029324
+}

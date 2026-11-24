@@ -1,0 +1,56 @@
+{
+  "baseline_experiment_id": "baseline-calibration-new-a40-20260914-run1",
+  "contract_parameters": {
+    "n_star": 85458944,
+    "time_seconds": 300.0,
+    "token_quantum": 524288,
+    "warmup_in_scientific_budget": false,
+    "warmup_optimizer_updates": 11
+  },
+  "field_provenance": {
+    "inference_result": "baseline-vs-baseline bracketed control on the live A40; normalized reference fixed to 1.0",
+    "peak_allocated_inference_memory_bytes": "bracketed_baseline_control.peak_allocated_inference_memory_bytes",
+    "protected_validation_bpb": "remote_calibration.validation_bpb",
+    "total_tokens": "remote_calibration.total_tokens",
+    "training_seed": "remote_calibration.training_seed"
+  },
+  "inference_result": {
+    "absolute_baseline_tok_s": 150.0487795394885,
+    "absolute_candidate_tok_s": 149.37368353388757,
+    "cached_decode_tokens_per_second_median": 149.37368353388757,
+    "correctness": {
+      "passed": true
+    },
+    "inference_status": "stable",
+    "normalized_decode_throughput": 1.0,
+    "normalized_decode_throughput_ci_95pct": [
+      1.0,
+      1.0
+    ],
+    "peak_allocated_inference_memory_bytes": 353574400,
+    "protocol_version": "autopareto_search_inference_bracketed_v2"
+  },
+  "protected_validation_bpb": 1.1998857791422985,
+  "record_scope": "same_seed_baseline",
+  "schema": "autopareto_pair_a_same_seed_baseline_registration_v1",
+  "source_artifacts": {
+    "bracketed_baseline_control": {
+      "path": "/var/lib/autopareto/pair_a_state/nonstudy_controls/baseline_vs_baseline_20260914/result.json",
+      "sha256": "d9f0a93a377bf63cb23649af9d28b43a317425440a05981e8012f76a2ebb811d"
+    },
+    "remote_calibration": {
+      "path": "/var/lib/autopareto/pair_a_state/calibration/run1/result.json",
+      "sha256": "5cabad227822b337b7b06e945a23964e59925d3a4ec9a7cd9709740cf3a288fc"
+    },
+    "remote_calibration_checkpoint": {
+      "path": "/var/lib/autopareto/pair_a_state/calibration/run1/result.checkpoint.pt",
+      "sha256": "f0f6a40fc6916455584508e3d75c8bb6b9d6c820816225c3243d7488b47a40bf"
+    }
+  },
+  "source_transform": "candidate-compatible baseline: removed only the post-training candidate-side evaluate_bpb import/call; protected validation remains controller-owned",
+  "starting_source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+  "total_tokens": 85458944,
+  "training_seed": 3,
+  "training_throughput_tokens_per_second": 283707.0857619215,
+  "validation_bpb": 1.1998857791422985
+}

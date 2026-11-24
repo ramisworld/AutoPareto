@@ -1,0 +1,11 @@
+{
+  "generated_at_utc": "2026-09-06T06:35:36.435640+00:00",
+  "pdf_sha256": "e86cea72f9f5e7abebe4b53b9d640964b8034938104611e7a477bf1372396eed",
+  "template_sha256": "c3fc2894e83d2517ca18b66741d6c595986d97957dc08ec08bb2125a7ec4555a",
+  "frozen_hypothesis_sha256": "8b274d1bcef3d28d39e156b55d18fec99c8d7162ab97d8a2bf132b7220763435",
+  "source_bundle_sha256": "58ff517d2a192cfa26518d6ba181612de6ca5c0015d4ad671c4c007271ec884d",
+  "artifact_inventory_sha256": "310156fdae9126825e20e2274fc6fdc8c9fd8e9fba03b6db9308f3314d2e0a3a",
+  "test_count": 15,
+  "reviewer_attacks": 18,
+  "status": "working paper; human rewrite pending; cutoff still in future"
+}

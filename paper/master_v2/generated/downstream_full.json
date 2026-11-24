@@ -1,0 +1,268 @@
+{
+ "baseline": {
+  "arc_easy/accuracy": {
+   "mean": 0.3528338945005612,
+   "sd": 0.01477466565058175
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.3333333333333333,
+   "sd": 0.002628366160942099
+  },
+  "piqa/accuracy": {
+   "mean": 0.5736307580703663,
+   "sd": 0.004155400521360054
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5768951759158506,
+   "sd": 0.0027384238067721723
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.20473510576363282,
+   "sd": 0.006053356864149894
+  },
+  "lambada_openai/perplexity": {
+   "mean": 14.34738141155896,
+   "sd": 0.5710084331785447
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.7137213930348258,
+   "sd": 0.00824040560575822
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.7137213930348258,
+   "sd": 0.00824040560575822
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.1465895336014258,
+   "sd": 0.004672577113590637
+  }
+ },
+ "autoresearch_compatible": {
+  "arc_easy/accuracy": {
+   "mean": 0.36503928170594835,
+   "sd": 0.013743585746942753
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.32435465768799104,
+   "sd": 0.009281551575209376
+  },
+  "piqa/accuracy": {
+   "mean": 0.5866884294523033,
+   "sd": 0.013659651837251008
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5725426187885383,
+   "sd": 0.014294991946999304
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.20441166957759233,
+   "sd": 0.009295400682118567
+  },
+  "lambada_openai/perplexity": {
+   "mean": 14.151781632706747,
+   "sd": 0.9978439403079917
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.7455920398009951,
+   "sd": 0.005919680963308624
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.7455920398009951,
+   "sd": 0.005919680963308624
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.099803115598075,
+   "sd": 0.0019426435923677486
+  }
+ },
+ "tpe_quality": {
+  "arc_easy/accuracy": {
+   "mean": 0.35704264870931535,
+   "sd": 0.01011269432712689
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.32463524130190796,
+   "sd": 0.012171476558217717
+  },
+  "piqa/accuracy": {
+   "mean": 0.5763511062749365,
+   "sd": 0.007100751523558901
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5607544432354008,
+   "sd": 0.008978522883196597
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.21424412963322337,
+   "sd": 0.012587112492281406
+  },
+  "lambada_openai/perplexity": {
+   "mean": 13.915338920398085,
+   "sd": 1.4487468727677448
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.7329701492537314,
+   "sd": 0.007819912778634367
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.7329701492537314,
+   "sd": 0.007819912778634367
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.1194015812978206,
+   "sd": 0.004270780014603397
+  }
+ },
+ "motpe_quality": {
+  "arc_easy/accuracy": {
+   "mean": 0.35409652076318743,
+   "sd": 0.018143262003896706
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.33964646464646464,
+   "sd": 0.015725203444671213
+  },
+  "piqa/accuracy": {
+   "mean": 0.5745375408052231,
+   "sd": 0.00445340194334738
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5656510700036271,
+   "sd": 0.0032794960681945947
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.21527912542855293,
+   "sd": 0.022651527183797572
+  },
+  "lambada_openai/perplexity": {
+   "mean": 15.061574683812673,
+   "sd": 1.7271308147770943
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.724726368159204,
+   "sd": 0.005487918510057325
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.724726368159204,
+   "sd": 0.005487918510057372
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.1482527567273162,
+   "sd": 0.003101569735633298
+  }
+ },
+ "autopareto_292": {
+  "arc_easy/accuracy": {
+   "mean": 0.3691077441077441,
+   "sd": 0.0036448880630658266
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.3416105499438833,
+   "sd": 0.012906083762185104
+  },
+  "piqa/accuracy": {
+   "mean": 0.582879941965905,
+   "sd": 0.0025711728108011853
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5790714544795067,
+   "sd": 0.0041554005213599934
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.21495568924251246,
+   "sd": 0.018502472264419343
+  },
+  "lambada_openai/perplexity": {
+   "mean": 14.208496174615345,
+   "sd": 1.6320275548243781
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.7201741293532339,
+   "sd": 0.003572665879507454
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.7201741293532339,
+   "sd": 0.003572665879507454
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.141837121365997,
+   "sd": 0.006034606800928308
+  }
+ },
+ "autopareto_299": {
+  "arc_easy/accuracy": {
+   "mean": 0.35676206509539843,
+   "sd": 0.015551522402414156
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.3256172839506173,
+   "sd": 0.01938465258071366
+  },
+  "piqa/accuracy": {
+   "mean": 0.5727239753355097,
+   "sd": 0.0073868015431324974
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5632934348929997,
+   "sd": 0.013616241816972062
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.20764603143799729,
+   "sd": 0.002099098355597129
+  },
+  "lambada_openai/perplexity": {
+   "mean": 15.604130760739874,
+   "sd": 0.7258481267526239
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.7047363184079602,
+   "sd": 0.00709269896125488
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.7047363184079602,
+   "sd": 0.00709269896125488
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.1593089589933974,
+   "sd": 0.0003695410819012796
+  }
+ },
+ "autopareto_294": {
+  "arc_easy/accuracy": {
+   "mean": 0.34834455667789,
+   "sd": 0.008831700749459664
+  },
+  "arc_easy/length_normalized_accuracy": {
+   "mean": 0.33052749719416386,
+   "sd": 0.009049637162104463
+  },
+  "piqa/accuracy": {
+   "mean": 0.5690968443960827,
+   "sd": 0.0023715445829927584
+  },
+  "piqa/length_normalized_accuracy": {
+   "mean": 0.5627493652520856,
+   "sd": 0.0029965019299707176
+  },
+  "lambada_openai/exact_match": {
+   "mean": 0.19917200336373633,
+   "sd": 0.00608850901845663
+  },
+  "lambada_openai/perplexity": {
+   "mean": 17.70683616514941,
+   "sd": 0.47692886020276726
+  },
+  "blimp/macro_accuracy": {
+   "mean": 0.6933432835820896,
+   "sd": 0.010543136102144612
+  },
+  "blimp/micro_accuracy": {
+   "mean": 0.6933432835820896,
+   "sd": 0.010543136102144612
+  },
+  "heldout_climbmix_bpb/bits_per_byte": {
+   "mean": 1.1900565997289696,
+   "sd": 0.0021787962862015245
+  }
+ }
+}

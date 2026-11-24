@@ -1,0 +1,78 @@
+{
+  "schema": "autopareto_contracts_2026_a40_environment_v1",
+  "recorded_at": "2026-08-31T12:59:56+12:00",
+  "host": {
+    "repository_path": "/workspace/autopareto",
+    "git_branch": "autopareto/research-infrastructure",
+    "git_head": "5bf86b572d5a729aaad0163103cf15a7b42797a9",
+    "working_tree_note": "A40 checkout was already dirty; no historical files were cleaned or rewritten."
+  },
+  "local_source_reference": {
+    "repository_path": "/Users/Rami/Documents/dev/autopareto",
+    "git_branch": "autopareto/professor-ready-2026",
+    "git_head": "6bcb69e6036d64bb0eca9b5b07d0b0fde1c58abf"
+  },
+  "authoritative_environment_spec": {
+    "pyproject_path": "pyproject.toml",
+    "pyproject_sha256": "147f82fd794a8d0e689af41583c80acf0628400461b1adc03e433c826cbf2d6d",
+    "lock_path": "uv.lock",
+    "lock_sha256": "262a4d55eaa24f47c98ca44cc82ff1660d5daba73df0b1e78246cceac2c429b4",
+    "python_version_file": ".python-version",
+    "python_version_file_sha256": "7a41a41354ab8049091ef1a00253ca00567f5a1d3f9aef5502c0b4b5ce9ae707",
+    "install_command": "uv sync --frozen --offline",
+    "install_exit_code": 0,
+    "substitution_policy": "No substitute versions were selected; the frozen uv.lock resolution was used."
+  },
+  "runtime": {
+    "python": "3.10.18",
+    "pytorch": "2.9.1+cu128",
+    "torch_version_cuda": "12.8",
+    "cuda_toolkit": "12.8 (nvcc Build cuda_12.8.r12.8/compiler.35583870_0)",
+    "nvidia_driver": "580.159.04",
+    "cuda_available": true,
+    "gpu_count": 1,
+    "gpus": [
+      {
+        "name": "NVIDIA A40",
+        "memory_total_mib": 46068,
+        "compute_capability": "8.6"
+      }
+    ]
+  },
+  "packages": {
+    "cmaes": "0.12.0",
+    "kernels": "0.12.1",
+    "matplotlib": "3.10.8",
+    "numpy": "2.2.6",
+    "optuna": "4.5.0",
+    "pandas": "2.3.3",
+    "pyarrow": "23.0.1",
+    "requests": "2.32.5",
+    "rustbpe": "0.1.0",
+    "tiktoken": "0.12.0",
+    "triton": "3.5.1",
+    "uv": "0.9.0"
+  },
+  "study_code_hashes": {
+    "study/contracts_2026/inference_benchmark.py": "7fc68a2a9318d121d3313af5af214f3937161f32f2cb1ac7ff3949cb72b22ac0",
+    "study/contracts_2026/benchmark_policy.py": "83123f64676aa4976d2f51c03d60063eabc930ee8fb199bb15173c786cb24f62",
+    "study/contracts_2026/train_launcher.py": "55e96dda7d458a5b45f3da97fe2262638da6db1665846d2c60f1e13be9f928a7",
+    "study/contracts_2026/bridge.py": "1db0065537a251f41e3ec6d024fca558d15cde1b8b64170a61382242078fe70f",
+    "study/contracts_2026/remote_runner.py": "5619b7e04e8544b082d281eff9599d0c9d5d2ad65d5ecbbf9651a95926da5c35",
+    "study/contracts_2026/tools/freeze_data_manifest.py": "68aef64c0291917027bad1ff45d3b80256b25e7dd21d42b9ace3f114262a0060",
+    "protected/inference_adapter.py": "06c72ea8d9502bfdccf0801b8d9f86e96fe13563bf980336a0924f79c606e448"
+  },
+  "data_manifest": {
+    "path": "study/contracts_2026/provenance/data_manifest.json",
+    "aggregate_manifest_sha256": "1211827090aa7e669ec8bcd965ae1423dc90697f0e4928d0fce707cbc36c3f93",
+    "file_count": 13,
+    "cache_root": "/workspace/.cache/autoresearch",
+    "validation_shard": "data/shard_06542.parquet"
+  },
+  "required_dependency_check": {
+    "kernels": "present",
+    "pyarrow": "present",
+    "rustbpe": "present",
+    "tiktoken": "present"
+  }
+}

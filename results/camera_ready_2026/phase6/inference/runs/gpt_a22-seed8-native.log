@@ -1,0 +1,1 @@
+{"label": "gpt_a22-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 263.6435695080598, "speedup": 1.9252969795060497, "peak_mib": 243.26318359375, "wall_s": 258.8}

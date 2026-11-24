@@ -1,0 +1,1 @@
+{"label": "arref-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 145.08968665187396, "speedup": 0.9977105235788186, "peak_mib": 337.26513671875, "wall_s": 275.5}

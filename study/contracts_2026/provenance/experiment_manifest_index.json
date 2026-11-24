@@ -1,0 +1,13 @@
+{
+  "schema": "autopareto_experiment_manifest_index_v1",
+  "audit_date": "2026-09-02",
+  "primary_recovered_registry": "results/snapshots/runpod-<pod-id>-shutdown-20260901/extracted/results/phase1/downstream_200m.db",
+  "primary_recovered_registry_sha256": "d1166a3b84e6e91f3039697e682aa07133970f8c19d2e60346a03a9459aa34ec",
+  "primary_recovered_registry_bytes": 62943232,
+  "row_counts": {"experiments":318,"training_runs":348,"inference_measurements":2940,"deployment_sessions":6,"deployment_measurements":6060,"experiment_events":48471,"agent_actions":67,"downstream_evaluation_runs":32,"downstream_task_results":288,"downstream_generations":576},
+  "public_release_snapshot": {"path":"data/experiment_records.csv","scope":"release subset","row_count":284},
+  "historical_discovery": {"autopareto_campaigns":3,"attempts":75,"completed":74,"pre_search_failures_retained":true},
+  "equal_token_panel": {"path":"results/phase1/phase1_equal_token_results.json","models":7,"seeds":[3,4,5],"runs":21,"tokens_per_run":201326592,"status":"completed in recovered evidence"},
+  "current_controlled_study": {"design":"Design-B","contracts":["T","N"],"scientific_campaign_launched":false,"n_star":93847552,"n_star_manifest_sha256":"7212564a3c7eb790f70cedcde50e93f2e36b35f6185609ab4ac98fe602bc4d4f"},
+  "scope_warning": "The recovered database is later/different in scope from the 284-row public CSV and from older prose counts. Neither the public CSV nor the zero-byte local database is the complete current registry."
+}

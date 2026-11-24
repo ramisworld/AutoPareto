@@ -1,0 +1,142 @@
+{
+ "panel_a": {
+  "Baseline": {
+   "params_M": 50.332176,
+   "heldout_bpb": 1.1465895336014258,
+   "decode_tok_s": 196.82072149558223,
+   "peak_mib": 250.8818359375,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  },
+  "AR-ref": {
+   "params_M": 50.332176,
+   "heldout_bpb": 1.099803115598075,
+   "decode_tok_s": 192.93322787922392,
+   "peak_mib": 250.8818359375,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  },
+  "TPE": {
+   "params_M": 39.846284,
+   "heldout_bpb": 1.1194015812978206,
+   "decode_tok_s": 258.89419169241535,
+   "peak_mib": 205.880859375,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  },
+  "MOTPE": {
+   "params_M": 26.345772,
+   "heldout_bpb": 1.1482527567273162,
+   "decode_tok_s": 270.0064033478398,
+   "peak_mib": 145.568359375,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  },
+  "AP-Q": {
+   "params_M": 29.360392,
+   "heldout_bpb": 1.141837121365997,
+   "decode_tok_s": 383.021825913658,
+   "peak_mib": 162.8798828125,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  },
+  "AP-F": {
+   "params_M": 26.214662,
+   "heldout_bpb": 1.1593089589933974,
+   "decode_tok_s": 488.25809485919143,
+   "peak_mib": 142.3798828125,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  },
+  "AP-S": {
+   "params_M": 17.891526,
+   "heldout_bpb": 1.1900565997289696,
+   "decode_tok_s": 495.4913043461184,
+   "peak_mib": 106.9423828125,
+   "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5 means)"
+  }
+ },
+ "panel_b": {
+  "Registered baseline": {
+   "params_M": 50.3,
+   "val_bpb": 1.1998857791422985,
+   "decode_tok_s": 149.37368353388757,
+   "peak_mib": 337.19482421875,
+   "source": "Pair-A registration calibration run"
+  },
+  "GPT-5.6 A14": {
+   "params_M": 24.641612,
+   "val_bpb": 1.1016129764389242,
+   "decode_tok_s": 193.46198022807346,
+   "speedup": 1.3190971142187524,
+   "peak_mib": 238.56689453125,
+   "source": "Pair-A Codex campaign record"
+  },
+  "Opus A23": {
+   "params_M": 26.214675,
+   "val_bpb": 1.0961979650230713,
+   "decode_tok_s": 4569.889933444409,
+   "decode_tok_s_repeats": [
+    4569.889933444409,
+    4577.348728819216,
+    4569.729556763741
+   ],
+   "baseline_tok_s_repeats": [
+    143.5396877729327,
+    145.47045860264384,
+    136.02243849791205
+   ],
+   "speedup": 31.834929025672537,
+   "speedup_repeats": [
+    31.834929025672537,
+    31.46658335197557,
+    33.58879617927661
+   ],
+   "stable_repeats": 2,
+   "peak_mib": 113.00537109375,
+   "source": "results/camera_ready_2026/phase2/raw/winner_verification_and_host_probe.tar.xz:phase2_winner_verification_20261107T032813Z/attempt-23/repeat_[123].json (SHA256SUMS-checked)"
+  },
+  "Opus A24": {
+   "params_M": 22.020371,
+   "val_bpb": 1.0994636269516112,
+   "decode_tok_s": 4578.056446803059,
+   "decode_tok_s_repeats": [
+    4577.43971880601,
+    4587.365257385056,
+    4578.056446803059
+   ],
+   "baseline_tok_s_repeats": [
+    134.84200213577554,
+    151.25475497288573,
+    148.3781528091154
+   ],
+   "speedup": 30.856249099630404,
+   "speedup_repeats": [
+    33.931451331389766,
+    30.32962905530311,
+    30.856249099630404
+   ],
+   "stable_repeats": 3,
+   "peak_mib": 96.88037109375,
+   "source": "results/camera_ready_2026/phase2/raw/winner_verification_and_host_probe.tar.xz:phase2_winner_verification_20261107T032813Z/attempt-24/repeat_[123].json (SHA256SUMS-checked)"
+  },
+  "Opus A27": {
+   "params_M": 26.214675,
+   "val_bpb": 1.096227390135518,
+   "decode_tok_s": 4591.643483151622,
+   "decode_tok_s_repeats": [
+    4592.672474863679,
+    4589.0304624484015,
+    4591.643483151622
+   ],
+   "baseline_tok_s_repeats": [
+    145.80871902482968,
+    140.6010987391366,
+    146.01466952764622
+   ],
+   "speedup": 31.470489163618826,
+   "speedup_repeats": [
+    31.470489163618826,
+    32.64596732264374,
+    31.44724950905369
+   ],
+   "stable_repeats": 1,
+   "peak_mib": 99.05224609375,
+   "source": "results/camera_ready_2026/phase2/raw/winner_verification_and_host_probe.tar.xz:phase2_winner_verification_20261107T032813Z/attempt-27/repeat_[123].json (SHA256SUMS-checked)"
+  }
+ }
+}

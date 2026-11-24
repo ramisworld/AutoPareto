@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/root/phase6_local/runs/p6-cmaes-time300s-seed7/final.pt",
+  "measured_training_tokens": 143917056,
+  "parameter_count": 21496078,
+  "peak_training_cuda_memory_mb": 13970.876152038574,
+  "total_runtime_seconds": 379.01183247566223,
+  "total_training_tokens": 145358848,
+  "training_seconds": 300.05937218666077,
+  "training_seed": 7,
+  "training_tokens_per_second": 479628.5980045048,
+  "val_bpb": 1.1084186341853297
+}

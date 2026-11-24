@@ -1,0 +1,76 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "amendment": {
+    "name": "A1",
+    "plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade"
+  },
+  "attempt": 1,
+  "attempt_wall_seconds": 490.08226442337036,
+  "cell": "time_300s",
+  "copy": {
+    "manifest_sha256": "c02b4721bac92a736ce4e46d15692f78b5145489ef66ffd4e36fa471be49894d",
+    "verified_files": 18
+  },
+  "display": "AR-ref",
+  "executed_in": "/root/phase6_local/runs/p6-arref-time300s-seed6-drift",
+  "finished_utc": "2026-11-17T03:59:59.814627+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.112.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "7df725316cd961de1b4088b07061c3ecc22642ee64fd1e5d8b3fbe7dc1848d84",
+    "e1_comparability": {
+      "heldout_bounds": [
+        1.149324136476854,
+        1.163674461110143
+      ],
+      "heldout_bpb": 1.1525398980620527,
+      "passed": true,
+      "tokens": 87818240,
+      "tokens_bounds": [
+        87069818,
+        88961187
+      ]
+    },
+    "end_to_end_training_seconds": 385.02334117889404,
+    "heldout_bpb": 1.1525398980620527,
+    "heldout_ci95": [
+      1.1463118294711478,
+      1.1592704142033394
+    ],
+    "parameter_count": 50332176,
+    "peak_training_memory_mb": 22652.443069458008,
+    "steady_state_seconds": 300.2324275970459,
+    "steady_state_tokens_per_second": 287698.59635525226,
+    "timing_anomaly": {
+      "excess_seconds": 0,
+      "max_step_seconds": 0.458,
+      "median_seconds": 0.456,
+      "parsed_steps": 659,
+      "passed": true,
+      "reason": null,
+      "slow_steps": 0
+    },
+    "tokens": 87818240,
+    "updates": 670,
+    "validation_bpb": 1.0966503367903313,
+    "validation_bpb_in_process": 1.0966289525859947
+  },
+  "order": 34,
+  "phase1_model_id": "autoresearch_compatible",
+  "pilot": false,
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "arref",
+  "role": "drift_control",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-arref-time300s-seed6-drift",
+  "run_id": "p6-arref-time300s-seed6-drift",
+  "seed": 6,
+  "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1",
+  "stage": "fixed",
+  "status": "completed"
+}

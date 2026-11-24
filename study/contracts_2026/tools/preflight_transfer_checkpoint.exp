@@ -1,0 +1,41 @@
+#!/usr/bin/expect -f
+
+# Preflight-only helper: transfer an existing frozen checkpoint over the
+# RunPod PTY wrapper without invoking any training or research attempt.
+if {$argc != 2} {
+    puts stderr "usage: preflight_transfer_checkpoint.exp LOCAL_CHECKPOINT REMOTE_PATH"
+    exit 2
+}
+
+set src [lindex $argv 0]
+set remote [lindex $argv 1]
+set file_size [file size $src]
+# macOS base64 emits one final newline and no wrapping for these files.
+set encoded_size [expr {4 * (($file_size + 2) / 3) + 1}]
+set timeout 300
+log_user 0
+
+spawn ssh -tt -o BatchMode=yes -o ConnectTimeout=20 -o StrictHostKeyChecking=no \
+    -i /Users/Rami/.ssh/id_ed25519 \
+    <pod-id>-<suffix>@ssh.runpod.io
+expect -re {# $}
+
+set remote_cmd [format {stty -echo -icanon min 1 time 0 -ixon; python3 -c 'import sys,base64; d=sys.stdin.buffer.read(%d); open("%s","wb").write(base64.b64decode(d))'} $encoded_size $remote]
+send -- "$remote_cmd\r"
+
+set f [open "|base64 -i $src" r]
+fconfigure $f -translation binary -encoding binary
+while {![eof $f]} {
+    set chunk [read $f 32768]
+    if {[string length $chunk] > 0} {
+        send -raw -- $chunk
+    }
+}
+close $f
+
+expect -re {# $}
+send -- "stty sane; sha256sum $remote\r"
+expect -re {([0-9a-f]{64})  }
+puts $expect_out(1,string)
+send -- "exit\r"
+expect eof

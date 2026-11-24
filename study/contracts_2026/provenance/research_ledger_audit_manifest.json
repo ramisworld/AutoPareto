@@ -1,0 +1,41 @@
+{
+  "schema": "autopareto_research_ledger_audit_manifest_v1",
+  "audit_date": "2026-09-02",
+  "scientific_execution": false,
+  "campaign_launch": false,
+  "n_star_modified": false,
+  "old_ledger": {"path":"study/contracts_2026/provenance/research_ledger_pre_rewrite_20260902.md","sha256":"691ac32a97d323334effeae3fffbb459ef2993bec5459d853b3aad428337070a","bytes":56532,"lines":940},
+  "new_ledger": {"path":"docs/RESEARCH_LEDGER.md","sha256":"f8213a916509a78f133a86b8663e962ff0d2b684dc14743d42c6a02dd2edcbed","bytes":31549,"lines":510},
+  "new_or_updated_audit_artifacts": [
+    "study/contracts_2026/provenance/research_ledger_pre_rewrite_record.json",
+    "study/contracts_2026/provenance/source_registry.json",
+    "study/contracts_2026/provenance/tokenizer_manifest.json",
+    "study/contracts_2026/provenance/model_checkpoint_registry.json",
+    "study/contracts_2026/provenance/experiment_manifest_index.json",
+    "study/contracts_2026/provenance/claim_source_artifact_map.json",
+    "study/contracts_2026/provenance/compute_ledger.json",
+    "study/contracts_2026/provenance/research_ledger_rewrite_report.md",
+    "study/contracts_2026/provenance/reproducibility_audit.md",
+    "study/contracts_2026/provenance/release_artifact_index.md",
+    "study/contracts_2026/provenance/neurips_checklist_readiness.md",
+    "study/contracts_2026/provenance/reproduction_commands.md",
+    "study/contracts_2026/provenance/sources.bib"
+  ],
+  "frozen_artifacts_read_only": {
+    "parent_manifest_sha256":"ab7c7923c324c30df8224d030648e62275509477bc4367799ca1a358ae52bb3e",
+    "n_star_freeze_v3_sha256":"7212564a3c7eb790f70cedcde50e93f2e36b35f6185609ab4ac98fe602bc4d4f",
+    "data_manifest_sha256":"6a6d9c60b99b80884553939932e91e93364e548e102cf71b545589317f55eb88",
+    "data_aggregate_sha256":"1211827090aa7e669ec8bcd965ae1423dc90697f0e4928d0fce707cbc36c3f93",
+    "phase1_results_sha256":"ae0792eb96cb31daa568064561daf47d8a1da98fd783516f49bc7d80905cc18f",
+    "recovered_registry_sha256":"d1166a3b84e6e91f3039697e682aa07133970f8c19d2e60346a03a9459aa34ec"
+  },
+  "known_unresolved": [
+    "runtime token-ID hash output missing",
+    "canonical populated results/results.db absent",
+    "full AutoPareto transcript absent",
+    "public raw per-example downstream traces absent",
+    "license/release review incomplete",
+    "energy/billing/human-time accounting incomplete",
+    "cross-GPU and larger-scale replication absent"
+  ]
+}

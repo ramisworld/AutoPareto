@@ -1,0 +1,94 @@
+{
+  "schema": "autopareto_n_star_freeze_v2",
+  "status": "SUPERSEDED_PAIR_A_PRE_STUDY",
+  "superseded_by": "runs/pair-a/provenance/pair_a_active_provenance_20260904.json",
+  "superseded_reason": "Historical 93,847,552 calibration freeze retained for provenance only; active Pair-A N_STAR is 88,604,672.",
+  "scientific_campaign_started": false,
+  "campaign_history_written": false,
+  "parent_manifest_sha256": "ab7c7923c324c30df8224d030648e62275509477bc4367799ca1a358ae52bb3e",
+  "supersedes_invalid_freeze": {
+    "path": "study/contracts_2026/provenance/n_star_freeze_20260902.json",
+    "sha256": "e96982c0193d08855a16b1491a5e9e797d02581e982cb14d073d153a0d39234e",
+    "reason": "old Contract-T parent clock included compilation and steps 0-10"
+  },
+  "baseline": {
+    "identity": "registered common baseline",
+    "contract": "T",
+    "seed": 3,
+    "time_seconds": 300.0,
+    "source_sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8",
+    "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+    "config_sha256": "9d0ce7414dcd3ecba3e0cefb8cfb817afb9d90403b44d14ce8a4a202941ee69e",
+    "total_batch_size": 524288,
+    "device_batch_size": 64,
+    "accumulation_steps": 4,
+    "sequence_length": 2048
+  },
+  "calibration_runs": [
+    {
+      "run_index": 1,
+      "path": "recovery_evidence_20260902/calibration_v3/run01_r2/result.json",
+      "result_sha256": "17a418e8314dd433e00ca878e87d6dc9c0a633008e948cff7169962893e8b58a",
+      "total_tokens": 93847552,
+      "optimizer_updates": 179,
+      "timed_optimizer_updates": 168,
+      "protected_measured_training_seconds": 300.216180091,
+      "validation_bpb": 1.1898654769819428,
+      "post_warmup_tokens_per_second": 295223.067342388,
+      "checkpoint_sha256": "3aebb2e31f2f048f6ff2c7b278aa20243ed0c6f153cb42e9f5a5ae3f8bc05150",
+      "checkpoint_pairing_verified": true
+    },
+    {
+      "run_index": 2,
+      "path": "recovery_evidence_20260902/calibration_v3/run02_final/result.json",
+      "result_sha256": "282391a11e370eece566e56a51e8b2e14684399391843370ddd75ab58113a0ec",
+      "total_tokens": 93847552,
+      "optimizer_updates": 179,
+      "timed_optimizer_updates": 168,
+      "protected_measured_training_seconds": 300.52063283,
+      "validation_bpb": 1.1898179647516447,
+      "post_warmup_tokens_per_second": 294925.5718787357,
+      "checkpoint_sha256": "5d8bf2f69dd19144d38ddf58779be9f6c27be53ac41435ea441af7f87d8ebf6a",
+      "checkpoint_pairing_verified": true
+    },
+    {
+      "run_index": 3,
+      "path": "recovery_evidence_20260902/calibration_v3/run03_final/result.json",
+      "result_sha256": "ff4b9a84a3c11fb9944eb3d3b5b14ba294641e1a06f6797b511e15330209a0d1",
+      "total_tokens": 93847552,
+      "optimizer_updates": 179,
+      "timed_optimizer_updates": 168,
+      "protected_measured_training_seconds": 300.17164684,
+      "validation_bpb": 1.1901799009296479,
+      "post_warmup_tokens_per_second": 295278.8352576328,
+      "checkpoint_sha256": "7a4f13fdb2c7b37d51bb523d9a99eac2ceee1a4abb34b558e65ab5d43e69b537",
+      "checkpoint_pairing_verified": true
+    }
+  ],
+  "selection_rule": "N_STAR = floor(median(run1_tokens, run2_tokens, run3_tokens) / 524288) * 524288",
+  "token_quantum": 524288,
+  "median_tokens": 93847552,
+  "n_star": 93847552,
+  "runtime": {
+    "protocol": "autopareto_protected_runtime_v3",
+    "protected_runtime_sha256": "03bd04d52f434adbaa0524012d917d14bd08e3d0861fd8441e2dc9d65b2d96fa",
+    "train_launcher_sha256": "3db0c4f60037b372e710582d6c179e364f1531acf7ef49d6511ff7facfee49e7",
+    "candidate_sandbox_sha256": "666aa35f6db3b46a8f551495e230f21ab66afe0bb93f41c2bb269a6f32bbe13b",
+    "candidate_worker_sha256": "1a529c53ac15cd4245d66ec2bad5da303fb0508be0eca834e8b3b5d6c3707511",
+    "study_runtime_sha256": "451e55fad68e77da6261af5374ae93a4f2f53ddc34c5b39222ae457b60c8d962",
+    "calibration_module_sha256": "e13971b3bbb2f554dde8a700825437b5f0bd4bdb06d576efa60301cca67cb0e2",
+    "protocol_document_sha256": "56453a9bdb0ad3aef8233207fa5f850ac465d6f2c55d914aff8eef72691237cd"
+  },
+  "environment": {
+    "pod_host": "ba1a98fa79ea",
+    "gpu_model": "NVIDIA A40",
+    "gpu_uuid": "GPU-b029c727-559c-ee4a-c1a8-ddf5dbab433b",
+    "driver": "570.195.03",
+    "cuda": "12.8",
+    "pytorch": "2.9.1+cu128",
+    "python": "3.10.18",
+    "venv": "/workspace/autopareto/.venv",
+    "registered_cache": "/workspace/.cache/autoresearch"
+  },
+  "frozen_at_utc": "2026-09-01T22:23:15.015190464Z"
+}

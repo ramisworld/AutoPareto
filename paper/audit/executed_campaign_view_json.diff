@@ -1,0 +1,13 @@
+--- T/campaign_view.json
++++ N/campaign_view.json
+@@ -45,8 +45,8 @@
+     "training_throughput_tokens_per_second": 294125.11352574814,
+     "validation_bpb": 1.1937269041212455
+   },
+-  "campaign_id": "pair-a-fixed-time-seed3",
+-  "contract_id": "T",
++  "campaign_id": "pair-a-fixed-tokens-seed3",
++  "contract_id": "N",
+   "failures": [],
+   "frontier": [],
+   "parent_pool": [],

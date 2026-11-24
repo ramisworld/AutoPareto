@@ -1,0 +1,18 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 80229553,
+      "checkpoint_path": "/root/phase6_local/runs/p6-motpe-time300s-seed7/final.pt",
+      "checkpoint_sha256": "8e8924b3cc346bb63a71b24a9d390f49187314fad5936677c9392b39c463014c",
+      "historical_steady_state_training_seconds": 300.1162233352661,
+      "optimizer_step": 1165,
+      "token_count": 152698880
+    }
+  ],
+  "device_batch_size": 64,
+  "format": "autopareto_camera_ready_fixed_time_checkpoint_manifest_v1",
+  "note": "single final checkpoint of a 300 s fixed-time run; consumed by scripts/evaluate_phase1_checkpoints.py",
+  "seed": 7,
+  "sequence_length": 2048,
+  "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8"
+}

@@ -1,0 +1,256 @@
+{
+  "checks": [
+    {
+      "check": "comparator_plan_e1",
+      "detail": "evaluation/camera_ready_e0_e1_plan_amendment1.json",
+      "status": "ok"
+    },
+    {
+      "check": "comparator_plan_phase5a",
+      "detail": "evaluation/phase5a_opus_fixed_tokens_plan.json",
+      "status": "ok"
+    },
+    {
+      "check": "implementation_sha256",
+      "detail": "20 files match",
+      "status": "ok"
+    },
+    {
+      "check": "recipe_sources",
+      "detail": "13 sources match",
+      "status": "ok"
+    },
+    {
+      "check": "reused_run_records",
+      "detail": "21 reused runs passed their gates",
+      "status": "ok"
+    }
+  ],
+  "e1_environment": {
+    "checks": [
+      {
+        "check": "plan_structure_and_sources",
+        "detail": "2 E0 + 24 E1 runs; both frozen sources hash-verified; batch 131072",
+        "status": "ok"
+      },
+      {
+        "check": "implementation_sha256",
+        "detail": "20 files match the pre-registered hashes",
+        "status": "ok"
+      },
+      {
+        "check": "phase1_source_identity",
+        "detail": "AP-Q == Phase-1 autopareto_292 source and AR-ref == Phase-1 autoresearch_compatible source (same path, same sha256)",
+        "status": "ok"
+      },
+      {
+        "check": "phase1_transform_reproduces_panel_derived_sources",
+        "detail": {
+          "phase1-autopareto_292-seed3": true,
+          "phase1-autoresearch_compatible-seed3": true
+        },
+        "status": "ok"
+      },
+      {
+        "check": "phase1_transform_accepts_every_budget_and_seed",
+        "detail": "19 fixed-token runs: transform accepted; 4 milestones reachable per budget",
+        "status": "ok"
+      },
+      {
+        "check": "historical_fixed_time_launcher",
+        "detail": "resolved from study/contracts_2026/historical_reference/protected/train_launcher.py",
+        "status": "ok"
+      },
+      {
+        "check": "fixed_time_protected_constants",
+        "detail": {
+          "benchmark_config.CUDA_ALLOCATOR": "backend:cudaMallocAsync",
+          "benchmark_config.TRAINING_BUDGET_SECONDS": 300,
+          "benchmark_config.TRAINING_MAX_OVERRUN_SECONDS": 15,
+          "benchmark_config.TRAINING_TIMEOUT_SECONDS": 900,
+          "prepare.EVAL_TOKENS": 20971520,
+          "prepare.MAX_SEQ_LEN": 2048,
+          "prepare.TIME_BUDGET": 300
+        },
+        "status": "ok"
+      },
+      {
+        "check": "fixed_time_isolate_inputs",
+        "detail": [
+          "prepare.py",
+          "benchmark_config.py",
+          "event_log.py",
+          "protected/inference_adapter.py"
+        ],
+        "status": "ok"
+      },
+      {
+        "check": "output_root",
+        "detail": {
+          "existing_run_dirs": {
+            "E0": [
+              "e0-apq-tokens201326592-seed3",
+              "e0-arref-time300s-seed0"
+            ],
+            "E1": [
+              "e1-apq-time300s-seed6",
+              "e1-apq-time300s-seed7",
+              "e1-apq-time300s-seed8",
+              "e1-apq-tokens088604672-seed6",
+              "e1-apq-tokens088604672-seed7",
+              "e1-apq-tokens088604672-seed8",
+              "e1-apq-tokens157286400-seed6",
+              "e1-apq-tokens157286400-seed7",
+              "e1-apq-tokens157286400-seed8",
+              "e1-apq-tokens201326592-seed6",
+              "e1-apq-tokens201326592-seed7",
+              "e1-apq-tokens201326592-seed8",
+              "e1-arref-time300s-seed6",
+              "e1-arref-time300s-seed7",
+              "e1-arref-time300s-seed8",
+              "e1-arref-tokens088604672-seed6",
+              "e1-arref-tokens088604672-seed7",
+              "e1-arref-tokens088604672-seed8",
+              "e1-arref-tokens157286400-seed6",
+              "e1-arref-tokens157286400-seed7",
+              "e1-arref-tokens157286400-seed8",
+              "e1-arref-tokens201326592-seed6",
+              "e1-arref-tokens201326592-seed7",
+              "e1-arref-tokens201326592-seed8"
+            ]
+          },
+          "exists": true,
+          "results_phase1_untouched": "output root is disjoint from results/phase1",
+          "root": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1"
+        },
+        "status": "ok"
+      },
+      {
+        "check": "e0_verdict",
+        "detail": "PASS",
+        "status": "info"
+      },
+      {
+        "check": "uv_lockfile",
+        "detail": "uv.lock matches the panel environment lock (262a4d55...)",
+        "status": "ok"
+      },
+      {
+        "check": "python_version",
+        "detail": "3.10.18 (panel: 3.10.18)",
+        "status": "ok"
+      },
+      {
+        "check": "torch_version",
+        "detail": "2.9.1+cu128",
+        "status": "ok"
+      },
+      {
+        "check": "cuda_gpu",
+        "detail": "NVIDIA A40",
+        "status": "ok"
+      },
+      {
+        "check": "gpu_idle",
+        "detail": "['NVIDIA A40, 595.91.07, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 46068 MiB']; no compute processes",
+        "status": "ok"
+      },
+      {
+        "check": "persistent_output_root",
+        "detail": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1 resolves under /workspace: True",
+        "status": "ok"
+      },
+      {
+        "check": "free_disk",
+        "detail": "243957.5 GB free on /workspace (need 25)",
+        "status": "ok"
+      },
+      {
+        "check": "data_cache",
+        "detail": "13 files match the data manifest",
+        "status": "ok"
+      },
+      {
+        "check": "heldout_shard_cache",
+        "detail": "/root/.cache/autopareto/downstream/915333b4f8b8684f39aeaafea600fea6f43fb703-shard_06541.parquet",
+        "status": "ok"
+      }
+    ],
+    "environment": {
+      "command_prefix": [
+        "uv",
+        "run",
+        "--locked",
+        "python"
+      ],
+      "executor_executable": "/workspace/autopareto-camera-ready/.venv/bin/python3",
+      "executor_python": "3.10.18",
+      "git": {
+        "available": false
+      },
+      "gpu_processes": [],
+      "kernel_cache": {
+        "hub": "/root/.cache/huggingface/hub",
+        "repos": {
+          "models--kernels-community--flash-attn3": {
+            "main": "e29f138fc363b396e5d2706c8a5f6fa7d36f41e0"
+          }
+        }
+      },
+      "nvidia_smi_gpus": [
+        "NVIDIA A40, 595.91.07, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 46068 MiB"
+      ],
+      "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+      "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+      "root": "/workspace/autopareto-camera-ready",
+      "training_interpreter": {
+        "argv": [
+          "uv",
+          "run",
+          "--locked",
+          "python"
+        ],
+        "cuda_available": true,
+        "errors": [],
+        "executable": "/workspace/autopareto-camera-ready/.venv/bin/python3",
+        "gpu_name": "NVIDIA A40",
+        "probed_with": "command_prefix",
+        "python": "3.10.18",
+        "torch": "2.9.1+cu128"
+      }
+    }
+  },
+  "e1_plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+  "format": "autopareto_phase6_stage_manifest_v1",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "run_ids": [
+    "p6-baseline-tokens201326592-seed6",
+    "p6-gpt_a24-tokens201326592-seed6",
+    "p6-nsgaii-tokens201326592-seed6",
+    "p6-tpe-tokens201326592-seed6",
+    "p6-gpt_a25-tokens201326592-seed6",
+    "p6-cmaes-tokens201326592-seed6",
+    "p6-rs-tokens201326592-seed6",
+    "p6-motpe-tokens201326592-seed6",
+    "p6-gpt_a24-tokens201326592-seed7",
+    "p6-nsgaii-tokens201326592-seed7",
+    "p6-tpe-tokens201326592-seed7",
+    "p6-gpt_a25-tokens201326592-seed7",
+    "p6-cmaes-tokens201326592-seed7",
+    "p6-rs-tokens201326592-seed7",
+    "p6-motpe-tokens201326592-seed7",
+    "p6-baseline-tokens201326592-seed7",
+    "p6-nsgaii-tokens201326592-seed8",
+    "p6-tpe-tokens201326592-seed8",
+    "p6-gpt_a25-tokens201326592-seed8",
+    "p6-cmaes-tokens201326592-seed8",
+    "p6-rs-tokens201326592-seed8",
+    "p6-motpe-tokens201326592-seed8",
+    "p6-baseline-tokens201326592-seed8",
+    "p6-gpt_a24-tokens201326592-seed8",
+    "p6-arref-tokens201326592-seed6-drift",
+    "p6-gpt_a22-tokens201326592-seed6-drift",
+    "p6-opus_a23-tokens201326592-seed6-drift"
+  ],
+  "started_utc": "2026-11-16T06:39:11.070736+00:00"
+}

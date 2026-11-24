@@ -1,0 +1,12 @@
+diff --git a/paper/main.tex b/paper/main.tex
+index 5ee861c..8223a0f 100644
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -103,3 +103,3 @@ Autonomous research agents can design and optimize machine learning systems, but
+
+\looseness=-1 \textbf{Why [-the strategies differed.}-]{+only Opus reached 32$\times$.}+} Both programs offered the same generation-code hook (Appendix~\ref{app:access}), and both agents first shrank the model, which made decoding about \CRNineGptDecX$\times$ faster in each campaign's search records [-(GPT A22; Opus A4).-]{+(Opus by A4, GPT-5.6 with its selected A22). GPT-5.6 tied decode speed to model size, removing a layer for ``materially improving cached decode speed'' (A4), and wrote no inference code in any campaign.+} Opus[-then-] hit a quality limit (``the quality prediction was falsified'', A7), [-diagnosed batch-one decoding-]{+identified kernel-launch overhead+} as [-launch-bound-]{+the bottleneck+} and wrote that ``CUDA-graph replay is the only lever that can raise speed without a quality cost'' (A10). [-GPT-5.6 tied decode speed to model size, removing a layer-]{+In these campaigns its inference-engine strategy was thus far more effective+} for[-``materially improving cached-] decode [-speed'' (A4), and never used the hook in any campaign.-]{+speed.+} Each search ran once, under different harnesses (Part~\ref{parttwo}), so this is[-an observed difference in strategy,-] not evidence that either model is the better researcher.
+
+@@ -119,3 +119,3 @@ Autonomous research agents can design and optimize machine learning systems, but
+
+\looseness=-1 \textbf{Speed measurements.} Decode rates are medians over eight timed windows, each bracketed by baseline windows. \CRSixUnstableRuns{} of the 39 runs [-exceeded the benchmark's stability limits on these ratios,-]{+carry+} a timing flag, not a correctness [-failure.-]{+failure (each passed the correctness check): their ratios to the baseline varied beyond the benchmark's stability limits (interquartile range 2\% of the median, coefficient of variation 5\%), and in all \CRSixFlagBaseDrift{} the baseline windows themselves varied by over 2\%.+} We report them as measured (rings in Figure~\ref{fig:unifiedscatter}); dropping them moves no mean by more than \CRSixStableShiftMax\% and leaves the {+means' Pareto+} frontier unchanged (Appendix~\ref{app:repro}). The 32$\times$ is far outside this noise; few-percent gaps between the slower recipes are not.
+

@@ -1,0 +1,28 @@
+{
+  "compile_cache": {
+    "local_tar": "/root/phase6_local_a2/runs/p6-motpe-tokens201326592-seed8-attempt3.compile_cache.tar",
+    "members": 1593
+  },
+  "copied_utc": "2026-11-17T03:35:38.736592+00:00",
+  "files": {
+    "checkpoint_evaluations.json": "87e2d3dadd16af7dc8da95dc7b1edcf4cd81df5d18c0e7cade6eeac647ad7197",
+    "compile_cache.tar": "d4d43b0282627a9503308c5cb86c6c117fcabe3db17fbdbd092b4281389697fb",
+    "events.jsonl": "10cc0c8a234e3abed6c09c9781e3f21539b7c727a2eec902fd33e006a33f6270",
+    "final.pt": "ddf3192bede239005ce6178eae350abe276881c6aae06022b903ec382ff581e9",
+    "milestones/manifest.json": "5dd958dd843c048013f247cc16aaadec276715ef73ed4737eea5f0f6bffa5e61",
+    "milestones/step-000384.pt": "9ebcf9809181ea7db6017f48e6199a5602ed96cd6ad1a439291fe94e3962ceb6",
+    "milestones/step-000768.pt": "c084ef4e4638ac9c410684d61fa7c82b14a98d1b3cec0f2b876b4d4b8dc62a08",
+    "milestones/step-001152.pt": "59a47417c7a6c2008a1dadee072faa68c06b7da205934c7dffe663be40863bcc",
+    "phase1_train.py": "54ee3571a7388933d6c1d6d48c4e3b64fec5225680328b399dd1fcbf977d0274",
+    "run_metadata.json": "3db9e22055ee120cb6268cffe8aaae44c9a079dcd141b22284d753c7ee561dbe",
+    "step_timing.jsonl": "928f2c5715878acb63f5975a69e2fb8c67414fa30ca5ba1883aad5ef809b6395",
+    "telemetry.json": "74c11e622433c24a281978f521720bc3337f3933add628d6f333ad13f1756bc1",
+    "timing_summary.json": "1ca6f986bc0b2ecf910f60f29877bb27823280f389b7e86cccc1a30e6a5f35ad",
+    "training.log": "94394ffab0b818c2f94fad2e88dc4d0cc0b730891b18619617386acd98ad2e64",
+    "training_metrics.json": "3723d11b983bdc46f00a5f8a9542b2d031082a3d63fab1dfc5588a79c609c968"
+  },
+  "format": "autopareto_phase6_a1_copy_manifest_v1",
+  "local_dir": "/root/phase6_local_a2/runs/p6-motpe-tokens201326592-seed8-attempt3",
+  "verified_files": 15,
+  "volume_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt3"
+}

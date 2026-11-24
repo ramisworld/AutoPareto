@@ -1,0 +1,522 @@
+AutoPareto: Separating Architecture from Resource
+Allocation
+in Autonomous Transformer Search
+Anonymous Author(s)
+Afﬁliation
+Address
+email
+Abstract
+Can the resource contract given to an autonomous researcher change what appears1
+to be a scientiﬁc discovery? Fixed-time evaluation entangles model design with2
+resource allocation because faster programs process more training data before they3
+are ranked. We study this problem with AutoPareto, a code-editing Transformer4
+researcher that jointly considers validation quality, cached-decode throughput, and5
+allocated inference memory on a single NVIDIA A40. We audit three ﬁxed-time6
+discovery campaigns, retrain seven frozen recipes at equal token exposure, and7
+begin a prospective ﬁxed-time versus ﬁxed-token budget-contract ablation. The8
+discovery-stage validation advantage of the selected AutoPareto recipe does not9
+survive equal-token held-out evaluation, showing that the original ranking com-10
+bined architecture with unequal exposure. The architecture nevertheless retains a11
+substantial deployment advantage: it nearly doubles cached-decoding throughput,12
+uses 41.7% fewer parameters and 35.1% less allocated inference memory, and13
+halves measured KV -cache memory relative to the selected AutoResearch refer-14
+ence. Early contract-pair trajectories pursue different edits, but the current paired15
+study is insufﬁcient to identify a causal effect of the contract on researcher behav-16
+ior. These results show that resource contracts and exposure accounting belong in17
+the speciﬁcation of autonomous ML research.18
+1 Part 1: Autonomous research result19
+1.1 Introduction20
+The resource contract is part of an autonomous research question. Under ﬁxed time, a faster training21
+program receives more data before evaluation, so architecture and resource allocation are entangled22
+in the score. Under ﬁxed tokens, exposure is controlled, but wall time, update count, and compute23
+may vary. A discovered improvement can therefore reﬂect the contract as much as the program edit.24
+This problem becomes especially visible when an agent is allowed to change architecture, batching,25
+and optimization together.26
+We study this problem in small language-model training on one NVIDIA A40. AutoPareto gives27
+a coding agent three explicit objectives: validation BPB, cached-decode throughput, and allocated28
+inference memory. The agent edits the training program rather than selecting only from a ﬁxed29
+vector. We audit its archive against a quality-only AutoResearch campaign and ﬁxed-vector ran-30
+dom search, TPE, MOTPE, NSGA-II, and CMA-ES. The classical comparison asks whether source-31
+editing search uncovers useful regions that ordinary optimizers miss. Unequal spaces and historical32
+budgets make it diagnostic rather than a controlled tournament.33
+Our central result separates discovery from veriﬁcation. AutoPareto’s best archived validation score34
+does not survive equal-token held-out evaluation, which shows that the discovery ranking mixed35
+Submitted to 40th Conference on Neural Information Processing Systems (NeurIPS 2026). Do not distribute.
+Table 1: Recovered discovery archives. Best validation BPB is an in-search diagnostic, not the held-
+out result. Classical methods optimize a ﬁxed parameter vector; coding agents edit source. Unequal
+spaces, seeds, and failure histories preclude a universal method ranking.
+Method Attempts Surface Selection signal Best val. BPB
+AutoPareto 3 × 25 Source code Quality, decode, memory 1.0933
+AutoResearch 50 + 5 Source code V alidation BPB 1.0950
+Random 25 Fixed vector V alidation BPB 1.1038
+TPE 25 Fixed vector V alidation BPB 1.0977
+MOTPE 25 Fixed vector Multiple objectives 1.0981
+NSGA-II 25 Fixed vector Multiple objectives 1.1077
+CMA-ES 25 Fixed vector V alidation BPB 1.1083
+program quality with exposure. A durable deployment result remains. After retraining seven frozen36
+recipes for exactly the same 201.3M tokens over three new seeds, AP292 has 41.7% fewer parame-37
+ters, 35.1% less allocated memory, 50% less measured incremental KV -cache memory, and 1.99 ×38
+the cached-decode throughput of the selected AutoResearch reference. The cost is 0.042034 held-39
+out BPB. This is a veriﬁed quality-efﬁciency frontier point, not a universal win.40
+The source lineage explains why the result is more than a one-knob depth sweep. The ﬁrst aggressive41
+four-layer compression damages validation BPB. From that branch, the agent restores width, spe-42
+cializes matrix, embedding, and output-head learning rates, and later explores a three-layer speed43
+branch. The selected recipe traces to experiment 134; AP292 is its independent-seed conﬁrmation44
+label. We then begin a prospective ﬁxed-time versus ﬁxed-token budget-contract ablation using45
+the same Codex CLI conﬁguration. The early trajectories choose different interventions, but the46
+completed preﬁx cannot yet identify a causal behavioral effect.47
+We ask: (1) what does multi-objective source-editing search ﬁnd that quality-only and ﬁxed-vector48
+search do not prioritize; (2) which gains survive exposure-controlled retraining; and (3) does the49
+budget contract redirect the agent’s search? The ﬁrst two yield a measured deployment trade-off on50
+one A40. The third is an explicitly preliminary ablation.51
+1.2 Discovery protocol and comparators52
+The baseline is an eight-layer, 512-wide decoder-only Transformer with 50.33M parameters, trained53
+on ClimbMix-400B-shufﬂe with a project-speciﬁc 8,192-token vocabulary and 2,048-token packed54
+sequences. Historical AutoPareto comprises three 25-attempt campaigns. Each attempt gives the55
+agent a parent program and prior results, then permits a source-code edit before a ﬁve-minute A4056
+run. Protected evaluators measure validation BPB, cached decoding, and memory. The quality-only57
+AutoResearch archive uses the same model family and task, but its recovered campaigns differ in58
+prompt text, commits, wrappers, and feedback. We therefore do not claim that the objective string59
+was the only operational difference.60
+Table 1 reports every recovered comparison family. AutoPareto attains the lowest archived validation61
+BPB, 1.0933, followed by AutoResearch at 1.0950 and TPE at 1.0977. Selection on these values can62
+be optimistic, so the paper’s primary comparison uses unseen conﬁrmation seeds and held-out BPB.63
+Ferreira et al. similarly show that classical HPO remains a strong baseline for autoresearch-style64
+problems and that code-editing and ﬁxed-vector search expose different capabilities [ Ferreira et al. ,65
+2026].66
+1.3 What the agent actually searched67
+Across 75 AutoPareto attempts, the audit labels 32 edits as architectural, 21 as optimizer changes,68
+10 as optimization logic, eight as batching, and four as schedule changes. These labels summa-69
+rize source diffs and require human veriﬁcation when a change spans categories. They counter the70
+narrower interpretation that the agent only varied batch size.71
+Figure 1 shows all 25 seed-0 attempts and their true ancestry. The path to A25 is baseline → A1 →72
+A4 → A6 → A7 → A8 → A18 → A19 → A20 → A22 → A24 → A25. A8’s aggressive compression73
+increases BPB from 1.0966 to 1.1573. Restoring width at A18 recovers it to 1.0957, and learning-74
+rate specialization reaches 1.0933 at A22. The later depth-width branch raises throughput to 408.475
+tokens/s at A25. This sequence is the autonomous ﬁnding: depth creates a speed opportunity, while76
+2
+baseline
+A05
+A10
+A15
+A20
+A25
+B  registered baseline
+A01  batch 219 → 217
+A02  matrix LR .04 → .03
+A03  KV heads 4 → 2
+A04  depth 8 → 7
+A05  matrix LR .04 → .03
+A06  depth 7 → 6; width 512 → 384
+A07  depth 6 → 5; width 384 → 320
+A08  depth 5 → 4; width 320 → 256
+A09  width 256 → 320
+A10  width 320 → 384
+A11  matrix LR .04 → .03
+A12  matrix LR .04 → .035
+A13  embed LR .6 → .5
+A14  embed LR .5 → .4
+A15  head LR .004 → .0035
+A16  head LR .004 → .0045
+A17  depth 4 → 3
+A18  width 256 → 512
+A19  matrix LR .04 → .035
+A20  embed LR .6 → .5
+A21  embed LR .5 → .45
+A22  head LR .004 → .0035
+A23  KV heads 4 → 2
+A24  depth 4 → 3; width 512 → 384
+A25  width 384 → 512
+Parent-linked source edits
+1.10 1.15 1.20
+1.2137
+1.1063
+1.1061
+1.1071
+1.1005
+1.1003
+1.0978
+1.0966
+1.1573
+1.1068
+1.1054
+1.0964
+1.0963
+1.0954
+1.0973
+1.0958
+1.0992
+crash
+1.0957
+1.0954
+1.0934
+1.0938
+1.0933
+1.0995
+1.1163
+1.0974
+Validation BPB ↓
+200 300 400
+164
+165
+163
+156
+185
+184
+217
+251
+312
+325
+291
+223
+258
+252
+216
+257
+226
+crash
+313
+312
+311
+320
+313
+287
+351
+408
+Decode tok/s ↑
+Green traces the ancestry of A25. Open nodes are alternative retained branches; gray nodes are dominated; A17 crashed.
+Figure 1: Complete seed-0 AutoPareto lineage, aligned with each attempt’s measured validation
+BPB and decode throughput. Arrows encode recorded parentage. Green traces the ancestry of at-
+tempt 25, open nodes are retained alternatives, gray nodes are dominated, and A17 crashes. Attempt
+22 is the source of AP292; attempt 25 reaches 408.4 tokens/s in the historical discovery workload.
+width and optimization recover much of the lost quality. We do not transfer A25’s rate into the77
+conﬁrmation headline because the workloads differ.78
+Primer searches compositions of low-level operations and discovers squared ReLU and depthwise79
+convolution around attention projections [ So et al. , 2021]. That is stronger operator-level novelty80
+than our numerical architecture edits. Squared ReLU was already in our baseline, so AutoPareto81
+did not discover it. Our contribution is instead objective-conditioned program search with a fully82
+retained lineage, followed by equal-exposure and deployment veriﬁcation. MONAQ also uses an83
+LLM for multi-objective architecture generation on constrained devices [ Trirat and Lee , 2025]; ac-84
+cordingly, we make no ﬁrst-of-kind claim.85
+1.4 Equal-token veriﬁcation86
+We froze seven recipes and retrained each at seeds 3, 4, and 5 for exactly 201,326,592 counted tokens.87
+The panel includes the baseline, selected AutoResearch-compatible recipe, TPE, MOTPE, and three88
+AutoPareto recipes. The restored token-stream audit records matching streams across accumulation89
+regimes. Held-out BPB uses a separate ﬁxed shard preﬁx and is distinct from discovery validation90
+BPB.91
+Cached decoding uses BF16, batch one, 256 input tokens, 256 generated tokens, and 30 stabilized92
+repetitions. The reported speed is the repetition median averaged across training seeds. Memory is93
+peak allocated CUDA memory. Training time is a steady-state equivalent extrapolated from timed94
+updates after the ﬁrst eleven; it is not end-to-end wall time.95
+AP292 and AutoResearch both complete 1,536 updates with total batch size 131,072. AP292 re-96
+mains faster and smaller after equal exposure and equal update count, but AutoResearch retains97
+better held-out BPB. The per-repetition cache measurements provide a direct architectural ablation98
+readout: AP292 uses 1.992 MiB of incremental KV state versus 3.984 MiB for AutoResearch, ex-99
+actly halving this component under the conﬁrmation workload. Figures 1 and 2 separate discovery100
+from veriﬁcation: the former explains the search path, while the latter shows which trade-offs sur-101
+vive new seeds.102
+3
+Table 2: Equal-token veriﬁcation, means over seeds 3–5. BPB is held-out and lower is better. De-
+code is tokens/s and memory is peak allocated MiB. The complete seed-level record is included with
+the analysis.
+Recipe M params BPB ↓ Decode ↑ MiB ↓ Train s
+Baseline 50.33 1.1466 196.8 250.9 688.5
+AutoResearch 50.33 1.0998 192.9 250.9 696.2
+TPE 39.85 1.1194 258.9 205.9 540.5
+MOTPE 26.35 1.1483 270.0 145.6 398.2
+AP292 29.36 1.1418 383.0 162.9 385.0
+AP299 26.21 1.1593 488.3 142.4 312.8
+AP294 17.89 1.1901 495.5 106.9 295.7
+200 400
+Decode tok/s
+1.10
+1.12
+1.14
+1.16
+1.18Held-out BPB
+100 200
+Peak alloc. MiB
+1.10
+1.12
+1.14
+1.16
+1.18Held-out BPB
+100 200
+Peak alloc. MiB
+200
+300
+400
+500Decode tok/s
+Baseline
+AutoResearch
+TPE
+MOTPE
+AP292
+AP299
+AP294
+Figure 2: Frozen recipes after equal-token retraining. Error bars are sample SD across three seeds.
+Circles are nondominated model means in held-out BPB, decode speed, and allocated memory;
+squares are dominated means. The plot veriﬁes recipes, not search-policy superiority.
+1.5 Downstream behavior103
+The evaluator uses zero-shot likelihood scoring on ARC-Easy test (2,376 examples), PIQA vali-104
+dation (1,838), LAMBADA test (5,153), and BLiMP (67,000 minimal pairs). These test science105
+questions, physical commonsense, contextual word prediction, and targeted syntax. Length normal-106
+ization reduces the preference for shorter choices; perplexity and BPB measure language-model107
+ﬁt.108
+Table 3: Equal-token downstream means over seeds 3–5. Accuracy and exact match are percentages;
+PPL is lower-is-better. “Favored” denotes only the observed mean.
+Task Metric AP292 AutoResearch Favored
+ARC-Easy Accuracy 36.91 36.50 AP292
+ARC-Easy Length-normalized 34.16 32.44 AP292
+PIQA Accuracy 58.29 58.67 AutoResearch
+PIQA Length-normalized 57.91 57.25 AP292
+LAMBADA Exact match 21.50 20.44 AP292
+LAMBADA Perplexity 14.21 14.15 AutoResearch
+BLiMP Accuracy 72.02 74.56 AutoResearch
+AP292 leads on four of seven displayed means. On BLiMP it is lower on 51 of 67 conﬁgurations, tied109
+on 1, and higher on 15; the largest deﬁcits concern negative-polarity scope and licensing, quantiﬁers,110
+ﬁller-gap dependencies, distractor agreement, and ellipsis. Across seven recipes, BLiMP tracks held-111
+out BPB ( r = −0.969) more strongly than depth ( r = 0 .717), pointing to a broad likelihood gap112
+rather than a BLiMP-speciﬁc defect. This selected-recipe correlation is descriptive; a controlled113
+depth-width ablation is needed for causal attribution.114
+Primary result. After equal-token retraining on one A40, AP292 has 41.7% fewer parameters, 35.1% less115
+allocated memory, and 1.99 times the decode throughput of AutoResearch, at a 0.042034 held-out BPB cost.116
+This source-linked frontier is veriﬁed across three new seeds; unequal comparator spaces preclude a universal117
+superiority claim.118
+4
+2 Part 2: System design and meta-analysis119
+Provisional agent-written source. A human author must rewrite and verify this section be-120
+fore submission. The private dossier maps every statement below to artifacts and lists unresolved121
+attribution questions.122
+2.1 Codex researcher and trusted harness123
+Humans deﬁne the task, objective contract, editable surface, budget, hardware, and acceptance rules.124
+Codex CLI runs gpt-5.6-sol at high reasoning with a 600-second scientist timeout. Each invocation125
+receives ﬁve staged ﬁles in an ephemeral, read-only container; only train.py is writable. The two126
+budget arms have separate histories and are interleaved on the same A40. Initial executable bytes127
+match across arms.128
+The trusted controller, which the researcher cannot edit, validates source and parent hashes, sends129
+the candidate to the A40 worker, runs training, checks the checkpoint, performs protected BPB130
+and deployment evaluation, records logs and lineage, then constructs the next campaign view. A131
+candidate may fail technically, complete with poor quality, or remain speed-uncertain. Those states132
+are preserved and are not interchangeable.133
+REGISTERED STUDY CONTRACT
+1  Human specification
+objectives, budget, seed, hardware
+editable surface and acceptance rules
+2  Freeze registered inputs
+manifest and SHA-256; isolated arm history
+identical initial code and data registration
+3  Codex CLI scientist
+gpt-5.6-sol, high reasoning, 600 s
+reads context; emits hypothesis and patch
+TRUST BOUNDARY: SCIENTIST CANNOT EDIT OR READ PROTECTED EVALUATION
+4  Validate candidate
+parse source; verify parent and source
+runtime and manifest hashes
+5  Train on one A40
+discard warm-up; reconstruct initial state
+run T=300 s or N=counted tokens
+6  Protected evaluation
+validation BPB and bracketed cached decode
+allocated memory and checkpoint checks
+7  Append immutable record
+status, metrics, patch, lineage and hypothesis
+retain failures and measurement uncertainty
+8  Construct the next campaign view
+return only arm-specific history and eligible parents to the next scientist call
+Historical discovery follows the same propose, execute, measure, and record pattern. The later T/N controller adds registered paired contracts and arm isolation.
+Figure 3: Executed research loop and trust boundary. The human registers the scientiﬁc contract.
+The controller freezes and hashes inputs, Codex emits a hypothesis and source patch, and protected
+code validates, trains, measures, and appends the outcome. Only an arm-speciﬁc campaign view
+returns to the next scientist call.
+The public reproduction command is:134
+python3 -m study.contracts_2026.campaign_controller run –execute135
+–state-root $STATE –baseline-record $BASELINE136
+–manifest $MANIFEST –manifest-sha256 $SHA256137
+–scientist-bin codex –model gpt-5.6-sol –reasoning high138
+–scientist-timeout-seconds 600 –a40-host $HOST139
+–a40-identity $KEY –a40-repository $REPO140
+–a40-cache $CACHE –a40-state-root $REMOTE_STATE141
+The exact executed invocation, manifest hash, private host, and paths are retained in the human142
+dossier. They are omitted here for double-blind review and credential hygiene.143
+2.2 Budget-contract follow-up144
+The budget-contract ablation asks whether ﬁxed time and ﬁxed counted tokens redirect the same145
+researcher’s edits. T trains for 300 seconds and completes the ﬁnal update. N processes 88,604,672146
+5
+counted tokens. Learning-rate progress follows elapsed fraction in T and token fraction in N. The147
+completed preﬁx contains 4 T and 4 N attempts at the analysis freeze.148
+Table 4: Executed budget controls at the frozen preﬁx. The same staged code and researcher conﬁg-
+uration are used, while the stopping rule and schedule progress differ by design. Hidden provider
+context is unavailable.
+Control Fixed time (T) Fixed tokens (N)
+Initial code / loader Identical executed input bytes Identical executed input bytes
+Scientist / seed gpt-5.6-sol, high / 3 gpt-5.6-sol, high / 3
+Training stop 300 s; complete ﬁnal update 88,604,672 counted tokens
+LR progress Elapsed-time fraction Counted-token fraction
+Frozen preﬁx 4 completed attempts 4 completed attempts
+Inference / memory Shared bracketed protocol Shared bracketed protocol
+Context / hardware Separate history; one A40 Separate history; same A40
+Parent policy (executed) Quality-valid parents allowed Quality-valid parents allowed
+1 2 3 4
+Attempt within arm
+50
+75
+100
+125Parameters (M)
+Fixed time
+Fixed tokens
+1 2 3 4
+Attempt within arm
+84
+86
+88Training tokens (M)
+1 2 3 4
+Attempt within arm
+1
+2
+3Validation BPB
+1 2 3 4
+Attempt within arm
+500
+1000Optimizer updates
+Figure 4: Completed budget-study trajectories. N ﬁrst expands capacity from 50.33M to 85.85M
+and 135.27M parameters, then changes batching. T keeps the baseline architecture and changes
+batching and learning rate. Lines connect adaptive descendants, not independent replicates. All
+quality-valid outcomes are shown, including two poor T results.
+N1 hypothesizes that added depth and width will use the ﬁxed exposure more effectively. N2 ex-149
+pands again, but BPB changes from 1.1631 to 1.1643. N3 returns to the N1 parent and halves the150
+batch, producing 338 updates and BPB 1.1243. N4 halves it again, producing 676 updates and BPB151
+1.1402. The trajectory suggests a capacity preference under ﬁxed tokens, but neither capacity nor152
+update count is monotonically beneﬁcial.153
+T1 and T2 reduce batch size without changing the 50.33M-parameter architecture; T2 reaches BPB154
+1.1034 at 661 updates. T3 and T4 produce BPB near 3.216. The agent proposes update intensity as155
+an explanation and then adjusts learning rate, but the second result does not repair the failure. These156
+are recorded agent hypotheses followed by outcomes, not veriﬁed mechanisms. At this freeze, 0 of 8157
+completed attempts are Pareto-eligible, so the follow-up supports no throughput-frontier claim yet.158
+2.3 Timing, kernels, and measurement boundaries159
+The current controller performs eleven disposable warm-up updates in the same worker, discards that160
+model, reconstructs scientiﬁc state, and veriﬁes matching initial-state hashes before measurement.161
+6
+This resolves CUDA allocation and compilation effects without counting warm-up learning. It does162
+not satisfy the earlier prompt’s stronger separate-process wording, which is disclosed as an execution163
+deviation.164
+Inference was repaired after Flash Attention and PyTorch SDPA paths produced workload-165
+dependent timing behavior. The current study uses eight ﬁxed prompts with 1,024 input and 128166
+generated tokens, 127 cached tokens, and eight baseline-candidate-baseline brackets. Candidate167
+speed is normalized to the interpolated baseline. Historical conﬁrmation instead uses 256 input and168
+256 generated tokens with 30 stabilized repetitions. Context-length sweeps at 256, 896, 1,024, and169
+1,536 tokens diagnose workload sensitivity; failed and unstable cells remain in the archive. No rate170
+is pooled across protocols.171
+2.4 Human interventions and veriﬁcation172
+The records preserve repaired launches, warm-up changes, inference stabilization, baseline registra-173
+tion, and lineage-policy amendments. The executed manifest permits quality-valid, speed-uncertain174
+candidates as parents. File timestamps alone cannot identify who authored each repair, so the private175
+dossier asks human authors to verify intervention ownership and what earlier outcomes were visible176
+at each relaunch.177
+The audit independently ingests raw metrics, checkpoints, inference records, downstream databases,178
+prompts, manifests, and candidate sources. It veriﬁes recipe hashes, exact token totals, step counts,179
+source-to-checkpoint links, status, metric direction, and all nine downstream outputs for each of the180
+21 conﬁrmation runs. It keeps corrupt registrations, failures, incompatible protocols, and missing181
+ﬁelds explicit. Dominance uses raw held-out BPB, decode throughput, and allocated memory, with182
+independent conﬁrmation runs as statistical units.183
+2.5 Signiﬁcance, related work, and limits184
+The useful ﬁnding is not that reducing depth increases speed. It is that a deployment-aware code-185
+editing researcher explored a broader architectural lineage and produced multiple efﬁciency-quality186
+points that survived equal-token retraining on a single A40. The measured quality cost prevents a187
+stronger claim. The lineage and failed branches show which hypotheses led to that point and which188
+simple reductions did not work.189
+A recovered historical component ablation around experiment 68 provides a separate caution. Three190
+batch-only runs average validation BPB 1.1040 at 88.1M tokens, while three nonbatch-only runs191
+average 1.2188 at 94.4M tokens. The contrast supports batch size as an important discovery-stage192
+mechanism, but its unequal exposures prevent a clean causal decomposition. We therefore keep193
+this component ablation separate from the prospective budget-contract ablation and the equal-token194
+conﬁrmation panel.195
+Primer searches low-level Transformer primitives under an implicit efﬁciency objective [ So et al. ,196
+2021]. einspace builds networks from a grammar of fundamental operations [ Ericsson et al. , 2024];197
+MOTE-NAS combines landscape and convergence estimates [ Zhang et al., 2024]; MONAQ queries198
+LLMs for resource-aware architectures [ Trirat and Lee , 2025]. Hyperband and BOHB allocate199
+resources across conﬁgurations [ Li et al. , 2018, Falkner et al. , 2018]. AutoDiscovery, MLE-STAR,200
+AI-Researcher, and MLE-Dojo address hypothesis search, targeted reﬁnement, broader research201
+automation, and interactive ML engineering environments [ Agarwal et al. , 2025, Nam et al. , 2025,202
+Tang et al., 2025, Qiang et al. , 2025]. AutoPareto’s narrower contribution is an auditable, objective-203
+conditioned source-editing loop with matched-exposure veriﬁcation.204
+The study has one hardware family and small models. Conﬁrmation seeds estimate recipe variability,205
+not independent search-policy variability. Historical comparators have unequal spaces, seeds, and206
+failure histories. The prospective budget comparison is one incomplete adaptive trajectory per arm,207
+with repaired protocols and no valid deployment frontier. BLiMP analysis is aggregate. Proprietary208
+agent behavior and service conﬁguration limit exact reproduction. We make no scale-transfer, cross-209
+GPU, causal budget-effect, energy-saving, or universal optimizer-superiority claim.210
+7
+3 Part 3: Broader impact and reﬂections211
+Resource contracts are part of the scientiﬁc speciﬁcation of autonomous research. When an agent212
+controls architecture and training, a time allowance changes how much data a faster candidate sees.213
+A token allowance removes that exposure pathway but permits update count and compute to vary.214
+Papers should therefore publish the stopping rule, schedule-progress variable, warm-up boundary,215
+inference workload, and feedback returned after each attempt.216
+Complete trajectories should retain crashes, unstable measurements, and scientiﬁcally poor but tech-217
+nically completed runs. Parent eligibility also matters. Allowing a quality-valid, speed-uncertain218
+candidate to seed a later experiment can keep a campaign moving through timing noise, but it219
+changes the search policy and must be recorded.220
+Efﬁciency may reduce the cost of an individual experiment or deployment, yet cheaper experiments221
+can increase total experimentation. We report no energy beneﬁt because the artifacts do not contain222
+a campaign-wide energy accounting. Small-model benchmark results also do not establish safe or223
+reliable use in consequential settings.224
+Human accountability grows with experiment volume. Humans set objectives, repair infrastructure,225
+decide which failures are scientiﬁc, and interpret evidence. An auditable record should distinguish226
+the human question, the agent’s prediction, the source edit, the measured outcome, and the retro-227
+spective explanation. The pipeline accompanying this paper rebuilds every table and vector ﬁgure228
+from frozen artifacts and reports changes to headline values without launching experiments.229
+Disclosure. This manuscript, analysis code, and ﬁgures were prepared with an AI assistant. Histor-230
+ical and current records identify research-agent actions separately. Part 2 remains an agent-written231
+source draft that workshop rules require a human author to rewrite. Authorship remains human-only.232
+Before submission, a human author must check both statements:233
+□ I curated this work and veriﬁed every claim, ﬁgure, method detail, and reference.234
+□ I take full accountability for the submitted, human-written artifact.235
+8
+References236
+Dhruv Agarwal, Bodhisattwa Prasad Majumder, Reece Adamson, Megha Chakravorty,237
+Satvika Reddy Gavireddy, Aditya Parashar, Harshit Surana, Bhavana Dalvi Mishra, Andrew238
+McCallum, Ashish Sabharwal, and Peter Clark. AutoDiscovery: Open-ended Scientiﬁc239
+Discovery via Bayesian Surprise. Advances in Neural Information Processing Systems 38240
+(NeurIPS 2025), 2025. URL https://papers.neurips.cc/paper_files/paper/2025/241
+hash/23b127521af7ca7a42f5cdb7507be4f2-Abstract-Conference.html .242
+Linus Ericsson, Miguel Espinosa, Chenhongyi Y ang, Antreas Antoniou, Amos Storkey, Shay B.243
+Cohen, Steven McDonagh, and Elliot J. Crowley. einspace: Searching for Neural244
+Architectures from Fundamental Operations. Advances in Neural Information Process-245
+ing Systems, 2024. URL https://papers.nips.cc/paper_files/paper/2024/hash/246
+0382cb76309820f71c6eacd47b36ce71-Abstract-Conference.html .247
+Stefan Falkner, Aaron Klein, and Frank Hutter. BOHB: Robust and Efﬁcient Hyperparameter248
+Optimization at Scale. International Conference on Machine Learning, 2018. URL https:249
+//proceedings.mlr.press/v80/falkner18a.html.250
+Fabio Ferreira, Lucca Wobbe, Arjun Krishnakumar, Frank Hutter, and Arber Zela. Can LLMs Beat251
+Classical Hyperparameter Optimization Algorithms? A Study on autoresearch. arXiv preprint,252
+2026. URL https://arxiv.org/abs/2603.24647v5.253
+Lisha Li, Kevin Jamieson, Giulia DeSalvo, Afshin Rostamizadeh, and Ameet Talwalkar. Hyperband:254
+A Novel Bandit-Based Approach to Hyperparameter Optimization. Journal of Machine Learning255
+Research, 2018. URL https://jmlr.org/papers/v18/16-558.html.256
+Jaehyun Nam, Jinsung Y oon, Jiefeng Chen, Jinwoo Shin, Sercan Arik, and Tomas257
+Pﬁster. MLE-STAR: Machine Learning Engineering Agent via Search and Tar-258
+geted Reﬁnement. Advances in Neural Information Processing Systems 38 (NeurIPS259
+2025), 2025. URL https://papers.nips.cc/paper_files/paper/2025/hash/260
+a9619dd0f0d54a5cf7734add1dc38cd1-Abstract-Conference.html .261
+Rushi Qiang, Y uchen Zhuang, Yinghao Li, Dingu Sagar V K, Rongzhi Zhang, Changhao Li, Ian262
+Shu-Hei Wong, Sherry Y ang, Percy Liang, Chao Zhang, and Bo Dai. MLE-Dojo: Interactive263
+Environments for Empowering LLM Agents in Machine Learning Engineering. arXiv preprint,264
+2025. URL https://arxiv.org/abs/2505.07782.265
+David So, Wojciech Ma ´nke, Hanxiao Liu, Zihang Dai, Noam Shazeer, and Quoc V Le. Primer:266
+Searching for Efﬁcient Transformers for Language Modeling. Advances in Neural Information267
+Processing Systems, 2021. URL https://papers.nips.cc/paper_files/paper/2021/268
+hash/2f3c6a4cd8af177f6456e7e51a916ff3-Abstract.html.269
+Jiabin Tang, Lianghao Xia, Zhonghang Li, and Chao Huang. AI-Researcher: Autonomous Scientiﬁc270
+Innovation. arXiv preprint, 2025. URL https://arxiv.org/abs/2505.18705.271
+Patara Trirat and Jae-Gil Lee. MONAQ: Multi-Objective Neural Architecture Querying for272
+Time-Series Analysis on Resource-Constrained Devices. Findings of the Association for273
+Computational Linguistics: EMNLP 2025, 2025. URL https://aclanthology.org/2025.274
+findings-emnlp.918/.275
+Y u-Ming Zhang, Jun-Wei Hsieh, Xin Li, Ming-Ching Chang, Chun-Chieh Lee, and276
+Kuo-Chin Fan. MOTE-NAS: Multi-Objective Training-based Estimate for Efﬁcient277
+Neural Architecture Search. Advances in Neural Information Processing Systems,278
+2024. URL https://proceedings.neurips.cc/paper_files/paper/2024/hash/279
+b6e118c759c16f2424997bbb6a1ffd61-Abstract-Conference.html .280
+9
+{'/Creator': 'LaTeX with hyperref', '/Title': 'AutoPareto: Separating Architecture from Resource Allocation in Autonomous Transformer Search', '/Producer': 'xdvipdfmx (0.1)', '/CreationDate': "D:20260906102107-00'00'"}

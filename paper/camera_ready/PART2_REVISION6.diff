@@ -1,0 +1,335 @@
+diff --git arevision5/Part2.tex brevision6/Part2.tex
+index b62d1a6..63fd6d0 100644
+--- arevision5/Part2.tex
++++ brevision6/Part2.tex
+@@ -5,111 +5,151 @@
+
+\subsection{Agent and Harness}\label{sec:agent}
+% [-P2-02: written with and approved-]{+P2-02 (approved 2026-11-10) restructured in revision 6+} by [-the-]{+Claude: provisional,+} author [-(2026-11-10).-]
+[-My-]{+must review and +}
+{+rewrite.+}
+{+\humanauthor[P2-02 r6]{My+} role was to design the research framework, define the objectives, compute budgets 
+and evaluation rules, and maintain the experimental infrastructure. The AI agents independently proposed 
+hypotheses, modified Transformer architectures and training settings, and selected which candidates to 
+explore. [-Every-]{+Three parts of the system should be kept apart. The \emph{model} proposes each change. The +}
+{+\emph{coding application} is the interface through which it reads files and runs commands. The +}
+{+\emph{protected runner} trains and evaluates the code, and the agent cannot change it.+}
+
+{+\textbf{Historical campaigns.} Most+} historical AutoPareto and AutoResearch [-attempt was proposed by \texttt{gpt-5.6-sol} at-]{+experiments used GPT-5.6 +}
+{+(\texttt{gpt-5.6-sol},+} high reasoning [-effort, which -]
+[-operated-]{+effort) through the Codex desktop application. For+} the {+first five +}
+{+attempts of the seed-42 campaign, the same model and setting were accessed through Cursor because Codex usage +}
+{+was nearly exhausted. In every case a+} protected {+experiment+} runner {+executed and evaluated the proposed code+} on 
+the [-GPU pod-]{+GPU. The agent started the runner+} over SSH, [-through-]{+and isolation relied on+} the [-Codex desktop app or, for five seed-42 -]
+[-attempts, Cursor's agent (Appendix~\ref{app:repro}). In-]{+program's instructions plus hash +}
+{+checks: every protected file was hashed before and after each attempt, and any change outside +}
+{+\texttt{train.py} rejected the run.+}
+
+{+\textbf{Pair-A campaigns} (\S\ref{sec:pilot}). Here a controller called+} the [-Pair-A harness (\S\ref{sec:pilot}),-]{+agent and launched every run +}
+{+itself. The+} Codex [-CLI -]
+[-0.153.0-]{+arm+} ran [-\texttt{gpt-5.6-sol} at high reasoning-]{+the same GPT-5.6 model through Codex CLI,+} in a fresh container for every call [-(600-second timeout), -]
+[-seeing-]{+that +}
+{+held+} five staged [-files and writing only \texttt{train.py}.-]{+files.+} The Opus arm ran [-\texttt{claude-opus-5-5} -]
+[-(effort \texttt{xhigh})-]{+Claude Opus 5.5+} through Claude [-Code 2.1.318 on the host,-]{+Code, Anthropic's command-line coding +}
+{+agent,+} with file tools [-only, no shell,-]{+only+} and {+no shell. Both arms used+} the same [-prompts, output schemas-]{+prompts+} and {+output schemas, made+} two {+agent+} 
+calls per [-attempt; it-]{+attempt and could write only \texttt{train.py}. The Opus arm+} was isolated by [-CLI-]{+command-line+} 
+permissions, file modes and hash checks, tested by a canary before the campaign.[-Historical isolation relied on instructions plus hash checks: -]
+[-protected files were hashed before and after every attempt, and any change outside \texttt{train.py} rejected -]
+[-the run.-] No agent saw downstream 
+results. [-All agent session logs-]{+Versions, timeouts and per-attempt attribution+} are [-retained privately-]{+in Appendix~\ref{app:repro}. Session logs survive +}
+{+for every campaign+} and [-not publicly -]
+[-released.-]{+stay private because they contain access credentials.}+}
+
+\subsection{Tools}
+% [-P2-03: written with and approved-]{+P2-03 (approved 2026-11-10) restructured in revision 6+} by [-the-]{+Claude: provisional,+} author [-(2026-11-10).-]
+[-All-]{+must review and +}
+{+rewrite.+}
+{+\humanauthor[P2-03 r6]{All+} training and measurement ran in BF16 on NVIDIA A40 [-GPUs (several physical cards across eras); software -]
+[-per era is in Appendix Table~\ref{tab:env}. The panel, E1-]{+GPUs. Historical discovery +}
+{+(July+} and {+August) did not log its environment, while+} the {+repository's lockfile pinned PyTorch 2.9.1. The +}
+{+matched-token verification (201.3M-token panel, E1,+} Opus [-retraining-]{+retraining)+} used Python 3.10.18 with PyTorch [-2.9.1+cu128. The-]{+2.9.1.+} 
+Pair-A [-campaigns-]{+and the inference ablations that reuse its benchmark+} ran in a separate Python 3.12 runtime with 
+PyTorch [-2.8.0+cu128-]{+2.8.0+} (2.9.1 in the September [-pilot), and the inference ablations also used PyTorch 2.8.0. The discovery-era -]
+[-environment was not logged at run time; the repository's lockfile then pinned PyTorch 2.9.1+cu128. A trusted -]
+[-controller stages each candidate, checks source and parent SHA-256 hashes, runs training, verifies the -]
+[-checkpoint, calls the protected BPB and inference evaluators, and appends the outcome to the registry and -]
+[-lineage.-]{+pilot). Table~\ref{tab:env} records every era.}+}
+
+\subsection{Research Loop}\label{sec:loop}
+% [-P2-04: written with and approved-]{+P2-04 (approved 2026-11-10) restructured in revision 6+} by [-the-]{+Claude: provisional,+} author [-(2026-11-10).-]
+[-Each-]{+must review and +}
+{+rewrite.+}
+{+\humanauthor[P2-04 r6]{Each+} attempt follows the [-loop below (historical campaigns: runner functions -]
+[-\texttt{validate\_autopareto\_proposal}-]{+eight steps below. The agent acts in steps 2+} and [-\texttt{raw\_pareto\_rows}; Pair-A: -]
+[-\texttt{campaign\_controller.py}, \texttt{campaign.py}).-]
+[-{\small\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}-]{+8 and, +}
+{+historically, labels the outcome in step 7. Protected code does everything else (Appendix~\ref{app:repro} +}
+{+names the functions).+}
+{+{\small\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{2pt}+}
+\item [-Stage-]{+\emph{Controller:} show+} the [-campaign view (this-]{+agent this+} campaign's [-records and-]{+records, the+} current [-frontier)-]{+frontier+} and the [-parent-]{+parent's+} source.
+\item [-The agent returns-]{+\emph{Agent:} return+} a hypothesis, {+the+} intended change, {+a+} change category, {+the chosen+} parent[-identifier-] and a 
+patch to \texttt{train.py}.
+\item [-Validate: the-]{+\emph{Controller:} validate. The+} parent must be on the current frontier (historical) or parent-eligible 
+in the same arm [-(Pair-A); protected-file-]{+(Pair-A). Protected files+} and {+the+} source[-hashes-] must [-match;-]{+match their SHA-256 hashes, and+} only 
+\texttt{train.py} may change.
+\item [-Train-]{+\emph{Controller:} train+} under the [-contract (300\,s; or $N^\star$ counted tokens-]{+contract, 300\,s or,+} in the Pair-A fixed-token [-arm).-]{+arm, $N^\star$ +}
+{+counted tokens.+}
+\item [-Protected evaluation:-]{+\emph{Controller:} verify the checkpoint, measure+} validation BPB, [-cached/full-logit correctness, cached-decode throughput,-]{+check that cached decoding matches a +}
+{+full recomputation, and measure decode throughput and+} peak allocated memory.
+\item [-Append-]{+\emph{Controller:} append+} an immutable record [-(hypothesis,-]{+of the hypothesis,+} patch, hashes, [-metrics,-]{+metrics and any failure +}
+{+text. A+} failure [-text); failures consume-]{+still uses up+} the attempt.
+\item [-Update-]{+\emph{Controller and agent:} update+} the [-archive: historically,-]{+archive. Historically+} a completed candidate [-is-]{+was+} retained [-if neither-]{+unless+} 
+another completed candidate [-nor-]{+or+} the registered same-seed baseline [-dominates-]{+dominated+} it on raw BPB, decode {+speed+} and 
+[-memory (no-]{+memory, with no+} noise [-margin); -]
+[-the-]{+margin. The+} agent labelled each outcome, and the runner rejected any label that 
+disagreed with this rule.
+\item [-The-]{+\emph{Agent:} choose the+} next[-attempt chooses its-] parent among {+the+} retained (historical) or parent-eligible (Pair-A) 
+records.
+\end{enumerate}}
+Without {+a+} noise [-margins-]{+margin+} the archive [-admits-]{+keeps+} noise-level [-trade-offs: A09-]{+trade-offs. In AP-Q's campaign A9+} and A10 build the same 
+model, yet A10 was retained. In Pair-A every quality-valid record was parent-eligible even when its speed was 
+[-uncertain.-]
+[-\humanauthor[P2-05b]{Figure~\ref{fig:loop} in Part~1 shows this loop and its protected boundary. Because any -]
+[-eligible record can be a parent, every campaign is a tree: Opus's branches are drawn from its recorded parent -]
+[-links in Figure~\ref{fig:opus} and AP-Q's in Appendix Figure~\ref{fig:lineagefull}.}-]{+uncertain.}+}
+
+\subsection{Human Interventions}\label{sec:interventions}
+% [-P2-06: written with and approved-]{+P2-06 (approved 2026-11-12) restructured in revision 6+} by [-the-]{+Claude: provisional,+} author [-(2026-11-12).-]
+[-I-]{+must review and +}
+{+rewrite.+}
+{+\humanauthor[P2-06 r6]{I+} chose the objectives, the 300-second contract, the matched-exposure design, the 
+{+recipes for the+} panel, E1 and [-Opus-test -]
+[-recipes,-]{+the Opus tests,+} the comparators and the interpretation. I made or approved each 
+intervention [-below;-]{+below, and+} AI coding assistants carried out several {+of them+} at my instruction. [-\textbf{(i)} \emph{Seed-42 AutoPareto-]{+None of them +}
+{+counts as autonomous agent research.+}
+
+{+\textbf{(i) Seed-42+} rollback.} Attempt 4 [-failed-]{+of+} the {+seed-42 AutoPareto campaign failed a+} cache-correctness [-check and-]{+check,+} 
+was labelled dominated, and attempts 5--8 {+then+} ran on 2026-07-28. [-When the-]{+The+} check {+itself+} was [-found faulty and repaired,-]{+faulty. After it was +}
+{+repaired+} I discarded attempts [-5--8-]{+5--8,+} because they had followed a frontier that wrongly excluded attempt 4 (ids 
+88--90 are [-absent); attempt-]{+absent). Attempt+} 4 was re-measured on a recreated checkpoint and [-changed to-]{+became+} retained, and attempt 5 
+was [-replayed.-]{+replayed unchanged.+} Attempt 10 was re-adjudicated after an FP32 evaluator amendment, and the program text 
+changed after attempt 4. I started seeds 0 and 1 {+only+} after reviewing seed 42. [-\textbf{(ii)} \emph{AutoResearch.}-]{+AP-Q comes from seed 0, which +}
+{+none of this touched.+}
+
+{+\textbf{(ii) AutoResearch reference.}+} In the 50-attempt [-campaign 27 trained candidates were discarded by-]{+AutoResearch campaign,+} a cache-correctness check 
+later found [-faulty;-]{+faulty discarded 27 trained candidates.+} AR-ref comes from a 5-attempt follow-up under a revised 
+program. [-\textbf{(iii)} \emph{Pair-A, Codex.} Inference-adapter amendments, requeues after pod or-]{+This is one reason AR-ref differs from our campaigns in more than the objective (\S\ref{sec:brief}).+}
+
+{+\textbf{(iii) Pair-A Codex arm.} Pod and+} provider [-failures,-]{+failures forced requeues, the inference adapter was +}
+{+amended, the+} configuration [-changes-]{+changed+} before launch, and[-inconsistent failure adjudication in-] a later [-restart. \textbf{(iv)} -]
+[-\emph{Pair-A, Opus.}-]{+restart adjudicated failures inconsistently. We +}
+{+use this arm only as a second instance of the speed lever, never to rank agents.+}
+
+{+\textbf{(iv) Pair-A Opus arm.}+} A defect in the protected FP32 correctness adjudication was fixed mid-campaign 
+and the affected attempt [-re-run; the-]{+re-run. After three consecutive+} agent-call [-timeout was-]{+timeouts at attempt 9, I+} raised {+the call +}
+{+timeout+} from 600 to 900\,s [-from attempt 9-]{+for the rest of the arm+} (Codex ran at [-600\,s); attempt-]{+600\,s). Attempt+} 9 was charged as a 
+candidate [-failure; the-]{+failure, and timed-out calls made before any candidate were requeued. The+} arm was extended from 25 
+attempts to 25 valid results (27 [-attempts; we-]{+attempts). Both arms moved to a second A40 once, Opus after A1 and Codex +}
+{+after A9. We+} also report the frozen first [-25); timed-out agent calls before any candidate were -]
+[-requeued; its recorded attempts ran on two A40s (A1; A2--A27), as Codex's did (A1--A9; A10--A22). -]
+[-\textbf{(v)} \emph{Failure-]{+25 attempts, and neither the timeout nor the extension changes a +}
+{+conclusion (Appendix~\ref{app:faq}).+}
+
+{+\textbf{(v) Failure+} accounting.} [-A17's-]{+The same+} tokenizer failure {+was counted differently in two campaigns. In seed +}
+{+0 it+} consumed [-a seed-0 attempt; the identical -]
+[-seed-42 failure-]{+attempt A17, while in seed 42 it+} was relabelled as[-setup. \textbf{(vi)} \emph{E1} ran on-] a [-different A40 from-]{+setup failure. AP-Q's campaign thus +}
+{+carries+} the {+stricter accounting.+}
+
+{+\textbf{(vi) E1 hardware.} The A40 on which E1's+} environment check [-(E0), as disclosed in-]{+(E0) passed was no longer available, so E1 +}
+{+ran on another A40 with the same driver. The deviation is recorded, and throughput matched E0 +}
+{+(Appendix~\ref{app:repro}).+}
+
+{+\textbf{(vii) Opus retraining.} Opus had rewritten the training-loop driver for the time contract, so+} its 
+[-record. \textbf{(vii)} \emph{Opus retraining}:-]{+sources could not run under+} a {+token budget unchanged. A+} scripted driver mapping and {+a+} storage export, 
+[-registered-]{+pre-registered+} with the [-plan.-]{+plan, made them runnable while keeping model and optimizer code byte-identical +}
+{+(Appendix~\ref{app:repro}).+}
+
+The AP-Q lineage (seed 0) has no recorded scientific intervention: its program, evaluator and records were 
+not changed. Interventions whose authorship cannot be reconstructed are excluded from claims of autonomous 
+[-contribution.-]{+contribution.}+}
+
+\subsection{Verification}\label{sec:verification}
+[-\humanauthor[P2-07]{A-]{+\humanauthor[P2-07 r6]{A number can be wrong without any run failing: a result may come from the wrong +}
+{+script, a run may see the wrong number of tokens, or an evaluation may use another run's checkpoint. A+} 
+separate audit pipeline {+therefore+} re-derives {+each+} reported [-numbers-]{+number+} from {+the+} frozen [-records-]{+records,+} without launching 
+[-experiments.-]{+experiments, and checks six things.+}
+{+{\setlength{\leftmargini}{1.2em}\begin{itemize}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\t+}
+{+opsep}{1pt}+}
+{+\item \emph{The code behind each model.}+} For each of the 21 panel runs[-it checks-] the[-source-] hash [-against-]{+of the training source must +}
+{+match+} the training record and {+the+} public [-manifest,-]{+manifest.+}
+{+\item \emph{Tokens and updates.} Each run must process+} the exact token total, {+with+} updates [-against-]{+equal to tokens +}
+{+divided by+} tokens per update, [-checkpoint-to-downstream -]
+[-pairing-]{+so recipes compared at equal tokens really saw equal tokens.+}
+{+\item \emph{Checkpoints+} and [-metric direction. E1 was analysed by-]{+evaluations.} Each downstream result must come from+} its [-pre-registered script,-]{+own run's checkpoint,+} and 
+[-the exploratory split -]
+[-reproduces-]{+every metric must point in+} its [-paired differences exactly.-]{+stated direction.+}
+{+\item \emph{Reported results.}+} Opus's frontier was re-measured on a fresh A40, where protected BPB reproduced 
+bit for [-bit-]{+bit,+} and an AP-Q checkpoint reproduced all nine August downstream metrics. [-The-]{+\CRNCrossChecked{} panel +}
+{+quantities agree with an independent audit to $10^{-15}$.+}
+{+\item \emph{Hypotheses and parents.} Scripts check every quoted agent excerpt verbatim against its attempt +}
+{+record and every drawn lineage edge against a recorded parent link.+}
+{+\item \emph{Statistics.} E1 was analysed by its pre-registered script, the exploratory split reproduces its +}
+{+paired differences exactly, and the+} Opus tests' pre-registered analysis reproduces byte for byte from the 
+archived raw records.
+{+\end{itemize}}+}
+Every result number in Part~1, every table and every data figure is generated by scripts in 
+[-\texttt{analysis/}, which also check -]
+[-each quoted agent excerpt verbatim against its attempt record and every drawn lineage edge against a recorded -]
+[-parent link. \CRNCrossChecked{} panel quantities were cross-checked against an independent audit (agreement -]
+[-to $10^{-15}$).-]{+\texttt{analysis/}.+} Figure~\ref{fig:loop}, the glossary and the discovery and canary environment rows are 
+[-hand-authored.}-]
+
+[-\begin{table}[t]-]
+[-\caption{\humancaption{P2-08}Selection funnel from discovery to the reported recipes,-]{+hand-authored. Data-integrity checks are+} in [-time order. Step 2's -]
+[-rule was fixed before the first AutoPareto attempt. Steps 3 and 4 were chosen after the agents' scores, and -]
+[-for step 4 the seeds 0--2 re-runs, were known. Step 5 was pre-registered. Counts and dates: Appendix -]
+[-Table~\ref{tab:funnelfull}.}\label{tab:funnel}-]
+[-\centering\scriptsize\setlength{\tabcolsep}{3pt}\input{generated/camera_ready/table_funnel_v3.tex}-]
+[-\end{table}-]
+
+[-\humanauthor[P2-09]{\textbf{Selection-]{+Appendix~\ref{app:repro}.}+}
+
+{+\humanauthor[P2-09 r6]{\textbf{Selection+} and the winner's curse.} [-Picking-]{+Each discovery score comes from one noisy +}
+{+run. When+} the best of many noisy[-discovery-] scores [-favours recipes-]{+is picked, the winner tends to be a recipe+} that [-were-]{+was also+} lucky, so 
+[-a discovery winner is expected to look worse when re-run. It did:-]{+its score overstates its quality. As this winner's curse predicts,+} every re-run candidate scored 
+\CROptMin--\CROptMax{} BPB worse than at discovery. This is why [-independent -]
+[-confirmation was needed.-]{+we retrained the selected recipes +}
+{+independently, on new seeds and a held-out shard, instead of trusting their discovery scores. Selection +}
+{+happened in stages (Appendix Table~\ref{tab:funnel}).+} The representative rule was committed on 2026-07-27, 
+before AutoPareto's first attempt, and yields 11 [-representatives (Table~\ref{tab:funnel}).-]{+representatives.+} On 2026-08-10, after discovery, a global 
+four-role selector cut these to four seed-0 recipes. The confirmation campaigns were created on 2026-08-11/12 
+UTC, so selection preceded the seeds-0--2 confirmation. The 201M panel was assembled around 2026-08-21--25, 
+@@ -118,110 +158,92 @@ lowest-memory role (exp 124). \textbf{Not confirmed.} Exp 109, the best seed-42
+50.3M-parameter model at batch 65,536 and reached \CRExpOneZeroNineBPB{} on \CRExpOneZeroNineTokens M tokens 
+(AR-ref: \CRSeedFortyTwoAR{} on \CRExpSixEightTokens M). It was a pre-registered representative but was never 
+confirmed, and it is the most plausible[-exposure-neutral-] AutoPareto quality [-candidate.-]{+candidate that does not rely on extra exposure.+} E1 
+tests AP-Q, not the best possible AutoPareto recipe, and our conclusions do not extend to unconfirmed 
+[-recipes. AR-ref replaced -]
+[-exp 65, which failed a cache-correctness check under a reference later judged faulty. Their fixed-time -]
+[-re-runs are indistinguishable (\CRFixedSixtyFive{} and \CRFixedSixtyEight).}-]
+
+[-\humanauthor[P2-10]{\textbf{Variability.}-]{+recipes.}+}
+
+{+\humanauthor[P2-10 r6]{\textbf{Variability.}+} Within the agent [-campaigns, best-to-second gaps are-]{+campaigns the best recipe beats the second by+} 
+at most \CRGapTwoMax{} BPB and [-best-to-fifth gaps-]{+the fifth by+} at most \CRGapFiveMax, [-against a-]{+while the+} pooled fixed-time seed SD [-of -]
+[-\CRPooledSD, so-]{+is +}
+{+\CRPooledSD. A campaign's+} ``best'' [-within a campaign-]{+recipe+} is {+therefore+} not [-resolvable.-]{+resolvable from its runners-up.+} The unchanged 
+baseline differs by \CRBaseSeedEffect{} BPB between seeds 0 and 42, and by \CRSessionLo--\CRSessionHi{} BPB 
+at the same seed between sessions. Under the fixed-time contract one recipe processed up to 
+\CRTokenSpreadMax\% different token counts across sessions. In E1 {+the+} within-recipe seed SD is at most 
+\CREOneMaxSD{} BPB, an order of magnitude below the matched-token gap. [-In Pair-A, \CROpUncertain{} of Opus's \CROpValid{} valid results-]{+Speed-measurement noise in Pair-A+} and 
+[-\CRCxUncertain{} of Codex's \CRCxValid{} were speed-uncertain. In the Opus arm the drift came from the -]
+[-baseline brackets on noisier hosts, not from the candidates. In the re-measurement of Opus's frontier -]
+[-\CROpStableRepeats{} of \CROpRepeats{} repeats passed the drift rule. In-]{+in+} the ablations[-\CRIAUnstable{} of -]
+[-\CRIARuns{} runs, all host-bound runs without the graph, failed the frozen stability rule and are reported, -]
+[-not re-run.}-]
+
+[-\humanauthor[P2-11]{\textbf{Data integrity.} The canonical validation value for panel runs-] is [-the panel -]
+[-results file. Database rows differ from it by at most $2.4\times10^{-5}$ and held-out values agree exactly. -]
+[-Held-out BPB exceeds validation BPB by \CRHeldValOffLo--\CRHeldValOffHi{} depending on the recipe, so recipes -]
+[-are compared only within one metric. Identical token streams across panel recipes were verified at run time, -]
+[-and E1's 24 runs and the Opus retraining's \CRMTRuns{} passed every pre-registered integrity gate on the -]
+[-first attempt.}-]{+reported in Appendix~\ref{app:repro}.}+}
+
+\subsection{Reproducibility}\label{sec:reproduce}
+[-\humanauthor[P2-17]{We separate three levels, with commands-]{+\humanauthor[P2-17 r6]{The code and artifacts will be released at +}
+{+\url{https://github.com/ramisworld/AutoPareto}. Much of the evidence, including the camera-ready run records, +}
+{+is still local, so every level below needs files that are not yet public. Commands are+} in 
+Appendix~\ref{app:howto}. \emph{Level 1, [-artifact reproduction}-]{+artifacts}+} (no [-GPU): one-]{+GPU). One+} script, 
+\texttt{paper/build\_camera\_ready.sh}, regenerates every number, table and figure from the archived records 
+and checks [-them-]{+each+} against the committed audit. [-It needs the -]
+[-full evidence tree, part of which (database snapshot, campaign histories) awaits the public release, while -]
+[-the-]{+The+} pre-registered E1 and Opus analyses [-already rerun from committed records.-]{+need only their run +}
+{+records, while the full build also needs the database snapshot and the campaign histories.+} \emph{Level 2, 
+[-recipe -]
+[-reproduction}-]{+recipes}+} (one [-A40): the-]{+A40). The+} frozen recipe sources, hashed plans and executors retrain AP-Q, AR-ref and Opus's 
+recipes under the recorded token or time contract. The training-shard revision and one GPU kernel are not 
+pinned in code, so exact losses may differ slightly. \emph{Level 3, [-agent-campaign reproduction}: the-]{+agent campaigns.} The+} Pair-A controller, 
+prompts, output schemas and permission checks run a comparable campaign with Codex CLI or Claude [-Code, but proprietary-]{+Code. +}
+{+Proprietary+} model state means {+that+} a new campaign will not repeat the same attempts, and pod setup is partly 
+manual. The historical campaigns were operated by hand through desktop agents and have no single entry point.}
+
+\subsection{Significance of result}
+[-\humanauthor[P2-12]{Matched-exposure-]{+\humanauthor[P2-12 r6]{Matched-exposure+} verification shows that the quality ranking depends on the contract, 
+while the efficiency [-result survives-]{+gains hold under+} every contract we tested. [-The-]{+At no+} pre-registered token[-sweep finds no-] budget[-at which AP-Q-] is {+AP-Q+} 
+better per token, so its fixed-time standing reflects its extra exposure, not better [-learning per token. Agents from two model families found-]{+learning. Opus pushed+} 
+the same lever [-and wrote it into their hypotheses: -]
+[-under a time budget, a smaller program trains on more data. The second pushed it further, was-]{+further: its recipes were+} worse still per token, and[-took-] most of its decode gain {+came+} from graph 
+replay whose recording the metric did not time. A benchmark that ranks agents under a [-throughput-coupled-]{+time+} budget [-is-]{+therefore+} 
+partly [-ranking-]{+ranks+} how fast their candidates train. [-Reported quality-]{+Quality+} gains should be rechecked [-under-]{+at+} controlled [-exposure-]{+exposure,+} and 
+speed gains [-under-]{+with+} end-to-end timing.}
+
+\subsection{Interpretability}
+[-\humanauthor[P2-13]{Every-]{+\humanauthor[P2-13 r6]{Every+} preserved attempt record keeps the agent's hypothesis, intended change, applied 
+patch, parent, source and parent hashes, status, raw metrics and failure [-text, so a-]{+text. A+} headline number can 
+{+therefore+} be traced to a source file, {+to+} the edit that produced it and {+to+} the hypothesis recorded before [-it-]{+the +}
+{+run+} (Figure~\ref{fig:opus}, Appendix~\ref{app:decisions}). We [-separate-]{+keep apart+} what the agent predicted, what it 
+changed, what the evaluator measured and what our retrospective analysis concludes, and we quote agent 
+motives rather than infer them.[-Session logs survive for every campaign, privately for the historical ones because they -]
+[-contain infrastructure access details.-] The [-record-]{+records+} also [-exposes-]{+expose+} gaps between intent and [-execution: AP-Q's -]
+[-recorded intended changes for A7 and A8 predict widths 384, 320 and 256, but width rounding kept A7 at 384 -]
+[-and took A8 straight to 256.}-]{+execution +}
+{+(Appendix~\ref{app:decisions}).}+}
+
+\subsection{Limitations}
+[-\humanauthor[P2-14]{\emph{Addressed-]{+\humanauthor[P2-14 r6]{\emph{Addressed+} since review:} the confounded [-reversal (E1 holds seeds and evaluation -]
+[-data fixed and varies only the budget),-]{+reversal,+} the single matched horizon[-(three budgets plus 300\,s)-] and 
+the fixed-time variability (E1[-seeds, session-] and[-seed effects-] above). \emph{Remaining:} one GPU type[-(A40)-] and small models, [-with-]{+so we make+} no 
+scale-transfer, cross-GPU or energy claim. Matched-token verification compares complete recipes, so 
+architecture and optimizer changes stay bundled, and in E1 tokens and updates change [-together (a -]
+[-batch-varied follow-up was not run).-]{+together.+} E1 resolves 
+the gap with three seeds but not its slope with tokens, and its exposure--architecture split is exploratory. 
+[-Selection narrowed after discovery, and a-]{+A+} pre-registered full-size candidate (exp 109) was never confirmed. Each Pair-A agent ran one [-seed,-]{+seed under +}
+{+slightly different conditions (\S\ref{sec:interventions}),+} so we do not rank agents. The[-Codex arm stopped after 22 attempts, and the Opus arm had a longer agent timeout and two extra attempts -]
+[-(neither changes a conclusion, Appendix~\ref{app:faq}). The-] Opus retraining 
+covers one budget and replaces[-its-] time-fraction learning-rate progress with the token fraction. The ablations 
+measure one workload on one host, and graph replay and fusion were not applied to the baseline or AR-ref.[-The fixed-time versus -]
+[-fixed-token pilot (\S\ref{sec:pilot}) shows a tendency but is too small for a behavioural conclusion.-] 
+Historical comparators differ in search space, budget, seed and failure history, so they support no 
+search-policy ranking.}
+
+\subsection{Pair-A: controlled agent campaigns}\label{sec:pilot}
+[-\humanauthor[P2-15]{We piloted a prospective test of H2, whether-]{+\humanauthor[P2-15 r6]{\textbf{The question.} Does+} the {+training+} contract [-changes-]{+change+} what an agent [-pursues.-]{+pursues? We +}
+{+piloted a prospective test of this hypothesis (H2).+} Two arms [-whose-]{+started from identical code at seed 3, with+} 
+programs {+that+} differ only in the[-contract-] paragraph [-started from identical bytes at seed 3.-]{+that states the contract. Arm+} T trains {+each candidate+} for 300\,s. 
+{+Arm+} N trains [-for-]{+each candidate on+} $N^\star$ counted tokens, [-the largest multiple of 524,288 not above the -]
+[-median of three-]{+set from+} baseline calibration [-runs:-]{+runs +}
+{+(Appendix~\ref{app:repro}). $N^\star$ was+} 88,604,672 in the first launches and 85,458,944 after recalibration 
+on a new A40 from 2026-09-09. Five Codex [-launch lineages-]{+launches+} ran between 2026-09-05 and 2026-09-17, with protocol 
+changes between [-them, and-]{+them.+} Part~\ref{partone} [-reports-]{+uses the fixed-time arm of+} the 2026-09-14 restart (22 attempts per 
+arm).
+
+[-In the lineage reported at submission, 2 of-]{+\textbf{What+} the[-first 4 fixed-time attempts are invalid. When a -]
+[-candidate's training loop ended before the trusted stop, the harness re-executed the training body and -]
+[-checkpointed a freshly initialized model (candidate-reported step 0 against 1,264 observed updates, BPB -]
+[-3.2159). The controller still marked these runs quality-valid and parent-eligible, and the agent's next -]
+[-hypothesis blamed its learning rates. The Opus harness treats an early normal exit as a candidate failure.}-]
+[-\humanauthor[P2-15b]{\textbf{What the two-] arms explored} (Appendix Table~\ref{tab:pilot}). In each of the three launches in which the 
+agent changed the architecture, the fixed-token arm's best model was [-larger -]
+[-(\CRFivePilotNA-]{+larger: \CRFivePilotNA+} M against 
+\CRFivePilotTA [-M,-]{+M parameters,+} \CRFivePilotNB M against \CRFivePilotTB M and \CRFivePilotNC M against 
+\CRFivePilotTC [-M parameters).-]{+M, or \CRFivePilotRatioLo{} to \CRFivePilotRatioHi{} times as large.+} Only fixed-token attempts 
+grew the model, to 10 and 12 layers, expecting a better BPB ``by increasing model [-capacity'', while under-]{+capacity''. Under+} fixed 
+time the agent {+instead+} cut depth and width and trained on up to 175M tokens. [-Batch reductions do not separate the arms: both-]{+Both arms+} reduced the {+batch, in +}
+{+different launches, so+} batch [-on 6 -]
+[-September, and on 9 and 14 September-]{+size does not separate them. Each launch ran+} each [-did so while the other did not. With-]{+arm once with+} a shared seed 
+and starting code, [-a changing-]{+the+} harness {+changed between launches,+} and six fixed-time attempts {+were+} lost to the defect 
+[-above, this is-]{+below. The pilot therefore shows+} an observed tendency, not an estimated [-contract effect.}-]
+
+[-\humanauthor[P2-16]{\textbf{What-]{+effect of+} the [-speed metric does not time.} The Opus arm inherited-]{+contract.+}
+
+{+\textbf{A harness defect.} In+} the [-Codex arm's -]
+[-frozen contract, schedule, baseline, data, evaluator and Pareto rule. Besides-]{+lineage reported at submission, 2 of+} the [-agent backend, isolation, -]
+[-call timeout and attempt budget (\S\ref{sec:interventions}), only-]{+first 4 fixed-time attempts are +}
+{+invalid. When a candidate's training loop ended before+} the [-early-exit repair-]{+trusted stop, the harness re-ran the training body+} 
+and {+saved+} a [-mid-campaign -]
+[-FP32 adjudication fix changed. Its largest decode gains came from recording-]{+freshly initialized model (step 0 reported against 1,264 observed updates, BPB 3.2159). The +}
+{+controller still marked these runs quality-valid and parent-eligible, and+} the {+agent's next hypothesis blamed +}
+{+its learning rates. The Opus harness treats such an early exit as a candidate failure.}+}
+
+{+\humanauthor[P2-16 r6]{\textbf{What the speed metric does not time.} Opus recorded its+} decode CUDA graph, and 
+later compiled regions, inside the untimed [-\texttt{prefill}-]{+prefill+} (\S\ref{sec:inference}), which its program calls 
+``diagnostic''. [-This was permitted,-]{+The rules allowed this,+} so we report both [-speeds. A scored prefill-inclusive metric-]{+speeds and recommend scoring prefill+} and [-output -]
+[-checks-]{+checking +}
+{+outputs+} inside[-timed windows belong in-] the [-harness.}-]{+timed windows.}+}
+\label{parttwoend}

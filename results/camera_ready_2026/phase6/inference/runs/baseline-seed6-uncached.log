@@ -1,0 +1,1 @@
+{"label": "baseline-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 107.29124402404169, "speedup": 0.7767642469731348, "peak_mib": 1007.9951171875, "wall_s": 263.7}

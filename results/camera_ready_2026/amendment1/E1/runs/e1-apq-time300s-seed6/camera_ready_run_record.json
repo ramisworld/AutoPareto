@@ -1,0 +1,42 @@
+{
+  "attempt": 1,
+  "attempt_wall_seconds": 471.26424050331116,
+  "cell": "time_300s",
+  "contract": "fixed_time",
+  "finished_utc": "2026-11-07T13:25:08.481160+00:00",
+  "format": "autopareto_camera_ready_run_record_v1",
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "06549e566ab770827ca28fe54f3fd0e02c2e02db9b3c949d1ffd8dcc236fc592",
+    "end_to_end_training_seconds": 387.33856773376465,
+    "heldout_bpb": 1.1559916005506328,
+    "heldout_ci95": [
+      1.1495728308711703,
+      1.1627883315234262
+    ],
+    "parameter_count": 29360392,
+    "peak_training_memory_mb": 12470.346542358398,
+    "steady_state_seconds": 300.0420491695404,
+    "steady_state_tokens_per_second": 522903.9877385541,
+    "tokens": 158334976,
+    "updates": 1208,
+    "validation_bpb": 1.092682638249098,
+    "validation_bpb_in_process": 1.0926761702727514
+  },
+  "order": 7,
+  "phase1_model_id": "autopareto_292",
+  "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+  "recipe": "AP-Q",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-apq-time300s-seed6",
+  "run_id": "e1-apq-time300s-seed6",
+  "seed": 6,
+  "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+  "stage": "E1",
+  "status": "completed",
+  "synthetic": false,
+  "time_budget_seconds": 300,
+  "token_budget": null
+}

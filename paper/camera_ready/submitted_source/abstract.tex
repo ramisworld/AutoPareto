@@ -1,0 +1,6 @@
+When an autonomous researcher is evaluated under a fixed wall-clock budget, a faster program also trains on more data before it is scored, so the resource contract can bias what the search appears to discover.
+We examine this in AutoPareto, an autonomous Transformer researcher that edits its own training source under three measured objectives: validation quality, cached-decode throughput, and allocated inference memory on a single NVIDIA A40.
+After the agent produced its source-edit lineage, we froze seven archived recipes and retrained each on three unseen seeds at exactly matched token exposure.
+The discovery-stage quality advantage of the selected agent recipe does not persist under this verification, so it should not be read as an exposure-controlled quality improvement.
+Its inference-efficiency advantages do persist: at matched tokens, updates, and batch size, the recipe retains \DecodeRatio$\times$ cached-decode throughput with \ParameterReduction\% fewer parameters and \MemoryReduction\% less allocated inference memory.
+Resource contracts and exposure-controlled verification therefore belong in the methodology of autonomous ML research, not only in its reporting.

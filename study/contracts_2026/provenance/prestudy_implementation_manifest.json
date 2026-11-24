@@ -1,0 +1,56 @@
+{
+  "schema": "autopareto_pre_study_implementation_manifest_v1",
+  "status": "validation_blocked_before_freeze",
+  "archive": {
+    "path": "study/contracts_2026/provenance/archive/pre_final_search_20260901T030943Z/current_v4_and_a40_traces.tar.gz",
+    "sha256": "6a77392e7cbf3fba7cf5ef7cbd0115070e7e94df5876496190d195343599cbd1",
+    "pre_change_component_sha256": {
+      "v4_inference_benchmark.py": "92861d945c025c3972bb716e29463a91def8fb6ed421a7db553e9b4c1ebc9e07",
+      "v4_benchmark_policy.py": "08d9487e0a621da3eab09b25a210e9587142aabf975fd81c12db60a8fbddca09",
+      "preexisting_inference_adapter.py": "ed63106537aed1276a0bf9d9788940e747b9d27253973b4e98f4cb9983f82161"
+    }
+  },
+  "local_harness_sha256": {
+    "inference_benchmark.py": "cc10b0ce321bb11d3d464f67f42a851cd7fbec1d69a10ad2e7228ea7e97d79e9",
+    "benchmark_policy.py": "712701d714a5a7bda2b04c6bcc48bfc1459c0df772cb25b94148b1980b27e02e",
+    "correctness_policy.py": "5a9a5796499562f7d8a2cc1dfe28e3185204c99a9478ae2c999d50e82ce80b32",
+    "inference_adapter.py": "55034cc2a544ffd0dbb93be4cd1694679936b4be61fe64c6c7c9ca2743c79d5c",
+    "candidate_sandbox.py": "b9c887ee505cb2631c5ee77117f4e9565f421d74daf03cef58509683f821c834",
+    "train_launcher.py": "b04cd70b9eb09d42a693b3a322e9bcddc822315398bbf034df950dfbafbb16a3",
+    "remote_runner.py": "1bc495c140ff758c4bd8297d86840c87f11c44d231412d80a0600985bb91b5bb",
+    "candidate_worker.py": "1afa94677d496ce3030db8d09f9a15b787b849f27917078af8fc6e8461d06e1f",
+    "study_runtime.py": "cee57ca2ba55610e3d4fd1348b7f85210f23e20c61770524ac2f5c66eb305663",
+    "context.py": "71f720ee8e6da913184634ec4c9d82e71b715c78aec46f5f1f2b897f17a42894"
+  },
+  "prompt_manifest_sha256": "849a4ca30faf47367380aba1a3b30a5d976ec8c9f89801a79f7861743823dde5",
+  "correctness_policy_sha256": "5a9a5796499562f7d8a2cc1dfe28e3185204c99a9478ae2c999d50e82ce80b32",
+  "workload_manifest_sha256": "b2a79948d7219cd59b6d9318c9126c4ed4876dac33c6c3e1f243ce2a64e1744a",
+  "prompt_snapshot_sha256": {
+    "fixed_time": "14f51ff7b604b03191ad01ead737fe6e6d1c4c28597ce075420aa6d9ce81c799",
+    "fixed_tokens": "7e7faaec6d6572a562256b226d05d1e03341a1b535f6312f9f032b1489851bff"
+  },
+  "local_validation": {
+    "py_compile": "passed",
+    "unit_tests": "34 passed, 3 expected skips (no local PyTorch/OS sandbox)",
+    "synthetic_speed_relations": "faster/slower/tied cases passed",
+    "historical_A40_runs": "not run; remote isolation blocker"
+  },
+  "remote_harness": {
+    "host": "f8f382cc4375",
+    "pod_id": "07nxx55segy6z5",
+    "public_endpoint": "63.141.33.108:22076",
+    "inference_benchmark.py": "missing from /workspace/autopareto at probe time",
+    "benchmark_policy.py": "missing from /workspace/autopareto at probe time",
+    "train_launcher.py": "missing from /workspace/autopareto at probe time",
+    "inference_adapter.py": "ed63106537aed1276a0bf9d9788940e747b9d27253973b4e98f4cb9983f82161",
+    "deployment_status": "new protocol not deployed"
+  },
+  "remote_isolation": {
+    "bubblewrap": false,
+    "docker": false,
+    "podman": false,
+    "unshare_user_namespace": false,
+    "unshare_mount_namespace": false,
+    "candidate_execution": "fail_closed"
+  }
+}

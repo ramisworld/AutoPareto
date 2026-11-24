@@ -1,0 +1,287 @@
+# Revision 13 (2026-11-19): final polish and the author-approved cross-reference fixes. Generated with diff -u; 'before' is revision 12 (FINAL(9)).
+--- a/paper/main.tex
++++ b/paper/main.tex
+@@ -75,8 +75,10 @@
+ 
+ \looseness=-1 \textbf{Terms.} Quality is \emph{bits per byte} (BPB) on unseen text, lower is better: agents saw \emph{validation BPB}; we confirm on \emph{held-out BPB} from a shard no agent saw (glossary: Appendix~\ref{app:glossary}).
+ 
+-\looseness=-1 \textbf{Setup.} Each candidate trains a small Transformer on web text (ClimbMix) for 300\,s on one NVIDIA A40, starting from 8 layers and 50.3M parameters. The agent edits only \texttt{train.py} (model, optimizer, training loop); a documented hook lets it add generation code, which the protected benchmark times (Appendix~\ref{app:access}). Each \emph{attempt} reads all earlier ones, picks a \emph{parent}, records a hypothesis and edits the file; protected code trains, measures and records it, failures included (Appendix Figure~\ref{fig:loop}). A recipe is on the \emph{Pareto frontier} if no other is at least as good on every objective and better on one.
++\looseness=-1 \textbf{Setup.} Each candidate trains a small Transformer on web text (ClimbMix) for 300\,s on one NVIDIA A40, starting from 8 layers and 50.3M parameters.
+ 
++\looseness=-1 \textbf{Search loop.} The agent edits only \texttt{train.py} (model, optimizer, training loop); a documented hook lets it add generation code, which the protected benchmark times (Appendix~\ref{app:access}). Each \emph{attempt} reads all earlier ones, picks a \emph{parent}, records a hypothesis and edits the file; protected code trains, measures and records it, failures included (Appendix Figure~\ref{fig:loop}). A recipe is on the \emph{Pareto frontier} if no other is at least as good on every objective and better on one.
++
+ \looseness=-1 \textbf{Eight approaches.} AutoPareto ran with GPT-5.6 (three campaigns of 25 attempts) and Claude Opus 5.5 (27 attempts, 25 valid, in a later harness; Part~\ref{parttwo}), against a quality-only AutoResearch agent (GPT-5.6) and five classical optimizers (Appendix~\ref{app:approaches}). \emph{GPT A22} is attempt 22 of GPT-5.6's seed-0 campaign; \emph{AR-ref} is AutoResearch's best recipe that passed the cache check. Campaigns differ in seed and harness, so we rank neither agents nor methods \citep[cf.][]{ferreira}.
+ 
+ \subsection{What did AutoPareto discover?}\label{sec:discover}
+@@ -86,7 +88,7 @@
+ \caption{All 13 recipes, seeds 6 to 8: held-out BPB after 201.3M tokens and after 300\,s, training speed (300\,s runs), and decode speed and peak memory on one inference benchmark and A40 (1{,}024 tokens in, 128 out, batch one). Stars: on the BPB--decode frontier in every seed. SDs: Table~\ref{tab:verify}.}\label{fig:overview}
+ \end{figure}
+ 
+-\looseness=-1 \textbf{Every agent found the same lever}: under a 300\,s budget smaller batches give more optimizer updates and smaller models more tokens. AutoResearch kept the 50.3M-parameter model (best held-out BPB at equal tokens). GPT A22 (4 layers, 29.4M) has \CRSixGptTrainRatio$\times$ AR-ref's training throughput and decodes \CRSixGptDecRatio$\times$ as fast with \CRSixGptMemRed\% less memory; GPT A24 and A25 (17.9M, 26.2M) are faster still but worse.
++\looseness=-1 \textbf{Every agent found the same lever}: under a 300\,s budget smaller batches give more optimizer updates and smaller models more tokens. AutoResearch kept the 50.3M-parameter model (best held-out BPB at equal tokens). GPT A22 (4 layers, 29.4M) trains \CRSixGptTrainRatio$\times$ and decodes \CRSixGptDecRatio$\times$ as fast as AR-ref with \CRSixGptMemRed\% less memory; GPT A24 and A25 (17.9M, 26.2M) are faster still but worse.
+ 
+ \looseness=-1 \textbf{Opus also rewrote the inference engine.} Its 22 to 26M-parameter recipes train about \CRSixOpTrainRatio$\times$ as many tokens per second as AR-ref and decode \CRSixDecodeLo{} to \CRSixDecodeHi{} tokens per second, \CRSixSpeedLo$\times$ to \CRSixSpeedHi$\times$ its starting model, in \CRSixOpMemLo{} to \CRSixOpMemHi{} instead of \CRSixARMem\,MiB. Most of this comes from Opus's generation code, not its model (\S\ref{sec:inference}); the ten other recipes run the protected reference decoder, so the 32$\times$ compares engines as well as models and measures speed, not quality.
+ 
+@@ -94,7 +96,7 @@
+ 
+ \begin{figure}[t]
+ \centering\includegraphics[width=\linewidth]{figures/cr_lineage3.pdf}
+-\caption{Three research histories in attempt order; lines join each attempt to its recorded parent, branches are abandoned or failed attempts (all: Figure~\ref{fig:histories}). Quotes: hypotheses recorded before each run. ``val'': validation BPB of one 300\,s run, comparable within a column. Speed-ups: search records over each agent's starting model (final recipes re-timed in Figure~\ref{fig:overview}).}\label{fig:tracks}\label{fig:opus}
++\caption{Three research histories in attempt order; lines join each attempt to its recorded parent; branches are abandoned or failed attempts (all: Figure~\ref{fig:histories}). Quotes: hypotheses recorded before each run. ``val'', tokens: validation BPB (comparable within a column) and training tokens of one 300\,s run. Speed-ups: search records over each starting model (final recipes re-timed in Figure~\ref{fig:overview}).}\label{fig:tracks}\label{fig:opus}
+ \end{figure}
+ 
+ \looseness=-1 \textbf{Three searches} (Figure~\ref{fig:tracks}). AutoResearch kept the model's size and tuned batch and learning rates (most failures: a faulty cache check, \S\ref{sec:interventions}). GPT-5.6 removed layers until A8 lost \CREightAPEightWorse, restored width 512 (A18) and tuned learning rates into GPT A22. Opus rewrote decoding from A8 and reached \CREightOpTwentyTwoX$\times$ by A22, while its \CRThreeLateValid{} valid attempts after A7 improved BPB by only \CRThreeLateGain{} in total.
+@@ -106,7 +108,7 @@
+ 
+ \begin{figure}[t]
+ \centering\includegraphics[width=\linewidth]{figures/cr_unified.pdf}
+-\caption{Two objectives on one benchmark (memory: Figure~\ref{fig:overview}): held-out BPB after (a) 201.3M tokens and (b) 300\,s against decode speed. Large: means; small: seeds (rings: timing flag). Dashed: the means' frontier; \CRSixFrontMeanOnlyTok{} (a), \CRSixFrontMeanOnlyTime{} (b) are on it, not in every seed.}\label{fig:unifiedscatter}
++\caption{A two-objective projection: held-out BPB after (a) 201.3M tokens and (b) 300\,s against decode speed. AutoPareto also optimizes inference memory (Figure~\ref{fig:overview}, Table~\ref{tab:verify}). Large: means; small: seeds (rings: timing flag). Dashed: the means' frontier in these two objectives; \CRSixFrontMeanOnlyTok{} (a), \CRSixFrontMeanOnlyTime{} (b) are on it, not in every seed.}\label{fig:unifiedscatter}
+ \end{figure}
+ 
+ \looseness=-1 \textbf{Equal tokens: AR-ref learns most per token.} All \CRSixTokWorseCount{} other recipes are worse after 201.3M tokens, by \CRSixTokDLo{} to \CRSixTokDHi{} held-out BPB, in every seed, with every per-comparison 95\% interval above zero (\CRSixBonfTok{} of \CRSixTokWorseCount{} after a Bonferroni adjustment): GPT A22 by \CRSixGptTokD{} (as in E1), Opus's recipes by about 0.06. \textbf{Equal time: the leaders are not separated.} At 300\,s no recipe is resolved as better than AR-ref (GPT A22 \CRSixGptTimeD{} \CRSixGptTimeCI, Opus A27 \CRSixOpTwSevenTimeD{} \CRSixOpTwSevenTimeCI), which is not evidence of equality, and \CRSixTimeWorseNames{} are resolved as worse (only the baseline after adjustment). The pre-registered E1 (Appendix Figure~\ref{fig:e1}) explains GPT A22: it learns less per token than AR-ref at every token budget and seed but trains on \CREOneTokAP M tokens in 300\,s to AR-ref's \CREOneTokAR M; the two roughly cancel.
+@@ -153,7 +155,7 @@
+ 
+ \subsection{Research Loop}\label{sec:loop}
+ % P2-04: restructured in revision 6 by Claude; the author stated on 2026-11-15 that Part 2 is reviewed and approved. Revision 7 changed names only; the author approved them on 2026-11-15 (camera_ready/CHANGELOG_CAMERA_READY.md).
+-\humanauthor[P2-04 r6]{\looseness=-1 Each attempt follows the eight steps below. The agent acts in steps 2 and 8 and, in original runs, labels the outcome in step 7. Protected code does everything else (Appendix~\ref{app:repro} names the functions).
++\humanauthor[P2-04 r6]{\looseness=-1 Each attempt follows the eight steps below. The agent acts in steps 2 and 8 and, in original runs, labels the outcome in step 7. Protected code does everything else (Appendix~\ref{app:repro} names the functions).\par
+ {\small\begin{enumerate}\setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}\setlength{\topsep}{2pt}
+ \item \emph{Controller:} show the agent this campaign's records, the current frontier and the parent's source.
+ \item \emph{Agent:} return a hypothesis, the intended change, a change category, the chosen parent and a patch to \texttt{train.py}.
+@@ -222,7 +224,7 @@
+ \humanauthor[P2-14 r6]{\looseness=-1 \emph{Addressed since review:} the confounded reversal, the single matched horizon and the fixed-time variability (E1 and above). \emph{Remaining:} one GPU type and small models, so we make no scale-transfer, cross-GPU or energy claim. Matched-token verification compares complete recipes, so architecture and optimizer changes stay bundled, and in E1 tokens and updates change together. E1 resolves the gap with three seeds but not its slope with tokens, and its exposure--architecture split is exploratory. A pre-registered full-size candidate (exp 109) was never confirmed. Each extended-experiment agent ran one seed under slightly different conditions (\S\ref{sec:interventions}), so we do not rank agents. The Opus retraining covers one token budget (the 13-recipe test adds 300\,s) and replaces time-fraction learning-rate progress with the token fraction. The ablations measure one workload on one host, and graph replay and fusion were not applied to the baseline or AR-ref. The original comparators differ in search space, budget, seed and failure history, so they support no search-policy ranking.}
+ 
+ \subsection{Extended experiments: the contract pilot}\label{sec:pilot}
+-\humanauthor[P2-15 r6]{\looseness=-1 \textbf{The question.} Does the training contract change what an agent pursues? We piloted a prospective test of this hypothesis (H2). Two arms started from identical code at seed 3, with programs that differ only in the paragraph that states the contract. Arm T trains each candidate for 300\,s. Arm N trains each candidate on $N^\star$ counted tokens, set from baseline calibration runs (Appendix~\ref{app:repro}). $N^\star$ was 88,604,672 in the first launches and 85,458,944 after recalibration on a new A40 from 2026-09-09. Five Codex launches ran between 2026-09-05 and 2026-09-17, with protocol changes between them. Part~\ref{partone} uses the fixed-time arm of the 2026-09-14 restart (22 attempts per arm).
++\humanauthor[P2-15 r6]{\looseness=-1 \textbf{The question.} Does the training contract change what an agent pursues? We piloted a prospective test of this hypothesis (H2). Two arms started from identical code at seed 3, with programs that differ only in the paragraph that states the contract. Arm T trains each candidate for 300\,s. Arm N trains each candidate on $N^\star$ counted tokens, set from baseline calibration runs (Appendix~\ref{app:repro}). $N^\star$ was 88,604,672 in the first launches and 85,458,944 after recalibration on a new A40 from \mbox{2026-09-09}. Five Codex launches ran between 2026-09-05 and 2026-09-17, with protocol changes between them. Appendices~\ref{app:agents} and~\ref{app:decisions} use the fixed-time arm of the 2026-09-14 restart (22 attempts per arm).
+ 
+ \looseness=-1 \textbf{What the arms explored} (Appendix Table~\ref{tab:pilot}). In each of the three launches in which the agent changed the architecture, the fixed-token arm's best model was larger: \CRFivePilotNA M against \CRFivePilotTA M parameters, \CRFivePilotNB M against \CRFivePilotTB M and \CRFivePilotNC M against \CRFivePilotTC M, or \CRFivePilotRatioLo{} to \CRFivePilotRatioHi{} times as large. Only fixed-token attempts grew the model, to 10 and 12 layers, expecting a better BPB ``by increasing model capacity''. Under fixed time the agent instead cut depth and width and trained on up to 175M tokens. Both arms reduced the batch, in different launches, so batch size does not separate them. Each launch ran each arm once with a shared seed and starting code, the harness changed between launches, and six fixed-time attempts were lost to the defect below. The pilot therefore shows an observed tendency, not an estimated effect of the contract.
+ 
+@@ -272,9 +274,9 @@
+ \textbf{Ablation}: removing one component to measure its effect. \textbf{95\% confidence interval (CI)}: a range computed from the data that expresses uncertainty about an effect. A CI spanning zero means the sign is not resolved.\par
+ \textbf{Candidate names}: a model is named by its agent and attempt. GPT A22 = attempt 22 of GPT-5.6's seed-0 AutoPareto campaign = exp 134 (AP292 in the submitted version, AP-Q in earlier drafts); GPT A24 = exp 136 (AP294, AP-S); GPT A25 = exp 137 (AP299, AP-F); AR-ref = exp 68, AutoResearch's best recipe that passed the cache check; Opus A23, A24 and A27 = attempts of Claude Opus 5.5's campaign. GPT A24 and Opus A24 are different models. T and N are the fixed-time and fixed-token arms of the extended experiments.\par
+ \textbf{Inference benchmark}: every comparison of recipes on decode speed or memory uses one benchmark, 128 tokens generated after a 1{,}024-token prompt at batch one, which the 13-recipe test ran on all 13 recipes. The original campaigns' search records timed 256 tokens after a 256-token prompt (Appendix~\ref{app:repro}).\par
+-\textbf{Original and extended experiments}: the July to August 2026 campaigns (GPT-5.6, AutoResearch, classical optimizers) and the September to November 2026 campaigns under the revised Pair-A harness (GPT-5.6 and Opus). Part~1 calls the extended GPT-5.6 arm GPT-5.6's later campaign.}
++\textbf{Original and extended experiments}: the July to August 2026 campaigns (GPT-5.6, AutoResearch, classical optimizers) and the September to November 2026 campaigns under the revised Pair-A harness (GPT-5.6 and Opus). Appendices~\ref{app:decisions} and~\ref{app:faq} call the extended GPT-5.6 arm GPT-5.6's later campaign.}
+ 
+-\begin{figure}[H]
++\begin{figure}[tbp]
+ \centering\includegraphics[width=\linewidth]{figures/research_loop_compact.pdf}
+ \caption{The AutoPareto loop. The agent proposes each attempt, and protected code (dashed box) validates, trains, measures and records it.}\label{fig:loop}
+ \end{figure}
+@@ -309,6 +311,7 @@
+ \item the Opus retraining and ablation plans, run records (raw benchmark records archived), analysis and audit record,
+ \item the extended-experiment histories of both agents, including failures,
+ \item the Opus frontier re-verification and downstream records,
++\item the 13-recipe test's pre-registration, plan, amendments A1 to A4 and incident log, with its training, inference and lm-eval run records and analysis,
+ \item the selection manifests (\texttt{autopareto\_confirmation\_selection.json}, SHA-256 prefix \texttt{72d58664}, and \texttt{autopareto\_primary\_confirmation\_plan.json}),
+ \item the analysis and audit scripts, and environment pins.
+ \end{itemize}}
+@@ -460,7 +463,6 @@
+ 
+ \textbf{Human author.} The author designed the study, chose its objectives, contracts and comparators, made or approved every intervention, directed the verification and is responsible for the submitted claims. Authorship of this submission is human only.}
+ 
+-\clearpage
+ \bibliographystyle{plainnat}
+ \bibliography{references}
+ \end{document}
+--- a/analysis/cr_r9.py
++++ b/analysis/cr_r9.py
+@@ -312,18 +312,16 @@
+     ar_fail = sum(1 for a in ar if a <= 50 and ar[a]['state'] == 'failed')
+     _need(ar_fail == 31, ar_fail)
+     AR = {'key': 'ar', 'nodes': ar, 'base_bpb': ar_b['val_bpb'],
+-          'head': 'AutoResearch, GPT-5.6', 'sub': 'quality only; seed 42; 50 + 5 attempts',
++          'head': 'AutoResearch, GPT-5.6', 'sub': 'BPB only; seed 42; 50 + 5 attempts',
+           'rows': [
+-              {'a': 0, 'label': f"start: 8 layers, 50.3M; val {ar_b['val_bpb']:.3f}"},
++              {'a': 0, 'label': 'start: 8 layers, 50.3M', 'label2': f"val {ar_b['val_bpb']:.3f}"},
+               {'a': 4, 'label': '#4 short attention windows',
+                'quote': _q(ar, 4, 'converting redundant attention compute into more training tokens')},
+-              {'a': 5, 'label': f"#5 batch halved: val {ar[5]['val_bpb']:.3f}", 'quote': _q(ar, 5, 'twice as many optimizer updates within the fixed training time')},
+-              {'a': 6, 'label': f"#6 halved again: val {ar[6]['val_bpb']:.3f}", 'hi': True},
+-              {'a': 9, 'label': '#9 longer LR warm-down'},
+-              {'a': 13, 'label': '#13 embedding LR'},
++              {'a': 5, 'label': '#5 batch halved', 'label2': f"val {ar[5]['val_bpb']:.3f}", 'quote': _q(ar, 5, 'twice as many optimizer updates within the fixed training time')},
++              {'a': 6, 'label': '#6 halved again', 'label2': f"val {ar[6]['val_bpb']:.3f}", 'hi': True},
++              {'a': 9, 'label': '#9 longer LR warm-down', 'label2': '#13 embedding LR', 'also': [13]},
+               {'a': 15, 'label': '#15, #16 output-head LR', 'also': [16]},
+-              {'a': 19, 'label': '#19 scalar LR'},
+-              {'a': 21, 'label': f"#21 weight decay: val {ar[21]['val_bpb']:.4f}"},
++              {'a': 19, 'label': '#19 scalar LR', 'label2': ['#21 weight decay', f"val {ar[21]['val_bpb']:.4f}"], 'also': [21]},
+               {'a': 'g', 'group': g, 'parent': 21, 'lane': 1,
+                'label': f'#22 to #47: 26 tries from #21, incl. batch halved again (#41); {gfail} failed'},
+               {'a': 48, 'label': '#48 six Newton-Schulz steps'},
+@@ -342,27 +340,26 @@
+           'GPT: no inference-code hypothesis')
+     ap_dec = ap[22]['decode'] / ap_b['inference_tokens_per_second']
+     GP = {'key': 'gpt', 'nodes': ap, 'base_bpb': ap_b['val_bpb'],
+-          'head': 'AutoPareto, GPT-5.6', 'sub': 'quality, speed, memory; seed 0; 25 attempts',
++          'head': 'AutoPareto, GPT-5.6', 'sub': 'BPB, speed, memory; seed 0; 25 attempts',
+           'rows': [
+-              {'a': 0, 'label': f"start: 8 layers, 50.3M; val {ap_b['val_bpb']:.3f}",
+-               'label2': f"{ap_b['total_training_tokens'] / 1e6:.0f}M training tokens in 300 s"},
+-              {'a': 1, 'label': f"A1 batch ¼: val {ap[1]['val_bpb']:.3f} ({sgn(ap[1]['val_bpb'] - ap_b['val_bpb'])})",
++              {'a': 0, 'label': 'start: 8 layers, 50.3M',
++               'label2': f"val {ap_b['val_bpb']:.3f}; {ap_b['total_training_tokens'] / 1e6:.0f}M tokens"},
++              {'a': 1, 'label': f"A1 batch ¼: val {ap[1]['val_bpb']:.3f}",
+                'quote': _q(ap, 1, 'roughly four times as many optimizer updates'), 'hi': True},
+               {'a': 4, 'label': 'A4 depth 8 to 7', 'quote': _q(ap, 4, 'materially improving cached decode speed')},
+               {'a': 6, 'label': 'A6 depth 6, width 384'},
+-              {'a': 7, 'label': f"A7 depth 5: val {ap[7]['val_bpb']:.4f}", 'label2': f"{ap[7]['tokens'] / 1e6:.0f}M training tokens in 300 s"},
++              {'a': 7, 'label': f"A7 depth 5: val {ap[7]['val_bpb']:.4f}", 'label2': f"{ap[7]['tokens'] / 1e6:.0f}M tokens"},
+               {'a': 8, 'label': f"A8 depth 4, width 256: {sgn(ap[8]['val_bpb'] - ap[7]['val_bpb'])}",
+                'quote': _q(ap, 8, 'the smaller model processes more tokens'), 'bad': True},
+               {'a': 9, 'label': 'A9, A10 width 320, 384', 'also': [10], 'lane': 1},
+               {'a': 'g', 'group': [11, 12, 13, 14, 15, 16], 'parent': 7, 'lane': 2,
+-               'label': 'A11 to A16: learning rates of A7'},
+-              {'a': 17, 'label': 'A17 depth 3: infrastructure crash', 'lane': 1},
++               'label': 'A11 to A16: learning rates'},
++              {'a': 17, 'label': 'A17 depth 3', 'label2': 'infrastructure crash', 'lane': 1},
+               {'a': 18, 'label': f"A18 width 512: val {ap[18]['val_bpb']:.4f}",
+                'quote': _q(ap, 18, 'recover enough validation quality'), 'hi': True},
+-              {'a': 19, 'label': 'A19 matrix LR'},
+-              {'a': 20, 'label': 'A20 embedding LR'},
++              {'a': 19, 'label': 'A19 matrix LR', 'label2': 'A20 embedding LR', 'also': [20]},
+               {'a': 21, 'label': 'A21 embedding LR', 'lane': 1},
+-              {'a': 22, 'label': 'A22 output-head LR = GPT A22',
++              {'a': 22, 'label': 'A22 head LR = GPT A22',
+                'label2': f"val {ap[22]['val_bpb']:.4f}; decode {ap_dec:.1f}×", 'final': True},
+               {'a': 23, 'label': 'A23 two KV heads', 'lane': 1},
+               {'a': 24, 'label': 'A24 depth 3 = GPT A24 (17.9M)', 'lane': 1, 'ring': True},
+@@ -382,10 +379,10 @@
+     _need([round(op[a]['speedup'], 1) for a in (4, 10, 14, 18, 19, 22)] == [1.9, 8.6, 16.8, 24.7, 29.6, 32.0], 'Opus speeds')
+     _need(round(op[7]['peak_mib'] - op[8]['peak_mib']) == 52, 'A8 memory')
+     OP = {'key': 'opus', 'nodes': op, 'squares': True,
+-          'head': 'AutoPareto, Claude Opus 5.5', 'sub': 'quality, speed, memory; seed 3; 27 attempts',
+-          'bands': [(1, 7, 'shrinks model\nand batch'), (8, 22, 'rewrites the\ndecode code'), (23, 27, 'frontier')],
++          'head': 'AutoPareto, Claude Opus 5.5', 'sub': 'BPB, speed, memory; seed 3; 27 attempts',
++          'bands': [(1, 7, 'shrinks model and batch'), (8, 22, 'rewrites the decode code'), (23, 27, 'frontier')],
+           'rows': [
+-              {'a': 0, 'label': f"start: 8 layers, 50.3M; val {OB['val_bpb']:.3f}", 'label2': f"{OB['tokens'] / 1e6:.0f}M training tokens in 300 s"},
++              {'a': 0, 'label': 'start: 8 layers, 50.3M', 'label2': f"val {OB['val_bpb']:.3f}; {OB['tokens'] / 1e6:.0f}M tokens"},
+               {'a': 1, 'label': 'A1 batch halved', 'quote': _q(op, 1, 'optimizer-update-limited, not token-limited')},
+               {'a': 2, 'label': 'A2 depth 6: run failed', 'lane': 1},
+               {'a': 3, 'label': f'A3, A4 depth 6, then 4: decode {x(4)}', 'also': [4], 'hi': True},
+@@ -425,7 +422,7 @@
+     rnd = fig.canvas.get_renderer()
+     avail = ax.get_window_extent(rnd).width * (0.985 - x0)
+     for w in range(70, 12, -1):
+-        lines = textwrap.wrap(text, w)
++        lines = textwrap.wrap(text, w, break_on_hyphens=False)
+         ok = True
+         for ln in lines:
+             t = ax.text(0, 0, ln, fontsize=fs, style=style_)
+@@ -449,8 +446,8 @@
+     for r in T['rows']:
+         lines = _fit_wrap(ax, r['label'], fs, XL, 'normal')
+         r['_nbold'] = len(lines)
+-        if r.get('label2'):
+-            lines += _fit_wrap(ax, r['label2'], fs, XL, 'normal')
++        for l2 in ([r['label2']] if isinstance(r.get('label2'), str) else r.get('label2', [])):
++            lines += _fit_wrap(ax, l2, fs, XL, 'normal')
+         r['_nlab'] = len(lines)
+         r['_nq'] = 0
+         if r.get('quote'):
+@@ -462,6 +459,8 @@
+         r['_lines'] = lines
+         nl += len(lines)
+     T['_nlines'], T['_nrows'] = nl, len(T['rows'])
++    # the column note is laid out inside the column's own height budget (revision 13: it no longer overlaps the legend)
++    T['_nnote'] = len(_fit_wrap(ax, T['note'], fs - 0.4, XL)) if T.get('note') else 0
+     return nl, len(T['rows'])
+ 
+ 
+@@ -553,38 +552,40 @@
+                     ax.scatter([gx], [gy], marker='x', s=6, color='#8f8e8a', linewidths=0.6, zorder=4)
+                 else:
+                     ax.scatter([gx], [gy], marker='o', s=5, facecolors='white', edgecolors='#8f8e8a', linewidths=0.5, zorder=4)
+-    ax.text(0.0, -2.45, T['head'], ha='left', va='top', fontsize=6.6, color=col, fontweight='bold')
+-    ax.text(0.0, -1.45, T['sub'], ha='left', va='top', fontsize=5.4, color=INK2)
++    ax.text(0.0, -2.45, T['head'], ha='left', va='top', fontsize=HEAD3, color=col, fontweight='bold')
++    ax.text(0.0, -1.45, T['sub'], ha='left', va='top', fontsize=SUB3, color=INK2)
+     if T.get('note'):
+         for i, ln in enumerate(_fit_wrap(ax, T['note'], fs - 0.4, XL)):
+             ax.text(XL, y + 0.1 + i * LP, ln, ha='left', va='top', fontsize=fs - 0.4, color=MUTED, style='italic')
+     return y
+ 
+ 
+-FS3 = 5.65
++FS3 = 6.2      # revision 13: labels 5.65 -> 6.2 pt, quotes 5.3 -> 5.85 pt (Figure 2 readability)
++HEAD3, SUB3, G03, H3 = 7.2, 5.7, 0.2, 4.28
+ 
+ 
+ def fig_lineage3():
+     T = lineage3_data()
+     style(1.0)
+-    fig = plt.figure(figsize=(5.5, 4.28))
+-    gs = fig.add_gridspec(1, 3, width_ratios=[0.94, 1.0, 1.12], wspace=0.035, left=0.004, right=0.996, top=0.985,
++    fig = plt.figure(figsize=(5.5, H3))
++    gs = fig.add_gridspec(1, 3, width_ratios=[0.82, 0.98, 1.26], wspace=0.035, left=0.004, right=0.996, top=0.985,
+                           bottom=0.05)
+     axs = [fig.add_subplot(gs[0, i]) for i in range(3)]
+     fig.canvas.draw()
+     for ax, t in zip(axs, T):
+         prepare_history(ax, t, fs=FS3)
+-    G0 = 0.3
+-    tot = max(t['_nlines'] * LP + t['_nrows'] * G0 for t in T)
++    G0 = G03
++    need = lambda t: (t['_nlines'] + t['_nnote']) * LP + (0.4 if t['_nnote'] else 0)
++    tot = max(need(t) + t['_nrows'] * G0 for t in T)
+     for ax, t in zip(axs, T):
+-        gap = (tot - t['_nlines'] * LP) / t['_nrows']
+-        draw_history(ax, t, gap, tot + 2.4, fs=FS3)
++        gap = (tot - need(t)) / t['_nrows']
++        draw_history(ax, t, gap, tot + 0.3, fs=FS3)
+     handles = [Line2D([], [], color=INK2, lw=1.5, marker='o', ms=3.4, mec='white', label='recorded path to the final model'),
+                Line2D([], [], color='#b9b8b4', lw=0.6, marker='o', ms=3.0, mfc='white', mec='#8f8e8a', label='branch'),
+                Line2D([], [], ls='none', marker='x', ms=3.4, mec='#8f8e8a', label='failed attempt'),
+                Line2D([], [], ls='none', marker='s', ms=3.2, mfc=VIOLET, mec='white', label='own inference code'),
+                Line2D([], [], ls='none', marker='o', ms=6.0, mfc='none', mec=INK2, label='final representative or frontier')]
+-    fig.legend(handles=handles, loc='lower center', ncol=5, fontsize=5.5, frameon=False, handlelength=1.6,
++    fig.legend(handles=handles, loc='lower center', ncol=5, fontsize=6.1, frameon=False, handlelength=1.6,
+                bbox_to_anchor=(0.5, -0.005), columnspacing=1.2, handletextpad=0.4)
+     # every label must stay inside its own column
+     fig.canvas.draw()
+--- a/analysis/cr_r8.py
++++ b/analysis/cr_r8.py
+@@ -737,6 +737,7 @@
+           'same program, start and writable file')
+     _need(orig_adapter == 0 and cx['own'] == 0 and op['own'] > 0 and op['first'] == 8, (orig_adapter, cx, op))
+     tt = lambda r: ' then '.join(f'{x:.0f}\\,s' for x in r['timeouts'])
++    op_eval = r'} then \texttt{'.join(op['evaluators'])      # roman "then" between the two evaluator hashes
+     out = ['% Generated by analysis/cr_r8.py from queue/autopareto-seed*/ and the extended attempt records. Do not edit by hand.',
+            r'\begin{tabular}{@{}>{\raggedright\arraybackslash}p{3.0cm}>{\raggedright\arraybackslash}p{3.15cm}'
+            r'>{\raggedright\arraybackslash}p{3.15cm}>{\raggedright\arraybackslash}p{3.15cm}@{}}', r'\toprule',
+@@ -748,7 +749,7 @@
+            rf"Model, reasoning & \texttt{{gpt-5.6-sol}}, high & \texttt{{{cx['model']}}}, {cx['reasoning']} & \texttt{{{op['model']}}}, {op['reasoning']} \\",
+            r'Execution & agent app, instruction-based isolation & container, shell inside & host, file tools only \\',
+            rf"Call timeout & none recorded & {tt(cx)} & {tt(op)} (from A10) \\",
+-           rf"Evaluator (SHA-256) & original runner & \texttt{{{', '.join(cx['evaluators'])}}} & \texttt{{{' then '.join(op['evaluators'])}}} (A8 on) \\",
++           rf"Evaluator (SHA-256) & original runner & \texttt{{{', '.join(cx['evaluators'])}}} & \texttt{{{op_eval}}} (A8~on) \\",
+            rf"Attempts (completed) & 75 (74) & {cx['attempts']} ({cx['valid']}) & {op['attempts']} ({op['valid']}) \\",
+            rf"Attempts defining their own inference code & {orig_adapter} of 75 & {cx['own']} of {cx['attempts']} & {op['own']} of {op['valid']} valid (first: A{op['first']}) \\",
+            r'\bottomrule', r'\end{tabular}']
+--- a/analysis/cr_v2.py
++++ b/analysis/cr_v2.py
+@@ -625,7 +625,7 @@
+         ('Opus A7', pair_rec(OPUS_ROOT, 7), 'Smaller, higher-loss models have smaller critical batch sizes',
+          f"predicted BPB 1.103--1.114; measured {O[7]['val_bpb']:.4f}; updates {O[5]['updates']}$\\to${O[7]['updates']}"),
+         ('Opus A10', pair_rec(OPUS_ROOT, 10), 'CUDA-graph replay is the only lever that can raise speed without a quality cost',
+-         f"decode-only {O[8]['decode_x']:.1f}$\\times\\to${O[10]['decode_x']:.1f}$\\times$; prefill {O[8]['prefill_ms']:.0f}$\\to${O[10]['prefill_ms']:.0f} ms"),
++         f"decode-only {O[8]['decode_x']:.1f}$\\times{{\\to}}${O[10]['decode_x']:.1f}$\\times$; prefill {O[8]['prefill_ms']:.0f}$\\to${O[10]['prefill_ms']:.0f} ms"),
+         ('Opus A11', pair_rec(OPUS_ROOT, 11), 'Prefill time rose from 6.4 ms to 81 ms (graph capture per prefill)',
+          'capture stayed in prefill through A27 (\\CRIACapture\\% of frontier prefill)'),
+         ('Opus A21', pair_rec(OPUS_ROOT, 21), 'Prefill/TTFT: may drop slightly (diagnostic only)', 'prefill is recorded but not scored'),
+--- a/analysis/cr_p6_paper.py
++++ b/analysis/cr_p6_paper.py
+@@ -598,7 +598,7 @@
+                ('lm_wikitext_word_ppl', 'frozen_blimp', 'lm_sciq', 'lm_hellaswag', 'lm_arc_challenge', 'lm_winogrande',
+                 'lm_openbookqa', 'lm_boolq')}
+         near = max(abs(rho[k]) for k in ('lm_hellaswag', 'lm_arc_challenge', 'lm_winogrande', 'lm_openbookqa', 'lm_boolq'))
+-        out += [m('RhoWiki', f"{rho['lm_wikitext_word_ppl']:.2f}"), m('RhoBlimp', f"{rho['frozen_blimp']:.2f}".replace('-', '$-$')),
++        out += [m('RhoWiki', f"{rho['lm_wikitext_word_ppl']:.2f}"), m('RhoBlimp', f"{rho['frozen_blimp']:.2f}"),   # used inside math only (Table 9 caption): plain '-' is a math minus
+                 m('RhoSciq', f"{rho['lm_sciq']:.2f}".replace('-', '$-$')), m('RhoNearMax', f"{near:.2f}"),
+                 m('LmSDMax', f"{max(100 * S[r][k + '_sd'] for r in S for k in ('lm_sciq', 'lm_boolq', 'lm_hellaswag', 'lm_arc_challenge', 'lm_winogrande', 'lm_openbookqa')):.1f}")]
+     infdir = ROOT / 'results/camera_ready_2026/phase6/inference/runs'

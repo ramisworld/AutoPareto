@@ -1,0 +1,9 @@
+{
+  "derived_definitions_equal_source": false,
+  "mode": "native_eager_reference",
+  "prepare_sha256": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+  "recipe": "opus_a23",
+  "source": "results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt23.train.py",
+  "source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+  "train_sha256": "fa01708557c882e976c68196ad8adc70aa6e6b6cacc552af9dd78055c06e0cb6"
+}

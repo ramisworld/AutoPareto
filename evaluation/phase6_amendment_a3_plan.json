@@ -1,0 +1,41 @@
+{
+ "format": "autopareto_phase6_amendment_a3_plan_v1",
+ "created_utc": "2026-11-16T20:33:57.245505+00:00",
+ "approval": "Author's choice, 2026-11-16: 'Approve A3 fix (Recommended)': run the frozen downstream function unchanged through a small wrapper that adds only Phase 5A's row_factory line; frozen files stay unchanged; rename the empty database aside rather than deleting it; run P0b, controls and anchors first, then downstream, the A1 switch, A2 and the A1 pilot.",
+ "parent_plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+ "implementation_sha256": {
+  "evaluation/PHASE6_AMENDMENT_A3.md": "dfa3b452209bfcd729fb3c9ea2769a6a38fbcc9c1c07d9820470bb2a97473b11",
+  "scripts/run_phase6_a3.py": "b447056d28fdfa3d07027006fe76be14cf0ade9a9cf8c5b7db18426b7ffaeb73",
+  "scripts/make_phase6_amendment_a3.py": "c9d7cac6571e9b558b429e675901cdf5d9ef4b14f5c94650908fba9776c032e1"
+ },
+ "reference": {
+  "file": "scripts/run_phase5a_opus_fixed_tokens.py",
+  "line": "db.row_factory = sqlite3.Row"
+ },
+ "empty_database": {
+  "path": "downstream_frozen/phase6_downstream.db",
+  "aside": "downstream_frozen/phase6_downstream.db.incident4-empty",
+  "sha256": "4b828eb9ea5968449b32cfd3ebc7e952ac37f84e2d31d2286650724430e54132",
+  "bytes": 196608,
+  "row_counts": {
+   "experiments": 0,
+   "campaign_state": 0,
+   "campaigns": 0,
+   "training_runs": 0,
+   "sqlite_sequence": 0,
+   "inference_measurements": 0,
+   "deployment_sessions": 0,
+   "deployment_measurements": 0,
+   "downstream_evaluation_runs": 0,
+   "downstream_task_results": 0,
+   "downstream_generations": 0,
+   "quantization_runs": 0,
+   "quantization_measurements": 0,
+   "legacy_metrics": 0,
+   "confirmation_runs": 0,
+   "ablation_runs": 0,
+   "agent_actions": 0,
+   "experiment_events": 0
+  }
+ }
+}

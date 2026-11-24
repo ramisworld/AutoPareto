@@ -1,0 +1,1 @@
+{"label": "opus_a24-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 268.5894115863067, "speedup": 1.7913913514743753, "peak_mib": 469.1904296875, "wall_s": 256.3}

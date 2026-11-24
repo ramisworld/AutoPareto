@@ -1,0 +1,9 @@
+{
+  "derived_definitions_equal_source": true,
+  "mode": "native",
+  "prepare_sha256": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+  "recipe": "gpt_a24",
+  "source": "results/candidates/autopareto-seed0-20260731/0024-train.py",
+  "source_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+  "train_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10"
+}
