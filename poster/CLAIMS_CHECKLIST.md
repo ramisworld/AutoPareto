@@ -12,8 +12,10 @@ verified line's 31.6× and 1.8× against `CRSixDecXVsBaseRecipe` and `CRSixGptDe
 - the lineage milestones and the A10 quote;
 - the stage speed-ups (1.0, 2.0, 11.6, 30.8×) and profiler counts;
 - the Pareto data;
-- the memory values;
-- the limits and AI-use text.
+- the memory values.
+
+**Removed on 2026-11-24:** the footer's limits, AI-use and references text, at the author's request. They remain in the paper.
+The footer is now one line of contact, code link and venue.
 
 **New or reworded in v7:**
 

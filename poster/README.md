@@ -40,7 +40,7 @@ much larger.
   - Memory is one line under the plots (337, 243, 96 MiB).
   - The matched-exposure finding is the equal-tokens subtitle and block ("AR-ref learns the most per token", "best
     in every seed").
-- **Section 5 lessons:** removed. The limits, AI-use disclosure and references now sit in the footer.
+- **Section 5 lessons:** removed. The limits, AI-use disclosure and references sat in the footer until 2026-11-24, when the author removed them; the footer is now one line of contact, code and venue. They remain in the paper.
 
 **Execution diagram: one time axis.**
 - **Lane length:** the time per decoded token in the ablation session, drawn on one millisecond axis: 6.71, 3.40,

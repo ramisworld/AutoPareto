@@ -265,7 +265,7 @@ OPUS_IDS = ('opus_a23', 'opus_a24', 'opus_a27')
 ARCH = '#3f7f8f'                      # Opus architecture changes (vs violet: inference engine)
 GPTC, ARC, CLC, BASEC = COL['gpt'], COL['autoresearch'], COL['classical'], COL['baseline']
 LAUNCH, KERN, SMALLK, LANE = '#2b2f36', '#3d4f6b', '#9aa6b8', '#eef1f5'
-HEAD_H, FOOT_H = 89.0, 25.0
+HEAD_H, FOOT_H = 89.0, 13.0
 SEC, LEDE, LAB, TK, NOTE = 32, 20, 17, 16, 15
 
 
@@ -356,26 +356,14 @@ def header():
 
 
 def footer():
-    """Compact footer: the scientific qualifications and disclosure that section 5 used to carry, then contact."""
+    """Contact, code and venue on one line."""
     y0 = H - FOOT_H
     rect(0, y0, W, FOOT_H, NAVY, z=0)
     rect(0, y0, W, 1.6, VIOLET, z=1)
-    lt, wt = '#c9cfda', 'white'
-    para(X0, y0 + 3.8, CW, [
-        ('Limits. ', 'demi', wt),
-        ('Three seeds; each compared search ran once under a different harness, so this is no ranking of models. The '
-         '32× compares inference engines as well as models and measures speed, not quality. ', 'reg', lt),
-        ('AI use. ', 'demi', wt),
-        ('Claude (Opus 5.5, Claude Code) ran the camera-ready experiments under approved plans and drafted this '
-         'poster; authorship is human. ', 'reg', lt),
-        ('Refs. ', 'demi', wt),
-        ('Karpathy, autoresearch (2026); Ferreira et al., arXiv:2603.24647 (2026).', 'reg', lt)], 14, lead=1.25,
-        justify=False)
-    hline(X0, X1, H - 9.8, color='#3a4466', lw=0.8)
-    yb = H - 3.8
-    text(X0, yb, 'rameonix@gmail.com   ·   rami.co.nz   ·   @vicilah on X', 14, 'reg', '#dfe3ea')
-    text(W / 2, yb, 'Code: github.com/ramisworld/autopareto', 14, 'demi', 'white', ha='center')
-    text(X1, yb, 'NeurIPS 2026  ·  AutoMLR Workshop  ·  Sydney', 14, 'reg', '#dfe3ea', ha='right')
+    yb = y0 + 1.6 + (FOOT_H - 1.6) / 2 + 2.0
+    text(X0, yb, 'rameonix@gmail.com   ·   rami.co.nz   ·   @vicilah on X', 15, 'reg', '#dfe3ea')
+    text(W / 2, yb, 'Code: github.com/ramisworld/autopareto', 15, 'demi', 'white', ha='center')
+    text(X1, yb, 'NeurIPS 2026  ·  AutoMLR Workshop  ·  Sydney', 15, 'reg', '#dfe3ea', ha='right')
 
 
 # ================================================================ 1: the research loop and one whole generation
@@ -804,9 +792,9 @@ def build():
     footer()
     ends = {}
     y = section1(HEAD_H + 9); ends['s1'] = y
-    y = section2(y + 11); ends['s2'] = y
-    y = section3(y + 11); ends['s3'] = y
-    y = section4(y + 11); ends['s4'] = y
+    y = section2(y + 14); ends['s2'] = y
+    y = section3(y + 14); ends['s3'] = y
+    y = section4(y + 14); ends['s4'] = y
     print({k: round(v, 1) for k, v in ends.items()})
     print(f'content ends at {y:.1f} mm; footer at {H - FOOT_H:.1f}')
     OUT.mkdir(exist_ok=True)
