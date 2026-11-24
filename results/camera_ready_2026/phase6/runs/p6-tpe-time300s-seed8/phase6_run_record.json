@@ -1,0 +1,63 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "amendment": {
+    "name": "A1",
+    "plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade"
+  },
+  "attempt": 1,
+  "attempt_wall_seconds": 471.10337376594543,
+  "cell": "time_300s",
+  "copy": {
+    "manifest_sha256": "74c58357c612b406b209f7dc143d7153bdfc7401cbef7b3f37dab9f854e01184",
+    "verified_files": 18
+  },
+  "display": "TPE",
+  "executed_in": "/root/phase6_local/runs/p6-tpe-time300s-seed8",
+  "finished_utc": "2026-11-17T07:11:33.128468+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.112.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "e0448e8d01d3ff9f2c60d8bdf60e137aabe851a5e47e81cb4e24aeef6b4f2b08",
+    "end_to_end_training_seconds": 376.8991320133209,
+    "heldout_bpb": 1.1588777168500786,
+    "heldout_ci95": [
+      1.1526035998252484,
+      1.165492488559241
+    ],
+    "parameter_count": 39846284,
+    "peak_training_memory_mb": 17561.394805908203,
+    "steady_state_seconds": 300.16940808296204,
+    "steady_state_tokens_per_second": 369851.094117214,
+    "timing_anomaly": {
+      "excess_seconds": 0,
+      "max_step_seconds": 0.357,
+      "median_seconds": 0.355,
+      "parsed_steps": 847,
+      "passed": true,
+      "reason": null,
+      "slow_steps": 0
+    },
+    "tokens": 112459776,
+    "updates": 858,
+    "validation_bpb": 1.098519194845018,
+    "validation_bpb_in_process": 1.0985084894309693
+  },
+  "order": 25,
+  "phase1_model_id": "tpe_quality",
+  "pilot": false,
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "tpe",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-tpe-time300s-seed8",
+  "run_id": "p6-tpe-time300s-seed8",
+  "seed": 8,
+  "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+  "stage": "fixed",
+  "status": "completed"
+}

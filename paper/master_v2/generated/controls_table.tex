@@ -1,0 +1,14 @@
+\begin{tabular}{p{1.2in}p{1.8in}p{1.8in}}
+\toprule
+Control & Fixed time (T) & Fixed tokens (N) \\
+\midrule
+Initial code / loader & Identical executed input bytes & Identical executed input bytes \\
+Scientist / seed & gpt-5.6-sol, high / 3 & gpt-5.6-sol, high / 3 \\
+Training stop & 300 s; complete final update & 88,604,672 counted tokens \\
+LR progress & Elapsed-time fraction & Counted-token fraction \\
+Frozen prefix & 4 completed attempts & 4 completed attempts \\
+Inference / memory & Shared bracketed protocol & Shared bracketed protocol \\
+Context / hardware & Separate history; one A40 & Separate history; same A40 \\
+Parent policy (executed) & Quality-valid parents allowed & Quality-valid parents allowed \\
+\bottomrule
+\end{tabular}

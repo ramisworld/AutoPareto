@@ -1,0 +1,174 @@
+{
+  "top": [
+    {
+      "name": "Baseline",
+      "kind": "base",
+      "params_M": 50.332176,
+      "heldout": 1.1465895336014258,
+      "heldout_seeds": [
+        1.1431104635651022,
+        1.1519004871954783,
+        1.144757650043697
+      ],
+      "train_tok_s": 292413.3130129108,
+      "decode": 196.82072149558223,
+      "mem": 250.8818359375,
+      "source": "cr_stats.json table1: 201.3M-token panel, means over seeds 3-5"
+    },
+    {
+      "name": "AR-ref",
+      "kind": "ar",
+      "params_M": 50.332176,
+      "heldout": 1.099803115598075,
+      "heldout_seeds": [
+        1.100920623285839,
+        1.100928774575567,
+        1.0975599489328192
+      ],
+      "train_tok_s": 289194.5122653682,
+      "decode": 192.93322787922392,
+      "mem": 250.8818359375,
+      "source": "cr_stats.json table1: 201.3M-token panel, means over seeds 3-5"
+    },
+    {
+      "name": "TPE",
+      "kind": "cls",
+      "params_M": 39.846284,
+      "heldout": 1.1194015812978206,
+      "heldout_seeds": [
+        1.1145083448168578,
+        1.122378990918381,
+        1.1213174081582233
+      ],
+      "train_tok_s": 372464.0722580163,
+      "decode": 258.89419169241535,
+      "mem": 205.880859375,
+      "source": "cr_stats.json table1: 201.3M-token panel, means over seeds 3-5"
+    },
+    {
+      "name": "MOTPE",
+      "kind": "cls",
+      "params_M": 26.345772,
+      "heldout": 1.1482527567273162,
+      "heldout_seeds": [
+        1.1508093608896621,
+        1.1491464505468767,
+        1.1448024587454098
+      ],
+      "train_tok_s": 505550.26709230314,
+      "decode": 270.0064033478398,
+      "mem": 145.568359375,
+      "source": "cr_stats.json table1: 201.3M-token panel, means over seeds 3-5"
+    },
+    {
+      "name": "AP-Q",
+      "kind": "gpt",
+      "params_M": 29.360392,
+      "heldout": 1.141837121365997,
+      "heldout_seeds": [
+        1.1396157998884338,
+        1.148667552852964,
+        1.1372280113565931
+      ],
+      "train_tok_s": 522900.23219664005,
+      "decode": 383.021825913658,
+      "mem": 162.8798828125,
+      "source": "cr_stats.json table1: 201.3M-token panel, means over seeds 3-5"
+    }
+  ],
+  "bottom": [
+    {
+      "name": "Baseline",
+      "kind": "base",
+      "params_M": 50.332176,
+      "heldout": null,
+      "train_tok_s": null,
+      "decode": 149.37368353388757,
+      "decode_lo": 134.84200213577554,
+      "decode_hi": 151.25475497288573,
+      "mem": 337.19482421875,
+      "source": "registered baseline: calibration-run decode and memory; bracketing-baseline range from the raw re-measurement repeats; not retrained at 201.3M tokens"
+    },
+    {
+      "name": "AR-ref",
+      "kind": "ar",
+      "params_M": 50.332176,
+      "heldout": 1.099494543975223,
+      "heldout_seeds": [
+        1.0947314692484047,
+        1.101032803528346,
+        1.1027193591489184
+      ],
+      "train_tok_s": 288772.15583806124,
+      "decode": null,
+      "mem": null,
+      "source": "cr_v2.json phase5.matched_tokens: 201.3M-token retraining, seeds 6-8 (AR-ref, AP-Q: E1 runs); decode benchmark of the extended experiments not run on this recipe"
+    },
+    {
+      "name": "AP-Q",
+      "kind": "gpt",
+      "params_M": 29.360392,
+      "heldout": 1.1410070517245683,
+      "heldout_seeds": [
+        1.1412749159783169,
+        1.1372416375884558,
+        1.1445046016069322
+      ],
+      "train_tok_s": 522846.7767094297,
+      "decode": null,
+      "mem": null,
+      "source": "cr_v2.json phase5.matched_tokens: 201.3M-token retraining, seeds 6-8 (AR-ref, AP-Q: E1 runs); decode benchmark of the extended experiments not run on this recipe"
+    },
+    {
+      "name": "Opus A23",
+      "kind": "opus",
+      "params_M": 26.214675,
+      "heldout": 1.158225678329065,
+      "heldout_seeds": [
+        1.156046227236649,
+        1.160371873188248,
+        1.158258934562298
+      ],
+      "train_tok_s": 657584.443062605,
+      "decode": 4569.889933444409,
+      "speedup": 31.834929025672537,
+      "mem": 113.00537109375,
+      "source": "cr_v2.json phase5.matched_tokens: 201.3M-token retraining, seeds 6-8 (AR-ref, AP-Q: E1 runs); decode and memory: raw repeat records of the fresh-A40 re-measurement (median of 3 repeats, SHA256SUMS-checked)"
+    },
+    {
+      "name": "Opus A24",
+      "kind": "opus",
+      "params_M": 22.020371,
+      "heldout": 1.16034449956661,
+      "heldout_seeds": [
+        1.159467449514329,
+        1.1615575985574444,
+        1.1600084506280566
+      ],
+      "train_tok_s": 657565.5683554132,
+      "decode": 4578.056446803059,
+      "speedup": 30.856249099630404,
+      "mem": 96.88037109375,
+      "source": "cr_v2.json phase5.matched_tokens: 201.3M-token retraining, seeds 6-8 (AR-ref, AP-Q: E1 runs); decode and memory: raw repeat records of the fresh-A40 re-measurement (median of 3 repeats, SHA256SUMS-checked)"
+    },
+    {
+      "name": "Opus A27",
+      "kind": "opus",
+      "params_M": 26.214675,
+      "heldout": 1.1580495386653844,
+      "heldout_seeds": [
+        1.155758482441808,
+        1.1593559101125854,
+        1.15903422344176
+      ],
+      "train_tok_s": 656654.2147152995,
+      "decode": 4591.643483151622,
+      "speedup": 31.470489163618826,
+      "mem": 99.05224609375,
+      "source": "cr_v2.json phase5.matched_tokens: 201.3M-token retraining, seeds 6-8 (AR-ref, AP-Q: E1 runs); decode and memory: raw repeat records of the fresh-A40 re-measurement (median of 3 repeats, SHA256SUMS-checked)"
+    }
+  ],
+  "train_ratio_apq_ar": 1.8081263994277348,
+  "decode_ratio_apq_ar": 1.9852558842452448,
+  "mem_reduction_apq_ar_pct": 35.077052428348445
+}

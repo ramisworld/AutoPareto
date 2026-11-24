@@ -1,0 +1,53 @@
+Traceback (most recent call last):
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/_snapshot_download.py", line 277, in snapshot_download
+    repo_info = api.repo_info(repo_id=repo_id, repo_type=repo_type, revision=revision)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3643, in repo_info
+    return method(
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/hf_api.py", line 3322, in model_info
+    r = get_session().get(path, headers=headers, timeout=timeout, params=params)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/httpx/_client.py", line 1053, in get
+    return self.request(
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/httpx/_client.py", line 825, in request
+    return self.send(request, auth=auth, follow_redirects=follow_redirects)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/httpx/_client.py", line 914, in send
+    response = self._send_handling_auth(
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/httpx/_client.py", line 942, in _send_handling_auth
+    response = self._send_handling_redirects(
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/httpx/_client.py", line 977, in _send_handling_redirects
+    hook(request)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 284, in hf_request_event_hook
+    raise OfflineModeIsEnabled(
+huggingface_hub.errors.OfflineModeIsEnabled: Cannot reach https://huggingface.co/api/models/kernels-community/flash-attn3/revision/main: offline mode is enabled. To disable it, please unset the `HF_HUB_OFFLINE` environment variable.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/workspace/autopareto-camera-ready/scripts/phase6_lmeval.py", line 139, in <module>
+    raise SystemExit(main())
+  File "/workspace/autopareto-camera-ready/scripts/phase6_lmeval.py", line 109, in main
+    lm = build_lm(args.candidate.resolve(), args.checkpoint.resolve(), args.batch_size, args.max_length)
+  File "/workspace/autopareto-camera-ready/scripts/phase6_lmeval.py", line 86, in build_lm
+    return AutoParetoLM()
+  File "/workspace/autopareto-camera-ready/scripts/phase6_lmeval.py", line 51, in __init__
+    self.scorer = ModelScorer(candidate=candidate, checkpoint=checkpoint,
+  File "/workspace/autopareto-camera-ready/downstream_evaluator.py", line 195, in __init__
+    self.module = module if module is not None else load_candidate_definitions(candidate)
+  File "/workspace/autopareto-camera-ready/inference_benchmark.py", line 57, in load_candidate_definitions
+    exec(compile(definitions, str(train_path), "exec"), module.__dict__)
+  File "/workspace/autopareto-camera-ready/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py", line 24, in <module>
+    fa3 = get_kernel(repo).flash_attn_interface
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/kernels/utils.py", line 312, in get_kernel
+    package_name, variant_path = install_kernel(
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/kernels/utils.py", line 187, in install_kernel
+    snapshot_download(
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/utils/_validators.py", line 89, in _inner_fn
+    return fn(*args, **kwargs)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/utils/_http.py", line 266, in _inner
+    return fn(*args, **kwargs)
+  File "/opt/autopareto_lmeval/lib/python3.10/site-packages/huggingface_hub/_snapshot_download.py", line 369, in snapshot_download
+    raise LocalEntryNotFoundError(
+huggingface_hub.errors.LocalEntryNotFoundError: Cannot find an appropriate cached snapshot folder for the specified revision on the local disk and outgoing traffic has been disabled. To enable repo look-ups and downloads online, set 'HF_HUB_OFFLINE=0' as environment variable.

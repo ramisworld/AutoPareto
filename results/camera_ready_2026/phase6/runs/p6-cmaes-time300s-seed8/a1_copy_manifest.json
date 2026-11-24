@@ -1,0 +1,31 @@
+{
+  "compile_cache": {
+    "local_tar": "/root/phase6_local/runs/p6-cmaes-time300s-seed8.compile_cache.tar",
+    "members": 2130
+  },
+  "copied_utc": "2026-11-17T07:34:44.640651+00:00",
+  "files": {
+    "checkpoint_evaluations.json": "5ca0dbcf839cbc6d289a58057f96ed2bbd85fbf8be99f990f4aae551e6c2061b",
+    "compile_cache.tar": "10a1a72310a4579416d2029aed7e7d436584a0e3a92514ff83bf2cafbdc7226a",
+    "evaluation.log": "f8ca03dc3207f268463051908678c4e5112d877192b73148787a7ed9fef7cfe0",
+    "events.jsonl": "12e6e8bf7fa10fe8525db58131a12b075534a00b7349a2177713cad00d1f3a48",
+    "final.pt": "54f68e0544ed3caf0d4613aeafc5b6771ba48478e02de3c0868f3bf31e0fed80",
+    "fixed_time_checkpoint_manifest.json": "ce63dca540db15efa058fd1b9e1cfb4848b4b3de3cc9a7761b96e9f51bfb98fe",
+    "fixed_time_training_metrics.json": "655ec3c1282c45ad2f046e0e2d70e80ad2f7b5bed601510e05cf75e4588d13e9",
+    "isolate/__pycache__/benchmark_config.cpython-310.pyc": "2a2f39c7b041a67894bfd446cc8d3c275e44579ee77bd1215bddc3237eefe57c",
+    "isolate/__pycache__/event_log.cpython-310.pyc": "60a9243a3aa04a7578b84d4b9f8b0a06b144783f4d721f5af32893c6f6c40f30",
+    "isolate/__pycache__/prepare.cpython-310.pyc": "5c7323615ab31ff9d5d93c35aa09273629f61a07b8e7a25856f458c1c59db399",
+    "isolate/benchmark_config.py": "722131ffc44d6b10a5e7fca1862ec01dfc7702388e3fb8eb9b629cb2a52c51dc",
+    "isolate/event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac",
+    "isolate/prepare.py": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+    "isolate/protected/__pycache__/inference_adapter.cpython-310.pyc": "2079d49b602831b461a11bc39894f827f34a94d165ea4d54ba2678b3d78ac5a1",
+    "isolate/protected/inference_adapter.py": "80f4d8c9de365480ef0e7170f705971a0454d421ef410a5c23ff6ae8795b4dd1",
+    "isolate/protected/train_launcher.py": "aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f",
+    "isolate/train.py": "7163c7b2ea29d1c0dc42bcade4d229b7b82e4e4bfdb4c27a8092d622d56e6f93",
+    "training.log": "7e2136560877155535ccddf16ad605c54e6ece89f663c178598a2713ce678b98"
+  },
+  "format": "autopareto_phase6_a1_copy_manifest_v1",
+  "local_dir": "/root/phase6_local/runs/p6-cmaes-time300s-seed8",
+  "verified_files": 18,
+  "volume_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-cmaes-time300s-seed8"
+}

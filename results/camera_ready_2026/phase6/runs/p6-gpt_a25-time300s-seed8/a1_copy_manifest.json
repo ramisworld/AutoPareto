@@ -1,0 +1,31 @@
+{
+  "compile_cache": {
+    "local_tar": "/root/phase6_local/runs/p6-gpt_a25-time300s-seed8.compile_cache.tar",
+    "members": 1426
+  },
+  "copied_utc": "2026-11-17T07:18:48.118344+00:00",
+  "files": {
+    "checkpoint_evaluations.json": "3c0c332fb35d67b3a1558c08174eee6091ab595837c55551246fec382bbf7c32",
+    "compile_cache.tar": "6079019bc1c1f478a9a2d66da6c977132605aa8af95bef28c1043212189c0036",
+    "evaluation.log": "f8ca03dc3207f268463051908678c4e5112d877192b73148787a7ed9fef7cfe0",
+    "events.jsonl": "8d4fb03e636fd86fabcbfaf3ad71e77a8c0788c75dc8b3ca3399d34775b09857",
+    "final.pt": "8145f53427c73b36718941f0136297c8a9f7962a80b32a71fcd68ec062c011b7",
+    "fixed_time_checkpoint_manifest.json": "c3fe0d938e636ddc33012741bf5156a4f2090b942a8d69f79bb09f1c781caac8",
+    "fixed_time_training_metrics.json": "4e95a9517e334db42ba5d2981f3451c720200370d307e7351870ebda598f97b4",
+    "isolate/__pycache__/benchmark_config.cpython-310.pyc": "21e1ee686d94a7014495644613dfd25265a153ff3fe6ed2c57ca79a78f55d4e4",
+    "isolate/__pycache__/event_log.cpython-310.pyc": "352518969104a6eaecd79b111ddae88671eb22c44a2c4ebeb41719455d7ebe37",
+    "isolate/__pycache__/prepare.cpython-310.pyc": "58c60917b25aa62c14f8be98c865686135212ca70c5c73f74e38cebd8a7cc196",
+    "isolate/benchmark_config.py": "722131ffc44d6b10a5e7fca1862ec01dfc7702388e3fb8eb9b629cb2a52c51dc",
+    "isolate/event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac",
+    "isolate/prepare.py": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+    "isolate/protected/__pycache__/inference_adapter.cpython-310.pyc": "e747e714b6c82974c8fa125601493dbb1ffc0e2a954cf458a3efe96d18ab76bd",
+    "isolate/protected/inference_adapter.py": "80f4d8c9de365480ef0e7170f705971a0454d421ef410a5c23ff6ae8795b4dd1",
+    "isolate/protected/train_launcher.py": "aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f",
+    "isolate/train.py": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+    "training.log": "3f0453c740de03ed71cc02e67c8638398767d88108e84f36e5811d6285b9cbd6"
+  },
+  "format": "autopareto_phase6_a1_copy_manifest_v1",
+  "local_dir": "/root/phase6_local/runs/p6-gpt_a25-time300s-seed8",
+  "verified_files": 18,
+  "volume_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-gpt_a25-time300s-seed8"
+}

@@ -1,0 +1,1 @@
+{"label": "gpt_a22-seed6-uncached", "mode": "uncached", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 214.64053779116725, "speedup": 1.478409844106269, "peak_mib": 624.763671875, "wall_s": 259.1}

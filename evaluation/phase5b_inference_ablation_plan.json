@@ -1,0 +1,340 @@
+{
+ "format": "autopareto_phase5b_inference_ablation_preregistration_v1",
+ "prepared_on": "2026-11-08",
+ "title": "Phase 5B: inference-only ablations of the Opus 5.5 frontier adapters on their existing Pair-A checkpoints",
+ "prose": "evaluation/PHASE5_PREREG.md",
+ "output_root": "results/camera_ready_2026/phase5/B",
+ "harness": {
+  "benchmark": "study.contracts_2026.inference_benchmark (trusted tree /opt/autopareto_trusted, runtime /opt/autopareto_runtime), candidate-only mode: precision-aware correctness, 20 s discarded warm-up, 8 windows of >= 8 s cached decode",
+  "benchmark_sha256": "must equal the evaluator_sha256 recorded by Phase 2A",
+  "workload": "8 registered 1,024-token prompts, 128 greedy tokens, batch 1, bf16 autocast",
+  "same_A40": "GPU-3adf8a47"
+ },
+ "checkpoints": {
+  "opus_attempt23": {
+   "sha256": "f098e0bd5b19fcc7cbfdf8f41d464cdd7297c392224560f4a053ccf516436941",
+   "source_sha256": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def"
+  },
+  "opus_attempt24": {
+   "sha256": "e5687149ac6243e48b6691d2aa595687a0a2c2404288d02e221c258039cf1d6b",
+   "source_sha256": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9"
+  },
+  "opus_attempt27": {
+   "sha256": "520af249fd6d1d157596a039a44b6402d2ebe8ae7ca0fcefe99c4e11dfc84d35",
+   "source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12"
+  },
+  "pair_a_baseline": {
+   "sha256": "f7ca17c624f8847e28a0d6abf9a33491023ea1bee72bf794fe7d8c6b343d43d9",
+   "context": "registered baseline context (canonical protected adapter)"
+  }
+ },
+ "variants": {
+  "V0_as_submitted": "unmodified source (control)",
+  "V1_no_cuda_graph": "no per-prompt CUDA-graph capture; the same compiled regions launched eagerly per token; one warm-up per adapter",
+  "V2_no_fusion": "CUDA graph kept; decode regions and split-key attention run as the same pure Python functions without torch.compile (unfused aten kernels)",
+  "V3_sdpa_attention": "CUDA graph and fused regions kept; decode attention = masked SDPA over the static buffers (Opus's pre-attempt-18 kernel)",
+  "V4_eager_unfused": "no CUDA graph and no fusion: Opus's decode math as plain eager aten ops",
+  "V5_linear_kv_cache": "CUDA graph and fusion kept; sliding-window layers store a full-length linear K/V buffer restricted by the same window mask instead of a 272-slot ring"
+ },
+ "excluded": "window-size changes (they change the trained function and would need retraining); any architectural change",
+ "variant_generator": {
+  "path": "scripts/phase5b_inference_ablation.py",
+  "sha256": "cda511addb026e4ee57d9dbdd94501dcbc0973de570d82bfa88f8303815ee31a"
+ },
+ "variant_train_sha256": {
+  "23/V0_as_submitted": "408228f4cd45e13395a43b6de75e4e0578f550480b32e4d8c1a2ae352ed83def",
+  "23/V1_no_cuda_graph": "b6b680659e0c6b3a0e7a41411aaf1122721280201425743f830be8e712964466",
+  "23/V2_no_fusion": "ff6ea50b1797f88a06ca48988de2002172f41329cd1703496ad1d5072589fbc1",
+  "23/V3_sdpa_attention": "f431132d51033c7e1c986e9b072bf01d77fa2f248bf8b27c5ff6f52ee4ae83cb",
+  "23/V4_eager_unfused": "dd4fc697c7ded913725b1fe52cf16c5eb4e650e3a4953d0ed93c503c2239c06b",
+  "23/V5_linear_kv_cache": "cf9550d0ad7d46b9d4aba26a6ea8f93cb077ea6c01d1e560d8f61ddf4e3e4314",
+  "24/V0_as_submitted": "d7c7d51b5117bfeac27bcd969f66210867f67a21cf7b33e54118f880d55be6b9",
+  "24/V1_no_cuda_graph": "7872da5d96742cc2cad57de74c4e2188c5017d2912008586ff875918b1047875",
+  "24/V2_no_fusion": "b69516dddbef575bce3857188bf2fcdec5b87f676007af33e15f01283335243f",
+  "24/V3_sdpa_attention": "2602a7e89415a2ba713005082c9b472fbf2ee92ef3d561218d5ad702f8ca5a06",
+  "24/V4_eager_unfused": "75c48d7d9f8959f10f725b0a3889119e72505a917052e66c54a22fed2e286162",
+  "24/V5_linear_kv_cache": "7ebcd738462856365326e886293107033d8452e5fe73897ec3a9db03f03eef04",
+  "27/V0_as_submitted": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+  "27/V1_no_cuda_graph": "103bd0cee83be9adc64bb7e7ff375af95f564df48ab5cfcb8bb225964aefad27",
+  "27/V2_no_fusion": "afa5414b1a7b81634eeb5b1b0282b51496b94876c99ab7e6d6af86c275c5424c",
+  "27/V3_sdpa_attention": "b99c1e20590df4249e1b06f2428cc47ba20ef9b58f00599e7b025148f0aaf91d",
+  "27/V4_eager_unfused": "0eb149961e1f8369cae2087c38e5507d84d6497f32a66d985b2e561da47db3d4",
+  "27/V5_linear_kv_cache": "b80f3fe1f5e201e48b808cec620fa402243f85e43d21b4d8d7bf55ddd349f8a0"
+ },
+ "kernel_census": {
+  "path": "scripts/phase5b_kernel_census.py",
+  "sha256": "3c12be78648551e260408b45de57d187de9ef05b9da5e122d82dcbb78bc29b15",
+  "scope": "attempt 23 x 6 variants + baseline, after all timing runs; 32 profiled decode tokens after 8 warm-up tokens; diagnostic only"
+ },
+ "driver": {
+  "path": "scripts/pod/phase5b_run_ablations.sh",
+  "sha256": "recorded at launch"
+ },
+ "order": [
+  {
+   "order": 1,
+   "id": "baseline-r1",
+   "model": "pair_a_baseline",
+   "variant": "canonical"
+  },
+  {
+   "order": 2,
+   "id": "a23-V0_as_submitted-r1",
+   "model": "opus_attempt23",
+   "variant": "V0_as_submitted"
+  },
+  {
+   "order": 3,
+   "id": "a23-V1_no_cuda_graph-r1",
+   "model": "opus_attempt23",
+   "variant": "V1_no_cuda_graph"
+  },
+  {
+   "order": 4,
+   "id": "a23-V2_no_fusion-r1",
+   "model": "opus_attempt23",
+   "variant": "V2_no_fusion"
+  },
+  {
+   "order": 5,
+   "id": "a23-V3_sdpa_attention-r1",
+   "model": "opus_attempt23",
+   "variant": "V3_sdpa_attention"
+  },
+  {
+   "order": 6,
+   "id": "a23-V4_eager_unfused-r1",
+   "model": "opus_attempt23",
+   "variant": "V4_eager_unfused"
+  },
+  {
+   "order": 7,
+   "id": "a23-V5_linear_kv_cache-r1",
+   "model": "opus_attempt23",
+   "variant": "V5_linear_kv_cache"
+  },
+  {
+   "order": 8,
+   "id": "a24-V0_as_submitted-r1",
+   "model": "opus_attempt24",
+   "variant": "V0_as_submitted"
+  },
+  {
+   "order": 9,
+   "id": "a24-V1_no_cuda_graph-r1",
+   "model": "opus_attempt24",
+   "variant": "V1_no_cuda_graph"
+  },
+  {
+   "order": 10,
+   "id": "a24-V2_no_fusion-r1",
+   "model": "opus_attempt24",
+   "variant": "V2_no_fusion"
+  },
+  {
+   "order": 11,
+   "id": "a24-V3_sdpa_attention-r1",
+   "model": "opus_attempt24",
+   "variant": "V3_sdpa_attention"
+  },
+  {
+   "order": 12,
+   "id": "a24-V4_eager_unfused-r1",
+   "model": "opus_attempt24",
+   "variant": "V4_eager_unfused"
+  },
+  {
+   "order": 13,
+   "id": "a24-V5_linear_kv_cache-r1",
+   "model": "opus_attempt24",
+   "variant": "V5_linear_kv_cache"
+  },
+  {
+   "order": 14,
+   "id": "a27-V0_as_submitted-r1",
+   "model": "opus_attempt27",
+   "variant": "V0_as_submitted"
+  },
+  {
+   "order": 15,
+   "id": "a27-V1_no_cuda_graph-r1",
+   "model": "opus_attempt27",
+   "variant": "V1_no_cuda_graph"
+  },
+  {
+   "order": 16,
+   "id": "a27-V2_no_fusion-r1",
+   "model": "opus_attempt27",
+   "variant": "V2_no_fusion"
+  },
+  {
+   "order": 17,
+   "id": "a27-V3_sdpa_attention-r1",
+   "model": "opus_attempt27",
+   "variant": "V3_sdpa_attention"
+  },
+  {
+   "order": 18,
+   "id": "a27-V4_eager_unfused-r1",
+   "model": "opus_attempt27",
+   "variant": "V4_eager_unfused"
+  },
+  {
+   "order": 19,
+   "id": "a27-V5_linear_kv_cache-r1",
+   "model": "opus_attempt27",
+   "variant": "V5_linear_kv_cache"
+  },
+  {
+   "order": 20,
+   "id": "baseline-r2",
+   "model": "pair_a_baseline",
+   "variant": "canonical"
+  },
+  {
+   "order": 21,
+   "id": "a27-V5_linear_kv_cache-r2",
+   "model": "opus_attempt27",
+   "variant": "V5_linear_kv_cache"
+  },
+  {
+   "order": 22,
+   "id": "a27-V4_eager_unfused-r2",
+   "model": "opus_attempt27",
+   "variant": "V4_eager_unfused"
+  },
+  {
+   "order": 23,
+   "id": "a27-V3_sdpa_attention-r2",
+   "model": "opus_attempt27",
+   "variant": "V3_sdpa_attention"
+  },
+  {
+   "order": 24,
+   "id": "a27-V2_no_fusion-r2",
+   "model": "opus_attempt27",
+   "variant": "V2_no_fusion"
+  },
+  {
+   "order": 25,
+   "id": "a27-V1_no_cuda_graph-r2",
+   "model": "opus_attempt27",
+   "variant": "V1_no_cuda_graph"
+  },
+  {
+   "order": 26,
+   "id": "a27-V0_as_submitted-r2",
+   "model": "opus_attempt27",
+   "variant": "V0_as_submitted"
+  },
+  {
+   "order": 27,
+   "id": "a24-V5_linear_kv_cache-r2",
+   "model": "opus_attempt24",
+   "variant": "V5_linear_kv_cache"
+  },
+  {
+   "order": 28,
+   "id": "a24-V4_eager_unfused-r2",
+   "model": "opus_attempt24",
+   "variant": "V4_eager_unfused"
+  },
+  {
+   "order": 29,
+   "id": "a24-V3_sdpa_attention-r2",
+   "model": "opus_attempt24",
+   "variant": "V3_sdpa_attention"
+  },
+  {
+   "order": 30,
+   "id": "a24-V2_no_fusion-r2",
+   "model": "opus_attempt24",
+   "variant": "V2_no_fusion"
+  },
+  {
+   "order": 31,
+   "id": "a24-V1_no_cuda_graph-r2",
+   "model": "opus_attempt24",
+   "variant": "V1_no_cuda_graph"
+  },
+  {
+   "order": 32,
+   "id": "a24-V0_as_submitted-r2",
+   "model": "opus_attempt24",
+   "variant": "V0_as_submitted"
+  },
+  {
+   "order": 33,
+   "id": "a23-V5_linear_kv_cache-r2",
+   "model": "opus_attempt23",
+   "variant": "V5_linear_kv_cache"
+  },
+  {
+   "order": 34,
+   "id": "a23-V4_eager_unfused-r2",
+   "model": "opus_attempt23",
+   "variant": "V4_eager_unfused"
+  },
+  {
+   "order": 35,
+   "id": "a23-V3_sdpa_attention-r2",
+   "model": "opus_attempt23",
+   "variant": "V3_sdpa_attention"
+  },
+  {
+   "order": 36,
+   "id": "a23-V2_no_fusion-r2",
+   "model": "opus_attempt23",
+   "variant": "V2_no_fusion"
+  },
+  {
+   "order": 37,
+   "id": "a23-V1_no_cuda_graph-r2",
+   "model": "opus_attempt23",
+   "variant": "V1_no_cuda_graph"
+  },
+  {
+   "order": 38,
+   "id": "a23-V0_as_submitted-r2",
+   "model": "opus_attempt23",
+   "variant": "V0_as_submitted"
+  },
+  {
+   "order": 39,
+   "id": "baseline-r3",
+   "model": "pair_a_baseline",
+   "variant": "canonical"
+  }
+ ],
+ "order_design": "Two repeats per (checkpoint, variant): repeat 1 in forward order (23, 24, 27; V0..V5), repeat 2 fully reversed, so every variant's mean position is the same; the baseline runs at the start, middle and end. Each run is a separate process.",
+ "outcomes_per_run": [
+  "decode tokens/s (cached_decode_tokens_per_second_median, 8 windows) and the frozen stability classification",
+  "prefill milliseconds (median over measured repetitions)",
+  "end-to-end tokens/s = 128 / (prefill + 127-token decode), median over measured repetitions",
+  "peak allocated inference memory and K/V cache bytes",
+  "precision-aware correctness (passed; bf16 fast path or FP32 adjudication; max logit difference)",
+  "greedy sample text (identity across variants)"
+ ],
+ "analysis": {
+  "per_cell": "mean of the two repeats (and both values) for every outcome",
+  "ratios": "each variant relative to V0 of the same checkpoint; V0 and V4 relative to the same-session baseline",
+  "decomposition": "decode time per token: graph factor = V0/V1, fusion factor = V0/V2, joint = V0/V4, interaction = joint/(graph x fusion); attention-kernel factor = V0/V3; ring-buffer factor = V0/V5 (speed) and V5/V0 (K/V bytes, peak memory); architecture-under-eager-execution factor = V4/baseline",
+  "end_to_end": "the same factors for prefill ms and end-to-end tokens/s; report which variant maximises end-to-end throughput",
+  "stability": "runs failing the frozen stability rule are reported, not re-run; no threshold is changed",
+  "significance": "no significance tests; two repeats show the range. Effects are described as multiplicative factors with both repeats."
+ },
+ "predictions_recorded_before_measurement": [
+  "P1: removing the CUDA graph (V1) lowers decode throughput by more than 3x",
+  "P2: V1 prefill is below 0.3x V0 prefill (the per-prompt capture dominates V0 prefill)",
+  "P3: removing fusion (V2) lowers decode throughput, by less than the graph removal",
+  "P4: SDPA attention (V3) lowers decode throughput relative to V0",
+  "P5: the linear K/V cache (V5) has a larger K/V footprint and decode throughput within 15% of V0",
+  "P6: V4 (eager unfused Opus) decodes faster than the eager baseline, because it has 3 layers instead of 8"
+ ],
+ "cost_estimate": {
+  "runs": 39,
+  "minutes_per_run": 2.75,
+  "kernel_census_minutes": 10,
+  "total_A40_h": 1.95
+ }
+}

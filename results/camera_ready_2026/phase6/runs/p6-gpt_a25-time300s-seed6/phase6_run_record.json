@@ -1,0 +1,63 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "amendment": {
+    "name": "A1",
+    "plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade"
+  },
+  "attempt": 1,
+  "attempt_wall_seconds": 439.4612214565277,
+  "cell": "time_300s",
+  "copy": {
+    "manifest_sha256": "475dc578b75899d459a7e5ed18a2c4e5507994e582355e8d2d31fe4be93bb77b",
+    "verified_files": 18
+  },
+  "display": "GPT A25",
+  "executed_in": "/root/phase6_local/runs/p6-gpt_a25-time300s-seed6",
+  "finished_utc": "2026-11-17T04:46:02.337391+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.112.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "285cc3bfd9442a7a0fe17219871d4cdcba1021be32eb0806b7915cfa613133a6",
+    "end_to_end_training_seconds": 368.92427372932434,
+    "heldout_bpb": 1.162057088572033,
+    "heldout_ci95": [
+      1.1557306086440091,
+      1.1688952453698818
+    ],
+    "parameter_count": 26214662,
+    "peak_training_memory_mb": 10001.323081970215,
+    "steady_state_seconds": 300.01112604141235,
+    "steady_state_tokens_per_second": 641792.0913153797,
+    "timing_anomaly": {
+      "excess_seconds": 0,
+      "max_step_seconds": 0.272,
+      "median_seconds": 0.203,
+      "parsed_steps": 1469,
+      "passed": true,
+      "reason": null,
+      "slow_steps": 0
+    },
+    "tokens": 193986560,
+    "updates": 1480,
+    "validation_bpb": 1.1000344116204852,
+    "validation_bpb_in_process": 1.1000269819939137
+  },
+  "order": 6,
+  "phase1_model_id": "autopareto_299",
+  "pilot": false,
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "gpt_a25",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-gpt_a25-time300s-seed6",
+  "run_id": "p6-gpt_a25-time300s-seed6",
+  "seed": 6,
+  "source_sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b",
+  "stage": "fixed",
+  "status": "completed"
+}

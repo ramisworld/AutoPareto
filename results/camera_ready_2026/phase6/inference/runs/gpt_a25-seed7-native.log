@@ -1,0 +1,1 @@
+{"label": "gpt_a25-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 374.2989949974593, "speedup": 2.4761950622352566, "peak_mib": 221.26318359375, "wall_s": 254.0}

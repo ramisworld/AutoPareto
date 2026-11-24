@@ -1,0 +1,986 @@
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+Stefan Falkner 1 Aaron Klein 1 Frank Hutter 1
+Abstract
+Modern deep learning methods are very sensitive
+to many hyperparameters, and, due to the long
+training times of state-of-the-art models, vanilla
+Bayesian hyperparameter optimization is typi-
+cally computationally infeasible. On the other
+hand, bandit-based conﬁguration evaluation ap-
+proaches based on random search lack guidance
+and do not converge to the best conﬁgurations as
+quickly. Here, we propose to combine the ben-
+eﬁts of both Bayesian optimization and bandit-
+based methods, in order to achieve the best of
+both worlds: strong anytime performance and
+fast convergence to optimal conﬁgurations. We
+propose a new practical state-of-the-art hyperpa-
+rameter optimization method, which consistently
+outperforms both Bayesian optimization and Hy-
+perband on a wide range of problem types, in-
+cluding high-dimensional toy functions, support
+vector machines, feed-forward neural networks,
+Bayesian neural networks, deep reinforcement
+learning, and convolutional neural networks. Our
+method is robust and versatile, while at the same
+time being conceptually simple and easy to imple-
+ment.
+1. Introduction
+Machine learning has recently achieved great successes in
+a wide range of practical applications, but the performance
+of the most prominent methods depends more strongly than
+ever on the correct setting of many internal hyperparameters
+(see, e.g., Henderson et al. (2017); Melis et al. (2017)). The
+best-performing models for many modern applications of
+deep learning are getting ever larger and thus more com-
+putationally expensive to train, but at the same time both
+researchers and practitioners desire to set as many hyperpa-
+rameters automatically as possible. These constraints call
+1Department of Computer Science, University of Freiburg,
+Freiburg, Germany. Correspondence to: Stefan Falkner
+<sfalkner@informatik.uni-freiburg.de>.
+Proceedings of the 35 th International Conference on Machine
+Learning, Stockholm, Sweden, PMLR 80, 2018. Copyright 2018
+by the author(s).
+for a practical solution to the hyperparameter optimization
+(HPO) problem that fulﬁlls many desiderata:
+1. Strong Anytime Performance. Since large contempo-
+rary neural networks often require days or even weeks to
+train, HPO methods that view performance as a black box
+function to be optimized require extreme resources. The
+overall budget that most researchers and practitioners can
+afford during development is often not much larger than that
+of fully training a handful of models, and hence practical
+HPO methods must go beyond this blackbox view to already
+yield good conﬁgurations with such a small budget.
+2. Strong Final Performance. On the other hand, what
+matters most at deployment time is the performance of the
+best conﬁguration a HPO method can ﬁnd given a larger
+budget. Since ﬁnding the best conﬁgurations in a large space
+requires guidance, this is where methods based on random
+search struggle.
+3. Effective Use of Parallel Resources. With the rise of
+parallel computing, large parallel resources are often avail-
+able (e.g., compute clusters or cloud computing), and practi-
+cal HPO methods need to be able to use these effectively.
+4. Scalability. Modern deep neural networks require the
+setting of a multitude of hyperparameters, including archi-
+tectural choices (e.g., the number and width of layers), op-
+timization hyperparameters (e.g., learning rate schedules,
+momentum, and batch size), and regularization hyperpa-
+rameters (e.g., weight decay and dropout rates). Practical
+modern HPO methods therefore must be able to easily han-
+dle problems ranging from just a few to many dozens of
+hyperparameters.
+5. Robustness & Flexibility. The challenges for hyperpa-
+rameter optimization vary substantially across subﬁelds of
+machine learning; e.g., deep reinforcement learning sys-
+tems are known to be very noisy (Henderson et al., 2017),
+while probabilistic deep learning is often very sensitive
+to a few key hyperparameters. Different hyperparameter
+optimization problems also give rise to different types of
+hyperparameters (such as binary, categorical, integer, and
+continuous), each of which needs to be handled effectively
+by a practical HPO method.
+As we will discuss in Section 2, while there has been a lot of
+recent progress in the ﬁeld of hyperparameter optimization,
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+101 102 103 104 105 10610−3
+10−2
+10−1
+20x speed up
+55x speed up
+wall clock time [s]
+regret
+Random Search
+Bayesian Optimization
+Hyperband
+BOHB
+Figure 1. Illustration of typical results obtained, here for optimiz-
+ing six hyperparameters of a neural network. We show the im-
+mediate regret of the best conﬁguration found by 4 methods as
+a function of time. Hyperband has strong anytime performance,
+but for larger budgets does not perform much better than random
+search. In contrast, Bayesian optimization starts slowly (like ran-
+dom search), but given enough time outperforms Hyperband. Our
+new method BOHB achieves the best of both worlds, starting fast
+and also converging to the global optimum quickly.
+all existing methods have some strengths and weaknesses,
+but none of them fulﬁlls all of these desiderata. The key con-
+tribution of this paper is therefore to combine the strengths
+of several methods (in particular, Hyperband (Li et al., 2017)
+and a robust & effective variant (Bergstra et al., 2011) of
+Bayesian optimization (Brochu et al., 2010; Shahriari et al.,
+2016)) to propose a practical HPO method that fulﬁlls all
+of these desiderata. We ﬁrst describe Bayesian optimiza-
+tion and Hyperband in more detail (Section 3) and then
+show how to combine them in our new method BOHB, as
+well as how to effectively parallelize the resulting system
+(Section 4). Our extensive empirical evaluation (Section 5)
+demonstrates that our method combines the best aspects of
+Bayesian optimization and Hyperband: it often ﬁnds good
+solutions over an order of magnitude faster than Bayesian
+optimization and converges to the best solutions orders of
+magnitudes faster than Hyperband. Figure 1 illustrates this
+pattern in a nutshell for optimizing six hyperparameters of
+a neural network.
+In this paper, we focus only on combining Hyperband and
+Bayesian optimization, but we would like to mention that
+methods improving BO are potentially applicable to BOHB
+as well, such as meta learning (Swersky et al., 2013; Feurer
+et al., 2015; Poloczek et al., 2016; Springenberg et al., 2016),
+active ensembling to combine models found during the opti-
+mization (Lévesque et al., 2016), and using multiple ﬁdeli-
+ties (Swersky et al., 2013; Kandasamy et al., 2017). The
+data gathered by BOHB on different budgets could also be
+used to quantify the importance of hyperparameters (Hutter
+et al., 2014; Biedenkapp et al., 2017; Golovin et al., 2017;
+van Rijn & Hutter, 2018). We leave these for future work.
+2. Related Work on Model-based
+Hyperparamter Optimization
+Bayesian optimization has been successfully applied to op-
+timize hyperparameters of neural networks in many works:
+Snoek et al. (2012) obtained state-of-the-art performance
+on CIFAR-10 by optimizing the hyperparameters of convo-
+lutional neural networks; Bergstra et al. (2014) used TPE
+(Bergstra et al., 2011) to optimize a highly parameterized
+three layer convolutional neural network; and Mendoza et al.
+(2016) won 3 datasets in the 2016 AutoML challenge by
+automatically ﬁnding the right architecture and hyperparam-
+eters for fully-connected neural networks.
+Gaussian processes are the most commonly-used probabilis-
+tic model in Bayesian optimization (Shahriari et al., 2016),
+since they obtain smooth and well-calibrated uncertainty
+estimates. However, Gaussian processes do not typically
+scale well to high dimensions and exhibit cubic complex-
+ity in the number of data points (scalability); they also do
+not apply to complex conﬁguration spaces without special
+kernels (ﬂexibility) and require carefully-set hyperpriors
+(robustness).
+To speed up the hyperparameter optimization of machine
+learning algorithms, recent methods in Bayesian optimiza-
+tion try to extend the traditional blackbox setting by exploit-
+ing cheaper ﬁdelities of the objective function (Swersky
+et al., 2014; Klein et al., 2017a; Swersky et al., 2013; Kan-
+dasamy et al., 2017; Klein et al., 2017c; Poloczek et al.,
+2017). For instance, multi-task Bayesian optimization
+(Swersky et al., 2013) exploits correlation between tasks
+to warm-start the optimization procedure. Fabolas (Klein
+et al., 2017a) uses similar techniques to evaluate conﬁgu-
+rations on subsets of the training data and to extrapolate
+their performance to the full dataset. Even though these
+methods achieved both good anytime and ﬁnal performance,
+they are based on Gaussian processes, which, as described
+above, do not satisfy all of our desiderata. Alternative mod-
+els, such as random forests (Hutter et al., 2011) or Bayesian
+neural networks (Snoek et al., 2015; Springenberg et al.,
+2016; Perrone et al., 2017), scale better with the number of
+dimensions, but with the exception of Klein et al. (2017c)
+have not yet been adopted for multi-ﬁdelity optimization.
+Hyperband (Li et al., 2017) is a bandit strategy that dynam-
+ically allocates resources to a set of random conﬁgurations
+and uses successive halving (Jamieson & Talwalkar, 2016)
+to stop poorly performing conﬁgurations. We describe this
+in more detail in Section 3.2. Compared to Bayesian opti-
+mization methods that do not use multiple ﬁdelities, Hyper-
+band showed strong anytime performance, as well as ﬂexibil-
+ity and scalability to higher-dimensional spaces. However,
+it only samples conﬁgurations randomly and does not learn
+from previously sampled conﬁgurations. This can lead to a
+worse ﬁnal performance than model-based approaches, as
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+we show empirically in Section 5.
+Concurrently to our work, two other groups (Bertrand
+et al., 2017; Wang et al., 2018) also attempted to combine
+Bayesian optimization with Hyperband. However, neither of
+them achieve the consistent and large speedups our method
+achieves. Furthermore, the method of Bertrand et al. (2017)
+is based on Gaussian processes and thus shares the limita-
+tions discussed above. We discuss differences between our
+work and these two papers in more detail in Appendix B.
+3. Bayesian Optimization and Hyperband
+The validation performance of machine learning algorithms
+can be modelled as a function f :X → R of their hy-
+perparameters x∈X . We note that the hyperparameter
+conﬁguration spaceX can include both discrete and contin-
+uous dimensions. The hyperparameter optimization (HPO)
+problem is then deﬁned as ﬁnding x⋆∈ arg minx∈Xf (x).
+Due to the intrinsic randomness of most machine learning
+algorithms (e. g. stochastic gradient descent), we assume
+that we cannot observef (x) directly but rather only trough
+noisy observationsy(x) = f (x)+ϵ, withϵ∼N (0,σ 2
+noise).
+We now discuss the two methods for tackling this optimiza-
+tion problem in more detail that we will use as components
+of our new method: Bayesian optimization and Hyperband.
+3.1. Bayesian Optimization
+In each iteration i, Bayesian optimization (BO) uses a
+probabilistic model p(f|D) to model the objective func-
+tion f based on the already observed data points D =
+{(x0,y 0),..., (xi−1,yi−1)}. BO uses an acquisition func-
+tiona :X →R based on the current model p(f|D) that
+trades off exploration and exploitation. Based on the model
+and the acquisition function, it iterates the following three
+steps: (1) select the point that maximizes the acquisition
+function xnew = arg maxx∈Xa(x), (2) evaluate the objec-
+tive functionynew =f (xnew)+ϵ, and (3) augment the data
+D← D∪ (xnew,ynew) and reﬁt the model. A common
+acquisition function is the expected improvement (EI) over
+the currently best observed valueα = min{y0,...,y n}:
+a(x) =
+∫
+max(0,α−f (x))dp(f|D). (1)
+Tree Parzen Estimator. The Tree Parzen Estimator
+(TPE) (Bergstra et al., 2011) is a Bayesian optimization
+method that uses a kernel density estimator to model the
+densities
+l(x) = p(y <α|x,D )
+g(x) = p(y >α|x,D ) (2)
+over the input conﬁguration space instead of modeling the
+objective functionf directly by p(f|D). To select a new
+candidate xnew to evaluate, it maximizes the ratiol(x)/g(x);
+Bergstra et al. (2011) showed that this is equivalent to max-
+imizing EI in Equation (1). Due to the nature of kernel
+density estimators, TPE easily supports mixed continuous
+and discrete spaces, and model construction scales linearly
+in the number of data points (in contrast to the cubic-time
+Gaussian processes (GPs) predominant in the BO literature).
+3.2. Hyperband
+While the objective function f :X →R is typically ex-
+pensive to evaluate (since it requires training a machine
+learning model with the speciﬁed hyperparameters), in most
+applications it is possible to deﬁne cheap-to-evaluate ap-
+proximate versions ˜f (·,b ) off (·) that are parameterized by
+a so-called budgetb∈ [bmin,bmax]. With the maximum
+budgetb =bmax, we have ˜f (·,bmax) = f (·), whereas with
+b < bmax, ˜f (·,b ) is only an approximation of f (·) whose
+quality typically increases withb. In our experiments, we
+will use this budget to encode the number of iterations for
+an iterative algorithm, the number of data points used, the
+number of steps in an MCMC chain, and the number of
+trials in deep reinforcement learning.
+Hyperband (HB) (Li et al., 2017) is a multi-armed ban-
+dit strategy for hyperparameter optimization that takes ad-
+vantage of these different budgets b by repeatedly calling
+SuccessiveHalving (SH) (Jamieson & Talwalkar, 2016) to
+identify the best out ofn randomly sampled conﬁgurations.
+It balances very agressive evaluations with many conﬁgu-
+rations on the smallest budget, and very conservative runs
+that are directly evaluated on bmax. The exact procedure
+for this trade-off is shown in Algorithm 1 (with pseudocode
+for SH shown in Appendix C). Line 1 computes the geo-
+metrically spaced budget∈ [bmin,bmax]. The number of
+conﬁgurations sampled in line 3 is chosen such that ev-
+ery SH run requires the same total budget. SH internally
+evaluates conﬁgurations on a given budget, ranks them by
+their performance, and continues the topη−1 (usually the
+best-performing third) on a budget η times larger. This is
+repeated until the maximum budget is reached. In prac-
+tice, HB works very well and typically outperforms random
+search and Bayesian optimization methods operating on
+the full function evaluation budget quite easily for small
+to medium total budgets. However, its convergence to the
+global optimum is limited by its reliance on randomly-drawn
+conﬁgurations, and with large budgets its advantage over
+random search typically diminishes.
+4. Model-Based Hyperband
+We now introduce our new practical HPO method, which we
+dub BOHB since it combines Bayesian optimization (BO)
+and Hyperband (HB). We designed BOHB to satisfy all the
+desiderata described in the introduction. HB already satis-
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+Algorithm 1: Pseudocode for Hyperband using
+SuccessiveHalving (SH) as a subroutine.
+input : budgetsbmin andbmax,η
+1 smax =⌊logη
+bmax
+bmin
+⌋
+2 fors∈{smax,smax− 1,..., 0} do
+3 samplen =⌈smax+1
+s+1 ·ηs⌉ conﬁgurations
+4 run SH on them withηs·bmax as initial budget
+ﬁes most of these desiderata (in particular, strong anytime
+performance, scalability, robustness and ﬂexibility), and we
+combine it with BO to also satisfy the desideratum of strong
+ﬁnal performance in BOHB. We also describe how to extend
+BOHB to make effective use of parallel resources.
+In the design of BOHB’s BO component, on top of the ﬁve
+desiderata above, we also followed two additional ones:
+6. Simplicity. Simplicity is a virtue, since simple ap-
+proaches can be easily veriﬁed, have less components that
+can break, and can be easily reimplemented in different
+frameworks. HB is very simple, but standard GP-BO meth-
+ods are not: they tend to require complex approximations,
+complex MCMC sampling over hyperparameters, and for
+good performance also data-dependent choices of kernel
+functions and hyperpriors.
+7. Computational efﬁciency. Since our HB component al-
+lows us to carry out many function evaluations at small
+budgets, the cubic complexity of standard GPs, and even
+the lower complexity of approximate GPs would become
+problematic. Furthermore, compared to these cheap func-
+tion evaluations, the complexity of computing sophisticated
+acquisition functions may also become a bottleneck, espe-
+cially when parallelization effectively reduces the cost of
+function evaluations.
+For these reasons, along with the reasons of scalability,
+robustness & ﬂexibility, we based BOHB’s BO component
+on the simple TPE method discussed above. As reliable
+GP-based BO methods become available that satisfy all the
+desiderata above, it would be easy to replace TPE with them.
+4.1. Algorithm description
+BOHB relies on HB to determine how many conﬁgurations
+to evaluate with which budget, but it replaces the random
+selection of conﬁgurations at the beginning of each HB it-
+eration by a model-based search. Once the desired number
+of conﬁgurations for the iteration is reached, the standard
+successive halving procedure is carried out using these con-
+ﬁgurations. We keep track of the performance of all function
+evaluationsg(x,b ) +ϵ of conﬁgurations x on all budgetsb
+to use as a basis for our models in later iterations.
+We follow HB’s way of choosing the budgets and continue
+to use SH, but we replace the random sampling by a BO
+component to guide the search. We construct a model and
+use BO to select a new conﬁguration, based on the conﬁgu-
+rations evaluated so far. In the remainder of this section, we
+will explain this procedure summarized by the pseudocode
+in Algorithm 2.
+The BO part of BOHB closely resembles TPE, with one
+major difference: we opted for a single multidimensional
+KDE compared to the hierarchy of one-dimensional KDEs
+used in TPE in order to better handle interaction effects in
+the input space. To ﬁt useful KDEs (in line 4 of Algorithm
+2), we require a minimum number of data pointsNmin; this
+is set tod + 1 for our experiments, whered is the number of
+hyperparameters. To build a model as early as possible, we
+do not wait untilNb =|Db|, the number of observations for
+budgetb, is large enough to satisfyq·Nb≥Nmin. Instead,
+after initializing withNmin + 2 random conﬁgurations (line
+3), we choose the
+Nb,l = max(Nmin,q·Nb)
+Nb,g = max(Nmin,Nb−Nb,l) (3)
+best and worst conﬁgurations, respectively, to model the
+two densities. This ensures that both models have enough
+datapoints and have the least overlap when only a limited
+number of observations is available. We used the KDE im-
+plementation from statsmodels (Seabold & Perktold, 2010),
+estimating the KDE’s bandwidth with the default estimation
+procedure (Scott’s rule of thumb), which is efﬁcient and
+performed well in our experience. Details on our KDE are
+given in Appendix D.
+As the optimization progresses, more conﬁgurations are
+evaluated on bigger budgets. Given that the goal is to opti-
+mize on the largest budget, BOHB always uses the model
+for the largest budget for which enough observations are
+available (line 2). This enables it to overcome wrong con-
+clusions drawn on smaller budgets by eventually relying on
+results with the highest ﬁdelity only.
+To optimize EI (lines 5-6), we sampleNs points froml′(x),
+which is the same KDE as l(x) but with all bandwidths
+multiplied by a factor bw to encourage more exploration
+around the promising conﬁgurations. We observed that
+this improves convergence especially in the late stages of
+the optimization, when the model on the biggest budget is
+queried frequently but updated rarely.
+In order to keep the theoretical guarantees of HB, we also
+sample a constant fractionρ of the conﬁgurations uniformly
+at random (line 1). Besides global exploration, this guar-
+antees that afterm· (smax + 1) SH runs, our method has
+(on average) evaluatedρ·m· (smax + 1) random conﬁg-
+urations onbmax. As every SH run consumes a budget of
+at most (smax + 1)·bmax, in the same time random search
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+evaluates (ρ−1· (smax + 1))-times as many conﬁguration
+on the largest budget. This means, that in the worst case
+(when the lower ﬁdelities are misleading), BOHB is at most
+this factor times slower than RS, but it is still guaranteed to
+converge eventually. The same argument holds for HB, but
+in practice both HB and BOHB substantially outperform RS
+in our experiments.
+No optimizer is free of hyperparameters itself, and their
+effects have to be studied carefully. We therefore include a
+detailed empirical analysis of BOHB’s hyperparameters in
+Appendix G that shows each hyperparameter’s effect when
+all others are ﬁxed to their default values (these are also
+listed there). We ﬁnd that BOHB is quite insensitive to its
+hyperparameters, with the default working robustly across
+different scenarios.
+4.2. Parallelization
+Modern optimizers must be able to take advantage of par-
+allel resources effectively and efﬁciently. BOHB achieves
+that by inheriting properties from both TPE and HB. The
+parallelism in TPE is achieved by limiting the number of
+samples to optimize EI, purposefully not optimizing it fully
+to obtain diversity. This ensures that consecutive sugges-
+tions by the model are diverse enough to yield near-linear
+speedups when evaluationed in parallel. On the other hand,
+HB can be parallelized by (a) starting different iterations
+at the same time (a parallel for loop in Alg. 1), and (b)
+evaluating conﬁgurations concurrently within each SH run.
+Our parallelization strategy of BOHB is as follows. We
+start with the ﬁrst SH run that sequential HB would perform
+(the most aggressive one, starting from the lowest budget),
+sampling conﬁgurations with the strategy outlined in Algo-
+rithm 2 until either (a) all workers are busy, or (b) enough
+conﬁgurations have been sampled for this SH run. In case
+(a), we simply wait for a worker to free up and then sample
+a new conﬁguration. In case (b), we start the next SH run
+in parallel, sampling the conﬁgurations to run for it also
+Algorithm 2: Pseudocode for sampling in BOHB
+input : observationsD, fraction of random runsρ,
+percentileq, number of samplesNs,
+minimum number of pointsNmin to build
+a model, and bandwidth factorbw
+output :next conﬁguration to evaluate
+1 if rand() <ρ then return random conﬁguration
+2 b = arg max{Db :|Db|≥ Nmin + 2}
+3 if b =∅ then return random conﬁguration
+4 ﬁt KDEs according to Eqs. (2) and (3)
+5 drawNs samples according tol′(x) (see text)
+6 return sample with highest ratiol(x)/g(x)
+100 101 102 103 104 10510−3
+10−2
+10−1
+100
+10−2
+100
+wall clock time [s]
+regret
+letter
+n = 1
+n = 2
+n = 4
+n = 8
+n = 16
+n = 32
+Figure 2. Performance of our method with different number of
+parallel workers on the letter surrogate benchmark (see Sec. 5) for
+128 iterations. The speedup for two and four workers is close to
+linear, for more workers it becomes sublinear. For example, the
+speedup to achieve a regret of 10−2 for one vs. 32 workers is ca.
+2000s/130s ≈ 15. We plot the mean and twice the standard error
+of the mean over 128 runs.
+according to Algorithm 2; observations D (and therefore
+the resulting models) are shared across all SH runs. BOHB
+is an anytime algorithm that at each point in time keeps
+track of the conﬁguration that achieved the best validation
+performance; it can also be given a maximum budget of SH
+runs.
+We note that SH has also been parallelized in (so far un-
+published) independent work (Li et al., 2018). Next to
+parallelizing SH runs (by ﬁlling the next free worker with
+the ready-to-be-executed run with the largest budget), that
+work mentioned that HB can trivially be parallelized by
+running its SH runs in parallel. In contrast to this approach
+of parallelizing HB by having separate pools of workers for
+each SH run, we rather join all workers into a single pool,
+and whenever a worker becomes available preferentially
+execute waiting runs with smaller budgets. New SH runs
+are only started when the SH runs currently executed are not
+waiting for a worker to free up. This strategy (a) allows us to
+achieve better speedups by using all workers in the most ag-
+gressive (and often most effective) bracket ﬁrst, and (b) also
+takes full advantage of models built on smaller budgets. Fig-
+ure 2 demonstrates that our method of parallelization can
+effectively exploit many parallel workers.
+5. Experiments
+We now comprehensively evaluate BOHB’s empirical per-
+formance in a wide range of tasks, including a high-
+dimensional toy function, as well as optimizing the hy-
+perparameters of support vector machines, feed-forward
+neural networks, Bayesian neural networks, deep reinforce-
+ment learning agents and convolutional neural networks.
+Code for BOHB and our benchmarks is publicly available
+at https://github.com/automl/HpBandSter
+To compare against TPE, we used the Hyperopt package
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+(Bergstra et al., 2011), and for all GP-BO methods we used
+the RoBO python package (Klein et al., 2017b). In all exper-
+iments we setη = 3 for HB and BOHB as recommended by
+Li et al. (2017). If not stated otherwise, for all methods we
+report the mean performance and the standard error of the
+mean of the best observed conﬁguration so far (incumbent)
+at a given budget.
+5.1. Artiﬁcial Toy Function: Stochastic Counting Ones
+In this experiment we investigated BOHB’s behavior in
+high-dimensional mixed continuous / categorical conﬁgu-
+ration spaces. Since GP-BO methods do not work well on
+such conﬁguration spaces (Eggensperger et al., 2013) we
+do not include them in this experiment. However, we do
+use SMAC (Hutter et al., 2011), since its random forest
+is known to perform well in high-dimensional categorical
+spaces (Eggensperger et al., 2013).
+Given a set of Ncat categorical variablesxi∈{ 0, 1} and
+Ncont continuous variablesxj∈ [0, 1], we deﬁned a variant
+of the counting ones problem as follows: We sum the values
+of all categoricalsxi and add the sample means of Bernoulli
+distributions with parameters xj given by the continuous
+variables. The number of samples used to estimate the mean
+represents the budget. Figure 3 shows the result of 512
+independent runs of various optimizers in a 16-dimensional
+space with Ncat = Ncont = 8 parameters. We plot the
+normalized immediate regret of the noise free function, i.e.
+|f (xinc)−d|/d whered =Ncat +Ncont and xinc is the
+incumbent at a speciﬁc time step.
+Random search worked very poorly on this benchmark and
+was quickly dominated by SMAC and TPE. Even though
+HB worked better in the beginning, SMAC and TPE clearly
+outperformed it after having obtained a sufﬁciently informa-
+tive model. BOHB worked as well as HB in the beginning
+and then quickly started to perform better.
+We obtained similar results for other dimensionalities (see
+Figures 8 and 9 in the supplementary material), but the pic-
+ture is not always as clear. In higher dimensions, SMAC
+seems to outperform TPE, hinting at the limitations of TPE’s
+KDE compared to SMAC’s random forest. As BOHB still
+evaluates conﬁgurations on small budgets even in late stages
+of the optimization, convergence can be slowed down com-
+pared to SMAC and TPE. A formal description of the prob-
+lem, the budgets, and a more detailed discussion of the
+results can be found in Appendix H.
+5.2. Comprehensive Experiments on Surrogate
+Benchmarks
+For the next experiments we constructed a set of surrogate
+benchmarks based on ofﬂine data following Eggensperger
+et al. (2015). Optimizing a surrogate instead of the real
+10−1 100 101 102 103 10410−3
+10−2
+10−1
+100
+cummulative budget / bmax
+normalized regret
+8 + 8 dimensions
+RS HB
+TPE BOHB
+SMAC
+Figure 3. Results for the counting ones problem in 16 dimensional
+space with 8 categorical and 8 continuous hyperparameters. In
+higher dimensional spaces RS-based methods need exponentially
+more samples to ﬁnd good solutions.
+objective function is substantially cheaper, which allows us
+to afford many independent runs for each optimizer and to
+draw statistically more meaningful conclusions. A more de-
+tailed discussion of how we generated these surrogates can
+be found in Appendix I in the supplementary material. To
+better compare the convergence towards the true optimum,
+we again computed the immediate regret of the incumbent.
+5.2.1. S UPPORT VECTOR MACHINE ON MNIST
+To compare against GP-BO, we used the support vector
+machine on MNIST surrogate from Klein et al. (2017a).
+This surrogate imitates the hyperparameter optimization
+of a support vector machine with a RBF kernel with two
+hyperparameters: the regularization parameter C and the
+kernel parameterγ. The budget is given by the number of
+training datapoints, where the minimum budget is 1/512 of
+the training data and the maximum budget is the full training
+data. For further details, we refer to Klein et al. (2017a).
+Figure 4 compares BOHB to various BO methods, such as
+Fabolas (Klein et al., 2017a), multi-task Bayesian optimiza-
+tion (MTBO) (Swersky et al., 2013), GP-BO with expected
+improvement (Snoek et al., 2012; Klein et al., 2017b), RS
+and HB. We follow the evaluation protocol of Klein et al.
+(2017a) and plot the performance of each conﬁguration
+when retrained using the full dataset. Both BOHB and HB
+identiﬁed the best conﬁguration within their ﬁrst iterations,
+making them competitive to Fabolas and MTBO. We note
+that this is despite the fact that GP-BO methods usually
+work particularly well on such low-dimensional continu-
+ous problems (Eggensperger et al., 2013). A more detailed
+discussion of the results can be found in Appendix I.
+5.2.2. F EED -FORWARD NEURAL NETWORKS ON
+OPEN ML D ATASETS
+We optimized six hyperparameters that control the training
+procedure (initial learning rate, batch size, dropout, exponen-
+tial decay factor for learning rate) and the architecture (num-
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+100 101 102 103 104 105 106 10710−2
+10−1
+100
+wall clock time [s]
+validation error
+Surrogate of SVM on MNIST
+RS
+GP-BO
+HB
+BOHB
+MTBO
+Fabolas
+Figure 4. Comparison on the SVM on MNIST surrogates as de-
+scribed in Klein et al. (2017a). BOHB and HB work comparably
+to Fabolas on this benchmark outperforming MTBO and GP-BO.
+102 103 104 105 106 107
+10−3
+10−1
+10−4
+10−2
+100
+wall clock time [s]
+regret
+poker
+RS
+TPE
+GP-BO
+HB
+HB-LCNet
+BOHB
+Figure 5. Optimizing six hyperparameter of a feed-forward neural
+network on featurized datasets; results are based on surrogate
+benchmarks. Results for the other 5 datasets are qualitatively
+similar and are shown in Figure 2 in the supplementary material.
+ber of layers, units per layer) of a feed forward neural net-
+work for six different datasets gathered from OpenML (Van-
+schoren et al., 2014): Adult (Kohavi, 1996), Higgs (Baldi
+et al., 2014), Letter (Frey & Slate, 1991), MNIST (LeCun
+et al., 2001), Optdigits (Dheeru & Karra Taniskidou, 2017),
+and Poker (Cattral et al., 2002). A detailed description of all
+hyperparameter ranges and training budgets can be found in
+Appendix I.
+We ran random search (RS), TPE, HB, GP-BO, Hyperband
+with LC-Net (HB-LCNet, see Klein et al. (2017c)) and
+BOHB on all six datasets and summarize the results for one
+of them in Figure 5. Figures for the other datasets are shown
+in Appendix E.
+We note that HB initially performed much better than the
+vanilla BO methods and achieved a roughly three-fold
+speedup over RS. However, for large enough budgets TPE
+and GP-BO caught up in all cases, and in the end found
+better conﬁgurations than HB and RS. HB and BOHB
+started out identically, but BOHB achieved the same ﬁnal
+performance as HB 100 times faster, while at the same
+time yielding a ﬁnal result that was better than that of
+the other BO methods. All model-based methods substan-
+tially outperformed RS at the end of their budget, whereas
+HB approached the same performance. Interestingly, the
+speedups that TPE and GP-BO achieved over RS are com-
+parable to the speedups that BOHB achieved over HB. Fi-
+nally, HB-LCNet performed somewhat better than HB alone,
+but consistently worse than BOHB, even when tuning HB-
+LCNet. We only compare to HB-LCNet on this benchmark,
+since it is the only one that includes full learning curves
+(for which the parametric functions in HB-LCNet were de-
+signed). Also, HB-LCNet requires access to performance
+values for all budgets, which we do not obtain when, e.g.,
+using data subset sizes as a budget, and we thus expect
+HB-LCNet to perform poorly in the other cases.
+5.3. Bayesian Neural Networks
+For this experiment we optimized the hyperparameters and
+the architecture of a two-layer fully connected Bayesian
+neural network trained with Markov Chain Monte-Carlo
+(MCMC) sampling. We used stochastic gradient Hamilto-
+nian Monte-Carlo sampling (SGHMC) (Chen et al., 2014)
+with scale adaption (Springenberg et al., 2016) to sample
+the parameter vector of the network. Note that to the best of
+our knowledge this is the ﬁrst application of hyperparameter
+optimization for Bayesian neural networks.
+As tunable hyperparameters, we exposed the step length,
+the length of the burn-in period, the number of units in each
+layer, and the decay parameter of the momentum variable. A
+detailed description of the conﬁguration space can be found
+in Appendix J. We used the Bayesian neural network im-
+plementation provided in the RoBO python package (Klein
+et al., 2017b) as described by Springenberg et al. (2016).
+We considered two UCI (Dheeru & Karra Taniskidou, 2017)
+regression datasets, Boston housing and protein structure
+as described by Hernández-Lobato & Adams (2015) and
+report the negative log-likelihood of the validation data. For
+BOHB and HB, we set the minimum budget to 500 MCMC
+steps and the maximum budget to 10000 steps. RS and TPE
+evaluated each conﬁguration on the maximum budget. For
+each hyperparameter optimization method, we performed
+50 independent runs to obtain statistically signiﬁcant results.
+As Figure 6 shows, HB initially performed better than TPE,
+but TPE caught up given enough time. BOHB converged
+faster than both HB and TPE and even found a better con-
+ﬁguration than the baselines on the Boston housing dataset.
+5.4. Reinforcement Learning
+Next, we optimized eight hyperparameters of proximal pol-
+icy optimization (PPO) (Schulman et al., 2017) to learn
+the cartpole swing-up task. For PPO, we used the imple-
+mentation from the TensorForce framework developed by
+Schaarschmidt et al. (2017) and we used the implementation
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+104 105 106
+4
+6
+8
+3
+5
+7
+9
+MCMC steps
+negative log-likelihood
+Boston Housing
+RS
+TPE
+HB
+BOHB
+Figure 6. Optimization of 5 hyperparameters of a Bayesian neural
+network trained with SGHMC. BOHB quickly outperforms both
+TPE and HB.
+101 102 103 104 105102
+103
+104
+time [s]
+epochs until convergence
+Cartpole
+RS
+TPE
+HB
+BOHB
+Figure 7. Hyperparameter optimization of 8 hyperparameters of
+PPO on the cartpole task. BOHB starts as well as HB but converges
+to a much better conﬁguration.
+from OpenAI Gym (Brockman et al., 2016) for the cartpole
+environment. The conﬁguration space for this experiment
+can be found in Appendix K.
+To ﬁnd a conﬁguration that not only converges quickly but
+also works robustly, for each function evaluation we ran a
+conﬁguration for nine individual trials with a different seed
+for the random number generator. We returned the average
+number of episodes until PPO has converged to the opti-
+mum, deﬁning convergence to mean that the reinforcement
+learning agent achieved the highest possible reward for 20
+consecutive episodes. For each hyperparameter conﬁgura-
+tion we stopped training after the agent has either converged
+or ran for a maximum of 3000 episodes. The minimum
+budget for BOHB and HB was one trial and the maximum
+budget were nine trials, and all other methods used a ﬁxed
+number of nine trials. As in the previous benchmark, for
+each hyperparameter optimization method we performed 50
+independent runs.
+Figure 7 shows that HB and BOHB worked equally well in
+the beginning, but BOHB converged to better conﬁgurations
+in the end. Apparently, the budget for this benchmark was
+not sufﬁcient for TPE to ﬁnd the same conﬁguration.
+5.5. Convolutional Neural Networks on CIFAR-10
+For a ﬁnal evaluation, we optimized the hyperparameters of
+a medium-sized residual network (depth 20 and basewidth of
+64; roughly 8.5M parameters) with Shake-Shake (Gastaldi,
+2017) and Cutout (DeVries & Taylor, 2017) regularization.
+To perform hyperparameter optimization, we split off 5 000
+training images as a validation set. As hyperparameters,
+we optimized learning rate, momentum, weight decay, and
+batch size.
+We ran BOHB with budgets of 22, 66, 200, and 600 epochs,
+using 19 parallel workers. Each worker used 2 NVIDIA
+TI 1080 GPUs for parallel training, which resulted in runs
+with the longest budget taking approximately 7 hours (on 2
+GPUs). The complete BOHB run of 16 iterations required a
+total of 33 GPU days (corresponding to a cost of less than
+3 full function evaluations on each of the 19 workers) and
+achieved a test error of 2.78%± 0.09% (which is better
+than the error Gastaldi (2017) obtained with a slightly larger
+network). While we note that the performance numbers
+from different papers are not directly comparable due to the
+use of different optimization and regularization approaches,
+it is still instructive to compare this result to others in the
+literature. Our result is better than that of last year’s state-of-
+the-art neural architecture search by reinforcement learning
+(3.65% (Zoph & Le, 2017)) and the recent paper on progres-
+sive neural architecture search (3.41% (Liu et al., 2017)),
+but it does not quite reach the state-of-the-art performance
+of 2.4% and 2.1% reported in recent arXiv papers on re-
+inforcement learning (Zoph et al., 2017) and evolutionary
+search (Real et al., 2018). However, since these approaches
+used 60 to 95 times more compute resources (2 000 and
+3 150 GPU days, respectively!), as well as networks with
+3-4 times more parameters, we believe that our results are a
+strong indication of the practical usefulness of BOHB for
+resource-constrained optimization.
+6. Conclusions
+We introduced BOHB, a simple yet effective method for
+hyperparameter optimization satisfying the desiderata out-
+lined above: it is robust, ﬂexible, scalable (to both high di-
+mensions and parallel resources), and achieves both strong
+anytime performance and strong ﬁnal performance. We
+thoroughly evaluated its performance on a diverse set of
+benchmarks and demonstrated its improved performance
+compared to a wide range of other state-of-the-art ap-
+proaches. Our easy-to-use open-source implementation
+(available under https://github.com/automl/HpBandSter)
+should allow the community to effectively use our method
+on new problems. To further improve BOHB, we will con-
+sider an automatic adaptation of the budgets used to alleviate
+the problem of misspeciﬁcation by the user while maintain-
+ing the versatility and robustness of the current version.
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+Acknowledgements
+We thank Ilya Loshchilov for suggesting to track the best
+hyperparameter setting across different budgets (already in
+late 2015), which inﬂuenced our thoughts about the problem
+and ultimately the development of BOHB. This work has
+partly been supported by the European Research Council
+(ERC) under the European Union’s Horizon 2020 research
+and innovation programme under grant no. 716721, by the
+European Commission under grant no. H2020-ICT-645403-
+ROBDREAM, and by the German Research Foundation
+(DFG) under Priority Programme Autonomous Learning
+(SPP 1527, grant BR 3815/8-1 and HU 1900/3-1) Fur-
+thermore, the authors acknowledge support by the state of
+Baden-Württemberg through bwHPC and the DFG through
+grant no INST 39/963-1 FUGG.
+References
+Baldi, P., Sadowski, P., and Whiteson, D. Searching for exotic
+particles in high-energy physics with deep learning. Nature
+communications, 5, 2014.
+Bergstra, J., Bardenet, R., Bengio, Y ., and Kégl, B. Algorithms for
+hyper-parameter optimization. In Advances in Neural Informa-
+tion Processing Systems, 2011.
+Bergstra, J., Yamins, D., and Cox, D. Making a science of model
+search: Hyperparameter optimization in hundreds of dimen-
+sions for vision architectures. In International Conference on
+Machine Learning, 2014.
+Bertrand, H., Ardon, R., Perrot, M., and Bloch, I. Hyperparameter
+optimization of deep neural networks: Combining hyperband
+with Bayesian model selection. Conférence sur l’Apprentissage
+Automatique, 2017.
+Biedenkapp, A., Lindauer, M., Eggensperger, K., Fawcett, C.,
+Hoos, H., and Hutter, F. Efﬁcient parameter importance anal-
+ysis via ablation with surrogates. In National Conference on
+Artiﬁcial Intelligence, 2017.
+Brochu, E., Cora, V ., and de Freitas, N. A tutorial on Bayesian
+optimization of expensive cost functions, with application to
+active user modeling and hierarchical reinforcement learning.
+arXiv:1012.2599 [cs.LG] , 2010.
+Brockman, G., Cheung, V ., Pettersson, L., Schneider, J.,
+Schulman, J., Tang, J., and Zaremba, W. Openai gym.
+arXiv:1606.01540 [cs.LG] , 2016.
+Cattral, R., Oppacher, F., and Deugo, D. Evolutionary data min-
+ing with automatic rule generalization. Recent Advances in
+Computers, Computing and Communications, 1(1), 2002.
+Chen, T., Fox, E., and Guestrin, C. Stochastic gradient Hamiltonian
+Monte Carlo. In Xing, E. and Jebara, T. (eds.), International
+Conference on Machine Learning, 2014.
+DeVries, T. and Taylor, G. W. Improved regularization of convo-
+lutional neural networks with cutout. arXiv:1708.04552
+[cs.CV], 2017.
+Dheeru, D. and Karra Taniskidou, E. UCI machine learning repos-
+itory, 2017. URL http://archive.ics.uci.edu/ml.
+Eggensperger, K., Feurer, M., Hutter, F., Bergstra, J., Snoek, J.,
+Hoos, H., and Leyton-Brown, K. Towards an empirical foun-
+dation for assessing Bayesian optimization of hyperparameters.
+In NIPS Workshop on Bayesian Optimization in Theory and
+Practice, 2013.
+Eggensperger, K., Hutter, F., Hoos, H., and Leyton-Brown, K.
+Efﬁcient benchmarking of hyperparameter optimizers via surro-
+gates. In National Conference on Artiﬁcial Intelligence, 2015.
+Feurer, M., Springenberg, T., and Hutter, F. Initializing Bayesian
+hyperparameter optimization via meta-learning. In National
+Conference on Artiﬁcial Intelligence, 2015.
+Frey, P. W. and Slate, D. J. Letter recognition using holland-style
+adaptive classiﬁers. Machine Learning, 6(2), 1991.
+Gastaldi, X. Shake-shake regularization. arXiv:1705.07485
+[cs.LG], 2017.
+Golovin, D., Solnik, B., Moitra, S., Kochanski, G., Karro, J., and
+Sculley, D. Google vizier: A service for black-box optimization.
+In International Conference on Knowledge Discovery and Data
+Mining, 2017.
+Henderson, P., Islam, R., Bachman, P., Pineau, J., Precup, D.,
+and Meger, D. Deep reinforcement learning that matters.
+arXiv:1709.06560 [cs.LG] , 2017.
+Hernández-Lobato, J. and Adams, R. Probabilistic backpropa-
+gation for scalable learning of Bayesian neural networks. In
+International Conference on Machine Learning , volume 37,
+2015.
+Hutter, F., Hoos, H., and Leyton-Brown, K. Sequential model-
+based optimization for general algorithm conﬁguration. In
+Learning and Intelligent Optimization, volume 6683, 2011.
+Hutter, F., Hoos, H., and Leyton-Brown, K. An efﬁcient approach
+for assessing hyperparameter importance. In International Con-
+ference on Machine Learning, 2014.
+Jamieson, K. and Talwalkar, A. Non-stochastic best arm identi-
+ﬁcation and hyperparameter optimization. In Conference on
+Artiﬁcial Intelligence and Statistics, 2016.
+Kandasamy, K., Dasarathy, G., Schneider, J., and Póczos, B. Multi-
+ﬁdelity bayesian optimisation with continuous approximations.
+In International Conference on Machine Learning, 2017.
+Klein, A., Falkner, S., Bartels, S., Hennig, P., and Hutter, F. Fast
+Bayesian hyperparameter optimization on large datasets. Elec-
+tronic Journal of Statistics, 11(2), 2017a.
+Klein, A., Falkner, S., Mansur, N., and Hutter, F. Robo: A ﬂexible
+and robust bayesian optimization framework in python. InNIPS
+2017 Bayesian Optimization Workshop, 2017b.
+Klein, A., Falkner, S., Springenberg, J. T., and Hutter, F. Learning
+curve prediction with Bayesian neural networks. In Interna-
+tional Conference on Learning Representations, 2017c.
+Kohavi, R. Scaling up the accuracy of naive-bayes classiﬁers: A
+decision-tree hybrid. In KDD, volume 96, 1996.
+LeCun, Y ., Bottou, L., Bengio, Y ., and Haffner, P. Gradient-based
+learning applied to document recognition. In Haykin, S. and
+Kosko, B. (eds.), Intelligent Signal Processing, pp. 306–351.
+IEEE Press, 2001.
+BOHB: Robust and Efﬁcient Hyperparameter Optimization at Scale
+Lévesque, J.-C., Gagné, C., and Sabourin, R. Bayesian hyperpa-
+rameter optimization for ensemble learning. In Uncertainty in
+Artiﬁcial Intelligence, 2016.
+Li, L., Jamieson, K., DeSalvo, G., Rostamizadeh, A., and Tal-
+walkar, A. Hyperband: Bandit-based conﬁguration evaluation
+for hyperparameter optimization. In International Conference
+on Learning Representations, 2017.
+Li, L., Jamieson, K., Rostamizadeh, A., Gonina, K., Hardt, M.,
+Recht, B., and Talwalkar, A. Massively parallel hyperparameter
+tuning, 2018. URL https://openreview.net/forum?
+id=S1Y7OOlRZ.
+Liu, C., Zoph, B., Shlens, J., Hua, W., Li, L.-J., Fei-Fei, L., Yuille,
+A., Huang, J., and Murphy, K. Progressive neural architecture
+search. arXiv:1712.00559 [cs.CV] , 2017.
+Melis, G., Dyer, C., and Blunsom, P. On the state of the art of
+evaluation in neural language models. arXiv:1707.05589
+[cs.CL], 2017.
+Mendoza, H., Klein, A., Feurer, M., Springenberg, J., and Hutter,
+F. Towards automatically-tuned neural networks. InICML 2016
+AutoML Workshop, 2016.
+Perrone, V ., Jenatton, R., Seeger, M., and Archambeau, C.
+Multiple adaptive bayesian linear regression for scalable
+bayesian optimization with warm start. arXiv:1712.02902
+[stat.ML], 2017.
+Poloczek, M., Wang, J., and Frazier, P. I. Warm starting bayesian
+optimization. In Winter Simulation Conference, 2016.
+Poloczek, M., Wang, J., and Frazier, P. Multi-information source
+optimization. In Advances in Neural Information Processing
+Systems, 2017.
+Real, E., Aggarwal, A., Huang, Y ., and Le, Q. V . Regularized
+Evolution for Image Classiﬁer Architecture Search. 2018.
+Schaarschmidt, M., Kuhnle, A., and Fricke, K. Tensorforce: A
+tensorﬂow library for applied reinforcement learning. Web page,
+2017. URL https://github.com/reinforceio/
+tensorforce.
+Schulman, J., Wolski, F., Dhariwal, P., Radford, A., and
+Klimov, O. Proximal policy optimization algorithms.
+arXiv:1707.06347 [cs.LG] , 2017.
+Seabold, S. and Perktold, J. Statsmodels: Econometric and statis-
+tical modeling with python. In Python in Science Conference,
+2010.
+Shahriari, B., Swersky, K., Wang, Z., Adams, R., and de Freitas,
+N. Taking the human out of the loop: A review of Bayesian
+optimization. IEEE, 104(1), 2016.
+Snoek, J., Larochelle, H., and Adams, R. P. Practical Bayesian
+optimization of machine learning algorithms. In Advances in
+Neural Information Processing Systems, 2012.
+Snoek, J., Rippel, O., Swersky, K., Kiros, R., Satish, N., Sundaram,
+N., Patwary, M., Prabhat, and Adams, R. Scalable Bayesian
+optimization using deep neural networks. In International Con-
+ference on Machine Learning, volume 37, 2015.
+Springenberg, J., Klein, A., Falkner, S., and Hutter, F. Bayesian
+optimization with robust bayesian neural networks. InAdvances
+in Neural Information Processing Systems, 2016.
+Swersky, K., Snoek, J., and Adams, R. Multi-task Bayesian opti-
+mization. In Advances in Neural Information Processing Sys-
+tems, 2013.
+Swersky, K., Snoek, J., and Adams, R. Freeze-thaw bayesian
+optimization. arXiv:1406.3896 [stat.ML] , 2014.
+van Rijn, J. N. and Hutter, F. Hyperparameter importance across
+datasets. In International Conference on Knowledge Discovery
+and Data Mining, 2018.
+Vanschoren, J., van Rijn, J., Bischl, B., and Torgo, L. OpenML:
+Networked science in machine learning. ACM SIGKDD Explo-
+rations Newsletter, 15(2), 2014.
+Wang, J., Xu, J., and Wang, X. Combination of hyperband and
+bayesian optimization for hyperparameter optimization in deep
+learning. arXiv:1801.01596 [cs.CV] , 2018.
+Zoph, B. and Le, Q. V . Neural architecture search with rein-
+forcement learning. In International Conference on Learning
+Representations, 2017.
+Zoph, B., Vasudevan, V ., Shlens, J., and Le, Q. V . Learning
+transferable architectures for scalable image recognition. 2017.

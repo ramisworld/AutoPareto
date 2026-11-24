@@ -1,0 +1,9 @@
+{
+  "derived_definitions_equal_source": true,
+  "mode": "native",
+  "prepare_sha256": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+  "recipe": "tpe",
+  "source": "results/candidates/tpe-seed42-20260805/0021-train.py",
+  "source_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2",
+  "train_sha256": "8547b2789c6635c5814ed67c0bb60256bf32bb24af0fcb744604ab59e17c76b2"
+}

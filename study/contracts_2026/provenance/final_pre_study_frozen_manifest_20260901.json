@@ -1,0 +1,180 @@
+{
+  "schema": "autopareto_final_pre_study_frozen_manifest_v1",
+  "status": "FROZEN_PRE_STUDY",
+  "created_at": "2026-09-01",
+  "scientific_execution_launched": false,
+  "design": "Design-B",
+  "benchmark": {
+    "protocol": "autopareto_search_inference_design_b_v1",
+    "precision": "bfloat16",
+    "batch_size": 1,
+    "concurrency": 1,
+    "input_tokens": 1024,
+    "generated_tokens": 128,
+    "cached_decode_transitions": 127,
+    "protected_prompt_count": 8,
+    "warmup_seconds": 20.0,
+    "decode_blocks": 8,
+    "decode_block_seconds": 8.0,
+    "synchronized_host_timing_authoritative": true,
+    "cuda_event_timing": "diagnostic_only",
+    "uncertainty": "block bootstrap 95% interval combined with frozen max-model sample SD of log velocity"
+  },
+  "workload_and_prompts": {
+    "workload": {
+      "batch_size": 1,
+      "cached_decode_transitions": 127,
+      "concurrency": 1,
+      "decoding": "greedy",
+      "generated_tokens": 128,
+      "input_tokens": 1024,
+      "precision": "bfloat16",
+      "prefill_in_timing_region": false,
+      "prefix_caching": false,
+      "protected_prompt_count": 8
+    },
+    "prompt_set_sha256": "117d3bf723e4f3e376caa20bb497bf5791d4fa6bbfeb2a61458ac86c804db684",
+    "prompt_text_set_sha256": "2173dd2807d22091f3aa3df4c2c99292a39c0836f3ccfdc56ddb21786d41e1f8",
+    "prompt_token_hashes": [
+      "0de230239f18c2d822605c0df32d83682225a4f0c5d60a65537c2b664c12307d",
+      "307c61ee36eeea8611e50b094d82a713d4d9fd455a168822a3ad861e61ca9d61",
+      "167e4d3e3d39e09f8745f2f4748ea2aab3ded17562fbab352b3a5efb5eb28e7a",
+      "43f05f10b22957d168a8d949df1fa52b1c920e9c6c2ba89dbed0735e3a813e49",
+      "78956319e35fd92ed2ccd0c6928d60aab7cc77ce3a0695c0c076304fe6aef5bf",
+      "d01039adeb09650776136fa53739895267fc0d1f58544d14a5700a66de082224",
+      "80b115af1e98d50092b16ee1744dfdd5dd9ba9152384f6c79dee95c295f2a19c",
+      "2339674a650dc11827330b9b24106c5a3bb934cc57967e468c18bed4214c534e"
+    ]
+  },
+  "correctness_rule": {
+    "version": "autopareto_cache_correctness_fp32_adjudicated_v1",
+    "bf16_screen_mean_atol": 0.03,
+    "fp32_adjudication_mean_atol": 0.0001,
+    "fp32_adjudication_max_atol": 0.001,
+    "checked_decode_steps": 32,
+    "rule": "BF16 finite/greedy screen followed by protected FP32 full-prefix adjudication"
+  },
+  "process_variance": {
+    "policy": "max_model_sample_sd_log_velocity",
+    "process_log_sd": 0.028866899197055054,
+    "per_model_log_sd": {
+      "ap292": 0.027036438809864023,
+      "ap299": 0.0024091447592566543,
+      "autoresearch": 0.007304817883339448,
+      "baseline": 0.028866899197055054
+    },
+    "development_process_counts": {
+      "baseline": 3,
+      "autoresearch": 3,
+      "ap292": 3,
+      "ap299": 3
+    },
+    "frozen_before_holdout": true
+  },
+  "development_results": {
+    "baseline": [184.03328671429747, 194.9521183440623, 188.86759531509762],
+    "autoresearch": [192.3106373829932, 193.9350347291308, 195.12933635170705],
+    "ap292": [378.14990932029286, 379.674469230959, 361.6235656543948],
+    "ap299": [487.4956984501931, 489.60644063864424, 487.64827750774805],
+    "all_valid": true,
+    "artifact": "/workspace/autopareto/final_readiness_development_summary_20260901.json",
+    "artifact_sha256": "da9e903ae140ec5c55f60f127cc2641380d07d7f30195a078ff4b632fe3c4dc5"
+  },
+  "holdout_results": {
+    "tpe": [256.7303934098274, 259.2296138639582, 247.8331503400987],
+    "motpe": [265.9482464204435, 268.80125408264416, 262.186055704816],
+    "processes_per_model": 3,
+    "all_valid": true,
+    "artifact": "/workspace/autopareto/final_readiness_holdout_summary_20260901_phase2.json",
+    "artifact_sha256": "7d6f7815067cb7d4b356f7298a1b85f6f449ace91a7b1362ffad77ed46891286"
+  },
+  "pareto_rule": {
+    "implementation": "study/contracts_2026/campaign.py::decide_candidate",
+    "objectives": [
+      "minimize protected_validation_bpb",
+      "maximize stable decode_velocity_point_estimate",
+      "minimize peak_allocated_inference_memory_bytes"
+    ],
+    "speed_comparison": "conservative interval relation with 2% practical equivalence margin",
+    "unstable_inference": "dominated/invalid; retain raw repetitions and do not select a fast repetition"
+  },
+  "dataset_and_tokenizer": {
+    "aggregate_manifest_sha256": "1211827090aa7e669ec8bcd965ae1423dc90697f0e4928d0fce707cbc36c3f93",
+    "tokenizer_token_bytes_sha256": "23517e0590d6aa9389c3263fab1f6062b2810b7c398a7b380291857639ac8d98",
+    "tokenizer_pickle_sha256": "888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629",
+    "validation_shard": "data/shard_06542.parquet"
+  },
+  "a40_environment": {
+    "gpu": "NVIDIA A40",
+    "gpu_uuid": "GPU-621eb939-c1eb-fe73-f2e9-cbe3a0400f8f",
+    "driver": "580.159.04",
+    "cuda": "12.8",
+    "pytorch": "2.9.1+cu128",
+    "python": "3.10.18",
+    "kernel": "6.8.0-134-generic",
+    "repository": "/workspace/autopareto",
+    "runtime": "/workspace/autopareto/final_process_readiness_runtime_20260901_phase8"
+  },
+  "isolation_policy": {
+    "version": "autopareto_linux_landlock_seccomp_setpriv_v1",
+    "namespaces_required": false,
+    "landlock_abi": 4,
+    "candidate_uid": 2001,
+    "candidate_gid": 996,
+    "setpriv": "all capabilities dropped; no_new_privs set; UID/GID changed; bounding set cleared",
+    "filesystem": "deny-by-default Landlock; read-only approved runtime/data/tokenizer; unique per-attempt output write access",
+    "network": "Landlock TCP connect/bind restrictions plus seccomp denial of AF_INET/AF_INET6 socket creation; AF_UNIX retained for legitimate local runtime",
+    "environment": "sanitized allowlist; no SSH/API credentials; no inherited campaign/history paths",
+    "candidate_container": "provider outer Pod container; no nested Docker or namespace dependency"
+  },
+  "isolation_evidence": {
+    "adversarial_all_denials": true,
+    "adversarial_proof": "/workspace/autopareto/process_boundary_proof_20260901_v4/proof.json",
+    "adversarial_proof_sha256": "e90052efa6357763330953da190918838e84235c3c3486664a52c2126c75880b",
+    "denied": ["repository docs", "historical results DB", "historical candidates", "paper/audits", "other campaign", "SSH credentials", "protected writes", "TCP", "UDP", "setuid/setgid escalation", "child bypass"],
+    "legitimate_gpu_proof": "/workspace/autopareto/final_gpu_functional_proof_20260901/proof.json",
+    "legitimate_gpu_proof_sha256": "4f58d5b889ac6a84d216628efa84fa4beff5bf78d3c71a0c473e9194effded4a",
+    "legitimate_gpu_result": {"uid": 2001, "gid": 996, "gpu": "NVIDIA A40", "tokens": 8, "checkpoint_sha256": "53c4efbce7198c7054064ea81289d3077cb200d5f89691de4a6f0eb3de8380bb"}
+  },
+  "resource_accounting_code_hashes": {
+    "study/contracts_2026/bridge.py": "8dd2506f05ff44a14a7ed60af3d478ccb16cb66430431dc02cbe0fbd443594a8",
+    "study/contracts_2026/candidate_sandbox.py": "80d9345e60e43da33dba10fdbe9536fd8ead450497fc485b5d23cc59217a256b",
+    "study/contracts_2026/candidate_worker.py": "1a529c53ac15cd4245d66ec2bad5da303fb0508be0eca834e8b3b5d6c3707511",
+    "study/contracts_2026/train_launcher.py": "1e7e62c633a89c21874df0ee55e793defdd1014c7f20dcd67af3d8d19796c13e",
+    "study/contracts_2026/remote_runner.py": "0f762bb522d9124c4e393db6cb51b1b4941e85d73a8e26ec3f45b89c1a8ed96c",
+    "study/contracts_2026/inference_benchmark.py": "cc10b0ce321bb11d3d464f67f42a851cd7fbec1d69a10ad2e7228ea7e97d79e9",
+    "study/contracts_2026/benchmark_policy.py": "712701d714a5a7bda2b04c6bcc48bfc1459c0df772cb25b94148b1980b27e02e",
+    "study/contracts_2026/correctness_policy.py": "5a9a5796499562f7d8a2cc1dfe28e3185204c99a9478ae2c999d50e82ce80b32",
+    "study/contracts_2026/protected_runtime.py": "44d5f509e1af8d9a13f209296bef7173f58ef0b811c03a9d659aed0f54126eb2",
+    "study/contracts_2026/batching.py": "a5d80c8f28c0f35f781434fd1118c86dabc51b77d595bcdd1be05a34aee013e6",
+    "protected/phase1_runtime.py": "527c1093867ee36d8021cf0156b3766aff9c8c3b97a6f97d6ed532a90cae94fd",
+    "protected/inference_adapter.py": "55034cc2a544ffd0dbb93be4cd1694679936b4be61fe64c6c7c9ca2743c79d5c",
+    "event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac"
+  },
+  "runtime_deployment": {
+    "source_file_count": 87,
+    "source_aggregate_sha256": "62d7e9f830cf4a184931b9bff917611b2188dceb0a26f3064228b5f098d9b974",
+    "archive_sha256": "802a508c512ee3e0399dac3a98e66f7cdb074b41335e4959fec2591b5677a6b5",
+    "byte_for_byte_match": true
+  },
+  "e2e_nonstudy": {
+    "status": "completed",
+    "contract": "N",
+    "n_star": 524288,
+    "total_tokens": 524288,
+    "optimizer_updates": 1,
+    "validation_bpb": 3.1146433101403077,
+    "checkpoint_sha256": "46e92f5bfcaef83d5087795be52446a865d5149e6a1e5cca9c7515d91719dc12",
+    "checkpoint_round_trip_hash_match": true,
+    "training_process_terminated_before_fresh_inference": true,
+    "inference_status": "stable",
+    "decode_velocity_tokens_per_second": 145.9893411756488,
+    "decode_velocity_95pct_interval": [116.98652916708919, 182.18240927944174],
+    "pareto_decision": {"decision": "retained", "reason": "non-dominated within baseline plus this campaign"},
+    "campaign_local_feedback_returned": true,
+    "artifact": "study/contracts_2026/provenance/final_readiness_e2e_nonstudy_20260901.json",
+    "artifact_sha256": "eb67bb3ef0c8700fd574b0d5b30bac46f017ea41ca4476ee58c6397683d62fb8"
+  },
+  "warnings": [],
+  "do_not_launch": ["N_STAR calibration", "Pair A", "25x25 campaigns", "scientific training"]
+}

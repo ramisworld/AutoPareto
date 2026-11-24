@@ -1,0 +1,156 @@
+{
+  "models": [
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt23.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed6/deployed/final.deployed.pt",
+      "checkpoint_sha256": "730ec3c5d290c9d867bb7a7df13970e7664ab387f96bbafeb3c442c4f6b6b252",
+      "exit": 0,
+      "id": 1,
+      "method": "opus55_t_attempt23_tokens201M_seed6",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A23",
+      "seed": 6
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt24.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus24-tokens201326592-seed6/deployed/final.deployed.pt",
+      "checkpoint_sha256": "3c52445631ca796a4c1763e7eeb857608455257868a3be4a2979fc2ac0f0f345",
+      "exit": 0,
+      "id": 2,
+      "method": "opus55_t_attempt24_tokens201M_seed6",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A24",
+      "seed": 6
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt27.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed6/deployed/final.deployed.pt",
+      "checkpoint_sha256": "4de5aaf723d477a1527ecfc822d8f9affb66556890435ce3160012406f1e6a5e",
+      "exit": 0,
+      "id": 3,
+      "method": "opus55_t_attempt27_tokens201M_seed6",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A27",
+      "seed": 6
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt24.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus24-tokens201326592-seed7/deployed/final.deployed.pt",
+      "checkpoint_sha256": "98530245a2075c3f816753dde6525b912cbb55be906af2e1d8213231a9303027",
+      "exit": 0,
+      "id": 4,
+      "method": "opus55_t_attempt24_tokens201M_seed7",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A24",
+      "seed": 7
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt27.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed7/deployed/final.deployed.pt",
+      "checkpoint_sha256": "ada328465d4651df3c0ca6abb93a9aa92c92e0254b0f61c9de42747096148c5e",
+      "exit": 0,
+      "id": 5,
+      "method": "opus55_t_attempt27_tokens201M_seed7",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A27",
+      "seed": 7
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt23.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/deployed/final.deployed.pt",
+      "checkpoint_sha256": "f9a7cb864f51b137bb441cbd5694eddd9b74a5f4881c26a24c8aae4c01bbc2b1",
+      "exit": 0,
+      "id": 6,
+      "method": "opus55_t_attempt23_tokens201M_seed7",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A23",
+      "seed": 7
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt27.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/deployed/final.deployed.pt",
+      "checkpoint_sha256": "e53c13240871118c8bb8f6546169ade9c0abb1d67f8e1dd11c461de447551454",
+      "exit": 0,
+      "id": 7,
+      "method": "opus55_t_attempt27_tokens201M_seed8",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A27",
+      "seed": 8
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt23.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed8/deployed/final.deployed.pt",
+      "checkpoint_sha256": "d1524d608e5ea5d336f9c117b48846cfed0172b2709238f86f7159da78120178",
+      "exit": 0,
+      "id": 8,
+      "method": "opus55_t_attempt23_tokens201M_seed8",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A23",
+      "seed": 8
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt24.train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus24-tokens201326592-seed8/deployed/final.deployed.pt",
+      "checkpoint_sha256": "cdb1065bd46058cffff2b884fe782f613886944c1ca6f8e889958382d513c8bd",
+      "exit": 0,
+      "id": 9,
+      "method": "opus55_t_attempt24_tokens201M_seed8",
+      "note": "Phase 5A matched tokens 201.3M (Phase-1 harness, deployed checkpoint), OPUS-A24",
+      "seed": 8
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-apq-tokens201326592-seed6/final.pt",
+      "checkpoint_sha256": "f604859e1982163fd4d2c9b36e2954172bf45dd4124b4b56035d055a912b2ab6",
+      "exit": 0,
+      "id": 10,
+      "method": "autopareto_292_tokens201M_seed6",
+      "note": "E1 matched tokens 201.3M (e1-apq-tokens201326592-seed6), AP-Q",
+      "seed": 6
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-apq-tokens201326592-seed7/final.pt",
+      "checkpoint_sha256": "94f6611889cbb94330b7868c6b231f7a88b952a26f8d0d1cdbd3f73bb4a73494",
+      "exit": 0,
+      "id": 11,
+      "method": "autopareto_292_tokens201M_seed7",
+      "note": "E1 matched tokens 201.3M (e1-apq-tokens201326592-seed7), AP-Q",
+      "seed": 7
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/autopareto-seed0-20260731/0022-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-apq-tokens201326592-seed8/final.pt",
+      "checkpoint_sha256": "3202ecc0e822402382799c4ddfc8d83be9b737c7a9ef608da45c847085e2bfc5",
+      "exit": 0,
+      "id": 12,
+      "method": "autopareto_292_tokens201M_seed8",
+      "note": "E1 matched tokens 201.3M (e1-apq-tokens201326592-seed8), AP-Q",
+      "seed": 8
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens201326592-seed6/final.pt",
+      "checkpoint_sha256": "3aa6bd106237d3d62a346c638da2762423bce4f517aac1096d80a0c59ca77aed",
+      "exit": 0,
+      "id": 13,
+      "method": "autoresearch_compatible_tokens201M_seed6",
+      "note": "E1 matched tokens 201.3M (e1-arref-tokens201326592-seed6), AR-ref",
+      "seed": 6
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens201326592-seed7/final.pt",
+      "checkpoint_sha256": "762c150c1a4674260f8bca5348eaa3d2999c7a73003f93dee4f860783a891a59",
+      "exit": 0,
+      "id": 14,
+      "method": "autoresearch_compatible_tokens201M_seed7",
+      "note": "E1 matched tokens 201.3M (e1-arref-tokens201326592-seed7), AR-ref",
+      "seed": 7
+    },
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-arref-tokens201326592-seed8/final.pt",
+      "checkpoint_sha256": "59bc64f474dca8bde138bd150dd7b6b9acd2c417f1f51310f13eeacd426e27e4",
+      "exit": 0,
+      "id": 15,
+      "method": "autoresearch_compatible_tokens201M_seed8",
+      "note": "E1 matched tokens 201.3M (e1-arref-tokens201326592-seed8), AR-ref",
+      "seed": 8
+    }
+  ],
+  "plan_sha256": "a47f81b752d7953d05227bae77451f398ab0fca672f711f21a2fb3523c72993d",
+  "recorded_utc": "2026-11-08T08:29:34.335024+00:00"
+}

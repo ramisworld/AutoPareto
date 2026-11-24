@@ -1,0 +1,174 @@
+{
+ "document": "evaluation/PHASE6_AMENDMENT_A1.md",
+ "e1_comparability_gate": {
+  "e1_arref_time300s": {
+   "6": {
+    "heldout_bpb": 1.152324136476854,
+    "record_sha256": "cb32795b8a487315c58526ba99eac9dd1fe8156ea1b37a2b15e0cacd56450fb4",
+    "tokens": 88080384
+   },
+   "7": {
+    "heldout_bpb": 1.1606744611101432,
+    "record_sha256": "bc32c9c2d3857a85c225b95c0daf3847bd0361d00ed4970314726d5967104b29",
+    "tokens": 87949312
+   },
+   "8": {
+    "heldout_bpb": 1.1577907745593023,
+    "record_sha256": "2a8dd321975dde074e0352f64565aca3a17dabd947dd68caf71406cca6bca14a",
+    "tokens": 88080384
+   }
+  },
+  "heldout_bounds": [
+   1.149324136476854,
+   1.163674461110143
+  ],
+  "tokens_bounds": [
+   87069818,
+   88961187
+  ]
+ },
+ "fixed_time_order": [
+  "p6-arref-time300s-seed6-drift",
+  "p6-rs-time300s-seed6",
+  "p6-opus_a24-time300s-seed6",
+  "p6-opus_a23-time300s-seed6",
+  "p6-baseline-time300s-seed6",
+  "p6-tpe-time300s-seed6",
+  "p6-gpt_a25-time300s-seed6",
+  "p6-nsgaii-time300s-seed6",
+  "p6-cmaes-time300s-seed6",
+  "p6-gpt_a24-time300s-seed6",
+  "p6-opus_a27-time300s-seed6",
+  "p6-motpe-time300s-seed6",
+  "p6-opus_a24-time300s-seed7",
+  "p6-opus_a23-time300s-seed7",
+  "p6-baseline-time300s-seed7",
+  "p6-tpe-time300s-seed7",
+  "p6-gpt_a25-time300s-seed7",
+  "p6-nsgaii-time300s-seed7",
+  "p6-cmaes-time300s-seed7",
+  "p6-gpt_a24-time300s-seed7",
+  "p6-opus_a27-time300s-seed7",
+  "p6-motpe-time300s-seed7",
+  "p6-rs-time300s-seed7",
+  "p6-opus_a23-time300s-seed8",
+  "p6-baseline-time300s-seed8",
+  "p6-tpe-time300s-seed8",
+  "p6-gpt_a25-time300s-seed8",
+  "p6-nsgaii-time300s-seed8",
+  "p6-cmaes-time300s-seed8",
+  "p6-gpt_a24-time300s-seed8",
+  "p6-opus_a27-time300s-seed8",
+  "p6-motpe-time300s-seed8",
+  "p6-rs-time300s-seed8",
+  "p6-opus_a24-time300s-seed8"
+ ],
+ "format": "autopareto_phase6_amendment_a1_plan_v1",
+ "implementation_sha256": {
+  "evaluation/PHASE6_AMENDMENT_A1.md": "e33435bdc7c867ee76f25b4cae4e8a5c32d98ad67e0ff4ad3826ba5e4008b0dc",
+  "scripts/make_phase6_amendment_a1.py": "b7da14a77f2e4c61686dff466e78323a91ee81838fb8460613622fab400f281a",
+  "scripts/phase6_lmeval.py": "84a0b5923650d384f025e872275a9240f611eaf6e34f90abe7033c42a044f07f",
+  "scripts/run_phase6_p2.py": "563e4dddde9c6b6ecb2f953fff6f8a1fa17217a16994ac35780af1f4227793de"
+ },
+ "lmeval": {
+  "crosscheck_labels": [
+   "arref-seed6",
+   "gpt_a22-seed6",
+   "opus_a23-seed6"
+  ],
+  "crosscheck_metrics": {
+   "arc_easy": [
+    "arc_easy",
+    "accuracy"
+   ],
+   "blimp": [
+    "blimp",
+    "macro_accuracy"
+   ],
+   "lambada_openai": [
+    "lambada_openai",
+    "exact_match"
+   ],
+   "piqa": [
+    "piqa",
+    "accuracy"
+   ]
+  },
+  "crosscheck_tasks": [
+   "arc_easy",
+   "piqa",
+   "lambada_openai",
+   "blimp"
+  ],
+  "crosscheck_tolerance_points": 0.5,
+  "frozen_for_all_39": [
+   "arc_easy",
+   "piqa",
+   "lambada_openai",
+   "blimp",
+   "heldout_climbmix_bpb"
+  ],
+  "reused_candidates_file": "results/camera_ready_2026/phase5/A/downstream/downstream_models.json",
+  "reused_results_dir": "results/camera_ready_2026/phase5/A/downstream/runs",
+  "tasks": [
+   "arc_challenge",
+   "hellaswag",
+   "winogrande",
+   "openbookqa",
+   "sciq",
+   "boolq",
+   "wikitext"
+  ]
+ },
+ "local_storage": {
+  "data": {
+   "files": {
+    "data/shard_00000.parquet": "054ddbd98abf30d773c54de578fc9d579bafeb6c14e04e97bd36aa90e825bf9b",
+    "data/shard_00001.parquet": "d4cfe1de19f4fd976022a9047458655968bc5583582ec5fa714801ec2be2c93c",
+    "data/shard_00002.parquet": "5e80d7596d53be648d841ea5811082747281c39f6851e10dd90375a84bc509a7",
+    "data/shard_00003.parquet": "b349c85d4b993d98e2328833ecfd3734692e0395a592d89858bae34a4ba73c59",
+    "data/shard_00004.parquet": "87dae96fe1a6116c54c7873aadb81832178a36755991befd1b3b641c76244474",
+    "data/shard_00005.parquet": "3d9aebf138ef69cff2585a686d7f21585b7ffc0de4655f8e7723590418583bd6",
+    "data/shard_00006.parquet": "6a3f2afde8f1a39f9283ea9d9e9ee6431634d6881b63798176bf64efc3f33576",
+    "data/shard_00007.parquet": "731eea337d941e5b18a9a4e2bbe73a517dac45d91bb93ae2e69346c68c5f37f6",
+    "data/shard_00008.parquet": "e78379132451838afabed9034b5483a2f3bc5a422bed8b55b99f2bbb9a128755",
+    "data/shard_00009.parquet": "f22410fe8f13b6976a2860a8a82ee71e838f4ee9b605d61584aaa963f966e120",
+    "data/shard_06542.parquet": "769fe59d108dfd2cfa186c63173b83fbfb90a7adb3519519ba6eaa6ca9889f94",
+    "tokenizer/token_bytes.pt": "23517e0590d6aa9389c3263fab1f6062b2810b7c398a7b380291857639ac8d98",
+    "tokenizer/tokenizer.pkl": "888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629"
+   },
+   "manifest_source": "evaluation/camera_ready_e0_e1_plan_amendment1.json",
+   "path": "/root/autoresearch_cache_local",
+   "source": "/workspace/.cache/autoresearch"
+  },
+  "env_a": {
+   "freeze_sha256": "16ca2a746d86a67b15399db54c0b881ffdc4b4bb01dd712ac626552ac058ef53",
+   "path": "/opt/autopareto_envA",
+   "volume_env_python": "/workspace/autopareto-camera-ready/.venv/bin/python"
+  },
+  "lmeval": {
+   "dataset_cache": "/root/phase6_lmeval_cache",
+   "dataset_cache_files": 618,
+   "dataset_cache_manifest_sha256": "2cfcf99d3a56731454dee04a559e97940b82a0840d06925adee8d753d8d0e18d",
+   "freeze_file": "/root/envC_freeze.txt",
+   "freeze_sha256": "e8d159ecd5aa658dd51d71af928f1760615072f867a052d039cc59850a9a25eb",
+   "lm_eval_version": "0.4.13",
+   "python": "/opt/autopareto_lmeval/bin/python"
+  },
+  "run_root": "/root/phase6_local"
+ },
+ "parent_plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+ "pilot": {
+  "local_root": "/root/phase6_local_pilot",
+  "pilot_run_id": "a1pilot-opus_a27-time300s-seed6",
+  "run_id": "p6-opus_a27-time300s-seed6",
+  "volume_root": "results/camera_ready_2026/phase6_pilot/a1"
+ },
+ "prepared_utc": "2026-11-16T08:51:31.584733+00:00",
+ "timing_anomaly_gate": {
+  "first_step_excluded": 10,
+  "max_excess_seconds": 3.0,
+  "min_parsed_steps": 100,
+  "slow_factor": 2.0
+ }
+}

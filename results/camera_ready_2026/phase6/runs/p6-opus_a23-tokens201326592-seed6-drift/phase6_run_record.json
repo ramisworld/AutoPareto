@@ -1,0 +1,54 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "attempt": 1,
+  "attempt_wall_seconds": 667.7946131229401,
+  "cell": "tokens_201326592",
+  "display": "Opus A23",
+  "finished_utc": "2026-11-16T13:34:02.981030+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.91.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "2c13180ecb8cf36916a189b8bc14ac80aab68e4b32872df11d32a03b576674f0",
+    "deployed_final_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-opus_a23-tokens201326592-seed6-drift/deployed/final.deployed.pt",
+    "deployed_final_checkpoint_sha256": "a847b1a23e6f2d609d5f5d588a69420e68e1d0746e398b7e3d87b483bd314828",
+    "derived_source_sha256": "e39b7012f6e2eec5e00e8485805abac714958879ce5b528e3f22911f372d3907",
+    "end_to_end_training_seconds": 411.246046246,
+    "heldout_bpb": 1.1552533742377318,
+    "heldout_ci95": [
+      1.1490811199630562,
+      1.1620190909792751
+    ],
+    "milestone_validation_bpb": {
+      "100663296": 1.1925127360487442,
+      "150994944": 1.1356863019240095,
+      "201326592": 1.0960871217890082,
+      "50331648": 1.2515440104996003
+    },
+    "parameter_count": 26214675,
+    "peak_training_memory_mb": 10125.83154296875,
+    "steady_state_seconds": 304.412504995,
+    "steady_state_tokens_per_second": 656624.7993106693,
+    "tokens": 201326592,
+    "total_scientific_step_wall_seconds": 362.466377756,
+    "updates": 1536,
+    "validation_bpb": 1.0960871217890082,
+    "validation_bpb_in_process": 1.0960791527650515
+  },
+  "order": 27,
+  "phase1_model_id": "opus55_t_attempt23",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "opus_a23",
+  "role": "drift_control",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-opus_a23-tokens201326592-seed6-drift",
+  "run_id": "p6-opus_a23-tokens201326592-seed6-drift",
+  "seed": 6,
+  "source_sha256": "5035e4d4c805b2382f7610c988e12eb53daa142366f4cda678bb17c2fd93ac79",
+  "stage": "train",
+  "status": "completed"
+}

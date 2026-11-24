@@ -1,0 +1,52 @@
+{
+  "attempt": 1,
+  "attempt_wall_seconds": 621.9510607719421,
+  "cell": "tokens_201326592",
+  "contract": "fixed_tokens",
+  "finished_utc": "2026-11-08T07:06:06.100434+00:00",
+  "format": "autopareto_phase5a_run_record_v1",
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "332022ba80a9213a23513f36541e937f96cec9b127c705d33fa107f066666db8",
+    "deployed_final_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed7/deployed/final.deployed.pt",
+    "deployed_final_checkpoint_sha256": "ada328465d4651df3c0ca6abb93a9aa92c92e0254b0f61c9de42747096148c5e",
+    "derived_source_sha256": "c8983c793491726a40df5720eb250f501c6a19ecb088165b59a39aaa0abfba6c",
+    "end_to_end_training_seconds": 393.96538557,
+    "heldout_bpb": 1.1593559101125854,
+    "heldout_ci95": [
+      1.1530194185308926,
+      1.1661189844175814
+    ],
+    "milestone_validation_bpb": {
+      "100663296": 1.1913039725995997,
+      "150994944": 1.1349442194483788,
+      "201326592": 1.0951178923119977,
+      "50331648": 1.2494830987545653
+    },
+    "parameter_count": 26214675,
+    "peak_training_memory_mb": 10125.87841796875,
+    "steady_state_seconds": 303.430325866,
+    "steady_state_tokens_per_second": 658750.2400411769,
+    "tokens": 201326592,
+    "total_scientific_step_wall_seconds": 352.464970917,
+    "updates": 1536,
+    "validation_bpb": 1.0951178923119977,
+    "validation_bpb_in_process": 1.0951061948966376
+  },
+  "order": 6,
+  "phase1_model_id": "opus55_t_attempt27",
+  "plan_sha256": "a47f81b752d7953d05227bae77451f398ab0fca672f711f21a2fb3523c72993d",
+  "recipe": "OPUS-A27",
+  "role": "treatment",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed7",
+  "run_id": "p5a-opus27-tokens201326592-seed7",
+  "seed": 7,
+  "source_sha256": "83310e48b1d117832ce58de84df571a3c01121ef852f447fc707be11427c2dc3",
+  "stage": "P5A",
+  "status": "completed",
+  "synthetic": false,
+  "token_budget": 201326592
+}

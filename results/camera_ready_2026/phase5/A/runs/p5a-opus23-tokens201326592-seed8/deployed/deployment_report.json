@@ -1,0 +1,37 @@
+{
+  "deployed_manifest": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed8/deployed/manifest.json",
+  "deployed_manifest_sha256": "e31042af91f144c8e540592041fed46f2450c09a8cd9586d80b59aceece61240",
+  "failures": [],
+  "format": "autopareto_phase5a_deployment_report_v1",
+  "gates": [
+    {
+      "deployed_checkpoint_reloads_bit_exact_through_protected_loader": true,
+      "protected_loader_on_raw_training_checkpoint_equals_deployed": true,
+      "raw_vs_deployed_differences": [],
+      "token_count": 50331648,
+      "training_checkpoint_loads_bit_exact_into_training_storage": true
+    },
+    {
+      "deployed_checkpoint_reloads_bit_exact_through_protected_loader": true,
+      "protected_loader_on_raw_training_checkpoint_equals_deployed": true,
+      "raw_vs_deployed_differences": [],
+      "token_count": 100663296,
+      "training_checkpoint_loads_bit_exact_into_training_storage": true
+    },
+    {
+      "deployed_checkpoint_reloads_bit_exact_through_protected_loader": true,
+      "protected_loader_on_raw_training_checkpoint_equals_deployed": true,
+      "raw_vs_deployed_differences": [],
+      "token_count": 150994944,
+      "training_checkpoint_loads_bit_exact_into_training_storage": true
+    },
+    {
+      "deployed_checkpoint_reloads_bit_exact_through_protected_loader": true,
+      "protected_loader_on_raw_training_checkpoint_equals_deployed": true,
+      "raw_vs_deployed_differences": [],
+      "token_count": 201326592,
+      "training_checkpoint_loads_bit_exact_into_training_storage": true
+    }
+  ],
+  "matrices_only_recipe": true
+}

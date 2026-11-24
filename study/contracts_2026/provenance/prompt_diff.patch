@@ -1,0 +1,39 @@
+--- program_fixed_time.md
++++ program_fixed_tokens.md
+@@ -6,28 +6,21 @@
+ 
+ ## Resource contract
+ 
+-This campaign uses CONTRACT T. For every candidate, the protected resource contract
+-is a 300.000-second measured training budget. The trusted parent starts
+-`time.perf_counter_ns()` at the beginning of the fresh scientific process, and
+-after each complete optimizer update stops on the first completed update whose
+-elapsed protected time is at or beyond 300.000 seconds. No partial update is
+-permitted; the completed-update raw overrun must remain within the registered
+-15-second limit. Normalize the training schedule with the measured progress
+-variable:
++This campaign uses CONTRACT N. Before attempt 1, the orchestration layer supplies
++one immutable positive integer `N_STAR`. Every candidate must process exactly
++`N_STAR` counted training tokens with no partial optimizer step. Normalize the
++training schedule with the counted-token progress variable:
+ 
+-    progress = min(measured_training_time / 300, 1)
++    progress = min(total_tokens / N_STAR, 1)
+ 
+-The measured training clock begins immediately before the first scientific
+-forward and ends immediately after that terminal completed optimizer update.
+-Final validation, checkpoint serialization, protected inference, and measurement
+-of inference memory are outside this resource contract. The authoritative value
+-is parent-owned synchronized timing, not a candidate-exported elapsed-time field.
++Final validation, checkpoint serialization, protected inference, and measurement of
++inference memory are outside this resource contract.
+ 
+ Before the scientific process starts, the trusted launcher may run exactly eleven
+ disposable compilation/cache-warm-up updates in a separate process. Its model,
+ optimizer, RNG/CUDA-RNG state, dataloader position, counters, and outputs are
+ discarded. The scientific process is fresh, and no warm-up update or token is
+-part of the Contract-T result.
++part of the Contract-N result.
+ 
+ ## Scientific and operational rules
+ 

@@ -1,0 +1,34 @@
+#!/usr/bin/expect -f
+
+# Read-only retrieval helper for non-historical A40 preflight evidence.
+if {$argc != 2} {
+    puts stderr "usage: preflight_retrieve_file.exp REMOTE_PATH LOCAL_PATH"
+    exit 2
+}
+set remote [lindex $argv 0]
+set local [lindex $argv 1]
+set timeout 300
+log_user 0
+match_max 10000000
+
+spawn ssh -tt -o BatchMode=yes -o ConnectTimeout=20 -o StrictHostKeyChecking=no \
+    -i /Users/Rami/.ssh/id_ed25519 \
+    <pod-id>-<suffix>@ssh.runpod.io
+expect -re {# $}
+send -- "stty -echo -icanon min 1 time 0; printf __AUTOPARETO_RETRIEVE_BEGIN__; python3 -c 'import base64; print(base64.b64encode(open(\"$remote\",\"rb\").read()).decode())'; printf __AUTOPARETO_RETRIEVE_DONE__\r"
+expect -re {__AUTOPARETO_RETRIEVE_BEGIN__}
+expect -re {__AUTOPARETO_RETRIEVE_DONE__}
+set encoded $expect_out(buffer)
+regsub {__AUTOPARETO_RETRIEVE_DONE__.*$} $encoded {} encoded
+set encoded [string map {\r {} \n {}} $encoded]
+set encoded_path "${local}.base64.tmp"
+set encoded_handle [open $encoded_path wb]
+fconfigure $encoded_handle -translation binary -encoding binary
+puts -nonewline $encoded_handle $encoded
+close $encoded_handle
+exec base64 -D -i $encoded_path -o $local
+file delete -force $encoded_path
+set decoded_length [file size $local]
+send -- "exit\r"
+expect eof
+puts [format "%s %d" $local $decoded_length]

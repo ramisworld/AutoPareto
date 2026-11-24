@@ -1,0 +1,18 @@
+{
+  "pdf_sha256": "cb0054fbbf16a9b3a1697830b161927090297574d68805cf241a0987950f2ba4",
+  "reviewed_at_utc": "2026-09-06T10:22:00+00:00",
+  "reviewer": "AI assistant; human verification pending",
+  "render_dpi": 125,
+  "pages": [
+    {"page": 1, "render": "/tmp/ap_final2.ZxSAJh/page-1.png", "render_sha256": "c734161e0ff26b6317904d253523c7d5102d268c3d52f2193954ee1ea8ef7107", "finding": "Title, focused abstract, and introduction are readable; the resource-contract question is explicit."},
+    {"page": 2, "render": "/tmp/ap_final2.ZxSAJh/page-2.png", "render_sha256": "4244f64353893e9135f94db9a42fd48e7f1026657a17033221de5020bf532014", "finding": "Comparator table and discovery narrative fit cleanly with no collisions."},
+    {"page": 3, "render": "/tmp/ap_final2.ZxSAJh/page-3.png", "render_sha256": "16ddd71fc2b24fded8860112272f73846e3429185fee6faf5f421baa5e648c40", "finding": "All 25 lineage attempts, parent arrows, edits, BPB values, and decode rates are legible; the redundant title collision is removed."},
+    {"page": 4, "render": "/tmp/ap_final2.ZxSAJh/page-4.png", "render_sha256": "0d4c5fa3218a72472636e85dbb0b43ce04519f9a582e4521f96a79e3102fcdb6", "finding": "Equal-token table, Pareto panels, downstream table, BLiMP account, and primary result fit Part 1."},
+    {"page": 5, "render": "/tmp/ap_final2.ZxSAJh/page-5.png", "render_sha256": "5a997b5235c26633f98224b877c7c13bdca3c0dd50c053e28bdcf0c0ea732703", "finding": "The protected research loop is clean at page scale; boxes, trust boundary, arrows, caption, and public command are readable."},
+    {"page": 6, "render": "/tmp/ap_final2.ZxSAJh/page-6.png", "render_sha256": "bdc358fe4fb947cb944d99ab5c713616223d018ea02419ed223db862ffa0453d", "finding": "Budget controls and all trajectory panels are readable, including poor fixed-time outcomes."},
+    {"page": 7, "render": "/tmp/ap_final2.ZxSAJh/page-7.png", "render_sha256": "29f9fdf508c15a897b90430d2a9d63e6958d16b85f8d6489ad52949d74acac2a", "finding": "Timing, verification, ablation, related-work, and limitation sections fit without orphan headings."},
+    {"page": 8, "render": "/tmp/ap_final2.ZxSAJh/page-8.png", "render_sha256": "3fc4d60272680f4b5b48dd4ead93cfa37b805f1935952d11fb3ae3e10bbc29bd", "finding": "Part 3 fits one page and both human accountability boxes remain visibly unchecked."},
+    {"page": 9, "render": "/tmp/ap_final2.ZxSAJh/page-9.png", "render_sha256": "f61b1bdaed7be02b12bfaac3ed86ff62175ceedacb8693e3a54fe81854f5a57a", "finding": "References are legible and links remain within margins."}
+  ],
+  "passed": true
+}

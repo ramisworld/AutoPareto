@@ -1,0 +1,157 @@
+\documentclass{article}
+\usepackage[dblblindworkshop]{neurips_2026}
+\workshoptitle{Workshop for Autonomous ML Research}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{hyperref,url,booktabs,amsfonts,amsmath,microtype,xcolor,graphicx,float}
+\setlength{\textfloatsep}{8pt plus 2pt minus 2pt}
+\setlength{\intextsep}{8pt plus 2pt minus 2pt}
+\setlength{\floatsep}{6pt plus 2pt minus 2pt}
+\renewcommand{\topfraction}{.92}
+\renewcommand{\bottomfraction}{.7}
+\renewcommand{\textfraction}{.06}
+\renewcommand{\floatpagefraction}{.85}
+\hypersetup{pdfauthor={},pdftitle={AutoPareto: Auditing Fixed-Time Autonomous Transformer Search with Matched-Exposure Verification},colorlinks=true,citecolor=blue,linkcolor=blue,urlcolor=blue}
+\input{generated/results_macros.tex}
+\title{AutoPareto: Auditing Fixed-Time Autonomous Transformer Search\\with Matched-Exposure Verification}
+\author{Anonymous Author(s)}
+\begin{document}
+\maketitle
+\begin{abstract}
+\input{generated/abstract.tex}
+\end{abstract}
+
+\noindent\textbf{Keywords:} autonomous ML research; neural architecture search; Transformer efficiency; multi-objective optimization; reproducibility
+
+\section{Autonomous research result}\label{partone}
+
+\subsection{Hypothesis}
+The resource contract determines which improvements an autonomous researcher is rewarded for discovering. Under a fixed wall-clock budget a faster training program completes more optimizer updates and processes more tokens before it is scored, so a discovery-stage score can reflect both the program edit and the resources the contract allocates to that edit; a fixed-token contract removes that pathway but lets update count, compute, and elapsed time vary instead. The problem sharpens when the agent may change architecture, batching, and optimization in one patch, because the score is then a single number over an entangled set of interventions.
+\textbf{H1 (retrospective audit hypothesis).} Because fixed-time training permits candidate-dependent token exposure, a discovery-stage BPB advantage need not persist when frozen recipes are retrained at matched exposure. H1 is supported if the selected AutoPareto recipe loses its discovery-stage advantage over the selected quality-only AutoResearch recipe after matched-token retraining on new seeds, and contradicted if it persists. H1 was formulated after the historical campaigns had been inspected, so it is a retrospective audit hypothesis rather than a preregistered prediction of those campaigns.
+
+\textbf{H2 (exploratory prospective hypothesis).} Changing the contract from fixed time to fixed counted tokens may redirect the sequence of hypotheses and source edits the agent pursues, because efficiency changes training exposure under fixed time but not under fixed tokens. H2 was registered in nondirectional form before the paired campaigns were launched. The completed prefix reported here contains four attempts per arm and is descriptive only.
+
+\subsection{Method}
+\paragraph{Task and discovery contract.} The registered baseline is an eight-layer, 512-wide decoder-only Transformer with 50,332,176 parameters, trained on ClimbMix-400B-shuffle with a project-specific 8,192-entry vocabulary and 2,048-token packed sequences on one NVIDIA A40. Historical AutoPareto comprises three 25-attempt campaigns (seeds 0, 1, 42). Each attempt hands the agent a parent program and prior campaign results, permits one edit to \texttt{train.py}, then runs protected training under a 300.000-second measured budget that stops after the first completed update at or beyond the boundary. The 300-second allowance is an immutable protected constant chosen so that a 25-attempt campaign fits inside a single-GPU session, and this fixed-time, single-file setting follows the autoresearch training loop the campaigns were built on \citep{autoresearch}.
+
+\paragraph{Objectives and measurement.} Protected evaluators the agent cannot edit return three quantities. Validation BPB is the discovery quality signal; bits per byte is the cross-entropy of the text per byte of the original UTF-8 stream, which keeps quality comparable across candidates whose tokenization cost per sequence differs. Cached-decode throughput is the deployment-relevant serving mode for autoregressive generation and the quantity that depth and KV-cache edits change; the probe is a fixed protected prompt, BF16, batch one, 256 input and 256 generated tokens, of which the 255 single-token cached steps after prefill are timed. Allocated memory is \texttt{max\_memory\_allocated()} in MiB over one measured repetition, with peak statistics reset at its start and the checkpoint already resident, so weights are included and CUDA reserved memory is excluded; incremental KV-cache memory is the validated cache size after the final decode step minus the size after prefill. Both memory quantities are exactly constant across all 30 repetitions and all three confirmation seeds, so their sample SD is zero and only throughput varies. Appendix~\ref{app:repro} gives the full protocol, dataset, tokenizer, and per-recipe source hashes.
+
+\paragraph{Comparators and related work.} We audit the AutoPareto archive against a quality-only AutoResearch campaign on the same model family and task, and against fixed-vector random search, TPE, MOTPE, NSGA-II, and CMA-ES archives run under the same 300-second contract. The AutoResearch campaigns differ from AutoPareto in prompt text, commits, wrappers, and returned feedback, so the objective string was not the only operational difference. Primer searches compositions of low-level operations and finds squared ReLU and depthwise convolutions around attention projections \citep{primer}, stronger operator-level novelty than our numerical edits; squared ReLU was already in our baseline, so AutoPareto did not discover it. Architecture search over primitive grammars and multi-objective estimators \citep{einspace,mote}, LLM-driven multi-objective architecture generation for constrained devices \citep{monaq}, resource allocation across configurations in a fixed space \citep{hyperband,bohb}, and agentic research systems \citep{autodiscovery,mlestar,airesearcher,mledojo} are all established, so we make no first-of-kind claim. Our contribution is an objective-conditioned source-editing loop with a retained lineage, followed by matched-exposure verification.
+
+Across those archives AutoPareto attains the lowest archived validation BPB, 1.0933, ahead of AutoResearch (1.0950), TPE (1.0977), MOTPE (1.0981), random search (1.1038), NSGA-II (1.1077), and CMA-ES (1.1083). These are in-search diagnostics under fixed time, not held-out results; the archives differ in space, budget, seed, and failure history, so we do not use them to infer search-policy superiority. Ferreira et al.\ likewise find classical HPO a strong baseline here \citep{ferreira}.
+
+\paragraph{Matched-exposure confirmation.} We froze seven recipes as exact source files and retrained each at seeds 3, 4, and 5 for exactly 201,326,592 counted tokens. That budget is $192\times2^{20}$ tokens, divisible by both batch settings in the panel (1{,}536 updates of 131{,}072 tokens, or 384 of 524{,}288), so every recipe stops on an exact optimizer update; seeds 3 to 5 are disjoint from every discovery seed (0, 1, 42) and from the earlier confirmation seeds (0, 1, 2). The panel is the registered baseline, the best completed attempt of the quality-only AutoResearch archive, the TPE and MOTPE quality representatives, and three AutoPareto recipes selected before confirmation under the archive's primary roles: best quality, largest exclusive hypervolume contribution, and fastest within one percent of best quality. Held-out BPB uses a separate fixed shard prefix and is distinct from discovery validation BPB; decode speed is the per-run median of 30 stabilized repetitions averaged over seeds; training seconds are a steady-state estimate from timed updates after the first eleven, not end-to-end wall time. The frozen downstream suite scores zero-shot likelihood on ARC-Easy test, PIQA validation, LAMBADA test, and BLiMP (67,000 minimal pairs), and the agent never saw it during search.
+
+\paragraph{Identifiers.} A22 is attempt 22 of the seed-0 AutoPareto campaign and is global archive experiment 134. AP292 denotes that attempt's frozen source recipe as retrained under the confirmation protocol; the numeral is inherited from archive row 292, an earlier exact-source confirmation of experiment 134, so AP292 labels a configuration, not a separately discovered architecture. AP294 and AP299 label the frozen recipes of A24 (experiment 136) and A25 (experiment 137).
+
+\subsection{Evidence}
+
+\begin{figure}[t]
+\centering\includegraphics[width=.76\linewidth]{figures/autopareto_lineage.pdf}
+\caption{Autonomous discovery lineage for the verified AP292 recipe: all 25 seed-0 attempts against their measured discovery objectives, arrows encoding recorded parentage. The highlighted path terminates at A22 (experiment 134), the frozen recipe later retrained as AP292; the dashed A24 to A25 branch explores higher-throughput configurations and is not used for the headline. Open nodes are retained alternatives, gray nodes dominated, and the failed A17 run is preserved.}\label{fig:lineage}
+\end{figure}
+
+\paragraph{What the agent searched.} Across the 75 AutoPareto attempts the source-diff audit labels 32 edits as architectural, 21 as optimizer changes, 10 as optimization logic, eight as batching, and four as schedule changes. Figure~\ref{fig:lineage} shows the seed-0 ancestry of the confirmed recipe, baseline $\rightarrow$ A1 $\rightarrow$ A4 $\rightarrow$ A6 $\rightarrow$ A7 $\rightarrow$ A8 $\rightarrow$ A18 $\rightarrow$ A19 $\rightarrow$ A20 $\rightarrow$ A22. Aggressive depth reduction at A8 raised validation BPB from 1.0966 to 1.1573; restored width at A18 recovered it to 1.0957, and successive matrix, embedding, and output-head learning-rate edits reached 1.0933 at A22. The later A24 to A25 branch trades quality for 408.4 tokens/s in the discovery workload, which we do not carry into the headline because the workloads differ. The contribution is not the expected observation that shallower models decode faster: the lineage shows the confirmed recipe emerging from interacting depth, width, and optimization edits rather than a monotonic depth sweep.
+
+\begin{table}[t]
+\caption{Matched-exposure verification. Every recipe received exactly 201,326,592 counted training tokens on one A40; entries are means over $n=3$ training seeds (3, 4, 5). BPB is held-out (lower better), decode is cached-decode tokens/s at 256 input and 256 generated tokens (higher better), memory is peak allocated MiB (lower better), and the last column is a steady-state estimate from timed post-warm-up updates, not end-to-end runtime.}\label{tab:main}
+\centering\footnotesize\input{generated/main_results_table.tex}
+\end{table}
+
+\begin{figure}[t]
+\centering\includegraphics[width=.62\linewidth]{figures/pareto_front.pdf}
+\caption{Held-out quality against cached-decode throughput after matched-exposure retraining. Error bars are sample SD across the three seeds; the horizontal bars are narrower than the markers. Circles are model means that are nondominated in held-out BPB, decode speed, and allocated memory jointly; squares are dominated. Memory is deterministic for this workload and is given in Table~\ref{tab:main}. The panel verifies recipes, not search-policy superiority.}\label{fig:pareto}
+\end{figure}
+
+\paragraph{Matched-exposure outcome.} AP292 and the AutoResearch reference both complete 1,536 optimizer updates at total batch size 131,072, so they match on tokens, updates, and batch. Under matched-token retraining on new seeds and held-out data the discovery-stage ordering reverses: AutoResearch reaches held-out BPB \ARBPB{} against \APBPB{} for AP292, although AP292 held the better validation BPB during fixed-time discovery. The fixed-time ranking should therefore not be read as an exposure-controlled recipe-quality ranking, and H1 is supported here. The efficiency differences persist: Table~\ref{tab:main} and Figure~\ref{fig:pareto} show AP292 at \APSpeed{} tokens/s against \ARSpeed{} and \APKV{} against \ARKV{} MiB incremental KV-cache memory, an exact halving that tracks the four-layer against eight-layer cache.
+
+\paragraph{Downstream and budget checks.} Downstream results are mixed and are not used to claim task-level superiority: AP292 and AutoResearch are close on ARC-Easy (36.91 against 36.50 accuracy), PIQA (58.29 against 58.67), and LAMBADA (21.50 against 20.44 exact match), and separate on BLiMP (72.02 against 74.56, AP292 lower on \BLiMPLower{} of 67 configurations). Across the seven confirmed recipes BLiMP tracks held-out BPB ($r=\BLiMPHeldoutCorr$) more strongly than depth ($r=\BLiMPDepthCorr$), a descriptive pattern consistent with a broad likelihood gap rather than a BLiMP-specific defect. For H2 we report the first four completed attempts of each arm (\BudgetN{} in total) for transparency; the prefix is one adaptive trajectory per arm, not \BudgetN{} independent samples, and is not used to estimate a causal contract effect. Arm N holds exposure at 88,604,672 tokens, the largest multiple of the 524,288-token quantum not exceeding the median token count of three seed-3 baseline runs under contract T. In this fixed-token trajectory the first two agent edits increase capacity (50.33M to 85.85M to 135.27M parameters) before later attempts return to the N1 parent and halve the batch, while the fixed-time trajectory keeps the 50.33M-parameter architecture and changes batching and learning rate. At this freeze \BudgetParetoN{} of \BudgetN{} attempts are Pareto-eligible, so the prefix supports no frontier claim.
+
+\subsection{Primary Result}
+\input{generated/primary_result.tex}
+\label{partoneend}
+
+
+\clearpage
+\section{System Design and Meta-Analysis}\label{parttwo}
+% SOURCE NOTE FOR THE HUMAN AUTHOR (not rendered): the workshop expects Part 2 to be
+% human-written. paper/part2_human_finalization.md maps every statement below to its
+% artifact, lists unresolved attributions, and reproduces the current paragraph so the
+% section can be rewritten and verified quickly.
+
+\subsection{Agent and Harness}
+Humans define the task, the objective contract, the editable surface, the budget, the hardware, and the acceptance rules. The research agent is Codex CLI 0.153.0 running \texttt{gpt-5.6-sol} at high reasoning with a 600-second per-call timeout, invoked headlessly in a fresh ephemeral container for every attempt. Each invocation receives five staged files and may write only \texttt{train.py}; the protected evaluators, the controller, the dataset, and the tokenizer lie outside the editable surface and are hashed on every attempt. The two budget arms keep separate campaign histories that are never crossed, and their initial executable bytes match. The agent receives no paper draft, no audit, no historical archive outside its own arm, and no downstream benchmark result.
+
+\subsection{Tools}
+Training and all measurements run on one NVIDIA A40 (driver 570.211.01) under PyTorch 2.9.1+cu128 with CUDA 12.8, Python 3.12, and BF16 precision. Data is the ClimbMix-400B-shuffle corpus with a fixed dataset manifest and a hashed protected tokenizer. The trusted controller stages sources, validates source and parent SHA-256 hashes, dispatches to the A40 worker, runs training, checks the checkpoint, calls the protected BPB and deployment evaluators, and appends logs and lineage. The protected inference benchmark performs the correctness check, the stabilization generations, and the timed repetitions. No external service beyond the agent provider is available to the researcher.
+
+\subsection{Research Loop}
+Each iteration begins from the human-defined contract. The agent receives the current campaign context, records a hypothesis, and proposes a source patch. The controller then validates that patch, runs training and protected evaluation, appends an immutable record, and constructs the next arm-specific context. Figure~\ref{fig:loop} shows the loop and its trust boundary. Parents are selected within an arm from recorded lineage under the executed manifest, which makes quality-valid candidates eligible as parents even when their speed measurement is uncertain; speed-uncertain candidates are not Pareto-eligible. A candidate may fail technically, complete with poor quality, or complete with uncertain speed, and those states are preserved separately. The historical campaigns ran 25 attempts per seed across July and August 2026; the current paired campaigns are interleaved on the same A40 and were frozen at four completed attempts per arm.
+
+\begin{figure}[t]
+\centering\includegraphics[width=\linewidth]{figures/research_loop.pdf}
+\caption{Executed research loop and trust boundary. The human registers the scientific contract. The controller freezes and hashes inputs, the agent emits a hypothesis and a source patch, and protected code validates, trains, measures, and appends the outcome. The agent cannot reach the protected evaluators, and only an arm-specific campaign view returns to the next agent call.}\label{fig:loop}
+\end{figure}
+
+
+
+\begin{table}[t]
+\caption{Executed budget controls at the frozen prefix. The same staged code and agent configuration are used in both arms; the stopping rule and the schedule-progress variable differ by design. Hidden provider state is unavailable.}\label{tab:controls}
+\centering\small\input{generated/controls_table.tex}
+\end{table}
+
+\subsection{Human Interventions}
+Humans chose the three objectives, the 300-second historical contract, the matched-exposure confirmation design, the seven frozen recipes, the AutoResearch comparator, and the interpretation of the final result. Humans also repaired the inference path after Flash Attention and PyTorch SDPA produced workload-dependent timing, changed warm-up handling, amended parent eligibility to admit quality-valid but speed-uncertain candidates, and relaunched campaigns. The current controller runs eleven disposable warm-up updates in the same worker process, discards that model, reconstructs scientific state, and verifies matching initial-state hashes before measurement. This reduces contamination from CUDA allocation and compilation warm-up without counting warm-up updates as scientific training, and it does not satisfy the stronger separate-process wording in the registered program text; that gap is disclosed as an execution deviation. For historical interventions whose preserved artifacts do not identify whether the change originated from the human operator or from assisted debugging, we exclude the intervention from claims of autonomous contribution.
+
+\subsection{Verification}
+The audit is a separate pipeline that re-derives every reported number from frozen artifacts without launching experiments. It independently ingests raw training metrics, checkpoints, inference records, downstream databases, agent prompts, manifests, and candidate sources. For each of the 21 confirmation runs it verifies the recipe source hash against both the training record and the public manifest, the exact 201,326,592-token total, the update count against tokens per update, one timing row per update, the checkpoint-to-downstream pairing, the completeness of the nine-metric suite, and the evidence cutoff. It preserves crashes, corrupt registrations, incompatible protocols, and missing fields rather than dropping them, and it checks metric direction so that lower-is-better and higher-is-better quantities cannot be silently inverted. Dominance is computed on raw held-out BPB, decode throughput, and allocated memory with independent confirmation runs as the statistical units. Every table and vector figure in this paper is regenerated from that pipeline, and every reference was checked against the cited work. Selection of the confirmed recipes is recorded in campaign identifiers created on 2026-08-10 and executed from 2026-08-12, so selection preceded confirmation.
+
+\subsection{Significance of result}
+The methodological result is that matched-exposure verification removes the apparent quality win while leaving the deployment-efficiency result intact. One autonomous discovery therefore split cleanly into a part the contract paid for and a part the program edit actually earned, and only verification could tell them apart. That is why the resource contract belongs in the scientific specification of autonomous ML research: a benchmark that ranks agents under a throughput-coupled budget is partly ranking how fast their candidates train, and any quality improvement it reports should be rechecked under controlled exposure before it is believed.
+
+\subsection{Interpretability}
+Every attempt retains the agent's stated hypothesis, its intended change, the applied patch, the parent identifier, the source hash, the parent hash, the status, the raw metrics, the checkpoint hash, and the campaign view returned to the next call. Failed runs, unstable timing measurements, and scientifically poor but technically complete runs stay in the record with their failure text. A reader can therefore trace any headline number back to a source file, that file back to the edit that produced it, and that edit back to the prediction the agent recorded before making it.
+
+\subsection{Limitations}
+The study covers one GPU family and small models, and makes no scale-transfer, cross-GPU, or campaign-level energy claim. Matched-token verification compares complete recipes rather than isolated architectures; architecture and optimization changes remain bundled. The confirmation changes exposure, seed, and evaluation data at once, so the discovery-to-confirmation ranking reversal cannot be attributed to exposure alone. Confirmation seeds estimate recipe variability, not search-policy variability, and $n=3$ supports point estimates with sample SD rather than significance claims. Historical comparators differ in search space, budget, seed, and failure history, so the archive comparison is diagnostic and not a controlled tournament. The prospective budget study is one incomplete adaptive trajectory per arm with repaired protocols and no valid deployment frontier. Downstream results are descriptive and BLiMP analysis is aggregate. Proprietary agent behavior and provider-side configuration limit exact reproduction.
+\label{parttwoend}
+
+\clearpage
+\section{Broader Impact}\label{partthree}
+Resource contracts are part of the scientific specification of autonomous research. When an agent controls architecture and training together, a time allowance changes how much data a faster candidate sees, and a token allowance removes that pathway while letting update count and compute vary. Papers reporting autonomous results should publish the stopping rule, the schedule-progress variable, the warm-up boundary, the inference workload, and the feedback returned after each attempt, because each of these changes what the agent is rewarded for finding.
+
+Complete trajectories should retain crashes, unstable measurements, and scientifically poor but technically completed runs. Parent eligibility matters for the same reason: allowing a quality-valid but speed-uncertain candidate to seed a later experiment can keep a campaign moving through timing noise, but it changes the search policy and must be recorded.
+
+Efficiency may reduce the cost of an individual experiment or deployment, yet cheaper experiments can increase total experimentation. We report no energy benefit because the artifacts contain no campaign-wide energy accounting. Small-model benchmark results also do not establish safe or reliable use in consequential settings.
+
+Human accountability grows with experiment volume. Humans set objectives, repair infrastructure, decide which failures are scientific, and interpret evidence. An auditable record should keep the human question, the agent's prediction, the source edit, the measured outcome, and the retrospective explanation distinguishable from one another, which is the property this project tried to preserve end to end.
+\label{partthreeend}
+
+\clearpage
+\appendix
+\section{Reproducibility Statement}\label{app:repro}
+\paragraph{Code and artifacts.} All results are regenerated by an analysis pipeline that reads frozen artifacts and launches no experiments. The public artifact set contains the frozen recipe sources, the protocol manifests, the aggregate result summaries, and the figure data; checkpoints, raw logs, the private database, and the dataset cache are excluded. An anonymized artifact bundle is available to reviewers through the submission system rather than through a public repository link, so that the anonymous PDF carries no identifying URL.
+
+\paragraph{Model panel and sources.} The confirmation panel is defined by \texttt{evaluation/phase1\_public\_manifest.json}. Each recipe is identified by the SHA-256 of its exact \texttt{train.py}: baseline \texttt{428e22f1}, AutoResearch reference \texttt{b3a961ee}, TPE \texttt{8547b278}, MOTPE \texttt{62882a20}, AP292 \texttt{55a7fd8b}, AP299 \texttt{36e3ad91}, and AP294 \texttt{6d0d8d1d} (first four bytes shown; full digests are in the manifest and in every per-run training record). AP292 has 29,360,392 parameters at depth 4, width 512, 4 query and 4 key-value heads, and window pattern SSSL; the AutoResearch reference has 50,332,176 parameters at depth 8, width 512, 4 and 4 heads, and window pattern SSSS.
+
+\paragraph{Data.} Training and validation use \texttt{karpathy/climbmix-400b-shuffle} at dataset revision \texttt{915333b4f8b8684f39aeaafea600fea6f43fb703} with 2,048-token packed sequences and a hashed project tokenizer of 8,192 entries. Held-out BPB is evaluated on shard \texttt{shard\_06541.parquet} (SHA-256 recorded per run) over 2,560 segments and 5,242,880 evaluated tokens.
+
+\paragraph{Training protocol.} Confirmation seeds are 3, 4, and 5. Each run processes exactly 201,326,592 counted tokens, where counted tokens exclude the eleven disposable warm-up updates. AP292, AP299, AP294, AutoResearch, TPE, and MOTPE use total batch size 131,072 with device batch 64 and no gradient accumulation, giving 1,536 optimizer updates; the baseline uses total batch 524,288 with accumulation 4, giving 384 updates. Learning-rate progress is the fraction of the token budget consumed. Precision is BF16 on one NVIDIA A40 with PyTorch 2.9.1+cu128 and CUDA 12.8.
+
+\paragraph{Inference and memory protocol.} Protocol \texttt{autopareto\_inference\_stabilized\_v2}: BF16, batch one, a fixed protected prompt of 256 input tokens, 256 generated tokens, greedy decoding, adaptive stabilization generations followed by 30 measured repetitions in three passes, with a correctness check comparing the full-prefix and cached paths before measurement. Reported throughput is the per-run median over the 30 repetitions and then the mean over seeds. Peak memory is \texttt{torch.cuda.max\_memory\_allocated()} after \texttt{reset\_peak\_memory\_stats()} at the start of each repetition, with weights resident and reserved memory excluded. Incremental KV memory is the validated cache size after the final decode step minus the size after prefill.
+
+\paragraph{Agent and harness.} Codex CLI 0.153.0, model \texttt{gpt-5.6-sol}, reasoning high, 600-second call timeout, headless container execution, one writable file (\texttt{train.py}), per-arm campaign histories, and parent selection restricted to the same arm with quality-valid candidates eligible. The registered program text, the staged context files, the executed instruction diff, per-attempt hypotheses, patches, source hashes, parent hashes, and all preserved failures accompany the artifact bundle. The budget study uses training seed 3, contract T at 300.000 protected seconds, and contract N at 88,604,672 counted tokens with a 524,288-token quantum.
+
+\section{Disclosure Statement}
+This manuscript, its analysis code, and its figures were prepared with AI assistance. The research agent that produced the searched source edits is \texttt{gpt-5.6-sol} run through Codex CLI 0.153.0; the writing and analysis assistant is a separate general-purpose assistant. Historical and current records identify research-agent actions separately from human actions, and interventions whose authorship cannot be reconstructed from artifacts are excluded from claims of autonomous contribution. Authorship of this submission is human-only.
+
+% SOURCE NOTE FOR THE HUMAN AUTHOR (not rendered): the two statements below are the
+% workshop's required human-accountability declarations. Mark each box only after you
+% have personally performed the corresponding verification. Do not remove them.
+\noindent$\square$ I curated this work and verified every claim, figure, method detail, and reference.\\
+$\square$ I take full accountability for the submitted, human-written artifact.
+
+\clearpage
+\bibliographystyle{plainnat}
+\bibliography{references}
+\end{document}

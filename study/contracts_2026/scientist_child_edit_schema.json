@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "AutoPareto Scientist child-edit proposal",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "hypothesis",
+    "intended_change",
+    "change_category"
+  ],
+  "properties": {
+    "hypothesis": {"type": "string", "minLength": 1},
+    "intended_change": {"type": "string", "minLength": 1},
+    "change_category": {"type": "string", "minLength": 1}
+  }
+}

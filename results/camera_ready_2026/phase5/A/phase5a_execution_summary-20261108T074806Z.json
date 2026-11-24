@@ -1,0 +1,18 @@
+{
+  "completed": [
+    "p5a-arref-tokens201326592-seed6-control",
+    "p5a-opus23-tokens201326592-seed6",
+    "p5a-opus23-tokens201326592-seed7",
+    "p5a-opus23-tokens201326592-seed8",
+    "p5a-opus24-tokens201326592-seed6",
+    "p5a-opus24-tokens201326592-seed7",
+    "p5a-opus24-tokens201326592-seed8",
+    "p5a-opus27-tokens201326592-seed6",
+    "p5a-opus27-tokens201326592-seed7",
+    "p5a-opus27-tokens201326592-seed8"
+  ],
+  "format": "autopareto_phase5a_execution_summary_v1",
+  "plan_sha256": "a47f81b752d7953d05227bae77451f398ab0fca672f711f21a2fb3523c72993d",
+  "recorded_utc": "2026-11-08T07:48:06.867663+00:00",
+  "reported_failed": []
+}

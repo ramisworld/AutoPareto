@@ -1,0 +1,80 @@
+{
+  "schema": "autopareto_pair_registration_v1",
+  "pair_id": "PAIR_A",
+  "status": "prepared_not_launched",
+  "attempts_per_campaign": 25,
+  "search_seed": 3,
+  "seed_selection": "unused by registered historical AutoPareto campaigns; requires a fresh seed-3 baseline",
+  "starting_source": {
+    "commit": "5ea452c9d86a43ad4bebd507c5872f18249627ce",
+    "train_py_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+    "baseline_experiment_id": "pair-a-seed3-baseline-pending"
+  },
+  "agent": {
+    "model": "gpt-5.6-sol",
+    "reasoning_level": "high",
+    "same_client_configuration_required": true,
+    "provider_internals_not_claimed": true
+  },
+  "shared": {
+    "dataset_and_tokenizer": "registered protected baseline sources; hashes required in each attempt manifest",
+    "hardware_class": "NVIDIA A40",
+    "software_environment": "one frozen image/environment for both campaigns",
+    "allowed_total_batch_sizes": [32768, 65536, 131072, 262144, 524288],
+    "evaluator_paths": [
+      "study/contracts_2026/benchmark_policy.py",
+      "study/contracts_2026/inference_benchmark.py",
+      "study/contracts_2026/campaign.py"
+    },
+    "evaluator_hashes_manifest": "study/contracts_2026/provenance/frozen_file_hashes.json",
+    "downstream_visibility": "sealed_post_search"
+  },
+  "campaigns": {
+    "T": {
+      "campaign_id": "pair-a-fixed-time-seed3",
+      "program": "study/contracts_2026/programs/program_fixed_time.md",
+      "contract": {"id": "T", "training_seconds": 300.0, "n_star": null},
+      "history": "runs/pair-a-fixed-time-seed3/history.jsonl"
+    },
+    "N": {
+      "campaign_id": "pair-a-fixed-tokens-seed3",
+      "program": "study/contracts_2026/programs/program_fixed_tokens.md",
+      "contract": {"id": "N", "training_seconds": null, "n_star": null, "n_star_status": "pending_calibration"},
+      "history": "runs/pair-a-fixed-tokens-seed3/history.jsonl"
+    }
+  },
+  "calibration": {
+    "baseline_generation_command": [
+      "python",
+      "-m",
+      "study.contracts_2026.runner",
+      "baseline-plan",
+      "--source",
+      "study/contracts_2026/historical_reference/baseline_source/train.py",
+      "--seed",
+      "3",
+      "--output",
+      "runs/pair-a-seed3-baseline-training.json"
+    ],
+    "command": [
+      "python",
+      "-m",
+      "study.contracts_2026.runner",
+      "calibrate",
+      "--contract",
+      "T",
+      "--repetitions",
+      "3",
+      "--seed",
+      "3",
+      "--baseline-source",
+      "study/contracts_2026/historical_reference/baseline_source/train.py",
+      "--output",
+      "runs/calibration_seed3.json",
+      "--execute"
+    ],
+    "selection": "N_STAR = floor(median(successful baseline token counts) / 524288) * 524288",
+    "token_quantum": 524288,
+    "executed": false
+  }
+}

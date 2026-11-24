@@ -1,0 +1,82 @@
+{
+  "schema": "autopareto_operational_efficiency_amendment_v1",
+  "status": "SUPERSEDED_HISTORICAL_N_STAR_PROVENANCE",
+  "superseded_by": "runs/pair-a/provenance/pair_a_active_provenance_20260904.json",
+  "superseded_reason": "The historical 93,847,552 N_STAR value is inactive for Pair A; the active repaired study value is 88,604,672.",
+  "recorded_at_utc": "2026-09-02",
+  "parent_pre_study_manifest_sha256": "ab7c7923c324c30df8224d030648e62275509477bc4367799ca1a358ae52bb3e",
+  "n_star_freeze_v3_sha256": "7212564a3c7eb790f70cedcde50e93f2e36b35f6185609ab4ac98fe602bc4d4f",
+  "scope": "Operational orchestration efficiency only. No model, data, training, inference, candidate-isolation, or Pareto protocol changed.",
+  "profile_source": {
+    "kind": "completed_non_scientific_contract_t_smoke",
+    "result_path": "/workspace/autopareto/recovery_evidence_20260902/smokes_v3/T_final/result.json",
+    "result_sha256": "04d1fe593d846b39a04399f389e39cd6b4756e8a75efc81493a4b036a2e8a415",
+    "total_candidate_evaluation_seconds": 731.0168050117791,
+    "scientist_reasoning_seconds": null,
+    "scientist_reasoning_note": "The direct smoke did not invoke a Scientist; reasoning remains an external, model-dependent orchestration interval.",
+    "staging_seconds": 0.0,
+    "staging_note": "The direct smoke began at the protected launcher and did not use the remote bridge.",
+    "isolated_process_setup_seconds": 48.2224883977334,
+    "steps_0_to_10_compilation_and_warmup_seconds": 150.991441798,
+    "protected_contract_t_seconds": 300.440020577,
+    "post_training_validation_checkpoint_and_worker_persistence_seconds": 68.573123862,
+    "fresh_inference_seconds": 162.7999247368425,
+    "inference_components_seconds": {
+      "fixed_prefill_diagnostics": 0.29305420629680157,
+      "fixed_decode_warmup": 22.95961194112897,
+      "eight_fixed_measurement_blocks": 87.24067391268909,
+      "clean_memory_request": 0.6956201624125242,
+      "fresh_process_load_correctness_and_inference_persistence_remainder": 51.61096451431512
+    },
+    "checkpoint_bytes": 159405955,
+    "one_checkpoint_sha256_read_seconds": 0.608322
+  },
+  "cache_policy": {
+    "venv": "/workspace/autopareto/.venv",
+    "data_and_tokenizer_cache": "/workspace/.cache/autoresearch",
+    "torchinductor_cache": "persistent only inside the unique candidate output directory and shared by that candidate's training and required fresh inference process",
+    "triton_cache": "persistent only inside the unique candidate output directory and shared by that candidate's training and required fresh inference process",
+    "cross_candidate_cache_reuse": "forbidden: it would expose candidate-generated artifacts across isolation boundaries and could change first-update compilation behavior"
+  },
+  "implemented_changes": [
+    {
+      "path": "study/contracts_2026/bridge.py",
+      "sha256": "3c820d12fa99716b3e4070ead2e6913bf5d867b7eba508768918907b814eae05",
+      "change": "Bundle the already-registered two-file payload into one SSH transaction; validate both remote byte hashes before returning."
+    },
+    {
+      "path": "study/contracts_2026/train_launcher.py",
+      "sha256": "5348073e86c1248ec233533f524ccf9f4cb89808a7e99423c245cf02b41c794c",
+      "change": "Compute the trusted parent checkpoint hash once before fresh inference and compare the fresh-process hash against it; remove the redundant parent rehash after inference."
+    }
+  ],
+  "validation": {
+    "local_unit_tests": "bridge, campaign, and inference-integration tests passed; an unrelated pre-existing syntax error in test_protected_instrument.py prevented that module from importing locally",
+    "a40_unit_tests": "study.contracts_2026.tests.test_bridge: 5 passed",
+    "a40_transfer_only_smoke": {
+      "remote_dir": "/workspace/autopareto/study_remote_runs/operational-transfer-smoke-20260902",
+      "train_py_sha256": "1ed624457bdb6fffeb6aa407253cfff9edd94270485dc3bce0162385235404f4",
+      "metadata_sha256": "96cce73971649c6d4d130453e79b97806021b66923bf5a228350b71c9656287d",
+      "runner_invoked": false
+    }
+  },
+  "expected_wall_time": {
+    "direct_a40_candidate_execution_before_seconds": 731.0168050117791,
+    "direct_a40_candidate_execution_after_estimate_seconds": 730.4084830117791,
+    "a40_candidate_execution_savings_estimate_seconds": 0.608322,
+    "bridge_staging_savings": "two eliminated SSH process/handshake round trips per attempt; network-dependent and outside scientific measurement",
+    "twenty_five_attempt_a40_execution_before_hours": 5.076505590359577,
+    "twenty_five_attempt_a40_execution_after_hash_only_hours": 5.072281132026244,
+    "scientist_reasoning_and_transport_are_additional": true
+  },
+  "scientific_invariants": {
+    "contract_t_seconds": 300.0,
+    "n_star": 93847552,
+    "training_warmup_boundary": "Steps 0–10 are scientifically executed but excluded from the historical steady-state timing boundary. Steady-state timing begins at step index 11.",
+    "inference_protocol": "unchanged",
+    "candidate_isolation": "unchanged",
+    "prompts": "unchanged",
+    "pareto_objectives": "unchanged",
+    "seeds": "unchanged"
+  }
+}

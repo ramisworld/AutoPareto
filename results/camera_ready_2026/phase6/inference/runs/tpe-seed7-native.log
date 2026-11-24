@@ -1,0 +1,1 @@
+{"label": "tpe-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 194.84278334435277, "speedup": 1.3084163469333412, "peak_mib": 289.26416015625, "wall_s": 265.1}

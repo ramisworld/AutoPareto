@@ -1,0 +1,1 @@
+{"label": "cmaes-seed6-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 146.1462985628272, "speedup": 1.0886134682954542, "peak_mib": 209.64013671875, "wall_s": 272.4}

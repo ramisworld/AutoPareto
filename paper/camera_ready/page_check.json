@@ -1,0 +1,29 @@
+{
+  "pdf": "/Users/Rami/Documents/dev/autopareto-camera-ready/paper/main.pdf",
+  "total_pages": 27,
+  "parts": {
+    "Part 1": {
+      "first_page": 1,
+      "last_page": 4,
+      "pages": 4,
+      "limit": 4,
+      "within_limit": true
+    },
+    "Part 2": {
+      "first_page": 5,
+      "last_page": 8,
+      "pages": 4,
+      "limit": 4,
+      "within_limit": true
+    },
+    "Part 3": {
+      "first_page": 9,
+      "last_page": 9,
+      "pages": 1,
+      "limit": 1,
+      "within_limit": true
+    }
+  },
+  "all_within_limits": true,
+  "appendix_and_references_from_page": 10
+}

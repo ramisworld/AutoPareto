@@ -1,0 +1,84 @@
+{
+  "candidate_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/phase1_train.py",
+  "candidate_sha256": "cebbf11fbb284bdf9710db625ecc94a00d5e48b82b7577798f26fe2810a1d82f",
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 79702717,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/deployed/step-000384.deployed.pt",
+      "checkpoint_sha256": "36b3e3129b84b0dbee3941b2810b7ae983a9485ae58fea83fa11ec9a1eaa0e31",
+      "cumulative_steady_state_seconds": 73.534553709,
+      "evaluator": "prepare.evaluate_bpb",
+      "historical_steady_state_training_seconds": 73.53455370900004,
+      "optimizer_step": 384,
+      "token_count": 50331648,
+      "total_scientific_step_wall_seconds": 124.09328288,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/milestones/step-000384.pt",
+      "training_checkpoint_sha256": "ba718fcdd269a6ac44f016a95afd91574a2915b9364a427d7098f87a0f24a3d2",
+      "validation_bpb": 1.2478425900302772
+    },
+    {
+      "checkpoint_bytes": 79702717,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/deployed/step-000768.deployed.pt",
+      "checkpoint_sha256": "ddbf22de6ce330bc9b4de4e97e777f0308cfb57b1b5ba11ae1c9907b69bef98b",
+      "cumulative_steady_state_seconds": 149.953176595,
+      "evaluator": "prepare.evaluate_bpb",
+      "historical_steady_state_training_seconds": 149.9531765950001,
+      "optimizer_step": 768,
+      "token_count": 100663296,
+      "total_scientific_step_wall_seconds": 200.511905766,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/milestones/step-000768.pt",
+      "training_checkpoint_sha256": "cd21c848c9d1384f4efe7003a48d1f04c994b521b65a98d54f08cd2b0629bc46",
+      "validation_bpb": 1.1909464405240384
+    },
+    {
+      "checkpoint_bytes": 79702717,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/deployed/step-001152.deployed.pt",
+      "checkpoint_sha256": "5bb3018475c7715c5957955a639c37c6d7e15351bd9fbf45c000b97decf5a99a",
+      "cumulative_steady_state_seconds": 226.703681216,
+      "evaluator": "prepare.evaluate_bpb",
+      "historical_steady_state_training_seconds": 226.70368121600004,
+      "optimizer_step": 1152,
+      "token_count": 150994944,
+      "total_scientific_step_wall_seconds": 277.262410387,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/milestones/step-001152.pt",
+      "training_checkpoint_sha256": "aedfd91e5bdb32a259b40b04e66bfdbeb4906e9488a3a60ceb58919245aa7f2d",
+      "validation_bpb": 1.1347701825891543
+    },
+    {
+      "checkpoint_bytes": 79702513,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/deployed/final.deployed.pt",
+      "checkpoint_sha256": "f9a7cb864f51b137bb441cbd5694eddd9b74a5f4881c26a24c8aae4c01bbc2b1",
+      "cumulative_steady_state_seconds": 303.31892399,
+      "evaluator": "prepare.evaluate_bpb",
+      "historical_steady_state_training_seconds": 303.3189239900001,
+      "optimizer_step": 1536,
+      "token_count": 201326592,
+      "total_scientific_step_wall_seconds": 353.877653161,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/final.pt",
+      "training_checkpoint_sha256": "d360ba3a82688c7f918acffdfc6dd961dab670a1442ce843411cedffb144a72b",
+      "validation_bpb": 1.0949342591845823
+    }
+  ],
+  "format": "autopareto_phase1_checkpoint_evaluations_v1",
+  "heldout_bpb": {
+    "confidence_high": 1.167167549139076,
+    "confidence_low": 1.1539224601905211,
+    "dataset_config": "shard_06541.parquet",
+    "dataset_name": "karpathy/climbmix-400b-shuffle",
+    "dataset_revision": "915333b4f8b8684f39aeaafea600fea6f43fb703",
+    "higher_is_better": false,
+    "metric_name": "bits_per_byte",
+    "metric_standard_error": null,
+    "metric_value": 1.160371873188248,
+    "raw": {
+      "evaluated_tokens": 5242880,
+      "segments": 2560,
+      "shard_sha256": "51da1a9bc052dfd5a77988d6ca4d1cbe62b89eedb247b56850fc1b9b45e56c73"
+    },
+    "sample_count": 2560,
+    "split": "heldout",
+    "task_name": "heldout_climbmix_bpb"
+  },
+  "milestone_manifest": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus23-tokens201326592-seed7/deployed/manifest.json",
+  "milestone_manifest_sha256": "f64e976fe13e8a65530b9eee96165486816326e587f986f2aa9179d53132c996"
+}

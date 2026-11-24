@@ -1,0 +1,266 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "amendment": {
+    "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+    "name": "A2",
+    "plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b",
+    "storage": "A1"
+  },
+  "attempt": 3,
+  "attempt_wall_seconds": 713.9721314907074,
+  "cell": "tokens_201326592",
+  "copy": {
+    "manifest_sha256": "0bf14c07c37f3fa82ee802b58d18e749f54290833b0c00bc8f960e096d470585",
+    "verified_files": 15
+  },
+  "display": "MOTPE",
+  "e1_environment": {
+    "checks": [
+      {
+        "check": "plan_structure_and_sources",
+        "detail": "2 E0 + 24 E1 runs; both frozen sources hash-verified; batch 131072",
+        "status": "ok"
+      },
+      {
+        "check": "implementation_sha256",
+        "detail": "20 files match the pre-registered hashes",
+        "status": "ok"
+      },
+      {
+        "check": "phase1_source_identity",
+        "detail": "AP-Q == Phase-1 autopareto_292 source and AR-ref == Phase-1 autoresearch_compatible source (same path, same sha256)",
+        "status": "ok"
+      },
+      {
+        "check": "phase1_transform_reproduces_panel_derived_sources",
+        "detail": {
+          "phase1-autopareto_292-seed3": true,
+          "phase1-autoresearch_compatible-seed3": true
+        },
+        "status": "ok"
+      },
+      {
+        "check": "phase1_transform_accepts_every_budget_and_seed",
+        "detail": "19 fixed-token runs: transform accepted; 4 milestones reachable per budget",
+        "status": "ok"
+      },
+      {
+        "check": "historical_fixed_time_launcher",
+        "detail": "resolved from study/contracts_2026/historical_reference/protected/train_launcher.py",
+        "status": "ok"
+      },
+      {
+        "check": "fixed_time_protected_constants",
+        "detail": {
+          "benchmark_config.CUDA_ALLOCATOR": "backend:cudaMallocAsync",
+          "benchmark_config.TRAINING_BUDGET_SECONDS": 300,
+          "benchmark_config.TRAINING_MAX_OVERRUN_SECONDS": 15,
+          "benchmark_config.TRAINING_TIMEOUT_SECONDS": 900,
+          "prepare.EVAL_TOKENS": 20971520,
+          "prepare.MAX_SEQ_LEN": 2048,
+          "prepare.TIME_BUDGET": 300
+        },
+        "status": "ok"
+      },
+      {
+        "check": "fixed_time_isolate_inputs",
+        "detail": [
+          "prepare.py",
+          "benchmark_config.py",
+          "event_log.py",
+          "protected/inference_adapter.py"
+        ],
+        "status": "ok"
+      },
+      {
+        "check": "output_root",
+        "detail": {
+          "existing_run_dirs": {
+            "E0": [
+              "e0-apq-tokens201326592-seed3",
+              "e0-arref-time300s-seed0"
+            ],
+            "E1": [
+              "e1-apq-time300s-seed6",
+              "e1-apq-time300s-seed7",
+              "e1-apq-time300s-seed8",
+              "e1-apq-tokens088604672-seed6",
+              "e1-apq-tokens088604672-seed7",
+              "e1-apq-tokens088604672-seed8",
+              "e1-apq-tokens157286400-seed6",
+              "e1-apq-tokens157286400-seed7",
+              "e1-apq-tokens157286400-seed8",
+              "e1-apq-tokens201326592-seed6",
+              "e1-apq-tokens201326592-seed7",
+              "e1-apq-tokens201326592-seed8",
+              "e1-arref-time300s-seed6",
+              "e1-arref-time300s-seed7",
+              "e1-arref-time300s-seed8",
+              "e1-arref-tokens088604672-seed6",
+              "e1-arref-tokens088604672-seed7",
+              "e1-arref-tokens088604672-seed8",
+              "e1-arref-tokens157286400-seed6",
+              "e1-arref-tokens157286400-seed7",
+              "e1-arref-tokens157286400-seed8",
+              "e1-arref-tokens201326592-seed6",
+              "e1-arref-tokens201326592-seed7",
+              "e1-arref-tokens201326592-seed8"
+            ]
+          },
+          "exists": true,
+          "results_phase1_untouched": "output root is disjoint from results/phase1",
+          "root": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1"
+        },
+        "status": "ok"
+      },
+      {
+        "check": "e0_verdict",
+        "detail": "PASS",
+        "status": "info"
+      },
+      {
+        "check": "uv_lockfile",
+        "detail": "uv.lock matches the panel environment lock (262a4d55...)",
+        "status": "ok"
+      },
+      {
+        "check": "python_version",
+        "detail": "3.10.18 (panel: 3.10.18)",
+        "status": "ok"
+      },
+      {
+        "check": "torch_version",
+        "detail": "2.9.1+cu128",
+        "status": "ok"
+      },
+      {
+        "check": "cuda_gpu",
+        "detail": "NVIDIA A40",
+        "status": "ok"
+      },
+      {
+        "check": "gpu_idle",
+        "detail": "['NVIDIA A40, 595.112.07, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 46068 MiB']; no compute processes",
+        "status": "ok"
+      },
+      {
+        "check": "persistent_output_root",
+        "detail": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1 resolves under /workspace: True",
+        "status": "ok"
+      },
+      {
+        "check": "free_disk",
+        "detail": "245959.9 GB free on /workspace (need 25)",
+        "status": "ok"
+      },
+      {
+        "check": "data_cache",
+        "detail": "13 files match the data manifest",
+        "status": "ok"
+      },
+      {
+        "check": "heldout_shard_cache",
+        "detail": "/root/.cache/autopareto/downstream/915333b4f8b8684f39aeaafea600fea6f43fb703-shard_06541.parquet",
+        "status": "ok"
+      }
+    ],
+    "environment": {
+      "command_prefix": [
+        "uv",
+        "run",
+        "--locked",
+        "python"
+      ],
+      "executor_executable": "/opt/autopareto_envA/bin/python3",
+      "executor_python": "3.10.18",
+      "git": {
+        "available": false
+      },
+      "gpu_processes": [],
+      "kernel_cache": {
+        "hub": "/root/.cache/huggingface/hub",
+        "repos": {
+          "models--kernels-community--flash-attn3": {
+            "main": "e29f138fc363b396e5d2706c8a5f6fa7d36f41e0"
+          }
+        }
+      },
+      "nvidia_smi_gpus": [
+        "NVIDIA A40, 595.112.07, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 46068 MiB"
+      ],
+      "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+      "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+      "root": "/workspace/autopareto-camera-ready",
+      "training_interpreter": {
+        "argv": [
+          "uv",
+          "run",
+          "--locked",
+          "python"
+        ],
+        "cuda_available": true,
+        "errors": [],
+        "executable": "/opt/autopareto_envA/bin/python3",
+        "gpu_name": "NVIDIA A40",
+        "probed_with": "command_prefix",
+        "python": "3.10.18",
+        "torch": "2.9.1+cu128"
+      }
+    }
+  },
+  "executed_in": "/root/phase6_local_a2/runs/p6-motpe-tokens201326592-seed8-attempt3",
+  "finished_utc": "2026-11-17T03:35:38.799077+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.112.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "ddf3192bede239005ce6178eae350abe276881c6aae06022b903ec382ff581e9",
+    "derived_source_sha256": "54ee3571a7388933d6c1d6d48c4e3b64fec5225680328b399dd1fcbf977d0274",
+    "end_to_end_training_seconds": 471.622772696,
+    "heldout_bpb": 1.151182245724,
+    "heldout_ci95": [
+      1.1448372418243946,
+      1.1579270392244851
+    ],
+    "milestone_validation_bpb": {
+      "100663296": 1.1575392521731511,
+      "150994944": 1.111019978447456,
+      "201326592": 1.0789514391581496,
+      "50331648": 1.2364977451415395
+    },
+    "parameter_count": 26345772,
+    "peak_training_memory_mb": 13660.365234375,
+    "steady_state_seconds": 395.735872864,
+    "steady_state_tokens_per_second": 505096.4891138215,
+    "timing_anomaly": {
+      "excess_seconds": 0,
+      "max_step_seconds": 0.304,
+      "median_seconds": 0.26,
+      "parsed_steps": 1525,
+      "passed": true,
+      "reason": null,
+      "slow_steps": 0
+    },
+    "tokens": 201326592,
+    "total_scientific_step_wall_seconds": 428.238155031,
+    "updates": 1536,
+    "validation_bpb": 1.0789514391581496,
+    "validation_bpb_in_process": 1.078936496306399
+  },
+  "order": 22,
+  "phase1_model_id": "motpe_quality",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "motpe",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt3",
+  "run_id": "p6-motpe-tokens201326592-seed8",
+  "seed": 8,
+  "source_sha256": "62882a20b11c8c9b6f103f221dfc8621f43013a24c58c14da4ae5909e266e4b8",
+  "stage": "train",
+  "status": "completed"
+}

@@ -1,0 +1,62 @@
+{
+  "checkpoint": "/var/lib/autopareto/pair_a_claude_opus55_baseline_attempt2/nonstudy_tests/t_smoke_artifacts/result.checkpoint.pt",
+  "context": "/opt/autopareto_trusted/study/contracts_2026/historical_reference/baseline_source",
+  "format": "autopareto_phase5b_kernel_census_v1",
+  "gpu_kernels_per_token": 625.0,
+  "host_graph_launch_calls_per_token": 0.0,
+  "host_kernel_launch_calls_per_token": 618.0,
+  "profiled_decode_tokens": 32,
+  "profiler_host_self_time_us_per_token": 11899.176468750036,
+  "top_kernels": [
+    {
+      "count_per_token": 68.0,
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<c10::BFloat16, "
+    },
+    {
+      "count_per_token": 60.0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctor_add<c10::BFloat16>, std::array<char*, 3ul> >(i"
+    },
+    {
+      "count_per_token": 48.0,
+      "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, floa"
+    },
+    {
+      "count_per_token": 43.0,
+      "name": "void at::native::unrolled_elementwise_kernel<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}:"
+    },
+    {
+      "count_per_token": 42.0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::(anonymous namespace)::pow_tensor_scalar_kernel_impl<float"
+    },
+    {
+      "count_per_token": 42.0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambd"
+    },
+    {
+      "count_per_token": 34.0,
+      "name": "void at::native::reduce_kernel<512, 1, at::native::ReduceOp<float, at::native::MeanOps<float, float, float, float>, unsi"
+    },
+    {
+      "count_per_token": 34.0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::CUDAFunctorOnSelf_add<float>, std::array<char*, 2ul> >(int"
+    },
+    {
+      "count_per_token": 34.0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::rsqrt_kernel_cuda(at::TensorIteratorBase&)::{lambda()#2}::"
+    },
+    {
+      "count_per_token": 34.0,
+      "name": "void at::native::elementwise_kernel<128, 2, at::native::gpu_kernel_impl_nocast<at::native::BinaryFunctor<float, float, f"
+    },
+    {
+      "count_per_token": 32.0,
+      "name": "void at::native::(anonymous namespace)::CatArrayBatchedCopy_alignedK_contig<at::native::(anonymous namespace)::OpaqueTyp"
+    },
+    {
+      "count_per_token": 23.0,
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul> >(int, "
+    }
+  ],
+  "torch": "2.8.0+cu128",
+  "train_py": "/opt/autopareto_trusted/study/contracts_2026/historical_reference/baseline_source/train.py"
+}

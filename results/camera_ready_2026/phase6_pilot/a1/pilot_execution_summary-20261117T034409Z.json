@@ -1,0 +1,11 @@
+{
+  "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+  "completed": [
+    "a1pilot-opus_a27-time300s-seed6"
+  ],
+  "format": "autopareto_phase6_a1_execution_summary_v1",
+  "recorded_utc": "2026-11-17T03:51:25.257120+00:00",
+  "reported_failed": [],
+  "stage": "pilot",
+  "stopped_by_e1_comparability_gate": false
+}

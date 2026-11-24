@@ -1,0 +1,1 @@
+{"label": "baseline-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 146.8935173179285, "speedup": 1.002395001146446, "peak_mib": 337.26513671875, "wall_s": 274.2}

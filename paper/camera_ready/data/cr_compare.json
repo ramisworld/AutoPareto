@@ -1,0 +1,178 @@
+{
+  "rows": [
+    {
+      "name": "Baseline",
+      "kind": "base",
+      "params_M": 50.332176,
+      "seeds": "3-5",
+      "heldout": 1.1465895336014258,
+      "heldout_seeds": [
+        1.1431104635651022,
+        1.1519004871954783,
+        1.144757650043697
+      ],
+      "train_tok_s": 292413.3130129108,
+      "decode": 145.47045860264384,
+      "mem": 337.19482421875,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)",
+      "decode_lo": 134.84200213577554,
+      "decode_hi": 151.25475497288573,
+      "source_decode": "baseline windows bracketing each Opus recipe in the fresh-A40 re-measurement (raw repeat records); memory: registered baseline, same benchmark"
+    },
+    {
+      "name": "AR-ref",
+      "kind": "ar",
+      "params_M": 50.332176,
+      "seeds": "3-5",
+      "heldout": 1.099803115598075,
+      "heldout_seeds": [
+        1.100920623285839,
+        1.100928774575567,
+        1.0975599489328192
+      ],
+      "train_tok_s": 289194.5122653682,
+      "decode": null,
+      "mem": null,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)"
+    },
+    {
+      "name": "TPE",
+      "kind": "cls",
+      "params_M": 39.846284,
+      "seeds": "3-5",
+      "heldout": 1.1194015812978206,
+      "heldout_seeds": [
+        1.1145083448168578,
+        1.122378990918381,
+        1.1213174081582233
+      ],
+      "train_tok_s": 372464.0722580163,
+      "decode": null,
+      "mem": null,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)"
+    },
+    {
+      "name": "MOTPE",
+      "kind": "cls",
+      "params_M": 26.345772,
+      "seeds": "3-5",
+      "heldout": 1.1482527567273162,
+      "heldout_seeds": [
+        1.1508093608896621,
+        1.1491464505468767,
+        1.1448024587454098
+      ],
+      "train_tok_s": 505550.26709230314,
+      "decode": null,
+      "mem": null,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)"
+    },
+    {
+      "name": "GPT A22",
+      "kind": "gpt",
+      "params_M": 29.360392,
+      "seeds": "3-5",
+      "heldout": 1.141837121365997,
+      "heldout_seeds": [
+        1.1396157998884338,
+        1.148667552852964,
+        1.1372280113565931
+      ],
+      "train_tok_s": 522900.23219664005,
+      "decode": null,
+      "mem": null,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)"
+    },
+    {
+      "name": "GPT A24",
+      "kind": "gpt",
+      "params_M": 17.891526,
+      "seeds": "3-5",
+      "heldout": 1.1900565997289696,
+      "heldout_seeds": [
+        1.1909114546092532,
+        1.1916783356808018,
+        1.1875800088968536
+      ],
+      "train_tok_s": 680887.6411635581,
+      "decode": null,
+      "mem": null,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)"
+    },
+    {
+      "name": "GPT A25",
+      "kind": "gpt",
+      "params_M": 26.214662,
+      "seeds": "3-5",
+      "heldout": 1.1593089589933974,
+      "heldout_seeds": [
+        1.1594194075079962,
+        1.1588967873234026,
+        1.1596106821487935
+      ],
+      "train_tok_s": 643658.1294647148,
+      "decode": null,
+      "mem": null,
+      "source": "cr_stats.json table1 (201.3M-token panel, seeds 3-5)"
+    },
+    {
+      "name": "Opus A23",
+      "kind": "opus",
+      "params_M": 26.214675,
+      "seeds": "6-8",
+      "heldout": 1.158225678329065,
+      "heldout_seeds": [
+        1.156046227236649,
+        1.160371873188248,
+        1.158258934562298
+      ],
+      "train_tok_s": 657584.443062605,
+      "decode": 4569.889933444409,
+      "speedup": 31.834929025672537,
+      "mem": 113.00537109375,
+      "source": "cr_v2.json phase5.matched_tokens (201.3M tokens, seeds 6-8); decode and memory: raw repeat records of the fresh-A40 re-measurement (median of 3 repeats)"
+    },
+    {
+      "name": "Opus A24",
+      "kind": "opus",
+      "params_M": 22.020371,
+      "seeds": "6-8",
+      "heldout": 1.16034449956661,
+      "heldout_seeds": [
+        1.159467449514329,
+        1.1615575985574444,
+        1.1600084506280566
+      ],
+      "train_tok_s": 657565.5683554132,
+      "decode": 4578.056446803059,
+      "speedup": 30.856249099630404,
+      "mem": 96.88037109375,
+      "source": "cr_v2.json phase5.matched_tokens (201.3M tokens, seeds 6-8); decode and memory: raw repeat records of the fresh-A40 re-measurement (median of 3 repeats)"
+    },
+    {
+      "name": "Opus A27",
+      "kind": "opus",
+      "params_M": 26.214675,
+      "seeds": "6-8",
+      "heldout": 1.1580495386653844,
+      "heldout_seeds": [
+        1.155758482441808,
+        1.1593559101125854,
+        1.15903422344176
+      ],
+      "train_tok_s": 656654.2147152995,
+      "decode": 4591.643483151622,
+      "speedup": 31.470489163618826,
+      "mem": 99.05224609375,
+      "source": "cr_v2.json phase5.matched_tokens (201.3M tokens, seeds 6-8); decode and memory: raw repeat records of the fresh-A40 re-measurement (median of 3 repeats)"
+    }
+  ],
+  "train_ratio_g22_ar": 1.8081263994277348,
+  "opus_train_ratio_ar": [
+    2.273848275721076,
+    2.273783009243355,
+    2.270631657466398
+  ],
+  "e18_g22_heldout": 1.1410070517245683,
+  "e18_ar_heldout": 1.099494543975223
+}

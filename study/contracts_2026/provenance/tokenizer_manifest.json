@@ -1,0 +1,28 @@
+{
+  "schema": "autopareto_tokenizer_provenance_v1",
+  "status": "STATIC_BYTES_VERIFIED_RUNTIME_TOKEN_HASH_MISSING",
+  "data_manifest_path": "study/contracts_2026/provenance/data_manifest.json",
+  "data_manifest_sha256": "6a6d9c60b99b80884553939932e91e93364e548e102cf71b545589317f55eb88",
+  "aggregate_manifest_sha256": "1211827090aa7e669ec8bcd965ae1423dc90697f0e4928d0fce707cbc36c3f93",
+  "tokenizer": {
+    "pickle_path": "tokenizer/tokenizer.pkl",
+    "pickle_sha256": "888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629",
+    "pickle_size_bytes": 94590,
+    "token_bytes_path": "tokenizer/token_bytes.pt",
+    "token_bytes_sha256": "23517e0590d6aa9389c3263fab1f6062b2810b7c398a7b380291857639ac8d98",
+    "token_bytes_size_bytes": 34373
+  },
+  "training_data": {
+    "train_shards": 10,
+    "validation_shard": "data/shard_06542.parquet",
+    "validation_shard_sha256": "769fe59d108dfd2cfa186c63173b83fbfb90a7adb3519519ba6eaa6ca9889f94",
+    "loader": "prepare.py::make_dataloader",
+    "loader_sha256": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3"
+  },
+  "equivalence": {
+    "analytic_loader_equivalence": true,
+    "runtime_token_id_hash_observed": false,
+    "missing_runtime_artifact": "results/phase1/token_stream_verification.json",
+    "safe_claim": "The fixed-cache loader is analytically deterministic and all 21 runs report exact token counts; runtime token-ID sequence hash verification is not evidenced in the recovered bundle."
+  }
+}

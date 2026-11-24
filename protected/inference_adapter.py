@@ -14,6 +14,8 @@ from typing import Any, Protocol
 
 import torch
 import torch.nn.functional as F
+import hashlib
+import json
 
 
 @dataclass
@@ -42,15 +44,21 @@ def save_training_checkpoint(
     config: Any,
     seed: int,
     train_file: str,
+    source_sha256: str | None = None,
 ) -> None:
     """Stable protected save contract used after the candidate training loop."""
     unwrapped = getattr(model, "_orig_mod", model)
+    config_payload = dict(vars(config))
     payload = {
-        "format_version": 1,
+        "format_version": 2,
         "seed": seed,
-        "config": dict(vars(config)),
+        "config": config_payload,
+        "config_sha256": hashlib.sha256(
+            (json.dumps(config_payload, sort_keys=True, separators=(",", ":")) + "\n").encode()
+        ).hexdigest(),
         "state_dict": {key: value.detach().cpu() for key, value in unwrapped.state_dict().items()},
         "train_file": train_file,
+        "source_sha256": source_sha256,
     }
     torch.save(payload, path)
 
@@ -79,10 +87,70 @@ class CanonicalGPTAdapter:
 
     def __init__(self, model: torch.nn.Module):
         self.model = model
-        required = ("transformer", "value_embeds", "resid_lambdas", "x0_lambdas", "lm_head", "cos", "sin")
+        required = ("transformer", "resid_lambdas", "x0_lambdas", "lm_head", "cos", "sin")
         missing = [name for name in required if not hasattr(model, name)]
         if missing:
             raise RuntimeError(f"candidate is not compatible with protected canonical adapter: {', '.join(missing)}")
+
+    def _value_embedding(
+        self,
+        block: torch.nn.Module,
+        token_ids: torch.Tensor,
+        layer_index: int,
+    ) -> torch.Tensor | None:
+        """Resolve the canonical value embedding for one gated layer.
+
+        The registered baseline exposes one embedding table per gated layer.
+        A model-neutral architectural change may instead share one table across
+        those layers.  Both representations implement the same protected
+        attention math; the candidate cannot replace the timing or correctness
+        procedure by choosing the representation.
+        """
+        gate = getattr(block.attn, "ve_gate", None)
+        if gate is None:
+            return None
+
+        per_layer = getattr(self.model, "value_embeds", None)
+        if per_layer is not None:
+            key = str(layer_index)
+            if key in per_layer:
+                return per_layer[key](token_ids)
+            if "shared" in per_layer:
+                return per_layer["shared"](token_ids)
+            if "early" in per_layer:
+                config = getattr(self.model, "config", None)
+                layer_count = getattr(config, "n_layer", None)
+                if isinstance(layer_count, int) and layer_index < layer_count // 2:
+                    return per_layer["early"](token_ids)
+            if isinstance(per_layer, torch.nn.ModuleList):
+                layer_blocks = getattr(getattr(self.model, "transformer", None), "h", None)
+                gated_layers = (
+                    [
+                        index
+                        for index, candidate_block in enumerate(layer_blocks)
+                        if getattr(getattr(candidate_block, "attn", None), "ve_gate", None) is not None
+                    ]
+                    if layer_blocks is not None
+                    else []
+                )
+                if len(per_layer) == len(gated_layers) and layer_index in gated_layers:
+                    return per_layer[gated_layers.index(layer_index)](token_ids)
+                config = getattr(self.model, "config", None)
+                layer_count = getattr(config, "n_layer", None)
+                if len(per_layer) == 2 and isinstance(layer_count, int) and layer_count > 1:
+                    stage = 0 if layer_index < layer_count // 2 else 1
+                    return per_layer[stage](token_ids)
+            raise RuntimeError(
+                f"canonical value embedding is missing gated layer {layer_index}"
+            )
+
+        shared = getattr(self.model, "value_embed", None)
+        if shared is not None:
+            return shared(token_ids)
+
+        raise RuntimeError(
+            "canonical model exposes a value gate but no value_embeds or value_embed table"
+        )
 
     @staticmethod
     def _norm(x: torch.Tensor) -> torch.Tensor:
@@ -130,10 +198,29 @@ class CanonicalGPTAdapter:
         k = attn.c_k(normalized).view(batch, length, attn.n_kv_head, attn.head_dim)
         v = attn.c_v(normalized).view(batch, length, attn.n_kv_head, attn.head_dim)
 
-        value_embedding = self.model.value_embeds[str(layer_index)](token_ids) if str(layer_index) in self.model.value_embeds else None
+        value_embedding = self._value_embedding(block, token_ids, layer_index)
         if value_embedding is not None:
-            value_embedding = value_embedding.view(batch, length, attn.n_kv_head, attn.head_dim)
+            # Value embeddings may use an independent, smaller head grouping
+            # than K/V attention heads.  Older candidates do not expose
+            # n_ve_head, in which case the historical n_kv_head layout is the
+            # canonical fallback.
+            value_heads = int(getattr(attn, "n_ve_head", attn.n_kv_head))
+            if value_heads < 1 or attn.n_kv_head % value_heads:
+                raise RuntimeError("value-embedding head count must divide KV head count")
+            if value_embedding.shape[-1] == attn.head_dim:
+                value_embedding = value_embedding.unsqueeze(2).expand(
+                    batch, length, attn.n_kv_head, attn.head_dim
+                )
+                value_heads = attn.n_kv_head
+            else:
+                value_embedding = value_embedding.view(batch, length, value_heads, attn.head_dim)
             gate = 2 * torch.sigmoid(attn.ve_gate(normalized[..., :attn.ve_gate_channels]))
+            if gate.size(-1) != value_heads:
+                raise RuntimeError("value-embedding gate width disagrees with value-embedding heads")
+            if value_heads != attn.n_kv_head:
+                expansion = attn.n_kv_head // value_heads
+                value_embedding = value_embedding.repeat_interleave(expansion, dim=2)
+                gate = gate.repeat_interleave(expansion, dim=2)
             v = v + gate.unsqueeze(-1) * value_embedding
 
         end_position = start_position + length
@@ -257,6 +344,32 @@ def validated_cache_nbytes(adapter: CandidateInferenceAdapter, state: Any) -> in
     return measured
 
 
+def validated_autoregressive_state_nbytes(adapter: CandidateInferenceAdapter, state: Any) -> int:
+    """Count state plus adapter-owned persistent tensors without counting model weights.
+
+    ``cache_nbytes`` remains the exact returned-state/KV accounting contract.  Novel
+    recurrent adapters may keep a persistent tensor on the adapter itself; such
+    tensors are included diagnostically here, while peak allocated CUDA memory is
+    still the authoritative Pareto memory objective.
+    """
+    measured = state_tensor_nbytes(state)
+    attributes = getattr(adapter, "__dict__", {})
+    if not isinstance(attributes, dict):
+        return measured
+    ignored = {"model", "config", "tokenizer", "device"}
+    for name, value in attributes.items():
+        if name in ignored or name.startswith("_") and name in {"_model", "_config"}:
+            continue
+        # Adapters commonly retain the model under a custom attribute (``net``,
+        # ``module``, ...).  Do not misreport parameter storage as autoregressive
+        # state merely because the attribute name is unusual; peak allocated CUDA
+        # memory remains authoritative for all live candidate buffers.
+        if isinstance(value, torch.nn.Module):
+            continue
+        measured += state_tensor_nbytes(value)
+    return measured
+
+
 def build_adapter(module: Any, model: torch.nn.Module) -> CandidateInferenceAdapter:
     """Build the candidate cache implementation under the protected timing harness.
 
@@ -301,6 +414,7 @@ def check_cached_correctness(
     max_error = 0.0
     max_mean_error = 0.0
     token_match = True
+    finite_outputs = True
     canonical_reference = isinstance(adapter, CanonicalGPTAdapter)
     for index in range(steps):
         if canonical_reference:
@@ -309,6 +423,10 @@ def check_cached_correctness(
         else:
             uncached_step = model(common_tokens)[:, -1, :].detach().float()
         cached_step = cached_logits[:, -1, :].detach().float()
+        finite_outputs = finite_outputs and bool(
+            torch.isfinite(uncached_step).all().item()
+            and torch.isfinite(cached_step).all().item()
+        )
         difference = (uncached_step - cached_step).abs()
         max_error = max(max_error, float(difference.max().item()))
         max_mean_error = max(max_mean_error, float(difference.mean().item()))
@@ -322,8 +440,9 @@ def check_cached_correctness(
     max_logits_match = max_atol is None or max_error <= max_atol
     logits_match = mean_logits_match and max_logits_match
     result = {
-        "passed": token_match and logits_match,
+        "passed": finite_outputs and token_match and logits_match,
         "greedy_tokens_match": token_match,
+        "finite_outputs": finite_outputs,
         "logits_match": logits_match,
         "mean_logits_match": mean_logits_match,
         "max_logits_match": max_logits_match,

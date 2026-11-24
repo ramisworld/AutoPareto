@@ -1,0 +1,9 @@
+{
+  "schema": "autopareto_compute_ledger_v1",
+  "status": "LOWER_BOUND_AND_RUN_TIME_RECORDS_ONLY",
+  "hardware": {"gpu":"NVIDIA A40","gpu_uuid":"GPU-b029c727-559c-ee4a-c1a8-ddf5dbab433b","driver":"570.195.03","cuda":"12.8","pytorch":"2.9.1+cu128","python":"3.10.18"},
+  "nominal_accounting": {"experiment_rows":318,"nominal_seconds_per_slot":300,"nominal_gpu_hours_for_rows":26.5,"training_run_rows":348,"nominal_gpu_hours_for_training_rows":29.0,"autopareto_attempts":75,"autopareto_nominal_gpu_hours":6.25},
+  "observed_examples": {"historical_baseline_tokens":92798976,"historical_baseline_training_seconds":301.3131194114685,"phase1_token_budget":201326592,"phase1_run_count":21},
+  "not_recorded": ["provider billing dollars","energy","carbon","complete wall-clock queue time","human time","data-cache download cost"],
+  "interpretation": "Nominal GPU-hour values include failed/early-terminated rows and are not invoices or energy measurements. Report them as coarse lower-bound/slot accounting only."
+}

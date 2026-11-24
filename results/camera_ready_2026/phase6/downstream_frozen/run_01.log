@@ -1,0 +1,77 @@
+Fetching 7 files:   0%|          | 0/7 [00:00<?, ?it/s]Fetching 7 files: 100%|██████████| 7/7 [00:00<00:00, 34582.01it/s]
+Warning: You are sending unauthenticated requests to the HF Hub. Please set a HF_TOKEN to enable higher rate limits and faster downloads.
+Generating test split:   0%|          | 0/5153 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 5153/5153 [00:00<00:00, 104546.68 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 72705.44 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 118680.97 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 113750.01 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 109246.58 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 116408.20 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112595.74 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 104281.45 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 84311.01 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 106937.54 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 111278.36 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 108748.06 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 99445.29 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 102437.51 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 110000.10 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112865.40 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 99603.51 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 108461.22 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 98599.03 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 90746.52 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 98188.17 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 113929.21 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 89035.92 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 78195.04 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 99933.38 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 107714.73 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 97383.42 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 113368.76 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 120755.00 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 120831.53 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 119251.22 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 119482.22 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 116686.72 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 123144.57 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 125304.10 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 116105.30 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 125050.06 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 128415.41 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 126498.30 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 117711.72 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 113546.77 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 110000.10 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 125736.08 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 120636.91 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 126521.19 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112282.26 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 131441.68 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 128054.71 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 126068.65 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 117953.37 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 113842.63 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 106306.02 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112153.16 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 110969.23 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 117339.60 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 110321.26 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 118216.01 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 116612.10 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112408.65 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 113919.93 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 114582.82 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 110580.12 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 220555.50 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 112505.14 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 121450.82 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 111559.54 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 104671.81 examples/s]
+Generating train split:   0%|          | 0/1000 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 1000/1000 [00:00<00:00, 207228.46 examples/s]
+Generating train split: 0 examples [00:00, ? examples/s]Generating train split: 16113 examples [00:00, 448212.47 examples/s]
+Generating validation split: 0 examples [00:00, ? examples/s]Generating validation split: 1838 examples [00:00, 206247.81 examples/s]
+Generating test split: 0 examples [00:00, ? examples/s]Generating test split: 3084 examples [00:00, 283723.40 examples/s]
+Generating train split:   0%|          | 0/2251 [00:00<?, ? examples/s]Generating train split: 100%|██████████| 2251/2251 [00:00<00:00, 151717.47 examples/s]
+Generating test split:   0%|          | 0/2376 [00:00<?, ? examples/s]Generating test split: 100%|██████████| 2376/2376 [00:00<00:00, 169348.76 examples/s]
+Generating validation split:   0%|          | 0/570 [00:00<?, ? examples/s]Generating validation split: 100%|██████████| 570/570 [00:00<00:00, 74182.49 examples/s]
+/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/downstream_frozen/runs/0001/results.json

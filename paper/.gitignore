@@ -1,0 +1,11 @@
+.venv/
+*.aux
+*.bbl
+*.blg
+*.log
+*.out
+*.xdv
+audit/literature/*.pdf
+audit/literature/*.html
+audit/overleaf_page.html
+camera_ready/.mplcache/

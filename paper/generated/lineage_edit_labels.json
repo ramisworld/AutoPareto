@@ -1,0 +1,836 @@
+{
+  "campaign": "autopareto-seed0-20260731",
+  "baseline_exp": 8,
+  "baseline_config": {
+    "n_layer": 8,
+    "n_embd": 512,
+    "n_head": 4,
+    "n_kv_head": 4,
+    "window_pattern": "SSSL"
+  },
+  "baseline_source": {
+    "kind": "frozen",
+    "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/baseline-a40-cached-fresh-20260722/0001-train.py",
+    "sha256": "428e22f114040f9fa9dd2d4da8b1ad005d7aa0be4dd3b395931c4537ba82f6b8"
+  },
+  "rule": "width = ceil(DEPTH*ASPECT_RATIO/HEAD_DIM)*HEAD_DIM, evaluated from each source's own build_model_config",
+  "code_diff_replay_check": [
+    {
+      "attempt": 1,
+      "exp": 113,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 2,
+      "exp": 114,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 3,
+      "exp": 115,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 4,
+      "exp": 116,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 5,
+      "exp": 117,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 6,
+      "exp": 118,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 7,
+      "exp": 119,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 8,
+      "exp": 120,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 9,
+      "exp": 121,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 10,
+      "exp": 122,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 11,
+      "exp": 123,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 12,
+      "exp": 124,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 13,
+      "exp": 125,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 14,
+      "exp": 126,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 15,
+      "exp": 127,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 16,
+      "exp": 128,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 18,
+      "exp": 130,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 19,
+      "exp": 131,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 20,
+      "exp": 132,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 21,
+      "exp": 133,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 22,
+      "exp": 134,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 23,
+      "exp": 135,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 24,
+      "exp": 136,
+      "replay_matches_frozen": true
+    },
+    {
+      "attempt": 25,
+      "exp": 137,
+      "replay_matches_frozen": true
+    }
+  ],
+  "labels": [
+    {
+      "attempt": 1,
+      "exp": 113,
+      "parent_exp": 8,
+      "status": "completed",
+      "label": "batch $2^{19}\\to2^{17}$",
+      "effective_change": true,
+      "config": {
+        "n_layer": 8,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 8,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0001-train.py",
+        "sha256": "8b57d2282c923c8fdd1d06be32c4e2d0e87d17ca2a1439e1b017c6d322d39b5a"
+      }
+    },
+    {
+      "attempt": 2,
+      "exp": 114,
+      "parent_exp": 113,
+      "status": "completed",
+      "label": "matrix LR .04$\\to$.03",
+      "effective_change": true,
+      "config": {
+        "n_layer": 8,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 8,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0002-train.py",
+        "sha256": "3fcc4c5f61ebf8fa7f5d3b46f139bb475fa7fd5d3bce4df6d518f8f51ff61e00"
+      }
+    },
+    {
+      "attempt": 3,
+      "exp": 115,
+      "parent_exp": 113,
+      "status": "completed",
+      "label": "KV heads 4$\\to$2",
+      "effective_change": true,
+      "config": {
+        "n_layer": 8,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 8,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0003-train.py",
+        "sha256": "e80b92da9df8cc06a51bc9368d79b11be22e411b2160472bf967e2d1a47de464"
+      }
+    },
+    {
+      "attempt": 4,
+      "exp": 116,
+      "parent_exp": 113,
+      "status": "completed",
+      "label": "depth 8$\\to$7 (width stays 512)",
+      "effective_change": true,
+      "config": {
+        "n_layer": 7,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 7,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0004-train.py",
+        "sha256": "cf4bb5cdc32af4e2a756da1b20b971f0d053385957be7c3d219b3ae9c8331a3a"
+      }
+    },
+    {
+      "attempt": 5,
+      "exp": 117,
+      "parent_exp": 116,
+      "status": "completed",
+      "label": "matrix LR .04$\\to$.03",
+      "effective_change": true,
+      "config": {
+        "n_layer": 7,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 7,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0005-train.py",
+        "sha256": "58b66a8623eb5b38ad399ba5d8696026149eebb2e4147d5c51283c814f54a96b"
+      }
+    },
+    {
+      "attempt": 6,
+      "exp": 118,
+      "parent_exp": 116,
+      "status": "completed",
+      "label": "depth 7$\\to$6; width 512$\\to$384",
+      "effective_change": true,
+      "config": {
+        "n_layer": 6,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 6,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0006-train.py",
+        "sha256": "642149fd473d2e447ad78a8c0ce0c946548defd90b80501894adea629c794137"
+      }
+    },
+    {
+      "attempt": 7,
+      "exp": 119,
+      "parent_exp": 118,
+      "status": "completed",
+      "label": "depth 6$\\to$5 (width stays 384)",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0007-train.py",
+        "sha256": "d4b75012dff5c1bdb5f4c63803b0052d1e91619250ad4ddcc920b04240480af6"
+      }
+    },
+    {
+      "attempt": 8,
+      "exp": 120,
+      "parent_exp": 119,
+      "status": "completed",
+      "label": "depth 5$\\to$4; width 384$\\to$256",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 256,
+        "n_head": 2,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 256,
+        "n_head": 2,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0008-train.py",
+        "sha256": "1a5002ca246244c648177038209f443266c34cefbacd725cf83b060b4cec48de"
+      }
+    },
+    {
+      "attempt": 9,
+      "exp": 121,
+      "parent_exp": 120,
+      "status": "completed",
+      "label": "aspect 64$\\to$80; width 256$\\to$384",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0009-train.py",
+        "sha256": "04ded24dbdfcafb44ffe5deb57d8d7119f38b6465234ccdc816d4df9b2c61322"
+      }
+    },
+    {
+      "attempt": 10,
+      "exp": 122,
+      "parent_exp": 121,
+      "status": "completed",
+      "label": "aspect 80$\\to$96 (no effective change)",
+      "effective_change": false,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0010-train.py",
+        "sha256": "64dd67278fde6f022f33b0d627e5f326b957cfe98e2b54a80e6bcf63c1962c8f"
+      }
+    },
+    {
+      "attempt": 11,
+      "exp": 123,
+      "parent_exp": 119,
+      "status": "completed",
+      "label": "matrix LR .04$\\to$.03",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0011-train.py",
+        "sha256": "e186166e909e228372357fd7757a5b5a36286de0c4ccf3bbf9238264e471be6f"
+      }
+    },
+    {
+      "attempt": 12,
+      "exp": 124,
+      "parent_exp": 119,
+      "status": "completed",
+      "label": "matrix LR .04$\\to$.035",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0012-train.py",
+        "sha256": "c2a5e5dcdc90f8465533d71f700b9ea8a4c2b024151759e2302126a17b425340"
+      }
+    },
+    {
+      "attempt": 13,
+      "exp": 125,
+      "parent_exp": 124,
+      "status": "completed",
+      "label": "embed LR .6$\\to$.5",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0013-train.py",
+        "sha256": "5bf59f8ec9ae96511389247aed28352ae5615b5cc24902984f853411d0f74bad"
+      }
+    },
+    {
+      "attempt": 14,
+      "exp": 126,
+      "parent_exp": 125,
+      "status": "completed",
+      "label": "embed LR .5$\\to$.4",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0014-train.py",
+        "sha256": "5b3b557e11f9eaca4a4b7fe93012728b05f1c5cf44326ac00745487d434c76ca"
+      }
+    },
+    {
+      "attempt": 15,
+      "exp": 127,
+      "parent_exp": 125,
+      "status": "completed",
+      "label": "head LR .004$\\to$.0035",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0015-train.py",
+        "sha256": "6fadd2554feea7cd0fdf18683d0a0159593f86fc02ec6a89b92a0bc5ef8cca83"
+      }
+    },
+    {
+      "attempt": 16,
+      "exp": 128,
+      "parent_exp": 125,
+      "status": "completed",
+      "label": "head LR .004$\\to$.0045",
+      "effective_change": true,
+      "config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 5,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0016-train.py",
+        "sha256": "8e3c4f982eb904c29cad5026cb2a079c6b07582502a08a23ea10c1fcb37a828c"
+      }
+    },
+    {
+      "attempt": 17,
+      "exp": 129,
+      "parent_exp": 120,
+      "status": "crash",
+      "label": "depth 4$\\to$3 (width stays 256)",
+      "effective_change": true,
+      "config": {
+        "n_layer": 3,
+        "n_embd": 256,
+        "n_head": 2,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_config": null,
+      "log_matches_source": null,
+      "source": {
+        "kind": "replayed_code_diff",
+        "path": null,
+        "sha256": "ec6903915b587e7de3724ff12bd04497bb025cf7920fbadfd994d9381afb3f7b",
+        "note": "frozen file not preserved; rebuilt from experiments.code_diff applied to train.py (sha256 eb267bef923515ad)"
+      }
+    },
+    {
+      "attempt": 18,
+      "exp": 130,
+      "parent_exp": 120,
+      "status": "completed",
+      "label": "aspect 64$\\to$128; width 256$\\to$512",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0018-train.py",
+        "sha256": "6122baac5058a46266179906961792ef644683e0c414ef3f4282df2dba98b2ab"
+      }
+    },
+    {
+      "attempt": 19,
+      "exp": 131,
+      "parent_exp": 130,
+      "status": "completed",
+      "label": "matrix LR .04$\\to$.035",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0019-train.py",
+        "sha256": "e9faa5f12c2666af4dbfecf3e409e0c8d00afc58c841c7fed073fb940f4db3b1"
+      }
+    },
+    {
+      "attempt": 20,
+      "exp": 132,
+      "parent_exp": 131,
+      "status": "completed",
+      "label": "embed LR .6$\\to$.5",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0020-train.py",
+        "sha256": "f3aaf08e7ea0c404772509290fb2efd3ca39a0df4480b5f50d2a983ac8dcceb3"
+      }
+    },
+    {
+      "attempt": 21,
+      "exp": 133,
+      "parent_exp": 132,
+      "status": "completed",
+      "label": "embed LR .5$\\to$.45",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0021-train.py",
+        "sha256": "d76fa1ae2ecc557d29843560a24e4b5ef330ba618c40b4d72527e3343ab41cb4"
+      }
+    },
+    {
+      "attempt": 22,
+      "exp": 134,
+      "parent_exp": 132,
+      "status": "completed",
+      "label": "head LR .004$\\to$.0035",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0022-train.py",
+        "sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a"
+      }
+    },
+    {
+      "attempt": 23,
+      "exp": 135,
+      "parent_exp": 134,
+      "status": "completed",
+      "label": "KV heads 4$\\to$2",
+      "effective_change": true,
+      "config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 4,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 2,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0023-train.py",
+        "sha256": "0c102d37aa4786d8c66ddaae3bd7a1fbfc7fa49475a5d3c177f45d86b72d06aa"
+      }
+    },
+    {
+      "attempt": 24,
+      "exp": 136,
+      "parent_exp": 134,
+      "status": "completed",
+      "label": "depth 4$\\to$3; width 512$\\to$384",
+      "effective_change": true,
+      "config": {
+        "n_layer": 3,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 3,
+        "n_embd": 384,
+        "n_head": 3,
+        "n_kv_head": 3,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0024-train.py",
+        "sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10"
+      }
+    },
+    {
+      "attempt": 25,
+      "exp": 137,
+      "parent_exp": 136,
+      "status": "completed",
+      "label": "aspect 128$\\to$160; width 384$\\to$512",
+      "effective_change": true,
+      "config": {
+        "n_layer": 3,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_config": {
+        "n_layer": 3,
+        "n_embd": 512,
+        "n_head": 4,
+        "n_kv_head": 4,
+        "window_pattern": "SSSL"
+      },
+      "log_matches_source": true,
+      "source": {
+        "kind": "frozen",
+        "path": "/Users/Rami/Documents/dev/autopareto/results/candidates/autopareto-seed0-20260731/0025-train.py",
+        "sha256": "36e3ad91a62810e4a907c1465adfbd1f07da446d0e63570c9e6a944b6066f12b"
+      }
+    }
+  ]
+}

@@ -1,0 +1,3 @@
+{"event": "empty_database_renamed", "from": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/downstream_frozen/phase6_downstream.db", "sha256": "4b828eb9ea5968449b32cfd3ebc7e952ac37f84e2d31d2286650724430e54132", "to": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/downstream_frozen/phase6_downstream.db.incident4-empty", "utc": "2026-11-17T01:42:20.126511+00:00"}
+{"a3_plan_sha256": "c7a46afd38887ae93e19bf31fe8f8243687b75ccda93f734e1fb5ed5cf3be79f", "event": "downstream_started", "utc": "2026-11-17T01:42:20.140236+00:00"}
+{"event": "downstream_finished", "exit": 0, "utc": "2026-11-17T03:23:27.082592+00:00"}

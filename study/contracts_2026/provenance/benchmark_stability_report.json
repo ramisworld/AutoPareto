@@ -1,0 +1,45 @@
+{
+  "schema": "autopareto_inference_stability_diagnostic_v1",
+  "source": "results/phase1/phase1_stabilized_inference_rebenchmark.json",
+  "source_sha256": "a25d99a6228340cd12997dfd8979957e14487351326917026592bafa294e43aa",
+  "diagnostic_scope": "static analysis only; no model or benchmark rerun in Phase 0.5",
+  "historical_protocol": {
+    "version": "autopareto_inference_stabilized_v2",
+    "warmup_block_size": 5,
+    "required_stable_blocks": 2,
+    "max_warmups_per_pass": 30,
+    "median_drift_threshold": 0.02,
+    "within_block_cv_threshold": 0.05,
+    "measured_passes": 3,
+    "repetitions_per_pass": 10
+  },
+  "observations": [
+    {"model_id": "baseline", "status": "unstable_environment", "correctness": true, "warmup_counts": [30], "diagnosis": "warm-up exhausted; raw repetitions are absent from the checked-in summary"},
+    {"model_id": "autoresearch_compatible", "status": "unstable_environment", "correctness": true, "warmup_counts": [30], "diagnosis": "warm-up exhausted; raw repetitions are absent from the checked-in summary"},
+    {"model_id": "tpe_quality", "status": "unstable_environment", "correctness": true, "warmup_counts": [15, 10], "failed_gate": "median drift 0.027592812950758053 > 0.02", "diagnosis": "cross-block timing drift; correctness did not fail"},
+    {"model_id": "motpe_quality", "status": "completed", "correctness": true, "warmup_counts": [25, 10, 10], "diagnosis": "all recorded pass gates completed"},
+    {"model_id": "autopareto_292", "status": "unstable_environment", "correctness": true, "warmup_counts": [10, 30], "failed_gate": "median drift 0.02571448845528332 > 0.02", "diagnosis": "cross-block timing drift; correctness did not fail"},
+    {"model_id": "autopareto_299", "status": "unstable_environment", "correctness": true, "warmup_counts": [25, 10, 15], "failed_gate": "median drift 0.0016187536725050537 was marked unstable by the historical pass gate; raw within-pass values are unavailable", "diagnosis": "the summary is insufficient to distinguish CV from another pass-level rule"},
+    {"model_id": "autopareto_294", "status": "unstable_environment", "correctness": true, "warmup_counts": [30, 10, 20], "failed_gate": "median drift 0.1779335967783243 > 0.02", "diagnosis": "large cross-block timing drift; correctness did not fail"}
+  ],
+  "conclusion": {
+    "cache_correctness": "not the cause of the six rejections; all seven correctness gates passed",
+    "timing_implementation": "synchronized timing exists in the historical stabilized path; static evidence does not show a code defect",
+    "warmup": "warm-up exhaustion explains two models and is itself a predeclared rejection, but missing raw blocks prevent a finer attribution",
+    "cv": "cannot be audited for every rejected model because raw repetitions are not present in the checked-in summary",
+    "drift": "directly explains at least three rejected models and is consistent with host/GPU environmental variation",
+    "model_specific_compilation": "not established by repository evidence; requires inexpensive repeated fixture/benchmark diagnostics before campaign launch",
+    "overall": "the dominant observed failure is environmental/pass-to-pass timing instability, not cache correctness; the evidence is not sufficient to claim a single root cause for all six"
+  },
+  "proposed_frozen_protocol": {
+    "version": "autopareto_inference_stabilized_v3",
+    "correctness": "compare the fixed cached and uncached workload logits before accepting timing",
+    "timing": "synchronize the CUDA stream immediately before and after every timed decode sequence",
+    "warmup": "blocks of five repetitions, at most six blocks, accept the first two adjacent blocks satisfying <=2% median drift and <=5% CV",
+    "measurement": "three passes of ten repetitions, with raw repetitions and per-pass diagnostics persisted",
+    "acceptance": "all three measured passes must satisfy the same <=5% within-pass CV rule; otherwise return measurement-unstable",
+    "scalar": "median cached-decode tokens/second over all 30 measured repetitions only after correctness and stability pass",
+    "memory": "persist peak allocated CUDA bytes, peak reserved CUDA bytes, and exact live KV-cache bytes; Pareto uses allocated bytes",
+    "candidate_tuning": "none; workload, thresholds, repetition counts, and protocol are global constants"
+  }
+}

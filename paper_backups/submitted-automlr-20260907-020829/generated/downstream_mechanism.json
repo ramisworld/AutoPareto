@@ -1,0 +1,59 @@
+{
+  "n_recipes": 7,
+  "recipes": [
+    {
+      "model": "baseline",
+      "depth": 8,
+      "parameters": 50332176.0,
+      "heldout_bpb": 1.1465895336014258,
+      "blimp": 0.7137213930348258
+    },
+    {
+      "model": "autoresearch_compatible",
+      "depth": 8,
+      "parameters": 50332176.0,
+      "heldout_bpb": 1.099803115598075,
+      "blimp": 0.7455920398009951
+    },
+    {
+      "model": "tpe_quality",
+      "depth": 6,
+      "parameters": 39846284.0,
+      "heldout_bpb": 1.1194015812978206,
+      "blimp": 0.7329701492537314
+    },
+    {
+      "model": "motpe_quality",
+      "depth": 6,
+      "parameters": 26345772.0,
+      "heldout_bpb": 1.1482527567273164,
+      "blimp": 0.724726368159204
+    },
+    {
+      "model": "autopareto_292",
+      "depth": 4,
+      "parameters": 29360392.0,
+      "heldout_bpb": 1.141837121365997,
+      "blimp": 0.7201741293532339
+    },
+    {
+      "model": "autopareto_299",
+      "depth": 3,
+      "parameters": 26214662.0,
+      "heldout_bpb": 1.1593089589933976,
+      "blimp": 0.7047363184079602
+    },
+    {
+      "model": "autopareto_294",
+      "depth": 3,
+      "parameters": 17891526.0,
+      "heldout_bpb": 1.1900565997289696,
+      "blimp": 0.6933432835820896
+    }
+  ],
+  "correlations": {
+    "blimp_vs_heldout_bpb": -0.9688165970511975,
+    "blimp_vs_depth": 0.717302611860421,
+    "blimp_vs_parameters": 0.6804570200534874
+  }
+}

@@ -1,0 +1,616 @@
+{
+  "descriptive": {
+    "AP-Q|time_300s": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 12470.346542358398,
+      "steady_state_seconds_mean": 300.09729766845703,
+      "steady_state_tokens_per_second_mean": 522079.71999554924,
+      "tokens_mean": 158116522.66666666,
+      "updates_mean": 1206.3333333333333
+    },
+    "AP-Q|tokens_088604672": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 12473.35205078125,
+      "steady_state_seconds_mean": 166.16809938633335,
+      "steady_state_tokens_per_second_mean": 524546.5438612833,
+      "tokens_mean": 88604672.0,
+      "updates_mean": 676.0
+    },
+    "AP-Q|tokens_157286400": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 12473.35205078125,
+      "steady_state_seconds_mean": 297.828991397,
+      "steady_state_tokens_per_second_mean": 523269.01722451654,
+      "tokens_mean": 157286400.0,
+      "updates_mean": 1200.0
+    },
+    "AP-Q|tokens_201326592": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 12473.35205078125,
+      "steady_state_seconds_mean": 382.30096713300003,
+      "steady_state_tokens_per_second_mean": 522846.7767094297,
+      "tokens_mean": 201326592.0,
+      "updates_mean": 1536.0
+    },
+    "AR-ref|time_300s": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 22652.443069458008,
+      "steady_state_seconds_mean": 300.25076762835187,
+      "steady_state_tokens_per_second_mean": 288408.56052750326,
+      "tokens_mean": 88036693.33333333,
+      "updates_mean": 671.6666666666666
+    },
+    "AR-ref|tokens_088604672": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 22653.44873046875,
+      "steady_state_seconds_mean": 301.1537963553333,
+      "steady_state_tokens_per_second_mean": 289429.96197806875,
+      "tokens_mean": 88604672.0,
+      "updates_mean": 676.0
+    },
+    "AR-ref|tokens_157286400": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 22653.44873046875,
+      "steady_state_seconds_mean": 539.2222609256667,
+      "steady_state_tokens_per_second_mean": 289017.49691957136,
+      "tokens_mean": 157286400.0,
+      "updates_mean": 1200.0
+    },
+    "AR-ref|tokens_201326592": {
+      "n": 3,
+      "peak_training_memory_mb_mean": 22653.44873046875,
+      "steady_state_seconds_mean": 692.1887439420001,
+      "steady_state_tokens_per_second_mean": 288772.15583806124,
+      "tokens_mean": 201326592.0,
+      "updates_mean": 1536.0
+    }
+  },
+  "exclusions_and_missing": [],
+  "figure": {
+    "paths": [
+      "results/camera_ready_2026/amendment1/E1/analysis/e1_delta_vs_tokens.pdf",
+      "results/camera_ready_2026/amendment1/E1/analysis/e1_delta_vs_tokens.png"
+    ],
+    "status": "written"
+  },
+  "fixed_time_vs_history": {
+    "e1_ci_contains_historical_mean": true,
+    "e1_summary": {
+      "ci": [
+        -0.012413151331649375,
+        0.003558429058594462
+      ],
+      "df": 2,
+      "mean": -0.004427361136527456,
+      "n": 3,
+      "same_sign_seeds": "all_negative",
+      "sd": 0.003214713160767211,
+      "se": 0.001856015508736382,
+      "seeds": [
+        6,
+        7,
+        8
+      ],
+      "t_critical": 4.302652729749456,
+      "values": [
+        -0.0037507564272070137,
+        -0.007926523383132267,
+        -0.0016048035992430876
+      ]
+    },
+    "historical_reported_mean": -0.006680201440237103,
+    "historical_seeds": [
+      0,
+      1,
+      2
+    ],
+    "historical_summary": {
+      "ci": [
+        -0.01302278214532963,
+        -0.00033762073514457657
+      ],
+      "df": 2,
+      "mean": -0.006680201440237103,
+      "n": 3,
+      "same_sign_seeds": "all_negative",
+      "sd": 0.002553232324879258,
+      "se": 0.0014741093700726938,
+      "t_critical": 4.302652729749456,
+      "values": [
+        -0.005364992292277382,
+        -0.005052709959857182,
+        -0.009622902068576744
+      ]
+    },
+    "metric": "validation_bpb_in_process",
+    "tokens_per_recipe": {
+      "AP-Q": {
+        "6": 158334976,
+        "7": 157679616,
+        "8": 158334976
+      },
+      "AR-ref": {
+        "6": 88080384,
+        "7": 87949312,
+        "8": 88080384
+      }
+    },
+    "verdict": "consistent",
+    "welch_e1_minus_history": {
+      "ci": [
+        -0.004463026899487324,
+        0.008968707506906617
+      ],
+      "df": 3.8049901520341973,
+      "difference": 0.0022528403037096467,
+      "se": 0.002370188178944044,
+      "t_critical": 2.83347426287013
+    }
+  },
+  "format": "autopareto_camera_ready_e1_analysis_v1",
+  "label": "E1 results",
+  "metrics": {
+    "heldout_bpb": {
+      "H_E1a": {
+        "contrast_largest_minus_smallest_budget": {
+          "ci": [
+            -0.0017273268264796156,
+            0.007836185754385381
+          ],
+          "df": 2,
+          "mean": 0.0030544294639528826,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.0019249159448021366,
+          "se": 0.0011113507388989165,
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.002811512215615153,
+            0.005089273779089076,
+            0.0012625023971544191
+          ]
+        },
+        "means_strictly_increasing": true,
+        "verdict": "inconclusive"
+      },
+      "H_E1b": {
+        "category_at_largest_budget": "AR-ref_better",
+        "category_at_smallest_budget": "AR-ref_better",
+        "verdict": "contradicted"
+      },
+      "crossover": {
+        "crossings": [],
+        "shape": "all_positive"
+      },
+      "crossover_bootstrap": {
+        "crossover_tokens_percentiles_conditional_on_crossing": {
+          "p2.5": null,
+          "p50": null,
+          "p97.5": null
+        },
+        "fraction_all_negative": 0.0,
+        "fraction_all_positive": 1.0,
+        "fraction_with_crossover_in_range": 0.0,
+        "method": "exact enumeration of all 3^3 = 27 equally likely seed resamples",
+        "n_seeds": 3,
+        "note": "percentiles are over resamples whose mean curve crosses zero inside the tested range; with n = 3 the bootstrap distribution is coarse (at most 10 distinct seed multisets).",
+        "resamples": 27,
+        "seeds": [
+          "6",
+          "7",
+          "8"
+        ]
+      },
+      "mean_curve": {
+        "log_tokens": [
+          18.299695145562033,
+          18.87357890529516,
+          19.120438983226688
+        ],
+        "mean_delta": [
+          0.03845807828539235,
+          0.03956058594652053,
+          0.04151250774934523
+        ]
+      },
+      "outcome_table": {
+        "outcome": "exposure_explains_fixed_time_advantage",
+        "paper_text_template": "At equal tokens AP-Q is not better even at 88.6M; the fixed-time advantage is explained by extra exposure."
+      },
+      "per_cell": {
+        "time_300s": {
+          "ci": [
+            -0.020471263993800556,
+            0.016041484401755252
+          ],
+          "df": 2,
+          "mean": -0.002214889796022653,
+          "n": 3,
+          "same_sign_seeds": "mixed",
+          "sd": 0.007349179601204331,
+          "se": 0.004243050821078227,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.0036674640737788256,
+            -0.010453129645745296,
+            0.00014099618389851187
+          ]
+        },
+        "tokens_088604672": {
+          "ci": [
+            0.02217510658856311,
+            0.05474104998222158
+          ],
+          "df": 2,
+          "mean": 0.03845807828539235,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.006554778191164062,
+          "se": 0.0037844029531468597,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.04373193451429702,
+            0.031119560281020586,
+            0.04052274006085943
+          ]
+        },
+        "tokens_157286400": {
+          "ci": [
+            0.022641744056568703,
+            0.05647942783647236
+          ],
+          "df": 2,
+          "mean": 0.03956058594652053,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.006810750390335965,
+          "se": 0.003932188571243818,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.04541710961502643,
+            0.032086758276242966,
+            0.04117788994829219
+          ]
+        },
+        "tokens_201326592": {
+          "ci": [
+            0.02866280437333158,
+            0.05436221112535888
+          ],
+          "df": 2,
+          "mean": 0.04151250774934523,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.005172701704592588,
+          "se": 0.0029864607215841672,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.046543446729912175,
+            0.03620883406010966,
+            0.04178524245801385
+          ]
+        }
+      }
+    },
+    "validation_bpb": {
+      "H_E1a": {
+        "contrast_largest_minus_smallest_budget": {
+          "ci": [
+            0.0011833264729001795,
+            0.004320645753376379
+          ],
+          "df": 2,
+          "mean": 0.0027519861131382792,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.0006314704828231202,
+          "se": 0.00036457965324323145,
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.0020700564742501815,
+            0.0028693800346968334,
+            0.0033165218304678223
+          ]
+        },
+        "means_strictly_increasing": true,
+        "verdict": "supported"
+      },
+      "H_E1b": {
+        "category_at_largest_budget": "AR-ref_better",
+        "category_at_smallest_budget": "AR-ref_better",
+        "verdict": "contradicted"
+      },
+      "crossover": {
+        "crossings": [],
+        "shape": "all_positive"
+      },
+      "crossover_bootstrap": {
+        "crossover_tokens_percentiles_conditional_on_crossing": {
+          "p2.5": null,
+          "p50": null,
+          "p97.5": null
+        },
+        "fraction_all_negative": 0.0,
+        "fraction_all_positive": 1.0,
+        "fraction_with_crossover_in_range": 0.0,
+        "method": "exact enumeration of all 3^3 = 27 equally likely seed resamples",
+        "n_seeds": 3,
+        "note": "percentiles are over resamples whose mean curve crosses zero inside the tested range; with n = 3 the bootstrap distribution is coarse (at most 10 distinct seed multisets).",
+        "resamples": 27,
+        "seeds": [
+          "6",
+          "7",
+          "8"
+        ]
+      },
+      "mean_curve": {
+        "log_tokens": [
+          18.299695145562033,
+          18.87357890529516,
+          19.120438983226688
+        ],
+        "mean_delta": [
+          0.04179323464331778,
+          0.04299996474713604,
+          0.04454522075645606
+        ]
+      },
+      "outcome_table": {
+        "outcome": "exposure_explains_fixed_time_advantage",
+        "paper_text_template": "At equal tokens AP-Q is not better even at 88.6M; the fixed-time advantage is explained by extra exposure."
+      },
+      "per_cell": {
+        "time_300s": {
+          "ci": [
+            -0.012415792045660366,
+            0.0035540279654764926
+          ],
+          "df": 2,
+          "mean": -0.004430882040091936,
+          "n": 3,
+          "same_sign_seeds": "all_negative",
+          "sd": 0.0032143588367901923,
+          "se": 0.00185581093969287,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            -0.0037586104365190387,
+            -0.007928210797065294,
+            -0.001605824886691476
+          ]
+        },
+        "tokens_088604672": {
+          "ci": [
+            0.03428673977384934,
+            0.04929972951278622
+          ],
+          "df": 2,
+          "mean": 0.04179323464331778,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.0030217708277450323,
+          "se": 0.0017446202008279527,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.04197781238175158,
+            0.03868340584408059,
+            0.04471848570412118
+          ]
+        },
+        "tokens_157286400": {
+          "ci": [
+            0.034055607653193085,
+            0.051944321841079
+          ],
+          "df": 2,
+          "mean": 0.04299996474713604,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.0036005882651492594,
+          "se": 0.002078800604124933,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.04249612481376919,
+            0.039677833112864436,
+            0.0468259363147745
+          ]
+        },
+        "tokens_201326592": {
+          "ci": [
+            0.0364230710172152,
+            0.05266737049569692
+          ],
+          "df": 2,
+          "mean": 0.04454522075645606,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "sd": 0.0032696052641614536,
+          "se": 0.0018877074794074328,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.04404786885600176,
+            0.04155278587877742,
+            0.048035007534589
+          ]
+        }
+      }
+    }
+  },
+  "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+  "runs_root": "results/camera_ready_2026/amendment1/E1",
+  "runs_used": 24,
+  "schedule_checks": [
+    {
+      "fixed_time_cell": "time_300s",
+      "fixed_time_tokens": {
+        "6": 158334976,
+        "7": 157679616,
+        "8": 158334976
+      },
+      "metrics": {
+        "heldout_bpb": {
+          "ci": [
+            -0.0013806641974517789,
+            0.0012115238774366782
+          ],
+          "df": 2,
+          "mean": -8.457016000755029e-05,
+          "n": 3,
+          "same_sign_seeds": "mixed",
+          "schedule_effect_detected": false,
+          "sd": 0.0005217480622404782,
+          "se": 0.00030123138418370574,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            -0.0002075656001410131,
+            0.000487686927796549,
+            -0.0005338318076781867
+          ]
+        },
+        "validation_bpb": {
+          "ci": [
+            -0.0007870842042762495,
+            0.00044874626252297827
+          ],
+          "df": 2,
+          "mean": -0.00016916897087663566,
+          "n": 3,
+          "same_sign_seeds": "mixed",
+          "schedule_effect_detected": false,
+          "sd": 0.00024874435522506926,
+          "se": 0.00014361262044859365,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            4.81213819354398e-05,
+            -0.0001151413739386431,
+            -0.0004404869206267037
+          ]
+        }
+      },
+      "recipe": "AP-Q",
+      "token_cell": "tokens_157286400",
+      "token_cell_tokens": 157286400
+    },
+    {
+      "fixed_time_cell": "time_300s",
+      "fixed_time_tokens": {
+        "6": 88080384,
+        "7": 87949312,
+        "8": 88080384
+      },
+      "metrics": {
+        "heldout_bpb": {
+          "ci": [
+            0.0004598250366025117,
+            0.0033472466457435887
+          ],
+          "df": 2,
+          "mean": 0.0019035358411730503,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "schedule_effect_detected": false,
+          "sd": 0.0005811718077228891,
+          "se": 0.0003355396996342315,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.002112507907127359,
+            0.0023513257146321465,
+            0.0012467739017596458
+          ]
+        },
+        "validation_bpb": {
+          "ci": [
+            -0.0002959794413972766,
+            0.0018483005092631238
+          ],
+          "df": 2,
+          "mean": 0.0007761605339329236,
+          "n": 3,
+          "same_sign_seeds": "all_positive",
+          "schedule_effect_detected": false,
+          "sd": 0.00043159442017196747,
+          "se": 0.0002491811546670259,
+          "seeds": [
+            6,
+            7,
+            8
+          ],
+          "t_critical": 4.302652729749456,
+          "values": [
+            0.00043129480111803176,
+            0.0012601611510321131,
+            0.000637025649648626
+          ]
+        }
+      },
+      "recipe": "AR-ref",
+      "token_cell": "tokens_088604672",
+      "token_cell_tokens": 88604672
+    }
+  ],
+  "seeds": [
+    6,
+    7,
+    8
+  ],
+  "synthetic": false,
+  "token_budgets": [
+    88604672,
+    157286400,
+    201326592
+  ]
+}

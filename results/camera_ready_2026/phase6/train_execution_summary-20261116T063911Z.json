@@ -1,0 +1,37 @@
+{
+  "completed": [
+    "p6-arref-tokens201326592-seed6-drift",
+    "p6-baseline-tokens201326592-seed6",
+    "p6-baseline-tokens201326592-seed7",
+    "p6-baseline-tokens201326592-seed8",
+    "p6-cmaes-tokens201326592-seed6",
+    "p6-cmaes-tokens201326592-seed7",
+    "p6-cmaes-tokens201326592-seed8",
+    "p6-gpt_a22-tokens201326592-seed6-drift",
+    "p6-gpt_a24-tokens201326592-seed6",
+    "p6-gpt_a24-tokens201326592-seed7",
+    "p6-gpt_a24-tokens201326592-seed8",
+    "p6-gpt_a25-tokens201326592-seed6",
+    "p6-gpt_a25-tokens201326592-seed7",
+    "p6-gpt_a25-tokens201326592-seed8",
+    "p6-motpe-tokens201326592-seed6",
+    "p6-motpe-tokens201326592-seed7",
+    "p6-nsgaii-tokens201326592-seed6",
+    "p6-nsgaii-tokens201326592-seed7",
+    "p6-nsgaii-tokens201326592-seed8",
+    "p6-opus_a23-tokens201326592-seed6-drift",
+    "p6-rs-tokens201326592-seed6",
+    "p6-rs-tokens201326592-seed7",
+    "p6-rs-tokens201326592-seed8",
+    "p6-tpe-tokens201326592-seed6",
+    "p6-tpe-tokens201326592-seed7",
+    "p6-tpe-tokens201326592-seed8"
+  ],
+  "format": "autopareto_phase6_execution_summary_v1",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recorded_utc": "2026-11-16T13:34:03.117127+00:00",
+  "reported_failed": [
+    "p6-motpe-tokens201326592-seed8"
+  ],
+  "stage": "train"
+}

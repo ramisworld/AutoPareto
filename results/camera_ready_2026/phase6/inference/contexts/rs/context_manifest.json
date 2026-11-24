@@ -1,0 +1,9 @@
+{
+  "derived_definitions_equal_source": true,
+  "mode": "native",
+  "prepare_sha256": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+  "recipe": "rs",
+  "source": "results/candidates/random-search-seed42-20260805/0010-train.py",
+  "source_sha256": "a30482c38ad719131dcfef99ca9ba507ae1ec04eee33039e984f55b2cf029bba",
+  "train_sha256": "a30482c38ad719131dcfef99ca9ba507ae1ec04eee33039e984f55b2cf029bba"
+}

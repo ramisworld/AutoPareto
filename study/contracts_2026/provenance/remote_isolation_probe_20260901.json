@@ -1,0 +1,19 @@
+{
+  "schema": "autopareto_remote_isolation_probe_v1",
+  "pod_id": "07nxx55segy6z5",
+  "hostname": "f8f382cc4375",
+  "endpoint": "63.141.33.108:22076",
+  "observed": {
+    "bubblewrap": false,
+    "docker": false,
+    "podman": false,
+    "nsjail": false,
+    "firejail": false,
+    "proot": false,
+    "unshare_user_map_root_status": 1,
+    "unshare_mount_status": 1,
+    "study_harness_present_at_workspace_autopareto": false,
+    "inference_adapter_sha256": "ed63106537aed1276a0bf9d9788940e747b9d27253973b4e98f4cb9983f82161"
+  },
+  "conclusion": "No enforceable candidate filesystem/process isolation boundary is available; remote scientific execution must fail closed until a clean container or bwrap-capable pod is provisioned."
+}

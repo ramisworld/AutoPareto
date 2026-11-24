@@ -1,0 +1,2 @@
+{"attempt": 1, "event": "attempt_started", "load": ["4.56", "3.50", "3.31"], "run_id": "a1pilot-opus_a27-time300s-seed6", "utc": "2026-11-17T03:44:09.718167+00:00"}
+{"attempt": 1, "e1_comparability": null, "event": "attempt_finished", "failures": [], "run_id": "a1pilot-opus_a27-time300s-seed6", "status": "completed", "timing_anomaly_s": 0, "utc": "2026-11-17T03:51:25.248882+00:00"}

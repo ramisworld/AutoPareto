@@ -1,0 +1,15 @@
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/lowering.py:7095: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+/usr/local/lib/python3.12/dist-packages/torch/_inductor/lowering.py:7095: UserWarning: 
+Online softmax is disabled on the fly since Inductor decides to
+split the reduction. Cut an issue to PyTorch if this is an
+important use case and you want to speed it up with online
+softmax.
+
+  warnings.warn(
+{"label": "pilot-opus23-s6-native-corr", "mode": "native", "status": "correctness_only", "hard_mismatches": 0, "token_agreement": 1022, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 16.4}

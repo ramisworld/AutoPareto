@@ -1,0 +1,135 @@
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'adjunct_island' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/adjunct_island/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:38 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'anaphor_gender_agreement' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/anaphor_gender_agreement/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:40 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'anaphor_number_agreement' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/anaphor_number_agreement/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:43 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'animate_subject_passive' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/animate_subject_passive/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:45 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'animate_subject_trans' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/animate_subject_trans/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:48 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'causative' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/causative/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:51 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'complex_NP_island' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/complex_NP_island/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:53 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'coordinate_structure_constraint_complex_left_branch' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/coordinate_structure_constraint_complex_left_branch/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:56 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'coordinate_structure_constraint_object_extraction' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/coordinate_structure_constraint_object_extraction/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:04:58 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:01 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:03 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_irregular_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_irregular_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:06 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_irregular_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_irregular_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:08 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_with_adj_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_with_adj_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:11 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_with_adj_irregular_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_with_adj_irregular_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:13 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_with_adj_irregular_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_with_adj_irregular_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:16 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'determiner_noun_agreement_with_adjective_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/determiner_noun_agreement_with_adjective_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:18 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'distractor_agreement_relational_noun' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/distractor_agreement_relational_noun/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:21 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'distractor_agreement_relative_clause' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/distractor_agreement_relative_clause/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:24 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'drop_argument' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/drop_argument/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:26 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'ellipsis_n_bar_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/ellipsis_n_bar_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:29 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'ellipsis_n_bar_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/ellipsis_n_bar_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:31 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'existential_there_object_raising' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/existential_there_object_raising/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:34 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'existential_there_quantifiers_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/existential_there_quantifiers_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:37 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'existential_there_quantifiers_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/existential_there_quantifiers_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:39 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'existential_there_subject_raising' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/existential_there_subject_raising/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:42 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'expletive_it_object_raising' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/expletive_it_object_raising/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:44 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'inchoative' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/inchoative/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:47 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'intransitive' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/intransitive/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:50 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'irregular_past_participle_adjectives' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/irregular_past_participle_adjectives/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:52 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'irregular_past_participle_verbs' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/irregular_past_participle_verbs/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:55 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'irregular_plural_subject_verb_agreement_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/irregular_plural_subject_verb_agreement_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:05:57 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'irregular_plural_subject_verb_agreement_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/irregular_plural_subject_verb_agreement_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:00 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'left_branch_island_echo_question' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/left_branch_island_echo_question/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:02 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'left_branch_island_simple_question' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/left_branch_island_simple_question/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:05 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'matrix_question_npi_licensor_present' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/matrix_question_npi_licensor_present/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:07 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'npi_present_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/npi_present_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:10 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'npi_present_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/npi_present_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:12 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'only_npi_licensor_present' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/only_npi_licensor_present/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:15 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'only_npi_scope' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/only_npi_scope/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:18 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'passive_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/passive_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:20 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'passive_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/passive_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:23 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_c_command' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_c_command/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:26 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_case_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_case_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:29 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_case_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_case_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:31 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_domain_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_domain_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:34 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_domain_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_domain_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:37 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_domain_3' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_domain_3/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:39 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'principle_A_reconstruction' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/principle_A_reconstruction/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:42 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'regular_plural_subject_verb_agreement_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/regular_plural_subject_verb_agreement_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:45 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'regular_plural_subject_verb_agreement_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/regular_plural_subject_verb_agreement_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:47 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sentential_negation_npi_licensor_present' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/sentential_negation_npi_licensor_present/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:50 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sentential_negation_npi_scope' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/sentential_negation_npi_scope/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:52 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'sentential_subject_island' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/sentential_subject_island/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:55 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'superlative_quantifiers_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/superlative_quantifiers_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:57 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'superlative_quantifiers_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/superlative_quantifiers_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:06:59 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'tough_vs_raising_1' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/tough_vs_raising_1/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:02 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'tough_vs_raising_2' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/tough_vs_raising_2/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:05 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'transitive' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/transitive/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:07 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_island' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_island/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:10 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_questions_object_gap' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_questions_object_gap/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:12 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_questions_subject_gap' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_questions_subject_gap/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:15 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_questions_subject_gap_long_distance' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_questions_subject_gap_long_distance/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:18 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_vs_that_no_gap' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_vs_that_no_gap/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:20 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_vs_that_no_gap_long_distance' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_vs_that_no_gap_long_distance/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:23 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_vs_that_with_gap' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_vs_that_with_gap/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:26 2026).
+Using the latest cached version of the dataset since nyu-mll/blimp couldn't be found on the Hugging Face Hub (offline mode is enabled).
+Found the latest cached dataset configuration 'wh_vs_that_with_gap_long_distance' at /root/phase6_lmeval_cache/hf/datasets/nyu-mll___blimp/wh_vs_that_with_gap_long_distance/0.0.0/877fba0801ffb7cbd8c39c1ff314a46f053f6036 (last modified on Mon Nov 16 08:07:29 2026).
+{"frozen_nospace_strict": 0.7254626865671642, "lmeval_space_argmax": 0.7368955223880597, "space_strict": 0.7367910447761195, "nospace_argmax": 0.7255671641791045, "configs": 67, "pairs": 67000, "ties": {"nospace": 7, "space": 7}, "frozen_reported": 0.7254776119402985, "lmeval_reported": 0.7368805970149256}

@@ -1,0 +1,161 @@
+6bcb69e6036d64bb0eca9b5b07d0b0fde1c58abf 2026-08-28T15:33:00+12:00 Correct abstract comparison wording
+fa54db593b35d27913cfe1ce4abb32430104114c 2026-08-28T15:20:32+12:00 Publish professor-ready AutoPareto research state
+e74771d9ffb313cce5e8b7ee629534f4cb63815a 2026-08-28T14:47:03+12:00 Document and package verified AutoPareto results
+5bf86b572d5a729aaad0163103cf15a7b42797a9 2026-08-17T19:12:19+12:00 Add append-only recovery for unstable deployment workloads
+d8131bdb9c7651dff15fd20bf04a63ec8985f26a 2026-08-17T13:35:55+12:00 Accept terminal partial stability failures as evidence
+3e3645c88fa11c45959781e61978092b69eab268 2026-08-17T10:41:16+12:00 Freeze stabilized deployment study and evidence
+8f330a862ca079fce4f3d8721d769acac6984384 2026-08-12T14:18:57+12:00 record primary AutoPareto confirmation results
+7813202ac807c08e68c4079e944775bcd3f5a787 2026-08-12T03:11:04+12:00 Exclude workspace temp files from Pod sync
+9cb262ecc81f04d6abc60a33f9e8e96b262a2894 2026-08-11T14:44:24+12:00 release reproducibility
+d2904b21846c94f04544e3ec06b66bdcde73b96e 2026-08-11T14:08:09+12:00 plots and protocol
+a1dcafc9b9429cae698d67bd3f2cc2214c00f118 2026-08-11T14:08:05+12:00 measurement data
+d21fa50acb38ebb6a6ba6cfd86cf565d14c21b50 2026-08-11T14:08:01+12:00 initial results release
+cc756d112006d5abf03205ea6be9c562b887f9aa 2026-08-10T11:42:06+12:00 Freeze discovery evidence and confirmation plan
+e69f79cd1292a740ba63fea7730eedae0f28cd92 2026-08-07T10:19:19+12:00 Finalize MOTPE seed 42 evidence
+940fe4171601463c53561284235930204c349d62 2026-08-06T21:54:10+12:00 Finalize CMA-ES seed 42 evidence
+ea235e75f771ad52283fc7a9dec6d76f92371796 2026-08-06T16:43:38+12:00 Finalize TPE seed 42 evidence
+471674859cbebb57a2feb46543489b4849b02e9e 2026-08-06T12:24:25+12:00 Guard classical searches with GPU preflight
+8fdc6de7e020ed9db96c234ff56d701f8d0b72ca 2026-08-05T15:10:14+12:00 Ignore local safety and setup artifacts
+ea3b3d719ea90a49c4594831d1c9e9430d7ee61b 2026-08-05T15:09:41+12:00 Prepare classical comparisons and curate AutoPareto evidence
+b8eab2894a5f2592a3a6e80b74e9c39ced80d67e 2026-08-03T16:52:55+12:00 Clarify dashboard experiment identities
+02caa96cdbf3863e1ee54367c49c82bd875ed7b1 2026-08-03T02:37:01+12:00 Add seed-42 research case study dashboard
+92f85f495e78e06340bf84fafabac3957737a690 2026-07-31T16:28:38+12:00 Record remaining AutoPareto campaign readiness
+985544ce6ce702e94ff59c942ed27fb7a3780552 2026-07-31T16:28:03+12:00 Prepare reproducible post-seed42 evaluation
+ece3dbde0792ce1e51a0f4b19da66476d7761de2 2026-07-31T11:06:09+12:00 Adjudicate every BF16 cache failure in FP32
+962345d5c5b8ae857d08e0d8b4f6870da9dbb146 2026-07-30T22:50:21+12:00 Record missing Seed-42 remote artifacts
+d358f399b30d2c668c7fabef1ec21bf803c207c9 2026-07-30T22:42:53+12:00 Adjudicate BF16 cache drift in FP32
+7dbdb23e1f7c98ad131eb22dff387af6c508ea73 2026-07-30T16:45:29+12:00 Align Seed-42 handoff with corrected continuation
+4843940a56daf9b1640db41743659f4374ae5b7b 2026-07-30T16:44:21+12:00 Record corrected Seed-42 continuation state
+8548308fc8437ff0120396fe158b377a8dbd4164 2026-07-30T16:38:29+12:00 Pause AutoPareto after inference failures
+984d3f4e471d3b91cb41d506d0acc0737c20fd61 2026-07-30T14:43:56+12:00 Audit evaluator-corrected cached remeasurement
+8ef7ab295d5cb4afb501fa10bc770b4e6556bdf5 2026-07-29T19:00:12+12:00 Align canonical cache correctness reference
+3825cc34c76d88c2de05147d40cabbb79ddd7024 2026-07-28T14:46:52+12:00 Clarify seed-42 checkpoint preflight
+a2528dc2bed9d2931936ad41174237f5ace96a3f 2026-07-28T14:05:50+12:00 Preserve publication goals and resumable handoff
+a32a09f5409aeee0e82192330e316e8c7922df27 2026-07-28T11:18:47+12:00 Record seed-42 preflight infrastructure blocker
+c200ccbe08b88c199e73715849187affd967eabe 2026-07-27T21:12:20+12:00 Harden AutoPareto campaign controls
+b58fd540fc4fd38ad037c7f3a82e338c61a8b91a 2026-07-27T19:12:26+12:00 Polish dashboard evidence and presentation
+37fb6562f5cdbf1b039d574b65c3ba8f817350d4 2026-07-27T17:51:45+12:00 Mark AutoPareto seed 42 ready
+f233ef7961c128c038150aff35468185b84f56ff 2026-07-27T17:48:58+12:00 Preserve remote datasets during source sync
+b69cecfc05b70dfec3271b4247d02ef6472d331a 2026-07-27T17:48:39+12:00 Complete pre-AutoPareto evidence and dashboard
+3b7de71a8417ee7ee62eebda2788cfb450ccab0e 2026-07-27T17:38:24+12:00 Pull final study analyses and manifests
+759e3bdfb1abb679ed338c83a406c56235ed7559 2026-07-27T17:37:33+12:00 Summarize deployment evidence and preserve representatives
+73b6b2aa2d9004d8f02f09e24339efeb8ee21dec 2026-07-27T17:00:35+12:00 Support normalized legacy training evidence
+3799d11e824886292d13f952f81749c6f2bc32da 2026-07-27T16:59:21+12:00 Audit deployment checkpoint availability
+86cafb022a51276d56f00a1e8df441e2910d9938 2026-07-27T15:00:37+12:00 Guard checkpoint storage before experiments
+d26d85aa699f5ad094c7c75715982b8c000000dd 2026-07-27T14:37:23+12:00 Freeze confirmation and deployment study
+a9e51a640d6803a90cc31edfd5eccab67b7d8fb3 2026-07-26T15:35:03+12:00 Prevent stale dashboard assets
+7a6decd19c567c18dd3cd1eb6f1b8b6e9dd627e9 2026-07-26T15:29:27+12:00 Preserve Explore experiment selection
+85e6b2973f5fdeb66f569d41e97aa3cb73bd3e7d 2026-07-26T15:25:39+12:00 Repair research dashboard presentation
+65120a553cd6a8288f82b542db444501827d62f4 2026-07-26T13:57:31+12:00 Complete preregistered AutoPareto preparation
+924067760c36b3a80e545639cbf6e949db2460d9 2026-07-25T23:25:41+12:00 Prepare reproducible three-seed optimizer study
+95fb9cee478f3025b2372da8f3297b604249ef25 2026-07-24T18:16:49+12:00 record five-attempt AutoResearch diagnostic
+75af7b7ec8d170e59aaac5b68fa154c5a5117a5b 2026-07-24T15:21:41+12:00 prepare robust five-attempt diagnostic
+3d22539f67297a3fe5f171ed4f515f1bc53fdb09 2026-07-24T02:02:14+12:00 Preregister five-attempt AutoResearch diagnostic
+42095f0bbf13cbcf5347fa5dea56b3d7e79f8b8c 2026-07-23T21:40:34+12:00 Checkpoint completed AutoResearch seed-42 campaign
+a2680be0096698894f54a22d60f0dc2d4eeff104 2026-07-23T13:19:36+12:00 Record new Pod AutoResearch readiness
+9d905ce62f6b837ac9aca1a00bd8f06ffb2abb6c 2026-07-23T13:15:04+12:00 Point helpers at new A40 pod
+7133809fbb685eed881aa2e87a238c177be5c620 2026-07-23T11:32:23+12:00 Add safe runner metadata preflight
+093f60526d7db04ad466d6b35012106be77dcfb8 2026-07-23T02:00:12+12:00 Checkpoint AutoResearch attempts 1-5
+4c302e500dc8431598ab2d5e8d5899b96b908d4d 2026-07-22T23:44:41+12:00 Complete seed-42 AutoResearch readiness gate
+e657a6739e3e9bbb268a84d8de47c0682250d380 2026-07-22T23:19:50+12:00 Add guarded RunPod results restoration
+6d47913cad8c9003e6c523f30117b6c51a036a4c 2026-07-22T23:18:34+12:00 Point RunPod helpers at active A40
+29dde211aac37fad70ee26bc25529285efdaa03d 2026-07-22T23:04:09+12:00 Harden AutoResearch campaign readiness
+66e118a29b1f71e8e77f79d4d8ca5bf2088c1b66 2026-07-22T22:40:28+12:00 Stabilize live training loss chart
+dde434116f3c7076a19998107788d4b98027fdfb 2026-07-22T22:22:52+12:00 Fix live training telemetry and RunPod relay
+3a417939ba8413601cb7c0fa5f6128e8e2d07e10 2026-07-22T17:37:55+12:00 Correct cached legacy metric classification
+adf5fc000bec24e7f9342b1a1472f75d631c4dd0 2026-07-22T17:29:38+12:00 Record clean five-seed cached baselines
+cc029fdb4381b32012d01bb4df25c08183f03cf7 2026-07-22T16:33:05+12:00 Archive legacy dashboard data before clean baselines
+f71ad8aa0be4e5b5f037266dcd4549d80133c595 2026-07-22T16:02:01+12:00 Document fixed evaluator traceability
+9e1650de0bd1ec0529f6a2c65b3e0492b4a3442e 2026-07-22T16:01:44+12:00 Keep evaluator bytes fixed across synchronized runs
+19cd8276038bf257ba61ee5513dd368a9b99ce19 2026-07-22T16:00:47+12:00 Record A40 cached baseline measurements
+87568faa563396a0fb714c51af90c5cf9f1f436a 2026-07-22T15:56:12+12:00 Test legacy archive after cached rebenchmarking
+bf0c1f6894cdb2fe9cb7f84612e7456e650abb92 2026-07-22T15:54:19+12:00 Record evaluator commit on synchronized Pods
+c1af0ef8ec22a2e9338d021f48aae9137aae4576 2026-07-22T15:48:31+12:00 Fix cached rebenchmark repetition storage
+357c390d2feae916b418e258464cd152439a6523 2026-07-22T15:43:18+12:00 Calibrate cached correctness on A40
+b2ff96f7e44c3802b2fe0e5c931ac5cc14465bdc 2026-07-22T15:08:04+12:00 Point RunPod workflow at new A40 pod
+f7769d0abf9266fc16b6f594f4d8ac45b1f07c56 2026-07-22T01:25:26+12:00 Record research-console visual update
+7cb805a7fcf03700567f79b5b9e8f47895939eb2 2026-07-22T01:25:08+12:00 Restyle dashboard as a premium research console
+5f7615c499a2573f2d5a16312677960009010e6c 2026-07-22T00:53:32+12:00 Record dashboard usability fixes
+8b873c6640b8e4fb0edda2387331facb64227518 2026-07-22T00:53:14+12:00 Fix presentation exit and stale dashboard state
+89a4cc7059f85d6a61c1c68126d7f7a6294c5bc4 2026-07-22T00:43:48+12:00 Record dashboard redesign state
+ad5884bb4209097c11862010c8130e9000217598 2026-07-22T00:36:02+12:00 Redesign dashboard for live research storytelling
+f3d19dd9cb6d7314a0b6a7c05953eadd897cbdb8 2026-07-21T21:36:42+12:00 Use dependency-free local dashboard command
+7a893d1095c7fa23d39d5b01702891776b3d59f6 2026-07-21T21:36:14+12:00 Record cached remeasurement handoff
+a0c54128c2b56801e940677ce916643abc99aac9 2026-07-21T21:36:02+12:00 Add guarded cached checkpoint remeasurement
+e3c42a68eb9607567094ad98cb3f091d7dd8d58f 2026-07-21T21:34:40+12:00 Record scientific refactor state
+6b4af1d09fd25f85d8385b5030576bbfffcd9cda 2026-07-21T21:33:49+12:00 Add live and replay research dashboard
+6761228a57cf74e2abf88eea1dad8b888233f34e 2026-07-21T21:33:45+12:00 Freeze controlled research protocol
+da4da1c184338e383c6e016231091c6c94cd86d5 2026-07-21T21:33:39+12:00 Add cached evaluator and scientific result model
+22b3f12a03c1b3ff8995bcafe877c07929385d11 2026-07-20T18:27:47+12:00 Record five-seed A40 baseline
+fe87792b9632bd9ec3b7d1b0b9e46f132cb24169 2026-07-20T17:08:52+12:00 Move execution to new A40 RunPod
+c119eeb235e2556d9bb956443398feb33108ec95 2026-07-20T02:18:46+12:00 Record completed A40 seed-0 baseline
+d06c0b5fd2ee346ab1d602ccfb8edce175be4583 2026-07-20T02:15:20+12:00 Harden RunPod PTY result framing
+5ea452c9d86a43ad4bebd507c5872f18249627ce 2026-07-20T02:00:27+12:00 Establish shared A40-compatible baseline
+237963673a65126d88dd83ebb28ad21f76e5aff2 2026-07-20T01:48:26+12:00 Use fixed async CUDA allocator for A40 runs
+9dca022215fb0924c2eff9d6278a639c0b87f29e 2026-07-20T01:43:07+12:00 Make isolated training imports deterministic
+807652151f1854931024edf0823799cde0a6c4a0 2026-07-20T01:40:24+12:00 Fix protected smoke test module path
+2dd6d84525e2a8ed417af18383813308d3fffb24 2026-07-20T01:24:34+12:00 Normalize ownership in cross-platform sync archives
+cefbc34b7bd9e0ba95a70a07322f1ebaaa9cf4a5 2026-07-20T01:23:19+12:00 Make RunPod PTY upload extraction reliable
+b3cd81437d9eae0091687b36e8a4018a10c08d5c 2026-07-20T01:21:58+12:00 Build protected AutoPareto experiment infrastructure
+228791fb499afffb54b46200aca536f79142f117 2026-03-25T17:07:37-07:00 Merge pull request #342 from kaizen-38/feat/bug-fix
+e6d79c123441a53d91bb8df7adf4db45cf120bf1 2026-03-20T19:13:39-07:00 Enhance README with more project context and links
+f32ab047a298737d459ac9ded1bc2fc399505159 2026-03-19T09:43:33-07:00 fix(analysis): define best_bpb before y-axis scaling
+32a1460f626e28479d427c033ee485bf5f86875a 2026-03-16T11:43:26-07:00 Merge pull request #301 from indianspeedster/master
+513fe6fceef9b37b6c24c8dc0f1050dee451c1ff 2026-03-16T11:28:48-07:00 add AMD ROCm fork to notable forks section
+c2450add72cc80317be1fe8111974b892da10944 2026-03-10T22:32:17-07:00 Guard against infinite loop when no training shards exist, fix README typo
+0be1e4fdf9882ea3b387ff432f2547246fc556bc 2026-03-10T22:31:43-07:00 fix NaN loss not caught by fast-fail check
+ebf357841b7358ae106b2f7ac378f9ec97b975f6 2026-03-11T04:28:08Z fix(train): make NaN fast-fail check explicit
+09ebea439db47bf08f925fc1654dc30415a58c64 2026-03-10T21:34:40-06:00 Guard against infinite loop when no training shards exist, fix README typo
+c12eef778edafc89cd7ce036a7f500ddb5397a65 2026-03-09T16:00:55-07:00 Include beginner's guide to neural networks
+7004de03bd05cde617eca0b5cfe398ac02943484 2026-03-09T19:29:59Z hmmm
+b5ba8ac00d64d38fd5b69714fe398b61c56d8160 2026-03-09T23:51:02+08:00 fix NaN loss not caught by fast-fail check
+068d93da75aa45f72ba482046f108241aaaf1b8e 2026-03-09T05:11:07Z clarify that results.tsv should not be committed, leave untracked
+c92bee55ebc339e8b1501f6b5c9cfb54835a9de8 2026-03-09T04:49:15Z some docs on what to play with to make autoresearch better on smaller computers
+2224cd7cae18f3e8e168a452f474592cfce1c2bd 2026-03-08T23:25:53Z reshuffle readme a bit and link to tiny stories for apple silicon guidance
+f16ece488fd8a9c363ac26bd7ca7e14abfef554f 2026-03-08T23:16:30Z clarification to baseline run instruction, there was some language from a previous version that wasn't fully cleaned up
+9264224a3cd92dd4efe39cc173672c9a07b78d12 2026-03-08T17:06:29Z add notable fork mlx
+6c087cb5e2185879fc7fe0426336b95e5fb65275 2026-03-08T16:27:48Z revert interrupted softcap experiment (restore softcap=15)
+fedfef398bf89ad5c1581cecb1aa5108b71f8f5b 2026-03-08T16:22:01Z add experiment results log (125 experiments, best val_bpb=0.969686)
+216eeb8d6efb610326af4afce85bd95be677a95f 2026-03-08T15:50:16Z softcap 15 to 17
+438a26e2c330743b9418bb5a861ff9af2f18fc89 2026-03-08T15:03:36Z warmdown 0.7 to 0.75
+b1d50048d9aa5faebb66b1061754b7926b7a78df 2026-03-08T14:23:02Z embedding LR 0.8 to 0.9 (re-test with WD)
+637f82f215a133d0aeb65073be6fb3cfc6f28cc3 2026-03-08T13:54:07Z VE WD 0.002 to 0.003
+73c77cad75b487a591a157fc3958b67d69475d00 2026-03-08T13:48:25Z VE WD 0.001 to 0.002
+1a85362b26476799b633a8d1e538a09e6d341d65 2026-03-08T13:42:34Z tiny VE WD 0.001
+ece91016aa88b9e8a8384de96c4e2b5c403d68c3 2026-03-08T13:30:56Z tiny embedding WD 0.001
+97dda8577f62fd3d52e4509c3e89a72f0fe7debc 2026-03-08T12:44:03Z init scale 0.7 to 0.68
+f5979a746462b104064955d0c75df2bb35ed56f1 2026-03-08T10:14:06Z init scale 0.7x
+41d50a8539c7bebb84926f18b8c3331861d8fcf3 2026-03-08T10:02:16Z reduce transformer init scale by 0.8x
+264a05b48ff71d3b6bb17a98e0c51fb0f61c872a 2026-03-08T07:23:33Z add small WD 0.01 to lm_head (AdamW)
+7f63c17076a3bdd65f28f513fa888165ab0a8ea6 2026-03-08T07:05:48Z unembedding LR 0.006 to 0.005
+a7aa309dd42252ae2479cac972dbad86ccc0a410 2026-03-08T05:29:56Z muon momentum warmup 300 to 200 steps
+aa8f408f399310bc9268a256eb6153f4c685d41b 2026-03-08T04:48:14Z unembedding LR 0.004 to 0.006
+772dada6cc7c3fd7dbc959d54917b57b379721c4 2026-03-08T04:36:38Z FINAL_LR_FRAC 0.0 to 0.05 (small LR floor)
+0640555a1fc34c6fd45cfa3ba270b6753f800658 2026-03-08T04:30:50Z x0_lambda init 0.1 to 0.05
+7d047e42f42cafb0cb2609d53ce0b2bd0590afce 2026-03-08T04:19:15Z embedding LR 0.6 to 0.8
+59e9dd9aab75d2a3e46e32c9458beb9a0a2d147f 2026-03-08T04:13:30Z RoPE base frequency 10K to 200K
+7da0b673a1ad7d7866b1ef681afdcf44e2651563 2026-03-08T04:07:44Z short window 1/8 context (256 tokens instead of 1024)
+8363d52e8d2210b91f7d088b7765df7c75624659 2026-03-08T04:01:58Z SSSSL window pattern (5:1 short:long ratio)
+4e6697f68d33bd4f632384709353643ddf0a52a5 2026-03-08T03:56:11Z warmdown 0.5 to 0.7 (more cooldown)
+7f2a65c9a5335adaa9fb3cf5f675c92102e8db26 2026-03-08T03:44:34Z depth 9 aspect_ratio 57 (extra layer, dim ~512)
+bea057bc083643799bb52655983f49533da9ff4d 2026-03-08T03:38:47Z halve batch size 524K to 262K for more steps in 5 min
+500114a035cb63a4fc1829036e064b22870c61b4 2026-03-07T14:17:45-08:00 Honor --download-workers instead of hardcoding 8 download workers
+7043095a183dd69b2d9062da2a730cfee0e3b48b 2026-03-07T22:15:52Z add macos fork
+777e4437905890a2be66bf4d0758c2f1da0a9368 2026-03-07T15:39:17-05:00 fix(prepare): honor --download-workers
+6fdefa7265d1cb2346e63c6f8b9824f5ff389a83 2026-03-07T20:09:51Z instruct the agent to also read README, should be good context
+b0d047425faf747e130b4758fd744e18a5f136f9 2026-03-07T19:46:27Z clarify note on platforms
+8a5c4869bdac309814d594466a95869e4c53950e 2026-03-07T19:00:04Z bunch of small changes to docs and files, and a teaser figure with a blooper :)
+032d2036954a6c41a268005e6a50fc5b18f4a0a7 2026-03-07T17:59:52Z minor tweaks, pin val shard
+47ec1ade0a42ef929c3d2ac9be92cc6475966584 2026-03-07T17:02:43Z tweaks to docs for both humans and agents
+ada84e52472409dc23ea421a6db245c57950a7da 2026-03-07T16:29:59Z soften the language just a bit
+bd7553449414cca25a48efc6572f3479f4a80d23 2026-03-07T08:23:51-08:00 Fix agent crash blindspot by forcing it to read traceback
+bdf0c0d5201795fcbc0ec20487a03561b407cdcc 2026-03-07T14:46:43+05:30 Allow agent to diagnose crashes by reading the python stack trace
+bb54287479ef4079adfc472287d1bd4b40c928fe 2026-03-06T21:59:49-08:00 Merge pull request #2 from marcinbogdanski/fix/fa3-non-hopper-fallback
+17b480aa6511e20a71c60b9541d2491263eab921 2026-03-07T01:31:48Z add fallback FA3 kernel for non-Hopper GPUs
+9c383a8c94d1fc047d43a592dbd6327d22ccfac0 2026-03-06T22:36:37Z add analysis notebook for convenience
+69eb7f9b99c128544dfed6d3e120d1bc1e44a471 2026-03-06T22:36:20Z cleanup more references to spawn.sh
+ae81d559043d2692ac085b733d32bcbe172cf57b 2026-03-06T22:08:45Z remove spawn.sh reference from README (file was deleted)
+4ab35a919b47ef66e508b400635820a7febb1ea1 2026-03-06T22:06:12Z also ref twitter
+1e207aaf2131df2a4efde060e7c38f5d98935bc3 2026-03-06T22:03:27Z dam, erase experimental file from before that snuck through in my purge
+2a70301b103fcddae6efeaf3cceaa5f88f5fdb24 2026-03-06T22:02:44Z small tweak readme
+b11d6f283f866eb7e10fb776a4b8553fef873fd5 2026-03-06T21:58:52Z initial commit

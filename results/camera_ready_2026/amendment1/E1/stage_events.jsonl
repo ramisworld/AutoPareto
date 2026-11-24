@@ -1,0 +1,50 @@
+{"event": "stage_started", "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc", "resume": false, "stage": "E1", "utc": "2026-11-07T12:00:01.317702+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens088604672-seed6", "utc": "2026-11-07T12:00:01.372921+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens088604672-seed6", "status": "completed", "utc": "2026-11-07T12:12:26.896336+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens088604672-seed6", "utc": "2026-11-07T12:12:26.926790+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens088604672-seed6", "status": "completed", "utc": "2026-11-07T12:20:37.666530+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens157286400-seed6", "utc": "2026-11-07T12:20:37.694519+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens157286400-seed6", "status": "completed", "utc": "2026-11-07T12:30:57.387414+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens157286400-seed6", "utc": "2026-11-07T12:30:57.416127+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens157286400-seed6", "status": "completed", "utc": "2026-11-07T12:47:00.483136+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens201326592-seed6", "utc": "2026-11-07T12:47:00.510391+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens201326592-seed6", "status": "completed", "utc": "2026-11-07T13:05:34.749579+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens201326592-seed6", "utc": "2026-11-07T13:05:34.778165+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens201326592-seed6", "status": "completed", "utc": "2026-11-07T13:17:17.186484+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-time300s-seed6", "utc": "2026-11-07T13:17:17.216920+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-time300s-seed6", "status": "completed", "utc": "2026-11-07T13:25:08.486362+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-time300s-seed6", "utc": "2026-11-07T13:25:08.534098+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-time300s-seed6", "status": "completed", "utc": "2026-11-07T13:33:44.067671+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens157286400-seed7", "utc": "2026-11-07T13:33:44.101182+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens157286400-seed7", "status": "completed", "utc": "2026-11-07T13:44:03.285509+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens157286400-seed7", "utc": "2026-11-07T13:44:03.331029+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens157286400-seed7", "status": "completed", "utc": "2026-11-07T14:00:10.157069+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens201326592-seed7", "utc": "2026-11-07T14:00:10.187843+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens201326592-seed7", "status": "completed", "utc": "2026-11-07T14:18:53.689079+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens201326592-seed7", "utc": "2026-11-07T14:18:53.720417+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens201326592-seed7", "status": "completed", "utc": "2026-11-07T14:30:37.765710+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-time300s-seed7", "utc": "2026-11-07T14:30:37.796756+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-time300s-seed7", "status": "completed", "utc": "2026-11-07T14:38:56.536954+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-time300s-seed7", "utc": "2026-11-07T14:38:56.575820+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-time300s-seed7", "status": "completed", "utc": "2026-11-07T14:48:00.012818+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens088604672-seed7", "utc": "2026-11-07T14:48:00.042495+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens088604672-seed7", "status": "completed", "utc": "2026-11-07T15:00:31.173772+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens088604672-seed7", "utc": "2026-11-07T15:00:31.205302+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens088604672-seed7", "status": "completed", "utc": "2026-11-07T15:08:59.132643+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens201326592-seed8", "utc": "2026-11-07T15:08:59.178789+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens201326592-seed8", "status": "completed", "utc": "2026-11-07T15:27:51.497678+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens201326592-seed8", "utc": "2026-11-07T15:27:51.532268+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens201326592-seed8", "status": "completed", "utc": "2026-11-07T15:40:10.243245+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-time300s-seed8", "utc": "2026-11-07T15:40:10.278287+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-time300s-seed8", "status": "completed", "utc": "2026-11-07T15:48:24.048797+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-time300s-seed8", "utc": "2026-11-07T15:48:24.091175+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-time300s-seed8", "status": "completed", "utc": "2026-11-07T15:57:17.154432+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens088604672-seed8", "utc": "2026-11-07T15:57:17.214324+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens088604672-seed8", "status": "completed", "utc": "2026-11-07T16:09:46.085401+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens088604672-seed8", "utc": "2026-11-07T16:09:46.117378+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens088604672-seed8", "status": "completed", "utc": "2026-11-07T16:18:08.006847+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-apq-tokens157286400-seed8", "utc": "2026-11-07T16:18:08.036554+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-apq-tokens157286400-seed8", "status": "completed", "utc": "2026-11-07T16:28:46.593422+00:00"}
+{"attempt": 1, "event": "attempt_started", "run_id": "e1-arref-tokens157286400-seed8", "utc": "2026-11-07T16:28:46.624584+00:00"}
+{"attempt": 1, "event": "attempt_finished", "failures": [], "run_id": "e1-arref-tokens157286400-seed8", "status": "completed", "utc": "2026-11-07T16:45:19.401469+00:00"}
+{"event": "stage_finished", "stage": "E1", "utc": "2026-11-07T16:45:19.407062+00:00"}

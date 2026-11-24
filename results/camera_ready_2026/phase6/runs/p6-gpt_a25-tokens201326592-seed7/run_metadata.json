@@ -1,0 +1,24 @@
+{
+  "format": "autopareto_phase1_run_metadata_v1",
+  "gpu_state_before_execution": {
+    "available": false,
+    "telemetry_errors": [
+      "NVML unavailable: ModuleNotFoundError: No module named 'pynvml'"
+    ]
+  },
+  "gpu_uuid": null,
+  "model_identifier": "autopareto_299",
+  "model_order_position": 12,
+  "pod_identifier": "25c8e71782f9",
+  "pod_start_time_utc": null,
+  "recorded_utc": "2026-11-16T09:44:00.179303+00:00",
+  "retried": false,
+  "seed": 7,
+  "software_versions": {
+    "git_commit": null,
+    "platform": "Linux-6.8.0-138-generic-x86_64-with-glibc2.39",
+    "python": "3.10.18",
+    "torch": "2.9.1+cu128",
+    "torch_cuda": "12.8"
+  }
+}

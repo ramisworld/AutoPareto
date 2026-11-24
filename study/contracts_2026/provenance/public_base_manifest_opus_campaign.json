@@ -1,0 +1,979 @@
+{
+  "a40": {
+    "calibration": {
+      "n_star": 85458944,
+      "path": "/var/lib/autopareto/pair_a_state/calibration/calibration.json",
+      "sha256": "211d0b74ed7751db17d738e8faabb9a9ad05912e98fa2b492c66885b6922efef",
+      "source_runs": 3,
+      "token_quantum": 524288
+    },
+    "gpu_model": "NVIDIA A40",
+    "gpu_uuid": "GPU-b74ec8bd-38c7-1555-5cb2-1244c55954d8",
+    "paired_baseline_checkpoints": {
+      "N": {
+        "path": "/var/lib/autopareto/pair_a_claude_opus55_baseline_attempt2/nonstudy_tests/n_smoke_artifacts/result.checkpoint.pt",
+        "sha256": "72d05e979d5dcf32a795931dcb579e27549fe57de2d72a7d8ab140e127d51667"
+      },
+      "T": {
+        "path": "/var/lib/autopareto/pair_a_claude_opus55_baseline_attempt2/nonstudy_tests/t_smoke_artifacts/result.checkpoint.pt",
+        "sha256": "f7ca17c624f8847e28a0d6abf9a33491023ea1bee72bf794fe7d8c6b343d43d9"
+      }
+    },
+    "rootfs_runtime": "/opt/autopareto_runtime/bin/python",
+    "ssh_host": "<pod-id>-<suffix>@ssh.runpod.io",
+    "study_venv": "/opt/autopareto_runtime",
+    "trusted_repository": "/opt/autopareto_trusted"
+  },
+  "continuation": {
+    "abandoned_unconsumed_invocation": {
+      "candidate_source_sha256": "0d1dcd8ce08705a81b89243fc5211c459308b896205541edfaff8d2dbb64532a",
+      "durable_receipt": {
+        "invocation_id": "pair-a-016-f6b218a7900c2b1d12570d3a7bbfae65",
+        "kept_unchanged": true,
+        "remote_state_root": "/var/lib/autopareto/pair_a_claude_opus55_t_seed3_continuation_20261105b",
+        "rerun_uses_a_new_remote_state_root": true,
+        "status": "FAILED"
+      },
+      "durable_receipt_verified_absent": false,
+      "global_position": 16,
+      "invocation_id": "pair-a-016-f6b218a7900c2b1d12570d3a7bbfae65",
+      "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-07",
+      "parent_source_sha256": "1f0130fc72949eff03c66912238932340d09941f8ebe3f70d8ff1aac0bf7e23a",
+      "reason": "protected-harness defect: training completed (1,475 updates), then the FP32 correctness adjudication sent FP32 tensors into the candidate's FlashAttention forward; the remote runner classified the failure origin as unknown (RemoteInfrastructureFailure) and the position was not consumed",
+      "remote_process_verified_absent": true,
+      "scientific_position_consumed": false
+    },
+    "amendment_record_file": {
+      "path": "<operator-local-path>",
+      "sha256": "bfa9ea7c079b3583d6b05c243f578b1b8a0e223912fc266e0e29716414ce5c49"
+    },
+    "amendments": [
+      {
+        "approval": "PI, 2026-11-05: fix the FP32 correctness-check bug after verifying the attention backend, test it on attempt 8's saved checkpoint, then rerun the exact same attempt 8 candidate with no new Scientist call",
+        "commit": "f2873fc",
+        "defect": "FP32 correctness adjudication of a candidate-supplied inference adapter used the candidate's own GPT.forward as the reference; that forward calls FlashAttention (registered kernels-community/flash-attn3, FlashAttnFwdSm80 on the A40), which rejects FP32 inputs, so any such candidate that missed the BF16 tolerance crashed the evaluator after training.",
+        "evidence": {
+          "backend_probe.json": "680b27536b974c67f14c79dbfe7046a44f9e6167c2f7ffb31c1d2e8773f95d93",
+          "folder": "<operator-local-path>",
+          "run_fixed/inference.json": "17bc9991467d444fae01311d31e72e1fdcf14a0b125fcad5b3899d773524b186",
+          "run_original/stderr.log": "ca22a40f9ac176bbfac24109bc072a44a87afea54b8813f8c5168d6844f11c13",
+          "unittest_fixed_full.log": "f4bfacad2f4a039a750f65f76fcbaa2642a50ab690f79863883285d07e580c4c"
+        },
+        "file": "study/contracts_2026/inference_benchmark.py",
+        "fix": "during the FP32 adjudication only, FlashAttention interfaces in the candidate module run FP32 inputs through an exact SDPA (MATH) stand-in with FlashAttention's causal mask, sliding window, GQA and scale semantics; half-precision calls still use the kernel; math-changing options are refused",
+        "new_sha256": "c9b632e6056317f76c5591baf0a37b1775dd955045893fb75e5d6826be7db365",
+        "old_sha256": "f05d47a17f1298f1c46521e31bef1ae7f5af81e7b95d671755252a96ee1edd79",
+        "prior_results_affected": "none: no completed result in either arm used a candidate-supplied adapter with FP32 adjudication (6 Codex FP32 adjudications all used the protected canonical adapter)",
+        "unchanged": [
+          "BF16 stage",
+          "FP32 and BF16 tolerances",
+          "correctness prompts and prefixes",
+          "decode steps",
+          "decode-speed and memory measurement",
+          "validation BPB",
+          "Pareto rules",
+          "canonical adapter path"
+        ]
+      },
+      {
+        "commit": "f2873fc, f915705, 83c4f81, b4facee",
+        "file": "study/contracts_2026/continuation.py",
+        "fix": "continuation support only, no study logic: an optional amendment record so a same-A40 continuation is not described as a hardware move; the prefix audit accepts a recorded candidate failure (no source registry row); a chained continuation keeps its predecessor's migration records; a manifest-pinned file hash moves only with a listed amendment",
+        "new_sha256": "5ffa255dce46ddfe2dbaf188ffe35c028437e9eed91dd5ceb6208d41ecdec5ae",
+        "old_sha256": "03425d4025d6529a1e5367bbb6fb5b54cfadff1082cee0bf89e2b1c608a7fdaf"
+      },
+      {
+        "commit": "f2873fc",
+        "file": "study/contracts_2026/tools/prepare_campaign_continuation.py",
+        "fix": "--amendment-record option",
+        "new_sha256": "2a7db2a96918af96f2b3872508adb69cb971f17b02c1009d99431cc7a7832c77",
+        "old_sha256": "b4b667dcc3e2d081ca8498b21da2ef536891b196d1b31ea7d6ac7e067f08f97c"
+      }
+    ],
+    "hardware_transition_after_global_position": 15,
+    "inherited_completed_positions": [
+      {
+        "bytes": 954726,
+        "campaign_attempt": 1,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": "60c1327e4652244a5d8be466502a98e1caf83cba0c192d44b8130dc51ce01e2b",
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-01",
+        "global_position": 2,
+        "parent_experiment_id": "baseline-calibration-new-a40-20260914-run1",
+        "path": "pair-a-fixed-time-seed3/position-002-pair-a-fixed-time-seed3.json",
+        "sha256": "7d903b23b13a141cad9b4e2de078c1468123fef1cf00192c678e3c921c91b493",
+        "status": "completed"
+      },
+      {
+        "bytes": 8440,
+        "campaign_attempt": 2,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": null,
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-02",
+        "global_position": 4,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-01",
+        "path": "pair-a-fixed-time-seed3/position-004-pair-a-fixed-time-seed3.json",
+        "sha256": "513404f72f2bb21b53fa541936d1d5c43c5eb680b6048954379b0492bdffe337",
+        "status": "scientific_failure"
+      },
+      {
+        "bytes": 1166241,
+        "campaign_attempt": 3,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": "d37c50f26b58a6d58e3bdf3bc5b8ca044d0e9cfa9b4934c3c29d71fd0b31f634",
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-03",
+        "global_position": 5,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-01",
+        "path": "pair-a-fixed-time-seed3/position-005-pair-a-fixed-time-seed3.json",
+        "sha256": "7e58e6654fcfc9f0fcf539d13a1c49edc47d8509f71bf4e1b605a25b374445bc",
+        "status": "completed"
+      },
+      {
+        "bytes": 1508007,
+        "campaign_attempt": 4,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": "9533a1ae889eb84828c01abcd4ea686d2a7d24e575ecf1585d7cbe9639f51b0c",
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-04",
+        "global_position": 7,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-03",
+        "path": "pair-a-fixed-time-seed3/position-007-pair-a-fixed-time-seed3.json",
+        "sha256": "1a32fa4122f54cc0a5ab4008a59353d661322312ebc94c8602122eb5d7573532",
+        "status": "completed"
+      },
+      {
+        "bytes": 1816241,
+        "campaign_attempt": 5,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": "a41460146ac8b0ab0bd59cd9a1070cec1785ee53176e8f76d24c95a650931528",
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-05",
+        "global_position": 10,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-04",
+        "path": "pair-a-fixed-time-seed3/position-010-pair-a-fixed-time-seed3.json",
+        "sha256": "2788d315e6559c62b6d4dc701492c822643f409f25e2c9a79f568a6e93b73894",
+        "status": "completed"
+      },
+      {
+        "bytes": 2171553,
+        "campaign_attempt": 6,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": "12796d510eeacd80b7466dd3f6fd4d349135e6601dbbb43f64a656eda3272bf2",
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-06",
+        "global_position": 11,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-05",
+        "path": "pair-a-fixed-time-seed3/position-011-pair-a-fixed-time-seed3.json",
+        "sha256": "f2c6cfcb54bac3e72e56f9b15b88fb17b9481b770fef0de01493a1708d30fc76",
+        "status": "completed"
+      },
+      {
+        "bytes": 2221656,
+        "campaign_attempt": 7,
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "candidate_source_sha256": "1f0130fc72949eff03c66912238932340d09941f8ebe3f70d8ff1aac0bf7e23a",
+        "contract_id": "T",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-07",
+        "global_position": 14,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-05",
+        "path": "pair-a-fixed-time-seed3/position-014-pair-a-fixed-time-seed3.json",
+        "sha256": "18348ef2adba9a562aa9fbd79440aca20f616c1ff5e1fae28c960f7ea34fad53",
+        "status": "completed"
+      }
+    ],
+    "inherited_source_registry": [
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "baseline-calibration-new-a40-20260914-run1",
+        "parent_eligible": true,
+        "parent_experiment_id": null,
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/baseline.train.py",
+        "source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab"
+      },
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-01",
+        "parent_eligible": true,
+        "parent_experiment_id": "baseline-calibration-new-a40-20260914-run1",
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-01.train.py",
+        "source_sha256": "60c1327e4652244a5d8be466502a98e1caf83cba0c192d44b8130dc51ce01e2b"
+      },
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-03",
+        "parent_eligible": true,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-01",
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-03.train.py",
+        "source_sha256": "d37c50f26b58a6d58e3bdf3bc5b8ca044d0e9cfa9b4934c3c29d71fd0b31f634"
+      },
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-04",
+        "parent_eligible": true,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-03",
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-04.train.py",
+        "source_sha256": "9533a1ae889eb84828c01abcd4ea686d2a7d24e575ecf1585d7cbe9639f51b0c"
+      },
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-05",
+        "parent_eligible": true,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-04",
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-05.train.py",
+        "source_sha256": "a41460146ac8b0ab0bd59cd9a1070cec1785ee53176e8f76d24c95a650931528"
+      },
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-06",
+        "parent_eligible": true,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-05",
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-06.train.py",
+        "source_sha256": "12796d510eeacd80b7466dd3f6fd4d349135e6601dbbb43f64a656eda3272bf2"
+      },
+      {
+        "campaign_id": "pair-a-fixed-time-seed3",
+        "experiment_id": "pair-a-fixed-time-seed3-attempt-07",
+        "parent_eligible": true,
+        "parent_experiment_id": "pair-a-fixed-time-seed3-attempt-05",
+        "pareto_eligible": true,
+        "source_path": "pair-a-fixed-time-seed3/sources/pair-a-fixed-time-seed3-attempt-07.train.py",
+        "source_sha256": "1f0130fc72949eff03c66912238932340d09941f8ebe3f70d8ff1aac0bf7e23a"
+      }
+    ],
+    "new_gpu_uuid": "GPU-b74ec8bd-38c7-1555-5cb2-1244c55954d8",
+    "next_global_position": 16,
+    "old_gpu_uuid": "GPU-b74ec8bd-38c7-1555-5cb2-1244c55954d8",
+    "operational_closure_refrozen": true,
+    "predecessor_controller_state": {
+      "path": "<operator-local-path>",
+      "sha256": "ed3bae00ae573cca438a07eaea319ba72992d450bfd2f8ad668ff1ee11342acf"
+    },
+    "predecessor_manifest": {
+      "path": "<operator-local-path>",
+      "sha256": "b9abe9852713a268461739d154e5228d429ee57f4eee3a1676df31a13af5a4e5"
+    },
+    "preparation_tool": {
+      "path": "study/contracts_2026/tools/prepare_campaign_continuation.py",
+      "sha256": "2a7db2a96918af96f2b3872508adb69cb971f17b02c1009d99431cc7a7832c77"
+    },
+    "replacement_a40_calibration": {
+      "calibrated_n_star": 85458944,
+      "choice": {
+        "n_star": 85458944,
+        "source_runs": [
+          {
+            "error": null,
+            "measured_training_seconds": 301.222451919,
+            "optimizer_updates": 163,
+            "run_id": "predecessor-calibration-run1",
+            "total_tokens": 85458944
+          },
+          {
+            "error": null,
+            "measured_training_seconds": 300.305638343,
+            "optimizer_updates": 162,
+            "run_id": "predecessor-calibration-run2",
+            "total_tokens": 84934656
+          },
+          {
+            "error": null,
+            "measured_training_seconds": 301.450147075,
+            "optimizer_updates": 163,
+            "run_id": "predecessor-calibration-run3",
+            "total_tokens": 85458944
+          }
+        ],
+        "token_quantum": 524288
+      },
+      "decision": "preserve the pre-registered N_STAR across the hardware epoch; do not redefine the scientific contract mid-study",
+      "delta_legal_updates": 0,
+      "delta_tokens": 0,
+      "frozen_continuation_n_star": 85458944,
+      "path": "<operator-local-path>",
+      "sha256": "53d0cfd0e2f8d8783929bba5a236114b4c1358b1e6dbd1397870d4af10aa8ddc"
+    },
+    "schema": "autopareto_pair_a_state_migration_v1",
+    "scientific_closure_changed": false,
+    "transition_kind": "protected_harness_fix_same_a40"
+  },
+  "contracts": {
+    "N": {
+      "active_n_star": 85458944,
+      "token_quantum": 524288,
+      "training_seed": 3
+    },
+    "T": {
+      "protected_training_seconds": 300,
+      "training_seed": 3
+    }
+  },
+  "derivation": {
+    "active_contracts": [
+      "T"
+    ],
+    "base_manifest": {
+      "path": "<operator-local-path>",
+      "sha256": "b091835787ad49edde5087961cacd994a3c7b9d4ddcb7401104e67a09fb8c929"
+    },
+    "changed_immutable_paths": {
+      "study/contracts_2026/bridge.py": {
+        "after": "848e1808c736c34460aff5fac8d016cdfb62396854f7bc89740c5ba2dede44de",
+        "before": "095cd6697ccaa4fd5bfd890aada663df39c1cab5f0f02b23573b326b12e349af"
+      },
+      "study/contracts_2026/campaign_controller.py": {
+        "after": "3d8e72c9b8ee4075732952ba64b6391a8852295fdf8d8eb0dc424b33154b671f",
+        "before": "1b6132469856e1d409adf17dd9a5787416db0e19f88734eaa79fc1b5ea3eb397"
+      },
+      "study/contracts_2026/candidate_process.py": {
+        "after": "41fc8a9605692797d75aa6f46e1a3c9fa1db88d921733d6aab7886529a62b7fc",
+        "before": "700937bb8480f09414139fac8fb627a9ee4f6b831d41d0c09633f5816ad2c819"
+      },
+      "study/contracts_2026/isolation.py": {
+        "after": "d62e765e96eab1427fe41afab25928ddfcca2e3a982a1501782db546ce1fd268",
+        "before": "ceb9f8c1a40f997d516c7818f2bf573fbc7a290b31d0e0f76ba13e1a74615092"
+      },
+      "study/contracts_2026/scientist_config.py": {
+        "after": "57166b0dd1afd4318ef5c16300f5f6029f21a690fc80738a6302a217948f8eda",
+        "before": "5591fc6791b62f21ac99e8e9d7a3db124b5e439c0eb1ef902f456264aac68732"
+      },
+      "study/contracts_2026/train_launcher.py": {
+        "after": "0bf6da101adbb1f61e25f00756463470dff174e6d3647e66a098585ef49ac0ca",
+        "before": "f0e903a951dafa9b42cb5c3d08394aad06bd7ed22396c47ddc98d0802c382c33"
+      }
+    },
+    "reason": "Claude Code CLI Scientist backend and early-return checkpoint fix; contracts, schedule, data, inference protocol and baseline are inherited unchanged",
+    "remote_run_namespace": "claude-opus55",
+    "removed_codex_campaign_history": [
+      "continuation",
+      "operational_amendments"
+    ],
+    "replaced_fields": {
+      "a40.gpu_uuid": {
+        "after": "GPU-4702993a-fd40-d985-292e-6398bd236183",
+        "before": "GPU-35264a0f-e6b7-563d-3871-761953a3ae8f"
+      },
+      "a40.paired_baseline_checkpoints.N": {
+        "after": {
+          "path": "/var/lib/autopareto/pair_a_claude_opus55_baseline_attempt2/nonstudy_tests/n_smoke_artifacts/result.checkpoint.pt",
+          "sha256": "72d05e979d5dcf32a795931dcb579e27549fe57de2d72a7d8ab140e127d51667"
+        },
+        "before": {
+          "path": "/var/lib/autopareto/pair_a_official_20260916_continuation/baseline_checkpoints/n_result.checkpoint.pt",
+          "sha256": "23be533b68f95def54403456c2b50e39ff5633e2685c3c63889b14fa70a6ff57"
+        }
+      },
+      "a40.paired_baseline_checkpoints.T": {
+        "after": {
+          "path": "/var/lib/autopareto/pair_a_claude_opus55_baseline_attempt2/nonstudy_tests/t_smoke_artifacts/result.checkpoint.pt",
+          "sha256": "f7ca17c624f8847e28a0d6abf9a33491023ea1bee72bf794fe7d8c6b343d43d9"
+        },
+        "before": {
+          "path": "/var/lib/autopareto/pair_a_official_20260916_continuation/baseline_checkpoints/t_result.checkpoint.pt",
+          "sha256": "0ccea0c4182bce78d9d6421b6855a8586b969d254b0c558891326ab34a09e802"
+        }
+      },
+      "a40.ssh_host": {
+        "after": "<pod-id>-<suffix>@ssh.runpod.io",
+        "before": "<pod-id>-<suffix>@ssh.runpod.io"
+      },
+      "persistent_paths.local_official_state": {
+        "after": "<operator-local-path>",
+        "before": "<operator-local-path>"
+      },
+      "persistent_paths.trusted_state_root": {
+        "after": "/var/lib/autopareto/pair_a_claude_opus55_t_seed3",
+        "before": "/var/lib/autopareto/pair_a_official_20260916_continuation"
+      }
+    },
+    "scientist_before": {
+      "approval_policy": "never",
+      "codex_version": "codex-cli 0.153.0",
+      "container_engine": "docker",
+      "container_image": "autopareto-scientist-codex:0.153.0",
+      "container_image_digest": "sha256:877dae34229cfab2888c13e500ca9e8cc2b7f25cc3789df0664ed3fc0bef2ae2",
+      "execution_backend": "docker",
+      "model": "gpt-5.6-sol",
+      "reasoning": "high",
+      "sandbox_mode": "danger-full-access",
+      "scientist_bin": "/usr/local/bin/codex",
+      "timeout_seconds": 600.0
+    }
+  },
+  "failure_semantics": {
+    "infrastructure_or_integrity_failure_stops": true,
+    "persistent_durable_invocation_reconciliation": true,
+    "scientific_candidate_failure_consumes_round": true,
+    "scientific_candidate_failure_continues": true,
+    "silent_retries": false
+  },
+  "frozen_at_utc": "2026-11-05T09:21:43.216721Z",
+  "immutable_deployment": {
+    "event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac",
+    "protected/inference_adapter.py": "80f4d8c9de365480ef0e7170f705971a0454d421ef410a5c23ff6ae8795b4dd1",
+    "protected/phase1_runtime.py": "527c1093867ee36d8021cf0156b3766aff9c8c3b97a6f97d6ed532a90cae94fd",
+    "protected/phase1_source_transform.py": "efb993cd97fd8cb6e62d0e56d682dfed4bd07a62fa4088310a4db2d9e77a1e01",
+    "protected/phase1_train_launcher.py": "1808f371c6e24e5ded4437ccf7317b845ed440dd45b0bdc690df92237f7e0a67",
+    "study/contracts_2026/__init__.py": "6f8a4544e158e7bc9c83281eade1f6f723cc4dd9c3dce3fc7e9f61631bb92c2b",
+    "study/contracts_2026/agent_request.py": "d807b219a743511206355bde040a8900037d49eda87366fbbe6bfe3f2c5ba3aa",
+    "study/contracts_2026/batching.py": "a5d80c8f28c0f35f781434fd1118c86dabc51b77d595bcdd1be05a34aee013e6",
+    "study/contracts_2026/benchmark_policy.py": "99c56fc5fe216dd80f2e5b2fc16c8fcdf728def676d2b7a00fe4d8ec8a7cb5d5",
+    "study/contracts_2026/bridge.py": "eff458d272c637b3688da243fab15e32432600fc221a12ba8c4f7a12a20c1b68",
+    "study/contracts_2026/bridge_protocol.md": "888d5ba47f55143e8eded5042ee83728f6a9bef6eadb7767c9a599e83e0f4608",
+    "study/contracts_2026/calibration.py": "e13971b3bbb2f554dde8a700825437b5f0bd4bdb06d576efa60301cca67cb0e2",
+    "study/contracts_2026/campaign.py": "3eeb0cc143d494a3d84e3eab18dbd87086dda5fcf67925109643e63e8c35486f",
+    "study/contracts_2026/campaign_controller.py": "d79b14ee6f79b9b09e47075a62858f50eb33bacea1f86f16b13b5431ed31bcbc",
+    "study/contracts_2026/candidate_process.py": "41fc8a9605692797d75aa6f46e1a3c9fa1db88d921733d6aab7886529a62b7fc",
+    "study/contracts_2026/candidate_sandbox.py": "01737b0c8453d2a11f38c821c15e24f09c4639860eea7b05328c2653deee0762",
+    "study/contracts_2026/candidate_worker.py": "7923d5ab914da60117b6dbafa5c242508865d3d077df4d1c4745a6f6ab4c16b9",
+    "study/contracts_2026/context.py": "cf3362d1409c81cdbd2d3bb6d1160d78ff66d2b0ee03d6dfd5c7d612996f8d8d",
+    "study/contracts_2026/context_allowlist.json": "4cc6898a3f975f306dc7112a7d49e6ccfa3b238c35e8f50a87554f702ed81bec",
+    "study/contracts_2026/continuation.py": "5ffa255dce46ddfe2dbaf188ffe35c028437e9eed91dd5ceb6208d41ecdec5ae",
+    "study/contracts_2026/contracts.py": "1d4fdca79e32091c59f64e490d82cad1278e6f87b3425f5f937b666823c7f57f",
+    "study/contracts_2026/correctness_policy.py": "5a9a5796499562f7d8a2cc1dfe28e3185204c99a9478ae2c999d50e82ce80b32",
+    "study/contracts_2026/crossover.py": "8df6c69cb84ff027ef0fab6c46a244dffcccd6d542c6bc2535fd852abdc48cd8",
+    "study/contracts_2026/downstream.py": "bfabd94f04eb76b0e123d00861b03cbe37bf21c3aacc616899e983a15247a1db",
+    "study/contracts_2026/historical_reference/RESEARCH_PROTOCOL.md": "2db6e8c95bb596ac1e3d15f8b4ee3034141b9f6db827cec1ffccf286ae13bd06",
+    "study/contracts_2026/historical_reference/baseline_source/prepare.py": "4f2ba9cbb8ba8c4a3d35be405a913e2f3be3af9aea103ed52ef7b2a662058150",
+    "study/contracts_2026/historical_reference/baseline_source/train.py": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab",
+    "study/contracts_2026/historical_reference/benchmark_config.py": "5f48229d16c1cfd6f55f7f628251ac03af9f3a0fd0afa40caa640689baf18a99",
+    "study/contracts_2026/historical_reference/docs/candidate_interface.md": "094e1b6e3e77c07ba6d14983527d1ce1632c9ec28e141d97d43f3e603c27c83c",
+    "study/contracts_2026/historical_reference/inference_benchmark.py": "0b252757d18c79a6a6ca319df6f813e337d41c571b34f1cd538cb138a0153cc0",
+    "study/contracts_2026/historical_reference/programs/program_autopareto.md": "7d6817f0aabd948024f9838657ca2b67df06c8d087670813f05b697e91a64f7e",
+    "study/contracts_2026/historical_reference/protected/train_launcher.py": "aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f",
+    "study/contracts_2026/historical_reference/runner.py": "2b0a1663f22d9eab37dde7b038601d7181a2ae5cccf4624ec758eaceec97fe19",
+    "study/contracts_2026/historical_reference/scripts/run_runner.sh": "6f51d99e056e4fc979f70c988da837c297b21d7fb99abbb84f6d72640e9bf487",
+    "study/contracts_2026/inference_benchmark.py": "c9b632e6056317f76c5591baf0a37b1775dd955045893fb75e5d6826be7db365",
+    "study/contracts_2026/inference_ipc.md": "4811a96675c69ba4c8a1d49880762b3b32857239d294f64f09e9f481aea91365",
+    "study/contracts_2026/inference_ipc.py": "6d5b6b8d18a6de167a9a37c5d215155805e5fae09f4334c3292da6bdb67b1267",
+    "study/contracts_2026/inference_model_host.py": "49b640862462feb9b3f0a893b584b44543e9e36b41169bf52b257b74ed5eed12",
+    "study/contracts_2026/isolation.py": "d62e765e96eab1427fe41afab25928ddfcca2e3a982a1501782db546ce1fd268",
+    "study/contracts_2026/pair_registration.json": "1accff794ee7b745b6d2e6b3eae8fabf3f74240b61afe8f17301242b87c7a5ee",
+    "study/contracts_2026/programs/program_fixed_time.md": "8acffb40c9b203fcd18bdb276c7833f90e989256d02371421020dbc4141cd969",
+    "study/contracts_2026/programs/program_fixed_tokens.md": "825e53e461fd7f75c5d1fbcd60353a9ecdc2bcca96d35b689170a7d46f9e07a8",
+    "study/contracts_2026/protected_runtime.py": "f5352d6fd3915335678680e91336b6027368d1f632d0700acbbde0326693d422",
+    "study/contracts_2026/protocol.md": "ee971f97f38c648c78b3421c59a495832651a6c4cb6416bc94b6a1eddc5c02d7",
+    "study/contracts_2026/provenance/__init__.py": "b25d62c30eb0cbe9cb7ef2d5b5bea2e9ca68211fb67f6c6d9727504a1259628c",
+    "study/contracts_2026/provenance/a40_environment.json": "be08d97c6dad34544130d2473fb386a8e6c07013c9837b451cb8cb1c87d2288b",
+    "study/contracts_2026/provenance/a40_final_readiness_prechange.json": "d8e06e2e3c528049c4a7ea3c326fabd8ffcbf8ea9dd1d6d8bfeb21f17a218b95",
+    "study/contracts_2026/provenance/a40_final_readiness_prechange.md": "93ee57c68f12346f75efaf1cb848bdced2391cfb236e75be2f0f2d80cef40eb9",
+    "study/contracts_2026/provenance/a40_inference_diagnosis.md": "917f4d3a77ca78ae2fe2bc5b778cbb75d39e8fbec408f02de6554e922a4b3822",
+    "study/contracts_2026/provenance/a40_inference_preflight.json": "783f1a780d053c16fc6287fa3fe9ed63701fef795eb73fd17193e06de855a9ab",
+    "study/contracts_2026/provenance/archive/pre_final_search_20260901T030943Z/current_v4_and_a40_traces.tar.gz": "6a77392e7cbf3fba7cf5ef7cbd0115070e7e94df5876496190d195343599cbd1",
+    "study/contracts_2026/provenance/benchmark_stability_report.json": "380cdd9848a8ed8cd0301dddebf42162998a25958a6f482e45a2e8722973f4f7",
+    "study/contracts_2026/provenance/bridge_preflight.json": "715f39c1bc59e6fc7f92aea0391df12f11ca2e5e04f74c96b302b65b1acd47ee",
+    "study/contracts_2026/provenance/claim_source_artifact_map.json": "12bbe3184d5d002059f3f02b8ad0ff8000403d7f23765f7385c6c91344e29589",
+    "study/contracts_2026/provenance/compute_ledger.json": "f6152369d4931d4e86e4acd10db04bf8312f11aca216b853486250592da0b2c5",
+    "study/contracts_2026/provenance/data_manifest.json": "6a6d9c60b99b80884553939932e91e93364e548e102cf71b545589317f55eb88",
+    "study/contracts_2026/provenance/experiment_manifest_index.json": "5c03263a85f19bca28479fe617aa5ff0d66314d617fa3d2608e7809d95594079",
+    "study/contracts_2026/provenance/final_inference_release_20260903.json": "1318de16acc89681c22a539f969c9bac9576c5433227629ca63fc651f9d280c6",
+    "study/contracts_2026/provenance/final_pre_study_frozen_manifest_20260901.json": "ab7c7923c324c30df8224d030648e62275509477bc4367799ca1a358ae52bb3e",
+    "study/contracts_2026/provenance/final_readiness_e2e_nonstudy_20260901.json": "eb67bb3ef0c8700fd574b0d5b30bac46f017ea41ca4476ee58c6397683d62fb8",
+    "study/contracts_2026/provenance/frozen_file_hashes.json": "52e88b5d041eeea205af6677d1da33cca9423b9efbdd78fe68020ac496dd075e",
+    "study/contracts_2026/provenance/hash_reconciliation_repaired_20260902.json": "5c855b2590c7edf8856e9873ca5c454c0e2730fc324623977a611a7bd29f8967",
+    "study/contracts_2026/provenance/historical_recovery_manifest.json": "aa9a7d29b27ead925d977094c6006c50d6eac851e3a85314e677e6cb85c37cf8",
+    "study/contracts_2026/provenance/inference_workload_manifest.json": "1b9a5b07cc02cdd5b198d44cf24d39433598379c940ea89e2cc981baf31f6940",
+    "study/contracts_2026/provenance/model_checkpoint_registry.json": "1f94f1b608c3fc264eacc1a55c7b1a6175eb799a2493153893e867464052a0cf",
+    "study/contracts_2026/provenance/n_star_freeze_v3_20260902.json": "e6fa9f725d7a6c5e915e172aabea43ef68a3f79fb90a90f663aa011cc2043eba",
+    "study/contracts_2026/provenance/n_star_invalidation_repaired_study_20260902.json": "47868fbdd3156d2d33497d9b3af6c01a2718e4bd3a137716dd8918842ddd7d73",
+    "study/contracts_2026/provenance/n_star_v3_smoke_pareto_check_20260902.json": "2189473a2888bb69486d88d4376a29d08fdbb5980c74ffeb699097fc9ee741e8",
+    "study/contracts_2026/provenance/neurips_checklist_readiness.md": "9f294f4dcc52beb1a023f592b54049c6cfe5fb5bfa842163609682ec0cbabd73",
+    "study/contracts_2026/provenance/operational_efficiency_amendment_20260902.json": "8a203048615c6c52dde6cdb90bff4612f5aae0bb06095e572e10e27a70a3a4d6",
+    "study/contracts_2026/provenance/pair_a_active_inference_config_20260904.json": "eb59d397be92d71176bc127cad51669cb12ab747787f76d1def58ae64d4d1143",
+    "study/contracts_2026/provenance/pair_a_interleaved_same_index_schedule_20260902.json": "ccd498d8697b35ebfbd63482b5a7b55cde08324abfce59f8f9f8f24dbeea1233",
+    "study/contracts_2026/provenance/pair_a_interleaved_schedule_20260902.json": "d13d338c064e83c6044142c6c34658ef81d6885e2bad75ef79fbd86e414f2c49",
+    "study/contracts_2026/provenance/pair_a_protected_prompt_tokens_v2.json": "78bba12b4f1faf6f860ca8c70547177fa9063536db263456c5364a1871b43fc3",
+    "study/contracts_2026/provenance/prestudy_implementation_manifest.json": "b1b1e5bb93e0ee80c9d0545c9909c336b56ab181c931ed5e5472ac3c4f47a8f0",
+    "study/contracts_2026/provenance/prestudy_manifest.json": "080fa521068dac382486cdddff7d48b9fe29a9a1545986daed66d255a16d1411",
+    "study/contracts_2026/provenance/prestudy_manifest.md": "3279f45063e4dc0058679b18f54b031f0f51886aba9d7c171c517014d453953a",
+    "study/contracts_2026/provenance/prestudy_repair_freeze_20260902.json": "07329851ae601b8dabdba2cb2ee1760b091a63a7b73ea063982f258a0833a83b",
+    "study/contracts_2026/provenance/prompt_diff.patch": "9b23a5490968f70854e5b9ae942e0853f99a12891d0487b9340f9ba43edd6769",
+    "study/contracts_2026/provenance/prompt_snapshot_manifest.json": "f89c539ae8e180fbc0714a12f17b60df5e82f4877df345e901a30c2941acf75c",
+    "study/contracts_2026/provenance/provider_bridge_preflight.json": "3a5db6c6e7120915f8e4ff72b824b8c7cc478a137d525993f74ed00df5efe7ba",
+    "study/contracts_2026/provenance/release_artifact_index.md": "d3e1cb46f9f7603e782d095c88169f4658ae102103cf04678fb6d4de76a3807d",
+    "study/contracts_2026/provenance/release_snapshots/final_inference_release_20260903.tar.gz": "0fd3944975637f7f556a3a9a6b3beed802d1747fb0eb963b77c5ec063aff5516",
+    "study/contracts_2026/provenance/remote_isolation_probe_20260901.json": "97d0ea4b34876f7b61ce1b92ac77da94970343f235546816b4b63f677a7ce3e1",
+    "study/contracts_2026/provenance/reproducibility_audit.md": "aeb6a8661230f02de7e4eff5811848290c0d8f1c5e04763c830557e2682c133c",
+    "study/contracts_2026/provenance/reproduction_commands.md": "3275d870aa21369a77222eb554d047a86c9c874c6c315b504278f1cac82594d1",
+    "study/contracts_2026/provenance/research_ledger_audit_manifest.json": "330b96ab6611c73a548d6134a452d4b2113eb12c74100c84a8f6fff81d2ce0a7",
+    "study/contracts_2026/provenance/research_ledger_pre_rewrite_20260902.md": "691ac32a97d323334effeae3fffbb459ef2993bec5459d853b3aad428337070a",
+    "study/contracts_2026/provenance/research_ledger_pre_rewrite_record.json": "caa269fa016c86950ccc8f13762427d15877118062275de53b9e8de40231174c",
+    "study/contracts_2026/provenance/research_ledger_rewrite_report.md": "9ce73e3aafe33c4c12d388c814950276aaa6c010f52f62b30b44d25bbfe1e089",
+    "study/contracts_2026/provenance/source_registry.json": "1916001aa837e770816cd4f2e581ef392cb34b5e1f01bfeda1fab52f9fb69af5",
+    "study/contracts_2026/provenance/sources.bib": "0404879336522266c630e191d34a8325fe0a3f312bd91d78d8fbe5aa9482cae2",
+    "study/contracts_2026/provenance/study_manifest_schema.json": "a0305ccc89936dbde91f989a4dbe89c274117b674e76bb8a8201b61395f5f8b3",
+    "study/contracts_2026/provenance/tokenizer_manifest.json": "85b3372c1734cd91311f603ce07b805b75775bed7a95e44f7b75f74ad84ee0a6",
+    "study/contracts_2026/remote_runner.py": "0909272ac26a14d920f2a5e15a2d08ff791ab97b14a11db61d38d8edc9d11cdb",
+    "study/contracts_2026/runner.py": "fa0d6363ceaf3103e79cdd91d7f060c1cb0cc2c4fd26518e2c06bf19612a4b63",
+    "study/contracts_2026/runtime.py": "aed3172a3caff4b11c3e40506bc2cf0c14e2e08be01a29a0a0ad3f0cba76acdc",
+    "study/contracts_2026/scheduling.py": "5faabe75e2edbef823bc40d046aa09992f1b6bda645d7bd8749713cf92aa755c",
+    "study/contracts_2026/scientist_child_edit_schema.json": "fa8bd01d0f4439083528a0e09c4fca39b7838a4397e6a194f398c137b1ef775e",
+    "study/contracts_2026/scientist_config.py": "57166b0dd1afd4318ef5c16300f5f6029f21a690fc80738a6302a217948f8eda",
+    "study/contracts_2026/scientist_parent_selection_schema.json": "8a149df0c66fbe3de2e34f44b16247c3dec8404b4226e5b1ce20bd482c666e8c",
+    "study/contracts_2026/scientist_runtime.Dockerfile": "c49cbcd0d39bb162f01d54958b03435c13e0534fcd1a20a25ec8cee0b816bec9",
+    "study/contracts_2026/smoke_workspace.py": "a640c0fc47b1aecf322f99e5af06f103e1f585adfa5f1ba4b2a1054c6f421e59",
+    "study/contracts_2026/study_runtime.py": "50dc71262896d1d5a5749ef1eeddf6dbeadf1f7765f5df86a08e0749c6cdea98",
+    "study/contracts_2026/tools/capture_prestudy.py": "90bd97b25872d7363fc6a4bc2d5c1bdb8c8276e4384ddbdb24a6b557b455a0a3",
+    "study/contracts_2026/tools/cleanroom_isolation_probe.py": "4d7b35fe141686255e061c45468ba4b2892eb95222a6ed61f0b53b05fbb815ca",
+    "study/contracts_2026/tools/diagnose_aggregated_timing.py": "4ef4d2490ad37bcde558ed51ac901b7b237c7e8fba411ef895280b9759547522",
+    "study/contracts_2026/tools/diagnose_correctness.py": "32410e4f99e0c0b05aeb5930138aa07d933cbc913c9e4361e4f729a67348367d",
+    "study/contracts_2026/tools/diagnose_production_correctness.py": "ae5bee4f047607bfb0b9256f6cf8bdd0798cc7c93631df1e0e84662364789c3d",
+    "study/contracts_2026/tools/diagnose_timing.py": "d46a9ddcdbd2f8bc5b1e0c6af02bd7b0fc833d417d2c6159348a29dd49d07577",
+    "study/contracts_2026/tools/freeze_data_manifest.py": "68aef64c0291917027bad1ff45d3b80256b25e7dd21d42b9ace3f114262a0060",
+    "study/contracts_2026/tools/preflight_retrieve_file.exp": "ed9e9522830a8be957a8b4f28c365eb711de2e48d1c374c12089d6e5c3a4e72b",
+    "study/contracts_2026/tools/preflight_transfer_checkpoint.exp": "e802e7f7c186f112a990943984fa193a0635683d5483386a6a16c535b2ff9d3e",
+    "study/contracts_2026/tools/prepare_campaign_continuation.py": "2a7db2a96918af96f2b3872508adb69cb971f17b02c1009d99431cc7a7832c77",
+    "study/contracts_2026/tools/prepare_clean_room.py": "1af7724caf74405ab3146276f8c4af0fb730f72add007044723d62cf88ca0f81",
+    "study/contracts_2026/tools/remote_sandbox_probe.py": "34dd8aeea5275231e405b2bb59595027667ada65ebaaf844bb194042d6d81af4",
+    "study/contracts_2026/tools/run_bridge_preflight.py": "1f30a76ab3737bc2b061e564246c3fcadafb9258cedb4b060322d3dd02639827",
+    "study/contracts_2026/tools/run_n_smoke.py": "19dadd0f30b97ea6d0b311ec5e04cb203cdca57c95f2ca57619bc88cf5804fb8",
+    "study/contracts_2026/tools/run_nonstudy_contract_validation.py": "aafed5db703720a3ee12856d0d2e80e4e4175ba3f97e5d3af670812c15c7a07a",
+    "study/contracts_2026/tools/run_provider_bridge_preflight.py": "ff31beab44647a697947f08c843a7e8607a54a9d5d5198bc6bf70767f1841137",
+    "study/contracts_2026/tools/run_t_smoke.py": "e15cbd0062d5e6f8a2fcff8821faab5c35c3962edf31da96d1e63ec05603e0a8",
+    "study/contracts_2026/train_launcher.py": "92183ae05998811e0b0feb3eec99076529b888c2bd4efffc917d4ec8e1667ecf"
+  },
+  "inference": {
+    "active_config": "study/contracts_2026/provenance/pair_a_active_inference_config_20260904.json",
+    "active_config_sha256": "eb59d397be92d71176bc127cad51669cb12ab747787f76d1def58ae64d4d1143",
+    "batch_size": 1,
+    "cached_decode_transitions": 127,
+    "correctness": {
+      "bf16_cache_check_required": true,
+      "fp32_sdpa_adjudication_allowed": true,
+      "material_bf16_error_not_accepted_by_fp32": true
+    },
+    "decoding": "greedy",
+    "diagnostics": [
+      "reserved_cuda_memory_bytes",
+      "kv_cache_bytes",
+      "prefill_latency",
+      "first_token_latency"
+    ],
+    "evaluator": "study/contracts_2026/inference_benchmark.py",
+    "evaluator_sha256": "c9b632e6056317f76c5591baf0a37b1775dd955045893fb75e5d6826be7db365",
+    "generated_tokens": 128,
+    "input_tokens": 1024,
+    "measurement": {
+      "cuda_synchronize_only_at_timing_boundaries": true,
+      "headline": "absolute candidate and contemporaneous interpolated-baseline tok/s medians plus median bracketed candidate/baseline ratio",
+      "minimum_cached_decode_seconds_per_window": 8.0,
+      "paired_baseline": {
+        "absolute_baseline_retained": true,
+        "absolute_candidate_retained": true,
+        "baseline_after_retained": true,
+        "baseline_before_retained": true,
+        "headline_objective": "median of eight pairwise ratios against interpolated baselines",
+        "protocol": "baseline_before_candidate_baseline_after_for_each_window",
+        "ratio_formula": "candidate_tok_s_i / linear_interpolation(baseline_before_i, baseline_after_i, candidate_i_timestamp)",
+        "required": true,
+        "timestamps_required": true,
+        "windows": 8
+      },
+      "raw_windows_preserved": true,
+      "stability": {
+        "dispersion_formula": "(Q3 - Q1) / median(eight aggregate window tok/s values)",
+        "dispersion_statistic": "interquartile_range_over_window_median",
+        "frozen_before_official_attempts": true,
+        "maximum_coefficient_of_variation": 0.05,
+        "maximum_relative_dispersion": 0.02,
+        "rationale": "The pre-study A40 evidence showed isolated window extremes with low CV and repeatable session medians; the robust statistic prevents one outlier from determining measured stability.",
+        "raw_range_retained_as": "diagnostic_only"
+      },
+      "uncertainty": "95 percent bootstrap confidence interval over whole timing windows",
+      "windows": 8
+    },
+    "memory_objective": "peak_allocated_inference_memory_bytes",
+    "precision": "bfloat16",
+    "protected_prompt_artifact": {
+      "path": "study/contracts_2026/provenance/pair_a_protected_prompt_tokens_v2.json",
+      "prompt_set_token_sha256": "8166c50c11ded0eea5819a7505ff96d942134583236851ab41a8c7790023c769",
+      "prompt_token_hashes": [
+        "9085a438b548f69d6e419dbb39b4accaf90e334d3a331a3ac56a8de13b03b7e1",
+        "c585778d61a5d7bdac6144e604292df99ed5a251dce7d3b4c5031d6fb0624468",
+        "be2b33f59a20b6f7990a0b6f09dcacbd1d68daf3f2ef7064f1108570cacbfb0c",
+        "cfa632c7a0db200295361a69fe34ff8c94a27b18142809f9dd639840d80cd622",
+        "aac8fc085e492d8abf49de1794c5e96d6b0d1440f4e0af8a7e733947c9ece203",
+        "ab84d612ef88ff117935712780d8b7dd627936d99da577b671b9675527e56732",
+        "58459ffde27e828a3e8cd4fb08ccce885c9d6d9117a39d94e92c998b3323179b",
+        "dbbe296f8c046689ec786f58ce7c02eb5496ae61c64aab5be42a7e9ea4624e11"
+      ],
+      "sha256": "78bba12b4f1faf6f860ca8c70547177fa9063536db263456c5364a1871b43fc3"
+    },
+    "protocol_version": "autopareto_search_inference_bracketed_v2",
+    "warmup": {
+      "adaptive_steady_state_gate": false,
+      "candidate_and_baseline_each_warmed": true,
+      "minimum_pure_decode_seconds": 20.0,
+      "mode": "fixed_discarded_cached_decode_duration_v1",
+      "warmup_measurements_used_for_official_metric": false
+    }
+  },
+  "isolation": {
+    "N": [
+      "train.py",
+      "campaign_view.json",
+      "history.jsonl",
+      "results"
+    ],
+    "T": [
+      "train.py",
+      "campaign_view.json",
+      "history.jsonl",
+      "results"
+    ],
+    "scientist_contexts_shared": false
+  },
+  "lineage": {
+    "cross_arm_parents": false,
+    "dominated_candidates_are_parents": false,
+    "eligible_parents": [
+      "registered baseline",
+      "valid same-arm Pareto-frontier member"
+    ],
+    "failed_candidates_are_parents": false,
+    "parent_source_staging_assertion": "parent ID -> stored source SHA -> staged source SHA",
+    "policy": "same-arm Pareto-archive branching"
+  },
+  "manifest_sha256": null,
+  "official_pair_a_attempts": 15,
+  "operational_amendments": [
+    {
+      "amended_at_utc": "2026-11-05T11:39:01Z",
+      "applies_to": "this position and every later position of this arm",
+      "approval": "PI, 2026-11-06, after three timeouts and the options (requeue at 600 s, raise to 900 s with disclosed asymmetry, charge as failure): 'Raise to 900 s'. The comparator results ran at 600 s throughout; disclose the asymmetry.",
+      "changed_immutable_paths": {},
+      "effective_campaign_attempt": 9,
+      "effective_global_position": 18,
+      "prior_manifest_path": "<operator-local-path>",
+      "prior_manifest_sha256": "d3465088e1315aef66572a0ecc45c439d92e48e9450f32e32ad8f1952ba080a5",
+      "reason": "Attempt 9 (global position 18) child-edit Scientist call exceeded the 600-second bound three times in a row (09:42, 10:32, 11:00 UTC on 2026-11-05) before any candidate or A40 work existed; each time the Scientist was writing an inference adapter. Raise only the bounded Scientist timeout to 900 seconds for the remaining attempts of this arm, as the comparator's 2026-09-09 lineage did for the same event.",
+      "schema": "autopareto_control_plane_amendment_v1",
+      "scientific_components_unchanged": [
+        "training",
+        "N_STAR",
+        "T_300s",
+        "evaluation",
+        "inference",
+        "Pareto",
+        "lineage",
+        "T/N isolation",
+        "schedule",
+        "dataset",
+        "tokenizer",
+        "immutable deployment",
+        "completed results"
+      ],
+      "scientific_contract_changed": false,
+      "scientist_timeout_seconds": {
+        "after": 900.0,
+        "before": 600.0
+      }
+    },
+    {
+      "amended_at_utc": "2026-11-05T13:39:30Z",
+      "approval": "PI, 2026-11-06 (local; 2026-11-05 UTC): Charge attempt 9 as a candidate failure, preserve its logs and exact failure reason in the full lineage so Opus can learn from it, and apply the tested error-classification fix. Resume from attempt 10 without changing Opus's code manually.",
+      "changed_immutable_paths": {
+        "study/contracts_2026/train_launcher.py": {
+          "after": "92183ae05998811e0b0feb3eec99076529b888c2bd4efffc917d4ec8e1667ecf",
+          "before": "0bf6da101adbb1f61e25f00756463470dff174e6d3647e66a098585ef49ac0ca"
+        }
+      },
+      "classification": {
+        "function": "train_launcher._post_training_failure_origin",
+        "reconciled_origin": "candidate",
+        "recorded_origin": "unknown"
+      },
+      "effective_global_position": 20,
+      "evidence": {
+        "absence_json_sha256": "d64b4de80736d36cac5f5504de8998f6fe415e923731db19ccd552738a447326",
+        "checked_utc": "2026-11-05T13:29:43Z",
+        "files_sha256": {
+          "invocation.log": "58321cfbf97cfb32ad37bf94491db7184cbbd176a75861466e3ffc6cec4729d5",
+          "invocation_receipt.json": "1d0dc7e541699dbec9672efd172a7f797159acd4597e286b55b9d6c789da7511",
+          "launcher_output.json": "910b033c935b6bd73a2fcf3c2f42b4b929368a7a4ca7e93cdf47a9012a448b61",
+          "worker_failure_receipt.json": "696b32ecb603b22435b05eaad236ac2015e2fcc1e8b800b804ff1b8faa961cec"
+        },
+        "folder": "<operator-local-path>"
+      },
+      "precedent": "Codex comparator N19 (position 37) and N20 (position 39), operational_amendments of final_pair_a_continuation_manifest_20260917_posttraining_failure_receipt_fix.json",
+      "prior_invocation_id": "pair-a-018-42202d14bfc428299745938dd9347bb5",
+      "prior_manifest_path": "<operator-local-path>",
+      "prior_manifest_sha256": "75b090e6fcf28e5251ee964073200d050d28cb08c70993a09edd7e1066393cd9",
+      "reason": "Attempt 9 (global position 18) completed training; the protected post-training check protected/inference_adapter.validated_cache_nbytes then rejected the candidate because its adapter's cache_nbytes reported 7,864,320 bytes while the protected traversal of the adapter's own decode state found 7,907,344 bytes (the CUDA-graph static I/O tensors in state['io'] were left out). The message was not yet listed in train_launcher._CANDIDATE_POST_TRAINING_FAILURE_MARKERS, so the launcher recorded the origin as unknown and the controller paused with RemoteInfrastructureFailure. The candidate's own accounting error is a candidate scientific failure. The message is now listed (commit 87de802, tested on the A40 runtime) and this position is reconciled once from the durable evidence, following the comparator's N19/N20 handling; no candidate is rerun and no Scientist call is made.",
+      "reconciled_campaign_attempt": 9,
+      "reconciled_prior_position": 18,
+      "schema": "autopareto_operational_amendment_v1",
+      "scientific_components_unchanged": [
+        "training",
+        "N_STAR",
+        "T_300s",
+        "validation",
+        "inference",
+        "Pareto",
+        "lineage",
+        "T/N isolation",
+        "schedule",
+        "dataset",
+        "tokenizer",
+        "completed results"
+      ],
+      "scientific_contract_changed": false
+    }
+  ],
+  "pareto": {
+    "objectives": [
+      "protected validation BPB minimize",
+      "stable BF16 cached decode tok/s maximize",
+      "peak allocated inference CUDA memory minimize"
+    ]
+  },
+  "persistent_paths": {
+    "candidate_attempt_root": "/opt/autopareto-candidate-attempts",
+    "candidate_input_root": "/opt/autopareto_candidate_inputs/per_attempts",
+    "candidate_output_root": "/var/lib/autopareto/candidate_attempts",
+    "candidate_runtime_root": "/opt/autopareto_candidate_runtime",
+    "candidate_workspace_root": "/opt/autopareto_candidate_contexts",
+    "local_official_state": "<operator-local-path>",
+    "registered_cache": "/var/cache/autopareto/pair_a_registered_cache",
+    "trusted_execution_copy": "/opt/autopareto_trusted",
+    "trusted_state_root": "/var/lib/autopareto/pair_a_claude_opus55_t_seed3_continuation_20261105c"
+  },
+  "registered_artifacts": {
+    "active_n_star": 85458944,
+    "baseline_registration": {
+      "path": "runs/pair-a-official-20260914-new-a40/provenance/baseline_registration_new_a40.json",
+      "source_sha256": "b2fb8788f02517af8bc2fcfa059fb799a6974c9050d00e322168ec414fac4fab"
+    },
+    "data_manifest_path": "study/contracts_2026/provenance/data_manifest.json",
+    "data_manifest_sha256": "6a6d9c60b99b80884553939932e91e93364e548e102cf71b545589317f55eb88",
+    "flash_attn3_revision": "e29f138fc363b396e5d2706c8a5f6fa7d36f41e0",
+    "new_a40_calibration": {
+      "n_star": 85458944,
+      "path": "/var/lib/autopareto/pair_a_state/calibration/calibration.json",
+      "sha256": "211d0b74ed7751db17d738e8faabb9a9ad05912e98fa2b492c66885b6922efef"
+    },
+    "registered_cache": "/var/cache/autopareto/pair_a_registered_cache",
+    "runtime_cache_closure": {
+      "cuda_version": "12.8",
+      "files": [
+        {
+          "bytes": 1560,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/.gitattributes",
+          "raw_target": "../../blobs/0cd58331b2a989b68be4ec5676383437fca8687b",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/0cd58331b2a989b68be4ec5676383437fca8687b",
+          "sha256": "aa0f55007ee70e2a79b9b3538b50daee4026794e9bdf7c811bba8cf3ffbba479"
+        },
+        {
+          "bytes": 1171,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/README.md",
+          "raw_target": "../../blobs/6c1ffe7402bae1934fd296c76aadd8fc89b2d77e",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/6c1ffe7402bae1934fd296c76aadd8fc89b2d77e",
+          "sha256": "483782b5b780bbb856d227a330281d58c55c8fed59ba0155e955ca487a6d6b20"
+        },
+        {
+          "bytes": 317,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/benchmark.py",
+          "raw_target": "../../blobs/d7b48ccbd63561f4f1e903fc5c7cb8fb864e003f",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/d7b48ccbd63561f4f1e903fc5c7cb8fb864e003f",
+          "sha256": "685a205d769a6b2305afb7094a5c3a44c7492361927ebe8138d485ad0eea1c39"
+        },
+        {
+          "bytes": 317,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/benchmarks/benchmark.py",
+          "raw_target": "../../../blobs/d7b48ccbd63561f4f1e903fc5c7cb8fb864e003f",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/d7b48ccbd63561f4f1e903fc5c7cb8fb864e003f",
+          "sha256": "685a205d769a6b2305afb7094a5c3a44c7492361927ebe8138d485ad0eea1c39"
+        },
+        {
+          "bytes": 387,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/__init__.py",
+          "raw_target": "../../../../blobs/3d12edd447e84d6e65c4fa9ab91ae3c3192884c1",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/3d12edd447e84d6e65c4fa9ab91ae3c3192884c1",
+          "sha256": "29756640933e2a159cd94a9625eb2ea4268ffa6a80bd3c7bc86b9e1404e09471"
+        },
+        {
+          "bytes": 804184680,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/_flash_attn3_cuda_2d990fe.abi3.so",
+          "raw_target": "../../../../blobs/385c5960f738f6c2f217ca93a46fb9be003e7076d60a5711cef8bebdf19eee20",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/385c5960f738f6c2f217ca93a46fb9be003e7076d60a5711cef8bebdf19eee20",
+          "sha256": "385c5960f738f6c2f217ca93a46fb9be003e7076d60a5711cef8bebdf19eee20"
+        },
+        {
+          "bytes": 234,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/_ops.py",
+          "raw_target": "../../../../blobs/1d9ac17ca94ff06dfccb0a48aeefbdf75e28043c",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/1d9ac17ca94ff06dfccb0a48aeefbdf75e28043c",
+          "sha256": "cf66e040c4e61bb0c875e5c393202e6e7a7a48a7d89f4b28a633c4746d759570"
+        },
+        {
+          "bytes": 1030,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/flash_attn3/__init__.py",
+          "raw_target": "../../../../../blobs/03dbc1afe1cf156661a2b1b22003cd5f599a0309",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/03dbc1afe1cf156661a2b1b22003cd5f599a0309",
+          "sha256": "0757fb1e297d4d48dfb3fe1ee969744dd1079c322d1227017527d8f791a6a62a"
+        },
+        {
+          "bytes": 952,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/flash_attn_config.py",
+          "raw_target": "../../../../blobs/c4b7130324be2c4cabee7ada7000e170a2a81865",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/c4b7130324be2c4cabee7ada7000e170a2a81865",
+          "sha256": "bb1a3e7b231c0e2b7fffc603692e11b64e414cc2b34d22bdb4e2938dd5957bfc"
+        },
+        {
+          "bytes": 41297,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/flash_attn_interface.py",
+          "raw_target": "../../../../blobs/2e2a3cdd3e89cbc59bf6c956454e2776c305e0e5",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/2e2a3cdd3e89cbc59bf6c956454e2776c305e0e5",
+          "sha256": "cb46c3d89606305817ea20eb7b7cc9376b013eeabfd7637a328e7967e1d008d4"
+        },
+        {
+          "bytes": 159,
+          "path": "huggingface/hub/models--kernels-community--flash-attn3/snapshots/e29f138fc363b396e5d2706c8a5f6fa7d36f41e0/build/torch29-cxx11-cu128-x86_64-linux/metadata.json",
+          "raw_target": "../../../../blobs/e0cc0c4f14abd10162c22499be39c75e6d922f94",
+          "resolved_path": "huggingface/hub/models--kernels-community--flash-attn3/blobs/e0cc0c4f14abd10162c22499be39c75e6d922f94",
+          "sha256": "bf7062340012da017522a7f276f972958e7c8317417b43ff19cfd3a482d63827"
+        }
+      ],
+      "full_snapshot_backup": "/workspace/pair_a_registered_cache_full_snapshot_20260907",
+      "full_snapshot_inventory_sha256": "3e05d2b86af3655a7228f966b67f722c3c914638b0a02951115f9783264715c9",
+      "record_path": "<operator-local-path>",
+      "record_sha256": "aafe409914638cb94186520128f39a349aacec809126fece5e81743e397f5e71",
+      "repository": "kernels-community/flash-attn3",
+      "revision": "e29f138fc363b396e5d2706c8a5f6fa7d36f41e0",
+      "schema": "autopareto_registered_cache_runtime_closure_v1",
+      "selected_build": "torch29-cxx11-cu128-x86_64-linux",
+      "status": "verified",
+      "torch_version": "2.9.1+cu128"
+    },
+    "tokenizer_sha256": "888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629"
+  },
+  "runtime": {
+    "candidate_uid": 2001,
+    "cuda": "12.8",
+    "huggingface_hub": "1.30.0",
+    "kernels": "0.12.1",
+    "pyarrow": "23.0.1",
+    "python": "/opt/autopareto_runtime/bin/python",
+    "python_version": "3.12",
+    "study_venv": "/opt/autopareto_runtime",
+    "tiktoken": "0.12.0",
+    "torch": "2.8.0+cu128",
+    "triton": "3.4.0"
+  },
+  "schedule": {
+    "N_positions": 25,
+    "T_positions": 25,
+    "first_four": [
+      "N1",
+      "T1",
+      "N2",
+      "T2"
+    ],
+    "last_two": [
+      "N25",
+      "T25"
+    ],
+    "path": "study/contracts_2026/provenance/pair_a_interleaved_same_index_schedule_20260902.json",
+    "positions": 50,
+    "sha256": "ccd498d8697b35ebfbd63482b5a7b55cde08324abfce59f8f9f8f24dbeea1233"
+  },
+  "schema": "autopareto_pair_a_cross_a40_continuation_v1",
+  "scientific_execution_launched": true,
+  "scientist": {
+    "campaign_histories_shared": false,
+    "codex_version": "2.1.318 (Claude Code)",
+    "configuration": {
+      "agent_backend": "claude",
+      "approval_policy": "acceptEdits",
+      "codex_version": "2.1.318 (Claude Code)",
+      "container_engine": "none",
+      "container_image": "none",
+      "container_image_digest": "unknown",
+      "execution_backend": "host",
+      "model": "claude-opus-5-5",
+      "reasoning": "xhigh",
+      "sandbox_mode": "claude-file-tools-accept-edits",
+      "scientist_bin": "/opt/homebrew/bin/claude",
+      "timeout_seconds": 900.0
+    },
+    "execution_backend": "host",
+    "fresh_ephemeral_invocations": true,
+    "model": "claude-opus-5-5",
+    "provider": "headless_claude_code_cli",
+    "reasoning": "xhigh"
+  },
+  "status": "FROZEN_PRE_STUDY_CLAUDE_T_ONLY_FRESH_0_OF_25",
+  "study_id": "autopareto-contracts-2026-pair-a",
+  "supersedes": null,
+  "validation_evidence": {
+    "bracketed_baseline_control": {
+      "absolute_baseline_tok_s": 150.0487795394885,
+      "absolute_candidate_tok_s": 149.37368353388757,
+      "correctness_passed": true,
+      "normalized_coefficient_of_variation": 0.008654331153965076,
+      "normalized_decode_throughput": 0.9933163223282189,
+      "normalized_decode_throughput_ci_95pct": [
+        0.9877654772321347,
+        1.0056912602523322
+      ],
+      "normalized_range_drift": 0.02586415472108729,
+      "normalized_relative_drift": 0.014549613056417068,
+      "official_attempts_consumed": 0,
+      "protocol_version": "autopareto_search_inference_bracketed_v2",
+      "result_artifact": "/var/lib/autopareto/pair_a_state/nonstudy_controls/baseline_vs_baseline_20260914/result.json",
+      "result_artifact_sha256": "d9f0a93a377bf63cb23649af9d28b43a317425440a05981e8012f76a2ebb811d",
+      "status": "passed"
+    },
+    "calibration": {
+      "evidence_path": "/var/lib/autopareto/pair_a_state/calibration/calibration.json",
+      "evidence_sha256": "211d0b74ed7751db17d738e8faabb9a9ad05912e98fa2b492c66885b6922efef",
+      "gpu_uuid": "GPU-98579d60-2f4d-8840-cadb-847d43886326",
+      "n_star": 85458944,
+      "optimizer_updates": [
+        163,
+        162,
+        163
+      ],
+      "runs": 3,
+      "scientific_elapsed_seconds": [
+        301.222451919,
+        300.305638343,
+        301.450147075
+      ],
+      "status": "passed",
+      "token_counts": [
+        85458944,
+        84934656,
+        85458944
+      ],
+      "token_quantum": 524288
+    },
+    "exact_token_n_smoke": {
+      "cached_decode_correctness": true,
+      "checkpoint_path": "/var/lib/autopareto/pair_a_state/nonstudy_n/n_smoke_artifacts/result.checkpoint.pt",
+      "checkpoint_sha256": "d71705571cba430aafb025a81122c038ddcfef5d1aaa44b073b1d4d2def43f9b",
+      "evidence_path": "/var/lib/autopareto/pair_a_state/nonstudy_n/n_smoke_artifacts/result.json",
+      "evidence_sha256": "dc579c9150ea7a6af781094b35cd2e999ba536fbb34edfc0592a928798e40951",
+      "n_star": 85458944,
+      "official_attempts_consumed": 0,
+      "optimizer_updates": 163,
+      "protected_validation_bpb": 1.2002101087262906,
+      "status": "passed",
+      "total_tokens": 85458944
+    },
+    "launch_critical_tests": {
+      "environment": "A40 rootfs runtime; torch available",
+      "passed": 143,
+      "skipped": 4,
+      "status": "passed"
+    }
+  }
+}

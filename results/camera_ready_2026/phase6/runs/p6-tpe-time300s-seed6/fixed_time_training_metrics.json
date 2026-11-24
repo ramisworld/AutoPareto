@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/root/phase6_local/runs/p6-tpe-time300s-seed6/final.pt",
+  "measured_training_tokens": 111017984,
+  "parameter_count": 39846284,
+  "peak_training_cuda_memory_mb": 17561.394805908203,
+  "total_runtime_seconds": 376.2062029838562,
+  "total_training_tokens": 112459776,
+  "training_seconds": 300.18043780326843,
+  "training_seed": 6,
+  "training_tokens_per_second": 369837.50444377295,
+  "val_bpb": 1.0997339401206445
+}

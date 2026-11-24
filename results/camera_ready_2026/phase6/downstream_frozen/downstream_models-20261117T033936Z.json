@@ -1,0 +1,16 @@
+{
+  "models": [
+    {
+      "candidate": "/workspace/autopareto-camera-ready/results/candidates/motpe-seed42-20260805/0022-train.py",
+      "checkpoint": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt3/final.pt",
+      "checkpoint_sha256": "ddf3192bede239005ce6178eae350abe276881c6aae06022b903ec382ff581e9",
+      "exit": 0,
+      "id": 24,
+      "method": "motpe_quality_tokens201M_seed8",
+      "recipe": "motpe",
+      "seed": 8
+    }
+  ],
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recorded_utc": "2026-11-17T03:39:36.264092+00:00"
+}

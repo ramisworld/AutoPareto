@@ -1,0 +1,18 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 159401323,
+      "checkpoint_path": "/root/phase6_local/runs/p6-arref-time300s-seed6-drift/final.pt",
+      "checkpoint_sha256": "7df725316cd961de1b4088b07061c3ecc22642ee64fd1e5d8b3fbe7dc1848d84",
+      "historical_steady_state_training_seconds": 300.2324275970459,
+      "optimizer_step": 670,
+      "token_count": 87818240
+    }
+  ],
+  "device_batch_size": 64,
+  "format": "autopareto_camera_ready_fixed_time_checkpoint_manifest_v1",
+  "note": "single final checkpoint of a 300 s fixed-time run; consumed by scripts/evaluate_phase1_checkpoints.py",
+  "seed": 6,
+  "sequence_length": 2048,
+  "source_sha256": "b3a961eeea05dcec17c49cb1fa392dae70c1c87d520409da43d4f3fb9fd6c5b1"
+}

@@ -1,0 +1,50 @@
+{
+  "attempt": 1,
+  "attempt_wall_seconds": 619.1786959171295,
+  "cell": "tokens_157286400",
+  "contract": "fixed_tokens",
+  "finished_utc": "2026-11-07T13:44:03.279877+00:00",
+  "format": "autopareto_camera_ready_run_record_v1",
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "8eb96d97e42524a799e71157952df71afce2226106b9409e5cd05d41b658a3d6",
+    "derived_source_sha256": "5f047ca4e220ec32cfb2755cca9d84a46170f7cc1df3d7bd75ef614e02e73a8b",
+    "end_to_end_training_seconds": 390.509921696,
+    "heldout_bpb": 1.1497336445366013,
+    "heldout_ci95": [
+      1.1434379738549698,
+      1.1564749742322549
+    ],
+    "milestone_validation_bpb": {
+      "117964800": 1.130801340291175,
+      "157286400": 1.0915529079651152,
+      "39321600": 1.268894135805861,
+      "78643200": 1.192132531711319
+    },
+    "parameter_count": 29360392,
+    "peak_training_memory_mb": 12473.35205078125,
+    "steady_state_seconds": 297.673586288,
+    "steady_state_tokens_per_second": 523541.9438566508,
+    "tokens": 157286400,
+    "total_scientific_step_wall_seconds": 343.816697206,
+    "updates": 1200,
+    "validation_bpb": 1.0915529079651152,
+    "validation_bpb_in_process": 1.091544158332504
+  },
+  "order": 9,
+  "phase1_model_id": "autopareto_292",
+  "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+  "recipe": "AP-Q",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1/runs/e1-apq-tokens157286400-seed7",
+  "run_id": "e1-apq-tokens157286400-seed7",
+  "seed": 7,
+  "source_sha256": "55a7fd8bf32924f2a35ebc095c5206f3503e671a9d7a9646b94979c8ae49259a",
+  "stage": "E1",
+  "status": "completed",
+  "synthetic": false,
+  "time_budget_seconds": null,
+  "token_budget": 157286400
+}

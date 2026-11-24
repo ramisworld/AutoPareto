@@ -1,0 +1,14 @@
+{
+  "schema": "autopareto_claim_source_artifact_map_v1",
+  "claims": [
+    {"id":"C1","claim":"Each of seven frozen recipes completed exactly 201326592 reported training tokens at seeds 3,4,5","status":"SUPPORTED_BUT_LIMITED","sources":["results/phase1/phase1_equal_token_results.json","results/snapshots/runpod-<pod-id>-shutdown-20260901/extracted/results/phase1/runs","results/phase1/full_21_run_integrity.log"],"caveat":"runtime token-ID hash output is missing; use exact accounting plus analytic loader equivalence, not runtime hash-verified wording"},
+    {"id":"C2","claim":"AP292 is smaller/faster than AutoResearch in equal-token panel","status":"VERIFIED_FOR_THIS_PANEL","sources":["results/phase1/phase1_equal_token_results.json","results/phase1/phase1_equal_token_results.csv","study/contracts_2026/provenance/model_checkpoint_registry.json"],"caveat":"one A40, n=3 seeds, trade-off includes worse held-out BPB"},
+    {"id":"C3","claim":"AP292 universally beats AutoResearch","status":"INVALIDATED","sources":["results/phase1/phase1_equal_token_results.json","docs/PHASE1_200M_RESULTS.md"],"caveat":"AutoResearch has better held-out BPB and BLiMP"},
+    {"id":"C4","claim":"AutoPareto is algorithmically superior to TPE/MOTPE","status":"NOT_IDENTIFIED","sources":["evaluation/phase1_equal_token_preflight.json","FORENSIC_RESEARCH_AUDIT.md","study/contracts_2026/protocol.md"],"caveat":"admissible spaces and objective contracts differ"},
+    {"id":"C5","claim":"AP292 gains are caused by depth alone","status":"UNSUPPORTED_HYPOTHESIS","sources":["AUTOPARETO_TRAJECTORY_AUDIT.md","results/candidates/autopareto-seed0-20260731/0022-train.py"],"caveat":"AP292 changes depth, window pattern, and several recipe constants"},
+    {"id":"C6","claim":"the original 1.81x decode ratio is the equal-token ratio","status":"CORRECTED","sources":["results/phase1/phase1_equal_token_results.json","docs/PHASE1_200M_RESULTS.md"],"caveat":"equal-token table gives 383.021825913658 / 192.93322787922392 = 1.985x"},
+    {"id":"C7","claim":"Historical N_STAR value 93847552","status":"SUPERSEDED_FOR_PAIR_A","sources":["study/contracts_2026/provenance/n_star_freeze_v3_20260902.json"],"superseded_by":"runs/pair-a/provenance/pair_a_active_provenance_20260904.json","caveat":"retained historical calibration; inactive for Pair A"},
+    {"id":"C8","claim":"the current protected harness preserves candidate isolation and A40 functionality","status":"VERIFIED_BY_PRESTUDY_EVIDENCE","sources":["study/contracts_2026/provenance/final_pre_study_frozen_manifest_20260901.json","study/contracts_2026/provenance/final_readiness_e2e_nonstudy_20260901.json"],"caveat":"evidence is pre-campaign; do not infer campaign outcomes"},
+    {"id":"C9","claim":"results transfer to other GPUs or scales","status":"UNKNOWN","sources":["FORENSIC_RESEARCH_AUDIT.md"],"caveat":"no cross-GPU or larger-scale result"}
+  ]
+}

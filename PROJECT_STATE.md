@@ -386,7 +386,7 @@ than creating a competing roadmap document.
 
 - Canonical local Git repository: `/Users/Rami/Documents/dev/autopareto`
 - Remote CUDA working directory: `/workspace/autopareto`
-- Last recovery SSH endpoint: `1y7yjg1u969jup-64411310@ssh.runpod.io`; it is not a
+- Last recovery SSH endpoint: `<pod-id>-<suffix>@ssh.runpod.io`; it is not a
   permanent endpoint and must remain stopped after artifact synchronization.
 - SSH identity path: `~/.ssh/id_ed25519` (never inspect, copy, or modify the key)
 - Original repository: `https://github.com/karpathy/autoresearch.git`

@@ -1,0 +1,36 @@
+{
+  "aggregate_manifest_sha256": "1211827090aa7e669ec8bcd965ae1423dc90697f0e4928d0fce707cbc36c3f93",
+  "cache_root_label": "autoresearch_cache",
+  "files": [
+    {"path":"data/shard_00000.parquet","sha256":"054ddbd98abf30d773c54de578fc9d579bafeb6c14e04e97bd36aa90e825bf9b","size_bytes":92291918,"split":"train"},
+    {"path":"data/shard_00001.parquet","sha256":"d4cfe1de19f4fd976022a9047458655968bc5583582ec5fa714801ec2be2c93c","size_bytes":92124317,"split":"train"},
+    {"path":"data/shard_00002.parquet","sha256":"5e80d7596d53be648d841ea5811082747281c39f6851e10dd90375a84bc509a7","size_bytes":91803619,"split":"train"},
+    {"path":"data/shard_00003.parquet","sha256":"b349c85d4b993d98e2328833ecfd3734692e0395a592d89858bae34a4ba73c59","size_bytes":91793972,"split":"train"},
+    {"path":"data/shard_00004.parquet","sha256":"87dae96fe1a6116c54c7873aadb81832178a36755991befd1b3b641c76244474","size_bytes":91428652,"split":"train"},
+    {"path":"data/shard_00005.parquet","sha256":"3d9aebf138ef69cff2585a686d7f21585b7ffc0de4655f8e7723590418583bd6","size_bytes":91845922,"split":"train"},
+    {"path":"data/shard_00006.parquet","sha256":"6a3f2afde8f1a39f9283ea9d9e9ee6431634d6881b63798176bf64efc3f33576","size_bytes":91455616,"split":"train"},
+    {"path":"data/shard_00007.parquet","sha256":"731eea337d941e5b18a9a4e2bbe73a517dac45d91bb93ae2e69346c68c5f37f6","size_bytes":91202032,"split":"train"},
+    {"path":"data/shard_00008.parquet","sha256":"e78379132451838afabed9034b5483a2f3bc5a422bed8b55b99f2bbb9a128755","size_bytes":91155507,"split":"train"},
+    {"path":"data/shard_00009.parquet","sha256":"f22410fe8f13b6976a2860a8a82ee71e838f4ee9b605d61584aaa963f966e120","size_bytes":92072356,"split":"train"},
+    {"path":"data/shard_06542.parquet","sha256":"769fe59d108dfd2cfa186c63173b83fbfb90a7adb3519519ba6eaa6ca9889f94","size_bytes":91699537,"split":"validation"},
+    {"path":"tokenizer/token_bytes.pt","sha256":"23517e0590d6aa9389c3263fab1f6062b2810b7c398a7b380291857639ac8d98","size_bytes":34373,"split":"tokenizer"},
+    {"path":"tokenizer/tokenizer.pkl","sha256":"888c9fa865c72c25f9c5e9467136a9cc8655253db459fb97481deb326681c629","size_bytes":94590,"split":"tokenizer"}
+  ],
+  "schema": "autopareto_contracts_2026_data_manifest_v1",
+  "sorted_file_order": [
+    "data/shard_00000.parquet",
+    "data/shard_00001.parquet",
+    "data/shard_00002.parquet",
+    "data/shard_00003.parquet",
+    "data/shard_00004.parquet",
+    "data/shard_00005.parquet",
+    "data/shard_00006.parquet",
+    "data/shard_00007.parquet",
+    "data/shard_00008.parquet",
+    "data/shard_00009.parquet",
+    "data/shard_06542.parquet",
+    "tokenizer/token_bytes.pt",
+    "tokenizer/tokenizer.pkl"
+  ],
+  "validation_shard": "shard_06542.parquet"
+}

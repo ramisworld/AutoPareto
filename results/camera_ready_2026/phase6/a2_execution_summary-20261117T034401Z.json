@@ -1,0 +1,12 @@
+{
+  "a1_plan_sha256": "2b9fdc3ef962277e78e5e6d98f4265c28033a324d288c536245fab1c14631ade",
+  "a2_plan_sha256": "2ed01afe7a1da33882343f04744d8e45594d35f9603809f445283cd9beda272b",
+  "format": "autopareto_phase6_a2_execution_summary_v1",
+  "parent_plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recorded_utc": "2026-11-17T03:44:01.805035+00:00",
+  "stages": {
+    "downstream": 0,
+    "inference": 0,
+    "train": 0
+  }
+}

@@ -1,0 +1,93 @@
+Traceback (most recent call last):
+  File "/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/runpy.py", line 196, in _run_module_as_main
+    return _run_code(code, main_globals, None,
+  File "/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/workspace/autopareto-camera-ready/protected/phase1_train_launcher.py", line 355, in <module>
+    raise SystemExit(main())
+  File "/workspace/autopareto-camera-ready/protected/phase1_train_launcher.py", line 276, in main
+    namespace = runpy.run_path(str(args.transformed), run_name="__main__")
+  File "/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/runpy.py", line 289, in run_path
+    return _run_module_code(code, init_globals, run_name,
+  File "/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/runpy.py", line 96, in _run_module_code
+    _run_code(code, mod_globals, init_globals,
+  File "/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/runpy.py", line 86, in _run_code
+    exec(code, run_globals)
+  File "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/phase1_train.py", line 602, in <module>
+    optimizer.step()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/optim/optimizer.py", line 517, in wrapper
+    out = func(*args, **kwargs)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py", line 120, in decorate_context
+    return func(*args, **kwargs)
+  File "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/phase1_train.py", line 431, in step
+    self._step_muon(group)
+  File "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/phase1_train.py", line 419, in _step_muon
+    muon_step_fused(stacked_grads, stacked_params,
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_dynamo/eval_frame.py", line 845, in compile_wrapper
+    raise e.remove_dynamo_frames() from None  # see TORCHDYNAMO_VERBOSE=1
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_fx.py", line 990, in _compile_fx_inner
+    raise InductorError(e, currentframe()).with_traceback(
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_fx.py", line 974, in _compile_fx_inner
+    mb_compiled_graph = fx_codegen_and_compile(
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_fx.py", line 1695, in fx_codegen_and_compile
+    return scheme.codegen_and_compile(gm, example_inputs, inputs_to_check, graph_kwargs)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_fx.py", line 1505, in codegen_and_compile
+    compiled_module = graph.compile_to_module()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/graph.py", line 2319, in compile_to_module
+    return self._compile_to_module()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/graph.py", line 2329, in _compile_to_module
+    mod = self._compile_to_module_lines(wrapper_code)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/graph.py", line 2397, in _compile_to_module_lines
+    mod = PyCodeCache.load_by_key_path(
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/codecache.py", line 3548, in load_by_key_path
+    mod = _reload_python_module(key, path, set_sys_modules=in_toplevel)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/compile_tasks.py", line 33, in _reload_python_module
+    exec(code, mod.__dict__, mod.__dict__)
+  File "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/compile_cache/torchinductor/xo/cxo2y7uxkt4vnsu34wpeln6hehsuw5w5w6lke47t3rmjtwzipk2x.py", line 1076, in <module>
+    async_compile.wait(globals())
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/async_compile.py", line 631, in wait
+    self._wait_futures(scope)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/async_compile.py", line 651, in _wait_futures
+    kernel = result.result()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/codecache.py", line 4289, in result
+    return self.result_fn()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/async_compile.py", line 461, in get_result
+    raise e.with_name(kernel_name) from e
+torch._inductor.exc.InductorError: SubprocException: An exception occurred in a subprocess:
+
+Name=triton_poi_fused_add_mul_9
+Traceback (most recent call last):
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_worker/subproc_pool.py", line 397, in do_job
+    result = job()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/compile_tasks.py", line 66, in _worker_compile_triton
+    kernel.precompile(warm_cache_only=True)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 439, in precompile
+    self._precompile_worker()
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 470, in _precompile_worker
+    compile_results.append(self._precompile_config(c))
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py", line 778, in _precompile_config
+    binary = triton.compile(*compile_args, **compile_kwargs)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/compiler/compiler.py", line 332, in compile
+    metadata_group[ir_filename] = fn_cache_manager.put(next_module, ir_filename)
+  File "/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/runtime/cache.py", line 112, in put
+    os.makedirs(temp_dir, exist_ok=True)
+  File "/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/os.py", line 225, in makedirs
+    mkdir(name, mode)
+OSError: [Errno 116] Stale file handle: '/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/compile_cache/triton/VCZXNNEA5UJYAS3BROJDG5JNSPLAJCFS5FMTYPRBALTUTRPJJF7Q/tmp.pid_769205_4bb215b6-e953-4c19-8cb8-07bdbafcf180'
+
+
+Set TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS="+dynamo"
+
+Vocab size: 8,192
+Model config: {'sequence_len': 2048, 'vocab_size': 8192, 'n_layer': 6, 'n_head': 3, 'n_kv_head': 3, 'n_embd': 384, 'window_pattern': 'L'}
+Parameter counts:
+  wte                     : 3,145,728
+  value_embeds            : 9,437,184
+  lm_head                 : 3,145,728
+  transformer_matrices    : 10,617,120
+  scalars                 : 12
+  total                   : 26,345,772
+Estimated FLOPs per token: 1.392002e+08
+Scaling AdamW LRs by 1/sqrt(384/768) = 1.414214
+Phase 1 token budget: 201,326,592
+Gradient accumulation steps: 1

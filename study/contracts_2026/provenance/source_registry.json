@@ -1,0 +1,124 @@
+{
+  "schema": "autopareto_source_registry_v1",
+  "audit_date": "2026-09-02",
+  "authority_rule": "raw measurements and machine-readable registries outrank summaries; event logs outrank prose; frozen manifests define intended protocol; historical values are retained rather than overwritten",
+  "status": "AUDITED_WITH_EXPLICIT_GAPS",
+  "sources": [
+    {
+      "id": "local_phase1_results",
+      "kind": "primary_machine_readable",
+      "path": "results/phase1/phase1_equal_token_results.json",
+      "sha256": "ae0792eb96cb31daa568064561daf47d8a1da98fd783516f49bc7d80905cc18f",
+      "scope": "aggregate 21-run equal-token panel; 7 models x seeds 3,4,5",
+      "status": "present"
+    },
+    {
+      "id": "local_phase1_snapshot",
+      "kind": "primary_recovered_evidence",
+      "path": "results/snapshots/runpod-<pod-id>-shutdown-20260901/extracted/results/phase1",
+      "scope": "per-run metrics, timing, telemetry, checkpoints, downstream database, logs",
+      "status": "present; recovered snapshot path must be preserved"
+    },
+    {
+      "id": "recovered_sqlite",
+      "kind": "primary_registry",
+      "path": "results/snapshots/runpod-<pod-id>-shutdown-20260901/extracted/results/phase1/downstream_200m.db",
+      "sha256": "d1166a3b84e6e91f3039697e682aa07133970f8c19d2e60346a03a9459aa34ec",
+      "size_bytes": 62943232,
+      "row_counts": {"experiments": 318, "training_runs": 348, "inference_measurements": 2940, "deployment_measurements": 6060, "experiment_events": 48471, "downstream_evaluation_runs": 32, "downstream_task_results": 288, "downstream_generations": 576, "agent_actions": 67},
+      "status": "present; read-only recovered registry"
+    },
+    {
+      "id": "local_results_db_placeholder",
+      "kind": "registry_placeholder",
+      "path": "results/phase1/downstream_200m.db",
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "size_bytes": 0,
+      "status": "not_authoritative; zero-byte placeholder"
+    },
+    {
+      "id": "phase1_preflight",
+      "kind": "protocol_manifest",
+      "path": "evaluation/phase1_equal_token_preflight.json",
+      "scope": "equal-token design, implementation hashes, and token-stream preflight",
+      "status": "present; explicitly says runtime token hashes were not observed"
+    },
+    {
+      "id": "phase1_public_manifest",
+      "kind": "protocol_manifest",
+      "path": "evaluation/phase1_public_manifest.json",
+      "status": "present"
+    },
+    {
+      "id": "data_manifest",
+      "kind": "data_manifest",
+      "path": "study/contracts_2026/provenance/data_manifest.json",
+      "sha256": "6a6d9c60b99b80884553939932e91e93364e548e102cf71b545589317f55eb88",
+      "aggregate_manifest_sha256": "1211827090aa7e669ec8bcd965ae1423dc90697f0e4928d0fce707cbc36c3f93",
+      "status": "present; static file hashes complete for 10 train shards, one validation shard, and two tokenizer files"
+    },
+    {
+      "id": "frozen_pre_study_manifest",
+      "kind": "frozen_protocol_manifest",
+      "path": "study/contracts_2026/provenance/final_pre_study_frozen_manifest_20260901.json",
+      "sha256": "ab7c7923c324c30df8224d030648e62275509477bc4367799ca1a358ae52bb3e",
+      "status": "present; historical frozen parent; not rewritten"
+    },
+    {
+      "id": "n_star_v3",
+      "kind": "frozen_protocol_manifest",
+      "path": "study/contracts_2026/provenance/n_star_freeze_v3_20260902.json",
+      "sha256": "7212564a3c7eb790f70cedcde50e93f2e36b35f6185609ab4ac98fe602bc4d4f",
+      "status": "present; N_STAR=93847552; read-only in this audit"
+    },
+    {
+      "id": "invalid_n_star",
+      "kind": "superseded_protocol_manifest",
+      "path": "study/contracts_2026/provenance/n_star_freeze_20260902.json",
+      "sha256": "e96982c0193d08855a16b1491a5e9e797d02581e982cb14d073d153a0d39234e",
+      "status": "retained as invalid historical evidence"
+    },
+    {
+      "id": "autopareto_trajectory",
+      "kind": "trajectory_audit",
+      "path": "AUTOPARETO_TRAJECTORY_AUDIT.md",
+      "status": "present; hypothesis and intervention reconstruction, not hidden chain-of-thought"
+    },
+    {
+      "id": "forensic_audit",
+      "kind": "prior_audit",
+      "path": "FORENSIC_RESEARCH_AUDIT.md",
+      "status": "present; reconciled and superseded where this ledger is more current"
+    },
+    {
+      "id": "neurips_2026_cfp",
+      "kind": "external_policy",
+      "url": "https://neurips.cc/Conferences/2026/CallForPapers",
+      "retrieved_at": "2026-09-02",
+      "status": "official current source"
+    },
+    {
+      "id": "neurips_2026_handbook",
+      "kind": "external_policy",
+      "url": "https://neurips.cc/Conferences/2026/MainTrackHandbook",
+      "retrieved_at": "2026-09-02",
+      "status": "official current source"
+    },
+    {
+      "id": "automlr_2026_call",
+      "kind": "external_policy",
+      "url": "https://automlr.com/",
+      "retrieved_at": "2026-09-02",
+      "status": "official workshop source; non-archival NeurIPS 2026 workshop"
+    }
+  ],
+  "known_missing_or_nonportable": [
+    "results/phase1/token_stream_verification.json",
+    "docs/PHASE1_MEASUREMENT_AMENDMENT.md",
+    "portable populated results/results.db at the canonical path",
+    "public raw per-example downstream logits/choices",
+    "full AutoPareto agent prompt/transcript/internal reasoning",
+    "exact energy, dollar, and human-time ledger",
+    "cross-GPU and larger-scale replication"
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "attempt": 1,
+  "attempt_wall_seconds": 649.8220555782318,
+  "cell": "tokens_201326592",
+  "contract": "fixed_tokens",
+  "finished_utc": "2026-11-08T06:34:11.670554+00:00",
+  "format": "autopareto_phase5a_run_record_v1",
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "6389a627744f346e03f2602000409b5420a1fa533f5914f6774b07d329f6b4ce",
+    "deployed_final_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus24-tokens201326592-seed6/deployed/final.deployed.pt",
+    "deployed_final_checkpoint_sha256": "3c52445631ca796a4c1763e7eeb857608455257868a3be4a2979fc2ac0f0f345",
+    "derived_source_sha256": "0772428361478e2ace55dcf75dc0808b25f362ef58569f6e82c74d44a652f597",
+    "end_to_end_training_seconds": 402.629746738,
+    "heldout_bpb": 1.159467449514329,
+    "heldout_ci95": [
+      1.153186117079683,
+      1.166278155387491
+    ],
+    "milestone_validation_bpb": {
+      "100663296": 1.195937307748336,
+      "150994944": 1.138610940105849,
+      "201326592": 1.09851891795791,
+      "50331648": 1.2527723376203466
+    },
+    "parameter_count": 22020371,
+    "peak_training_memory_mb": 9973.83154296875,
+    "steady_state_seconds": 305.491275043,
+    "steady_state_tokens_per_second": 654306.0844270098,
+    "tokens": 201326592,
+    "total_scientific_step_wall_seconds": 356.37194555,
+    "updates": 1536,
+    "validation_bpb": 1.09851891795791,
+    "validation_bpb_in_process": 1.098512810467279
+  },
+  "order": 3,
+  "phase1_model_id": "opus55_t_attempt24",
+  "plan_sha256": "a47f81b752d7953d05227bae77451f398ab0fca672f711f21a2fb3523c72993d",
+  "recipe": "OPUS-A24",
+  "role": "treatment",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus24-tokens201326592-seed6",
+  "run_id": "p5a-opus24-tokens201326592-seed6",
+  "seed": 6,
+  "source_sha256": "169d4761e624257a4f2d70175e253135eabecaa991fe418fe7f60c701001b6f2",
+  "stage": "P5A",
+  "status": "completed",
+  "synthetic": false,
+  "token_budget": 201326592
+}

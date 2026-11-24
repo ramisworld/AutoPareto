@@ -1,0 +1,90 @@
+[2026-11-08T08:29:34Z] phase5b start on GPU-3adf8a47-baa4-0808-d8e8-3068de291340, 595.91.07; plan sha256 94727990d9a74829c30ca92d5218a73dd923a82b80e69147154eedc46234e2e5 | load 8.24 9.55 12.14
+[2026-11-08T08:29:35Z] identity ok: 3 Opus checkpoints + sources, baseline T, benchmark c9b632e6056317f76c5591baf0a37b1775dd955045893fb75e5d6826be7db365 (= Phase 2A), generator, census; driver 732e5801898a88ad92b9891add8279c98f3dff0c2e24f132a45819bcd7851111 | load 8.24 9.55 12.14
+[2026-11-08T08:29:35Z] 18 variant contexts generated and hash-verified | load 8.24 9.55 12.14
+[2026-11-08T08:29:35Z] run 01_baseline-r1 start | load 8.24 9.55 12.14
+  01_baseline-r1: exit 0 status=stable decode=145.5 prefill_ms=7.39 e2e=145.8 peak_mib=337.2 kv_mib=17.98 correct=True mode=None
+[2026-11-08T08:31:12Z] run 02_a23-V0_as_submitted-r1 start | load 7.86 8.93 11.66
+  02_a23-V0_as_submitted-r1: exit 0 status=stable decode=4575.4 prefill_ms=139.91 e2e=763.3 peak_mib=113.0 kv_mib=3.61 correct=True mode=None
+[2026-11-08T08:39:58Z] run 03_a23-V1_no_cuda_graph-r1 start | load 9.15 11.61 12.02
+  03_a23-V1_no_cuda_graph-r1: exit 0 status=stable decode=403.5 prefill_ms=3.74 e2e=403.2 peak_mib=96.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T08:41:35Z] run 04_a23-V2_no_fusion-r1 start | load 7.72 10.41 11.55
+  04_a23-V2_no_fusion-r1: exit 0 status=stable decode=1722.0 prefill_ms=96.83 e2e=750.3 peak_mib=113.0 kv_mib=3.61 correct=True mode=None
+[2026-11-08T08:44:59Z] run 05_a23-V3_sdpa_attention-r1 start | load 23.06 16.24 13.58
+  05_a23-V3_sdpa_attention-r1: exit 0 status=stable decode=3543.9 prefill_ms=128.31 e2e=779.6 peak_mib=104.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T08:51:43Z] run 06_a23-V4_eager_unfused-r1 start | load 12.27 12.47 12.68
+  06_a23-V4_eager_unfused-r1: exit 0 status=unstable decode=289.9 prefill_ms=3.59 e2e=290.1 peak_mib=96.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T08:53:16Z] run 07_a23-V5_linear_kv_cache-r1 start | load 13.42 13.63 13.13
+  07_a23-V5_linear_kv_cache-r1: exit 0 status=stable decode=4359.9 prefill_ms=141.94 e2e=748.2 peak_mib=109.2 kv_mib=7.54 correct=True mode=None
+[2026-11-08T09:01:51Z] run 08_a24-V0_as_submitted-r1 start | load 10.90 10.82 11.69
+  08_a24-V0_as_submitted-r1: exit 0 status=stable decode=4586.6 prefill_ms=133.33 e2e=794.9 peak_mib=96.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T09:10:31Z] run 09_a24-V1_no_cuda_graph-r1 start | load 22.52 16.21 13.19
+  09_a24-V1_no_cuda_graph-r1: exit 0 status=unstable decode=396.7 prefill_ms=3.78 e2e=396.5 peak_mib=88.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T09:12:07Z] run 10_a24-V2_no_fusion-r1 start | load 17.24 16.09 13.44
+  10_a24-V2_no_fusion-r1: exit 0 status=stable decode=1722.5 prefill_ms=98.51 e2e=743.2 peak_mib=105.0 kv_mib=3.61 correct=True mode=None
+[2026-11-08T09:15:33Z] run 11_a24-V3_sdpa_attention-r1 start | load 12.54 12.88 12.59
+  11_a24-V3_sdpa_attention-r1: exit 0 status=stable decode=3550.6 prefill_ms=127.14 e2e=785.6 peak_mib=96.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T09:22:10Z] run 12_a24-V4_eager_unfused-r1 start | load 8.24 13.86 13.61
+  12_a24-V4_eager_unfused-r1: exit 0 status=unstable decode=292.3 prefill_ms=3.52 e2e=292.7 peak_mib=88.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T09:23:42Z] run 13_a24-V5_linear_kv_cache-r1 start | load 11.78 13.31 13.41
+  13_a24-V5_linear_kv_cache-r1: exit 0 status=stable decode=4372.2 prefill_ms=146.18 e2e=730.6 peak_mib=109.3 kv_mib=7.54 correct=True mode=None
+[2026-11-08T09:32:28Z] run 14_a27-V0_as_submitted-r1 start | load 10.34 12.62 13.68
+  14_a27-V0_as_submitted-r1: exit 0 status=stable decode=4595.7 prefill_ms=132.18 e2e=801.0 peak_mib=99.1 kv_mib=3.61 correct=True mode=None
+[2026-11-08T09:40:52Z] run 15_a27-V1_no_cuda_graph-r1 start | load 6.61 7.93 10.93
+  15_a27-V1_no_cuda_graph-r1: exit 0 status=stable decode=412.9 prefill_ms=4.09 e2e=411.0 peak_mib=82.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T09:42:29Z] run 16_a27-V2_no_fusion-r1 start | load 6.80 7.62 10.51
+  16_a27-V2_no_fusion-r1: exit 0 status=stable decode=1644.7 prefill_ms=94.82 e2e=744.0 peak_mib=90.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T09:45:45Z] run 17_a27-V3_sdpa_attention-r1 start | load 7.84 8.14 10.19
+  17_a27-V3_sdpa_attention-r1: exit 0 status=stable decode=3558.1 prefill_ms=133.00 e2e=758.8 peak_mib=99.1 kv_mib=3.61 correct=True mode=None
+[2026-11-08T09:52:33Z] run 18_a27-V4_eager_unfused-r1 start | load 10.31 9.14 9.78
+  18_a27-V4_eager_unfused-r1: exit 0 status=stable decode=267.9 prefill_ms=4.24 e2e=268.6 peak_mib=82.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T09:54:04Z] run 19_a27-V5_linear_kv_cache-r1 start | load 7.23 8.47 9.47
+  19_a27-V5_linear_kv_cache-r1: exit 0 status=stable decode=4369.1 prefill_ms=151.95 e2e=707.2 peak_mib=103.4 kv_mib=7.54 correct=True mode=None
+[2026-11-08T10:03:17Z] run 20_baseline-r2 start | load 6.89 8.54 9.07
+  20_baseline-r2: exit 0 status=stable decode=148.8 prefill_ms=7.28 e2e=148.4 peak_mib=337.2 kv_mib=17.98 correct=True mode=None
+[2026-11-08T10:04:52Z] run 21_a27-V5_linear_kv_cache-r2 start | load 6.47 7.94 8.80
+  21_a27-V5_linear_kv_cache-r2: exit 0 status=stable decode=4372.0 prefill_ms=127.41 e2e=818.1 peak_mib=103.4 kv_mib=7.54 correct=True mode=None
+[2026-11-08T10:12:40Z] run 22_a27-V4_eager_unfused-r2 start | load 6.62 8.49 9.08
+  22_a27-V4_eager_unfused-r2: exit 0 status=stable decode=283.1 prefill_ms=3.97 e2e=283.2 peak_mib=82.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T10:14:11Z] run 23_a27-V3_sdpa_attention-r2 start | load 6.28 7.94 8.83
+  23_a27-V3_sdpa_attention-r2: exit 0 status=stable decode=3558.7 prefill_ms=127.00 e2e=786.9 peak_mib=99.1 kv_mib=3.61 correct=True mode=None
+[2026-11-08T10:20:53Z] run 24_a27-V2_no_fusion-r2 start | load 7.64 9.97 9.82
+  24_a27-V2_no_fusion-r2: exit 0 status=stable decode=1644.5 prefill_ms=99.84 e2e=722.9 peak_mib=90.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T10:24:14Z] run 25_a27-V1_no_cuda_graph-r2 start | load 24.25 15.46 11.84
+  25_a27-V1_no_cuda_graph-r2: exit 0 status=unstable decode=375.5 prefill_ms=4.51 e2e=379.8 peak_mib=82.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T10:25:52Z] run 26_a27-V0_as_submitted-r2 start | load 12.40 14.43 11.88
+  26_a27-V0_as_submitted-r2: exit 0 status=stable decode=4594.8 prefill_ms=139.01 e2e=768.1 peak_mib=99.1 kv_mib=3.61 correct=True mode=None
+[2026-11-08T10:34:38Z] run 27_a24-V5_linear_kv_cache-r2 start | load 9.27 10.45 10.78
+  27_a24-V5_linear_kv_cache-r2: exit 0 status=stable decode=4372.8 prefill_ms=127.13 e2e=819.6 peak_mib=109.3 kv_mib=7.54 correct=True mode=None
+[2026-11-08T10:42:27Z] run 28_a24-V4_eager_unfused-r2 start | load 6.17 8.00 9.49
+  28_a24-V4_eager_unfused-r2: exit 0 status=stable decode=295.6 prefill_ms=3.48 e2e=295.7 peak_mib=88.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T10:43:58Z] run 29_a24-V3_sdpa_attention-r2 start | load 6.40 7.77 9.28
+  29_a24-V3_sdpa_attention-r2: exit 0 status=stable decode=3550.6 prefill_ms=125.53 e2e=793.6 peak_mib=96.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T10:50:33Z] run 30_a24-V2_no_fusion-r2 start | load 13.20 9.60 9.31
+  30_a24-V2_no_fusion-r2: exit 0 status=stable decode=1722.4 prefill_ms=94.26 e2e=762.0 peak_mib=105.0 kv_mib=3.61 correct=True mode=None
+[2026-11-08T10:54:00Z] run 31_a24-V1_no_cuda_graph-r2 start | load 6.94 8.26 8.83
+  31_a24-V1_no_cuda_graph-r2: exit 0 status=stable decode=419.1 prefill_ms=3.56 e2e=417.0 peak_mib=88.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T10:55:36Z] run 32_a24-V0_as_submitted-r2 start | load 5.40 7.49 8.51
+  32_a24-V0_as_submitted-r2: exit 0 status=stable decode=4586.5 prefill_ms=127.94 e2e=822.3 peak_mib=96.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T11:03:48Z] run 33_a23-V5_linear_kv_cache-r2 start | load 6.03 8.22 9.00
+  33_a23-V5_linear_kv_cache-r2: exit 0 status=stable decode=4365.3 prefill_ms=128.99 e2e=809.7 peak_mib=109.2 kv_mib=7.54 correct=True mode=None
+[2026-11-08T11:11:40Z] run 34_a23-V4_eager_unfused-r2 start | load 6.96 8.46 9.18
+  34_a23-V4_eager_unfused-r2: exit 0 status=stable decode=297.8 prefill_ms=3.49 e2e=297.9 peak_mib=96.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T11:13:12Z] run 35_a23-V3_sdpa_attention-r2 start | load 15.19 10.33 9.74
+  35_a23-V3_sdpa_attention-r2: exit 0 status=stable decode=3547.4 prefill_ms=125.56 e2e=793.2 peak_mib=104.9 kv_mib=3.61 correct=True mode=None
+[2026-11-08T11:19:44Z] run 36_a23-V2_no_fusion-r2 start | load 6.66 7.87 8.81
+  36_a23-V2_no_fusion-r2: exit 0 status=stable decode=1723.0 prefill_ms=86.96 e2e=796.7 peak_mib=113.0 kv_mib=3.61 correct=True mode=None
+[2026-11-08T11:22:57Z] run 37_a23-V1_no_cuda_graph-r2 start | load 6.88 7.19 8.34
+  37_a23-V1_no_cuda_graph-r2: exit 0 status=unstable decode=392.0 prefill_ms=3.87 e2e=398.8 peak_mib=96.8 kv_mib=3.57 correct=True mode=None
+[2026-11-08T11:24:33Z] run 38_a23-V0_as_submitted-r2 start | load 11.37 8.93 8.86
+  38_a23-V0_as_submitted-r2: exit 0 status=stable decode=4585.7 prefill_ms=135.16 e2e=785.9 peak_mib=113.0 kv_mib=3.61 correct=True mode=None
+[2026-11-08T11:33:09Z] run 39_baseline-r3 start | load 10.11 11.00 9.80
+  39_baseline-r3: exit 0 status=stable decode=152.9 prefill_ms=7.09 e2e=152.7 peak_mib=337.2 kv_mib=17.98 correct=True mode=None
+[2026-11-08T11:34:42Z] timing runs done | load 6.61 9.57 9.41
+[2026-11-08T11:34:50Z] census a23 V0_as_submitted exit 0 token": 1.0, "host_kernel_launch_calls_per_token": 2.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 252.76228125000023, "torch": "2.8.0+cu128", "train_py": "/workspace/autopareto-camera-ready/results/camera_ready_2 | load 6.59 9.47 9.38
+[2026-11-08T11:34:59Z] census a23 V1_no_cuda_graph exit 0 oken": 0.0, "host_kernel_launch_calls_per_token": 75.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 3209.436843750014, "torch": "2.8.0+cu128", "train_py": "/workspace/autopareto-camera-ready/results/camera_ready_20 | load 6.94 9.50 9.38
+[2026-11-08T11:35:03Z] census a23 V2_no_fusion exit 0 per_token": 1.0, "host_kernel_launch_calls_per_token": 2.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 658.4718437500002, "torch": "2.8.0+cu128", "train_py": "/workspace/autopareto-camera-ready/results/camera_read | load 6.79 9.42 9.36
+[2026-11-08T11:35:11Z] census a23 V3_sdpa_attention exit 0 ken": 1.0, "host_kernel_launch_calls_per_token": 2.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 310.47474999999986, "torch": "2.8.0+cu128", "train_py": "/workspace/autopareto-camera-ready/results/camera_ready_202 | load 6.74 9.32 9.33
+[2026-11-08T11:35:19Z] census a23 V4_eager_unfused exit 0 ken": 0.0, "host_kernel_launch_calls_per_token": 284.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 4268.192062500015, "torch": "2.8.0+cu128", "train_py": "/workspace/autopareto-camera-ready/results/camera_ready_20 | load 6.68 9.27 9.31
+[2026-11-08T11:35:26Z] census a23 V5_linear_kv_cache exit 0 en": 1.0, "host_kernel_launch_calls_per_token": 2.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 260.80056249999984, "torch": "2.8.0+cu128", "train_py": "/workspace/autopareto-camera-ready/results/camera_ready_2026 | load 9.31 9.77 9.47
+[2026-11-08T11:35:39Z] census baseline exit 0 raph_launch_calls_per_token": 0.0, "host_kernel_launch_calls_per_token": 618.0, "profiled_decode_tokens": 32, "profiler_host_self_time_us_per_token": 11899.176468750036, "torch": "2.8.0+cu128", "train_py": "/opt/autopareto_trusted/study/con | load 8.80 9.64 9.44
+[2026-11-08T11:35:39Z] PHASE5B DONE | load 8.80 9.64 9.44

@@ -1,0 +1,104 @@
+[2026-11-16T05:36:29Z] RESUME r2: previous chain stopped after P0a exit 120 (volume write failure); completed run records are skipped by the runner
+[2026-11-16T05:36:29Z] P0a start (plan dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096)
+{"label": "opus_a24-seed7-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 4594.165849633901, "speedup": 30.7145845652914, "peak_mib": 105.07568359375, "wall_s": 782.3}
+{"label": "arref-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 149.9863207352733, "speedup": 0.9947373285093359, "peak_mib": 337.26513671875, "wall_s": 267.1}
+{"label": "opus_a23-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1020, "decode_tok_s": 4574.284142188687, "speedup": 33.37263687977517, "peak_mib": 113.07568359375, "wall_s": 774.1}
+{"label": "opus_a27-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1024, "decode_tok_s": 4583.289993668988, "speedup": 31.703516145426093, "peak_mib": 99.12255859375, "wall_s": 826.4}
+{"label": "opus_a24-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1014, "decode_tok_s": 4593.904100699829, "speedup": 31.51900560473552, "peak_mib": 105.07568359375, "wall_s": 783.6}
+{"label": "gpt_a22-seed8-native", "mode": "native", "status": "completed", "hard_mismatches": 0, "token_agreement": 1023, "decode_tok_s": 263.6435695080598, "speedup": 1.9252969795060497, "peak_mib": 243.26318359375, "wall_s": 258.8}
+[2026-11-16T06:38:25Z] P0a exit 0
+[2026-11-16T06:38:25Z] P1-train start (plan dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096)
+{"complete": true, "missing_files": [], "persistent_cache": "/workspace/.cache/autoresearch", "required_files": ["tokenizer/tokenizer.pkl", "tokenizer/token_bytes.pt", "data/shard_06542.parquet"], "runtime_cache": "/root/.cache/autoresearch", "runtime_resolves_to": "/workspace/.cache/autoresearch", "status": "ok", "training_shards": 10}
+{"checkpoint_root": "/workspace/autopareto-camera-ready/results/checkpoints", "mode": "runpod_persistent", "status": "ok"}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-baseline-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1414138023035085, "tok_s": 291862.0416808185, "failures": [], "wall_s": 1409}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a24-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1872447574797154, "tok_s": 613587.2069673354, "failures": [], "wall_s": 1139}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-nsgaii-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1136960177393889, "tok_s": 286172.9828244742, "failures": [], "wall_s": 1296}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-tpe-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.121006220022935, "tok_s": 371122.24181816896, "failures": [], "wall_s": 1004}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a25-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1598490701637163, "tok_s": 639205.862660227, "failures": [], "wall_s": 673}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-cmaes-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1413143623519382, "tok_s": 480317.88492856757, "failures": [], "wall_s": 832}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-rs-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1237956416307213, "tok_s": 389652.2296853774, "failures": [], "wall_s": 947}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-motpe-tokens201326592-seed6", "attempt": 1, "status": "completed", "heldout": 1.1427986301262536, "tok_s": 504815.0343272613, "failures": [], "wall_s": 815}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a24-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.1853266361804577, "tok_s": 696763.9516957481, "failures": [], "wall_s": 664}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-nsgaii-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.112458804983773, "tok_s": 285995.35783369443, "failures": [], "wall_s": 1282}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-tpe-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.119909432533216, "tok_s": 371263.66559593746, "failures": [], "wall_s": 1014}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a25-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.153852025293219, "tok_s": 644079.1116167001, "failures": [], "wall_s": 723}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-cmaes-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.142349243424845, "tok_s": 480328.33102209313, "failures": [], "wall_s": 858}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-rs-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.1208947928815791, "tok_s": 390071.99962818035, "failures": [], "wall_s": 1010}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-motpe-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.1537011975008566, "tok_s": 505239.022284508, "failures": [], "wall_s": 819}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-baseline-tokens201326592-seed7", "attempt": 1, "status": "completed", "heldout": 1.1421611329237393, "tok_s": 292026.70697680337, "failures": [], "wall_s": 1222}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-nsgaii-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.1147751667746164, "tok_s": 286269.1265518581, "failures": [], "wall_s": 1190}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-tpe-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.1207120949950211, "tok_s": 371349.3442752673, "failures": [], "wall_s": 984}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a25-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.1663601483769632, "tok_s": 643949.6456798883, "failures": [], "wall_s": 654}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-cmaes-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.143384303144345, "tok_s": 480401.1652510864, "failures": [], "wall_s": 821}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-rs-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.1223012547091096, "tok_s": 389874.98445513943, "failures": [], "wall_s": 922}
+{"run_id": "p6-motpe-tokens201326592-seed8", "attempt": 1, "status": "failed", "heldout": null, "tok_s": null, "failures": ["Phase-1 launcher exited with 1 (see training.log)", "training failed: InductorError: SubprocException: An exception occurred in a subprocess:\n\nName=triton_poi_fused_add_mul_9\nTraceback (most recent call last):\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_worker/subproc_pool.py\", line 397, in do_job\n    result = job()\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/compile_tasks.py\", line 66, in _worker_compile_triton\n    kernel.precompile(warm_cache_only=True)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 439, in precompile\n    self._precompile_worker()\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 470, in _precompile_worker\n    compile_results.append(self._precompile_config(c))\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 778, in _precompile_config\n    binary = triton.compile(*compile_args, **compile_kwargs)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/compiler/compiler.py\", line 332, in compile\n    metadata_group[ir_filename] = fn_cache_manager.put(next_module, ir_filename)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/runtime/cache.py\", line 112, in put\n    os.makedirs(temp_dir, exist_ok=True)\n  File \"/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/os.py\", line 225, in makedirs\n    mkdir(name, mode)\nOSError: [Errno 116] Stale file handle: '/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8/compile_cache/triton/VCZXNNEA5UJYAS3BROJDG5JNSPLAJCFS5FMTYPRBALTUTRPJJF7Q/tmp.pid_769205_4bb215b6-e953-4c19-8cb8-07bdbafcf180'\n\n\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\n"], "wall_s": 73}
+{"run_id": "p6-motpe-tokens201326592-seed8", "attempt": 2, "status": "failed", "heldout": null, "tok_s": null, "failures": ["Phase-1 launcher exited with 1 (see training.log)", "training failed: InductorError: SubprocException: An exception occurred in a subprocess:\n\nName=triton_poi_fused_add_mul_6\nTraceback (most recent call last):\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/compile_worker/subproc_pool.py\", line 397, in do_job\n    result = job()\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/compile_tasks.py\", line 66, in _worker_compile_triton\n    kernel.precompile(warm_cache_only=True)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 439, in precompile\n    self._precompile_worker()\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 470, in _precompile_worker\n    compile_results.append(self._precompile_config(c))\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/torch/_inductor/runtime/triton_heuristics.py\", line 778, in _precompile_config\n    binary = triton.compile(*compile_args, **compile_kwargs)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/compiler/compiler.py\", line 310, in compile\n    metadata_group[ir_filename] = fn_cache_manager.put(module, ir_filename)\n  File \"/workspace/autopareto-camera-ready/.venv/lib/python3.10/site-packages/triton/runtime/cache.py\", line 112, in put\n    os.makedirs(temp_dir, exist_ok=True)\n  File \"/root/.local/share/uv/python/cpython-3.10.18-linux-x86_64-gnu/lib/python3.10/os.py\", line 225, in makedirs\n    mkdir(name, mode)\nOSError: [Errno 116] Stale file handle: '/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-motpe-tokens201326592-seed8-attempt2/compile_cache/triton/LYLNVEXJ3JH5P4LYRC42KSTFQFYA6KCSUGT6EGKR7NIHCDIHKPNA/tmp.pid_770532_ec81a148-35ea-4466-b082-6f5b243c7bac'\n\n\nSet TORCHDYNAMO_VERBOSE=1 for the internal stack trace (please do this especially if you're reporting a bug to PyTorch). For even more developer context, set TORCH_LOGS=\"+dynamo\"\n"], "wall_s": 66}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-baseline-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.1498049037627356, "tok_s": 291931.3616471688, "failures": [], "wall_s": 1214}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a24-tokens201326592-seed8", "attempt": 1, "status": "completed", "heldout": 1.189026203980049, "tok_s": 729770.2731922787, "failures": [], "wall_s": 648}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-arref-tokens201326592-seed6-drift", "attempt": 1, "status": "completed", "heldout": 1.096768018958142, "tok_s": 288869.4810645988, "failures": [], "wall_s": 1207}
+{"checkpoints": 4, "heldout": true, "status": "ok"}
+{"run_id": "p6-gpt_a22-tokens201326592-seed6-drift", "attempt": 1, "status": "completed", "heldout": 1.1414441849391481, "tok_s": 522853.67392762075, "failures": [], "wall_s": 738}
+{"run_id": "p6-opus_a23-tokens201326592-seed6-drift", "attempt": 1, "status": "completed", "heldout": 1.1552533742377318, "tok_s": 656624.7993106693, "failures": [], "wall_s": 668}
+{
+ "format": "autopareto_phase6_execution_summary_v1",
+ "stage": "train",
+ "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+ "completed": [
+  "p6-arref-tokens201326592-seed6-drift",
+  "p6-baseline-tokens201326592-seed6",
+  "p6-baseline-tokens201326592-seed7",
+  "p6-baseline-tokens201326592-seed8",
+  "p6-cmaes-tokens201326592-seed6",
+  "p6-cmaes-tokens201326592-seed7",
+  "p6-cmaes-tokens201326592-seed8",
+  "p6-gpt_a22-tokens201326592-seed6-drift",
+  "p6-gpt_a24-tokens201326592-seed6",
+  "p6-gpt_a24-tokens201326592-seed7",
+  "p6-gpt_a24-tokens201326592-seed8",
+  "p6-gpt_a25-tokens201326592-seed6",
+  "p6-gpt_a25-tokens201326592-seed7",
+  "p6-gpt_a25-tokens201326592-seed8",
+  "p6-motpe-tokens201326592-seed6",
+  "p6-motpe-tokens201326592-seed7",
+  "p6-nsgaii-tokens201326592-seed6",
+  "p6-nsgaii-tokens201326592-seed7",
+  "p6-nsgaii-tokens201326592-seed8",
+  "p6-opus_a23-tokens201326592-seed6-drift",
+  "p6-rs-tokens201326592-seed6",
+  "p6-rs-tokens201326592-seed7",
+  "p6-rs-tokens201326592-seed8",
+  "p6-tpe-tokens201326592-seed6",
+  "p6-tpe-tokens201326592-seed7",
+  "p6-tpe-tokens201326592-seed8"
+ ],
+ "reported_failed": [
+  "p6-motpe-tokens201326592-seed8"
+ ],
+ "recorded_utc": "2026-11-16T13:34:03.117127+00:00"
+}
+[2026-11-16T13:34:03Z] P1-train exit 1
+[2026-11-16T13:34:03Z] STOP after P1-train

@@ -1,0 +1,12 @@
+{
+  "checkpoint": "/root/phase6_local/runs/p6-gpt_a24-time300s-seed8/final.pt",
+  "measured_training_tokens": 208797696,
+  "parameter_count": 17891526,
+  "peak_training_cuda_memory_mb": 8002.929893493652,
+  "total_runtime_seconds": 368.5230247974396,
+  "total_training_tokens": 210239488,
+  "training_seconds": 300.08493638038635,
+  "training_seed": 8,
+  "training_tokens_per_second": 695795.3255451948,
+  "val_bpb": 1.1279735960903854
+}

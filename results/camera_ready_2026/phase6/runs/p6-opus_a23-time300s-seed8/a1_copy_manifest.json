@@ -1,0 +1,31 @@
+{
+  "compile_cache": {
+    "local_tar": "/root/phase6_local/runs/p6-opus_a23-time300s-seed8.compile_cache.tar",
+    "members": 1631
+  },
+  "copied_utc": "2026-11-17T06:55:17.692606+00:00",
+  "files": {
+    "checkpoint_evaluations.json": "34d30d7a543f06dbfb3d3ff1690880d86bf3e3018f9eed38867ce30fb36f76ca",
+    "compile_cache.tar": "681758fc3287fcf6bfd7b506123cd5e1bc8997307fddd602ebbef8a48d65d64e",
+    "evaluation.log": "f8ca03dc3207f268463051908678c4e5112d877192b73148787a7ed9fef7cfe0",
+    "events.jsonl": "071e9a28581fa933e9be05624344009873f4692f9d5cb0944003fe5034fc15ea",
+    "final.pt": "19c167665cc5c958a8632527e6600a1c3459f3b2cadd53043b6017f9028834d8",
+    "fixed_time_checkpoint_manifest.json": "1cb9821f5f6412a2c955c311765c2a4e7d6b67c970365fde4754adbdac4f28d0",
+    "fixed_time_training_metrics.json": "5211f51ca0d90810003d7e41f5303db0bcc958145070796a1959d4500461cc9f",
+    "isolate/__pycache__/benchmark_config.cpython-310.pyc": "9c4b7a226c10b5e777a23478c3679df7f69ddea601cfc3ed28e8be32f26ddd13",
+    "isolate/__pycache__/event_log.cpython-310.pyc": "e480b7ff6434372129a7f6e104140cf82be07dc6c0ced781cb8fd5f72249522c",
+    "isolate/__pycache__/prepare.cpython-310.pyc": "687b42433620a6e2ef7191c206623ddf1339348c2a2427381c414bb038fd4658",
+    "isolate/benchmark_config.py": "722131ffc44d6b10a5e7fca1862ec01dfc7702388e3fb8eb9b629cb2a52c51dc",
+    "isolate/event_log.py": "4fa92d5d9ef68703455a04b26354d2287ae5a5fdcc99911bb38ffe4b3adb7cac",
+    "isolate/prepare.py": "7132ec46aa39f99a40c207a9c540fdffe0fb9413a3c973e938bab26bf3e170b3",
+    "isolate/protected/__pycache__/inference_adapter.cpython-310.pyc": "79c33db3031f6e457f35f4a6de529497ca529aba7ecd8210d8547a4926b326fc",
+    "isolate/protected/inference_adapter.py": "80f4d8c9de365480ef0e7170f705971a0454d421ef410a5c23ff6ae8795b4dd1",
+    "isolate/protected/train_launcher.py": "aa9dc8b2f5ff8b87a16d0a6094c0a6bd612d4ca79594e2ab83de6204bad0182f",
+    "isolate/train.py": "5035e4d4c805b2382f7610c988e12eb53daa142366f4cda678bb17c2fd93ac79",
+    "training.log": "d66bbd8fcb57f4afcbd00261399a624222263c8a98c88fa48fdfe7c96f0e9fdb"
+  },
+  "format": "autopareto_phase6_a1_copy_manifest_v1",
+  "local_dir": "/root/phase6_local/runs/p6-opus_a23-time300s-seed8",
+  "verified_files": 18,
+  "volume_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-opus_a23-time300s-seed8"
+}

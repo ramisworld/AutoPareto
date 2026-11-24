@@ -1,0 +1,18 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 71318409,
+      "checkpoint_path": "/root/phase6_local/runs/p6-cmaes-time300s-seed6/final.pt",
+      "checkpoint_sha256": "449f37518dc6e3d6110ad79991a699de6f99ed7d125bc7c0cded2b8734e5eba9",
+      "historical_steady_state_training_seconds": 300.10807275772095,
+      "optimizer_step": 1110,
+      "token_count": 145489920
+    }
+  ],
+  "device_batch_size": 64,
+  "format": "autopareto_camera_ready_fixed_time_checkpoint_manifest_v1",
+  "note": "single final checkpoint of a 300 s fixed-time run; consumed by scripts/evaluate_phase1_checkpoints.py",
+  "seed": 6,
+  "sequence_length": 2048,
+  "source_sha256": "7163c7b2ea29d1c0dc42bcade4d229b7b82e4e4bfdb4c27a8092d622d56e6f93"
+}

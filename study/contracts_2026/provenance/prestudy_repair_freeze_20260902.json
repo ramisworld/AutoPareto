@@ -1,0 +1,90 @@
+{
+  "schema": "autopareto_pre_study_repair_freeze_v1",
+  "created_at": "2026-09-02",
+  "status": "BLOCKED_DO_NOT_LAUNCH",
+  "scientific_campaign_started": false,
+  "parent_frozen_manifest": {
+    "path": "study/contracts_2026/provenance/final_pre_study_frozen_manifest_20260901.json",
+    "sha256": "ab7c7923c324c30df8224d030648e62275509477bc4367799ca1a358ae52bb3e"
+  },
+  "historical_hash_ledger": {
+    "path": "study/contracts_2026/provenance/frozen_file_hashes.json",
+    "sha256": "52e88b5d041eeea205af6677d1da33cca9423b9efbdd78fe68020ac496dd075e",
+    "preserved_immutable": true,
+    "reconciliation_path": "study/contracts_2026/provenance/hash_reconciliation_repaired_20260902.json",
+    "reconciliation_sha256": "5c855b2590c7edf8856e9873ca5c454c0e2730fc324623977a611a7bd29f8967"
+  },
+  "warmup_semantics": {
+    "disposable_updates": 11,
+    "disposable_zero_based_indices": "0-10",
+    "scientific_process": "fresh process after warm-up; model, optimizer, CPU/CUDA RNG, dataloader position, counters and outputs are reconstructed from the registered source and seed",
+    "contract_t_timer": "parent monotonic clock starts before the first scientific process forward/update; every scientific update is included",
+    "contract_n_tokens": "warm-up tokens are discarded; exact N_STAR termination is enforced in the fresh scientific process",
+    "historical_wording": "Steps 0–10 are scientifically executed but excluded from the historical steady-state timing boundary. Steady-state timing begins at step index 11."
+  },
+  "n_star": {
+    "old_value": 93847552,
+    "old_freeze_path": "study/contracts_2026/provenance/n_star_freeze_v3_20260902.json",
+    "old_freeze_sha256": "7212564a3c7eb790f70cedcde50e93f2e36b35f6185609ab4ac98fe602bc4d4f",
+    "old_value_status": "INVALIDATED_FOR_REPAIRED_STUDY",
+    "invalidation_path": "study/contracts_2026/provenance/n_star_invalidation_repaired_study_20260902.json",
+    "invalidation_sha256": "47868fbdd3156d2d33497d9b3af6c01a2718e4bd3a137716dd8918842ddd7d73",
+    "replacement_value": null,
+    "replacement_status": "PENDING_THREE_A40_CONTRACT_T_CALIBRATIONS"
+  },
+  "a40_identity": {
+    "current_host_verified": false,
+    "last_registered_uuid_historical_only": "GPU-621eb939-c1eb-fe73-f2e9-cbe3a0400f8f",
+    "last_registered_driver_historical_only": "580.159.04",
+    "last_registered_cuda_historical_only": "12.8",
+    "last_registered_pytorch_historical_only": "2.9.1+cu128",
+    "current_uuid": null
+  },
+  "process_isolation": {
+    "training_candidate_host": "study/contracts_2026/candidate_process.py",
+    "protected_parent": "study/contracts_2026/train_launcher.py",
+    "handoff": "candidate_sandbox.py applies Landlock/seccomp/no_new_privs/capability drop, then execve replaces the wrapper with a clean candidate Python process",
+    "parent_accounting": "typed child event stream with parent-derived token, microbatch and update ledger",
+    "candidate_prepare_view": "remote_runner.py stages a data/tokenizer prepare shim with evaluator body removed",
+    "static_adversarial_tests": "passed",
+    "a40_adversarial_execution": "not_run",
+    "attestation_limitation": "event structure cannot by itself prove an untrusted child performed the claimed GPU update; this remains a launch blocker until a trusted attestation design is validated"
+  },
+  "inference_boundary": {
+    "protected_in_process_candidate_loader": "disabled_fail_closed",
+    "separate_model_host_evaluator_ipc": "not_implemented",
+    "launch_status": "blocked"
+  },
+  "schedule": {
+    "superseded_path": "study/contracts_2026/provenance/pair_a_interleaved_schedule_20260902.json",
+    "path": "study/contracts_2026/provenance/pair_a_interleaved_same_index_schedule_20260902.json",
+    "sha256": "ccd498d8697b35ebfbd63482b5a7b55cde08324abfce59f8f9f8f24dbeea1233",
+    "design": "25 same-index T/N blocks in randomized within-block order; T and N each advance in internal order 1..25; never simultaneous; campaign histories and views separate",
+    "frozen_before_results": true
+  },
+  "canonical_repaired_artifacts": {
+    "study/contracts_2026/candidate_process.py": "aae88052f5cc9bc3dc16ec548eb1d7dfc6ab40bcad724b763d0962cc928d44c0",
+    "study/contracts_2026/candidate_worker.py": "7923d5ab914da60117b6dbafa5c242508865d3d077df4d1c4745a6f6ab4c16b9",
+    "study/contracts_2026/candidate_sandbox.py": "cdb7b13a619a8566a995fb19cb1c7bdb2665bff1008433d8f1640738b89bec50",
+    "study/contracts_2026/train_launcher.py": "fb39d6f7f7163aed9c33f9354930ab354571c202b3696b532cadac9121084368",
+    "study/contracts_2026/remote_runner.py": "4babc52a2265a6d801014bec7cf1df499b0655d59e788dac97749bfdbfb41a21",
+    "study/contracts_2026/inference_benchmark.py": "8bd674c009280978108b4a2eebffa2cbedac8003499c238f40a2b28ff1aadf94",
+    "study/contracts_2026/runner.py": "3c2abdda6192dd495c7dd266b280dea5ae42dcb3f54311dee4a4f4746bf828ed",
+    "study/contracts_2026/scheduling.py": "5faabe75e2edbef823bc40d046aa09992f1b6bda645d7bd8749713cf92aa755c",
+    "study/contracts_2026/provenance/pair_a_interleaved_same_index_schedule_20260902.json": "ccd498d8697b35ebfbd63482b5a7b55cde08324abfce59f8f9f8f24dbeea1233",
+    "study/contracts_2026/protocol.md": "857b211a227a022e1dc88678873f4339c0373b0d3e5adc5d7588e3d16b8e8867",
+    "study/contracts_2026/programs/program_fixed_time.md": "a6898e914dee335bd5ea5b02856ea6a232150068d24ac39a06633e0a3a4ca4f6",
+    "study/contracts_2026/programs/program_fixed_tokens.md": "c35ef08f012c2c8f6732cdab74ab421a19fe44b6996c00c72249c4d2011c53f6",
+    "study/contracts_2026/provenance/prompt_diff.patch": "0535395d7c0ad2c238b35c6176f9f96cf44ce722148bc1283ce5ed42eccb10c6",
+    "study/contracts_2026/provenance/prompt_snapshot_manifest.json": "becf3d06dbe6b4c1278e5fe356907d33a51b8525a28f0022559fa2f2717585a4",
+    "study/contracts_2026/tests/test_process_boundary.py": "f7b7c2bed8a0988ee6257c5e7e32af8ba8583f9fc5a8d72fcad08c99e0f3f0e7"
+  },
+  "validation": {
+    "local_unit_tests": "46_passed_3_skipped; no failures",
+    "local_cuda": "unavailable_on_macOS_ARM64",
+    "a40_contract_t_smokes": "not_run",
+    "a40_contract_n_smokes": "not_run",
+    "three_run_recalibration": "not_run",
+    "study_attempts_launched": false
+  }
+}

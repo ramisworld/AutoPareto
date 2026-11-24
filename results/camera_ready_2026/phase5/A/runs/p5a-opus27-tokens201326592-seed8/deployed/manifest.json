@@ -1,0 +1,76 @@
+{
+  "checkpoints": [
+    {
+      "checkpoint_bytes": 79752777,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/deployed/step-000384.deployed.pt",
+      "checkpoint_sha256": "76aae0c8649e6a853e9dcc41ef7e07fa268aa89ebf133cbdff7b1275c077999d",
+      "cumulative_steady_state_seconds": 73.795302984,
+      "historical_steady_state_training_seconds": 73.79530298399999,
+      "optimizer_step": 384,
+      "token_count": 50331648,
+      "total_scientific_step_wall_seconds": 125.285233456,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/milestones/step-000384.pt",
+      "training_checkpoint_sha256": "c7fe44eb2e1867874f3e66408463d4fd49148c325fb608d5865dad179ad779c3"
+    },
+    {
+      "checkpoint_bytes": 79752777,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/deployed/step-000768.deployed.pt",
+      "checkpoint_sha256": "10336b92b4d59762cc101cf558725f6eceb03a7e086a57b7fab1569388d155f3",
+      "cumulative_steady_state_seconds": 150.623298309,
+      "historical_steady_state_training_seconds": 150.623298309,
+      "optimizer_step": 768,
+      "token_count": 100663296,
+      "total_scientific_step_wall_seconds": 202.113228781,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/milestones/step-000768.pt",
+      "training_checkpoint_sha256": "71c0dd966de5b338a0959795229511636ed0310372e950e58e459e708b85033d"
+    },
+    {
+      "checkpoint_bytes": 79752777,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/deployed/step-001152.deployed.pt",
+      "checkpoint_sha256": "daefc53fbc1c0562d8245325c80d37db8f28907ab0cdfd8159c0a2b3ea0dd70e",
+      "cumulative_steady_state_seconds": 227.533671811,
+      "historical_steady_state_training_seconds": 227.53367181100003,
+      "optimizer_step": 1152,
+      "token_count": 150994944,
+      "total_scientific_step_wall_seconds": 279.023602283,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/milestones/step-001152.pt",
+      "training_checkpoint_sha256": "67bc55b75314a515e908c04cf5f591851f310811ad37cfa5d183895146b2b1ab"
+    },
+    {
+      "checkpoint_bytes": 79752491,
+      "checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/deployed/final.deployed.pt",
+      "checkpoint_sha256": "e53c13240871118c8bb8f6546169ade9c0abb1d67f8e1dd11c461de447551454",
+      "cumulative_steady_state_seconds": 304.225286464,
+      "historical_steady_state_training_seconds": 304.2252864639999,
+      "optimizer_step": 1536,
+      "token_count": 201326592,
+      "total_scientific_step_wall_seconds": 355.715216936,
+      "training_checkpoint_path": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/final.pt",
+      "training_checkpoint_sha256": "7488b904c3d391d1d11b79cbba0f1eccd2b881a99c39a254df9a76c9bfc4b200"
+    }
+  ],
+  "deployment": {
+    "candidate": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/phase1_train.py",
+    "candidate_sha256": "e4c8bd519e1ddab9610f04ce11da56008d98e5e97e1f3641cec3ed9777852702",
+    "format": "autopareto_phase5a_deployed_checkpoints_v1",
+    "original_source": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase2/raw/pod_phase2/inputs/sources/opus_attempt27.train.py",
+    "original_source_sha256": "b8eaf5e93838b007aaaa66b6bb5a5ed15127f4c1c10c1f35633f2d075f8f8e12",
+    "post_training_storage_statements": [
+      "getattr(model, '_orig_mod', model).set_matrix_dtype(torch.bfloat16)",
+      "getattr(model, '_orig_mod', model).set_table_dtype(INFERENCE_TABLE_DTYPE)"
+    ],
+    "training_manifest": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase5/A/runs/p5a-opus27-tokens201326592-seed8/milestones/manifest.json",
+    "training_manifest_sha256": "6d45ab87ca3c4bfd759056c631620d5b0686d99cac1e7be050b03c32060c8523",
+    "training_storage_statements": [
+      "model.set_matrix_dtype(torch.float32)",
+      "model.set_table_dtype(TRAIN_TABLE_DTYPE)"
+    ]
+  },
+  "device_batch_size": 64,
+  "format": "autopareto_phase1_milestones_v1",
+  "seed": 8,
+  "sequence_length": 2048,
+  "source_sha256": "83310e48b1d117832ce58de84df571a3c01121ef852f447fc707be11427c2dc3",
+  "token_budget": 201326592,
+  "total_batch_size": 131072
+}

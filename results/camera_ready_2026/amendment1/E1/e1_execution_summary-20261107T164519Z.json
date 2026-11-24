@@ -1,0 +1,33 @@
+{
+  "completed": [
+    "e1-apq-time300s-seed6",
+    "e1-apq-time300s-seed7",
+    "e1-apq-time300s-seed8",
+    "e1-apq-tokens088604672-seed6",
+    "e1-apq-tokens088604672-seed7",
+    "e1-apq-tokens088604672-seed8",
+    "e1-apq-tokens157286400-seed6",
+    "e1-apq-tokens157286400-seed7",
+    "e1-apq-tokens157286400-seed8",
+    "e1-apq-tokens201326592-seed6",
+    "e1-apq-tokens201326592-seed7",
+    "e1-apq-tokens201326592-seed8",
+    "e1-arref-time300s-seed6",
+    "e1-arref-time300s-seed7",
+    "e1-arref-time300s-seed8",
+    "e1-arref-tokens088604672-seed6",
+    "e1-arref-tokens088604672-seed7",
+    "e1-arref-tokens088604672-seed8",
+    "e1-arref-tokens157286400-seed6",
+    "e1-arref-tokens157286400-seed7",
+    "e1-arref-tokens157286400-seed8",
+    "e1-arref-tokens201326592-seed6",
+    "e1-arref-tokens201326592-seed7",
+    "e1-arref-tokens201326592-seed8"
+  ],
+  "format": "autopareto_camera_ready_e1_execution_summary_v1",
+  "next": "python scripts/analyze_camera_ready_e1.py --runs-root /workspace/autopareto-camera-ready/results/camera_ready_2026/amendment1/E1",
+  "plan_sha256": "89f2901588fceec18ab93d4e74ed652b8f6c6df9329eb8ba1d3a7ead128f60dc",
+  "recorded_utc": "2026-11-07T16:45:19.416816+00:00",
+  "reported_failed": []
+}

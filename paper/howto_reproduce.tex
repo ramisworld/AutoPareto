@@ -1,0 +1,38 @@
+% Hand-written from paper/camera_ready/REPRODUCE.md. Every path and flag below was checked against the source
+% (argparse) on 2026-11-14, and the 13-recipe (Phase 6) lines on 2026-11-18; no command was executed for this revision.
+Full commands and their private dependencies are in \path{paper/camera_ready/REPRODUCE.md}. Nothing below was re-executed for this revision, and every flag shown exists in the script's argument parser.
+
+\emph{Level 1, artifacts (no GPU).} Python 3.10 with the pins in \path{paper/requirements.txt} and Tectonic. The build recomputes every number, table and figure and stops if any value differs from the committed audit by more than $10^{-9}$. It needs the full evidence tree (database snapshot, campaign histories, selection manifests), which is part of the pending release. The pre-registered analyses rerun on a CPU from committed records.
+\par\begingroup\footnotesize
+\begin{verbatim}
+AUTOPARETO_EVIDENCE_ROOT=<evidence tree> sh paper/build_camera_ready.sh
+E1=results/camera_ready_2026/amendment1/E1
+python3 scripts/analyze_camera_ready_e1.py --runs-root $E1 --output-dir <out>
+python3 scripts/analyze_e1_exposure_decomposition.py \
+    --runs-root $E1 --out-dir <out>
+python3 scripts/analyze_phase5.py --out <out>
+python3 analysis/cr_p6.py    # 13-recipe test, from its run records
+\end{verbatim}
+\par\endgroup
+
+\emph{Level 2, recipes (one A40).} \path{prepare.py} downloads the ClimbMix shards and rebuilds the tokenizer, whose hashes are checked against \path{study/contracts_2026/provenance/tokenizer_manifest.json}. Each executor only validates unless \texttt{-{}-execute} is passed. Frozen sources: GPT A22 \path{results/candidates/autopareto-seed0-20260731/0022-train.py}, AR-ref \path{results/candidates/autoresearch-diagnostic5-seed42-20260724/0005-train.py}, Opus \path{evaluation/phase5a_sources/}; the 13-recipe plan \path{evaluation/phase6_unified_plan.json} lists all 13 by hash. Its 300\,s and lm-eval stages run under amendment A1 (\path{scripts/run_phase6_p2.py}), and amendments A2 to A4 have their own runners (\path{scripts/run_phase6_a2.py}, \texttt{\_a3}, \texttt{\_a4}). The shard revision and the flash-attention kernel are not pinned in code, the lockfile is not yet on a public branch, and the E1 executor refuses to write into an output root that already holds the committed E0 results.
+\par\begingroup\footnotesize
+\begin{verbatim}
+python prepare.py --num-shards 10 --download-workers 8
+python scripts/run_camera_ready_e0_e1.py --stage E0 --execute
+python scripts/run_camera_ready_e0_e1.py --stage E1 --execute
+python scripts/run_phase5a_opus_fixed_tokens.py --execute
+python scripts/run_phase6.py --stage train --execute
+python scripts/run_phase6.py --stage inference --block P0a --execute
+python scripts/run_phase6_p2.py --stage fixed --execute
+\end{verbatim}
+\par\endgroup
+
+\emph{Level 3, agent campaigns.} The controller of the extended experiments runs a campaign with Claude Code or Codex CLI. Its programs are in \path{study/contracts_2026/programs/}, the Claude command line and its permission checks in \path{study/contracts_2026/isolation.py}, and \path{study/contracts_2026/tools/dry_run_claude_campaign.py} rehearses a campaign offline with a fake CLI and a mocked GPU. The \texttt{run} subcommand also needs the state root, manifest, baseline record and GPU-host arguments listed in \path{REPRODUCE.md}. Pod setup is partly manual, the Codex container image was not preserved, and the original campaigns have no single entry point.
+\par\begingroup\footnotesize
+\begin{verbatim}
+python3 -B -m study.contracts_2026.campaign_controller {dry-run,preflight,run} \
+    --agent-backend {claude,codex} --model <id> --reasoning <effort> \
+    --scientist-timeout-seconds 600 ...
+\end{verbatim}
+\par\endgroup

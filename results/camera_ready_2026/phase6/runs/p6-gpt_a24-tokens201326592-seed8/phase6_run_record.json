@@ -1,0 +1,52 @@
+{
+  "TOTAL_BATCH_SIZE": 131072,
+  "attempt": 1,
+  "attempt_wall_seconds": 647.9233264923096,
+  "cell": "tokens_201326592",
+  "display": "GPT A24",
+  "finished_utc": "2026-11-16T12:50:29.095433+00:00",
+  "format": "autopareto_phase6_run_record_v1",
+  "gpu": [
+    "NVIDIA A40, GPU-6de81321-d585-b7d2-7cf9-79fb2ce0487f, 595.91.07"
+  ],
+  "integrity": {
+    "failures": [],
+    "passed": true
+  },
+  "metrics": {
+    "checkpoint_sha256": "c95b0c5a78741d5bc455d08fbb5cfc0b93d459ee626d202436f2866bf2533022",
+    "derived_source_sha256": "e74002982d830ac592399adf8fb0ba1f80063dc357545df61c1e50a1672d72f7",
+    "end_to_end_training_seconds": 414.080258694,
+    "heldout_bpb": 1.189026203980049,
+    "heldout_ci95": [
+      1.1827235874095043,
+      1.1958090165132897
+    ],
+    "milestone_validation_bpb": {
+      "100663296": 1.2197868414126838,
+      "150994944": 1.1664224758916593,
+      "201326592": 1.1300683327905072,
+      "50331648": 1.2784998144313728
+    },
+    "parameter_count": 17891526,
+    "peak_training_memory_mb": 8006.06103515625,
+    "steady_state_seconds": 273.900989589,
+    "steady_state_tokens_per_second": 729770.2731922787,
+    "tokens": 201326592,
+    "total_scientific_step_wall_seconds": 349.989519091,
+    "updates": 1536,
+    "validation_bpb": 1.1300683327905072,
+    "validation_bpb_in_process": 1.13005516840595
+  },
+  "order": 24,
+  "phase1_model_id": "autopareto_294",
+  "plan_sha256": "dc1e605e82c5f598bbf91ab17f63d1db30a27511f5d264142c9b31eb6fe61096",
+  "recipe": "gpt_a24",
+  "role": "new",
+  "run_dir": "/workspace/autopareto-camera-ready/results/camera_ready_2026/phase6/runs/p6-gpt_a24-tokens201326592-seed8",
+  "run_id": "p6-gpt_a24-tokens201326592-seed8",
+  "seed": 8,
+  "source_sha256": "6d0d8d1d9c7a08eeca1cd8d15b20b0bfdf5d84ee5255f56cd8a8092715290d10",
+  "stage": "train",
+  "status": "completed"
+}

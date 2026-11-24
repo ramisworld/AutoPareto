@@ -1,0 +1,1 @@
+{"label": "pilot-opus23-s6-canonical-corr", "mode": "canonical", "status": "incorrect_not_timed", "hard_mismatches": 30, "token_agreement": 978, "decode_tok_s": null, "speedup": null, "peak_mib": null, "wall_s": 9.3}

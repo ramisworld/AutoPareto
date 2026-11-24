@@ -1,0 +1,222 @@
+{
+  "schema": "autopareto_prelaunch_hash_reconciliation_v1",
+  "created_at": "2026-09-02",
+  "parent_frozen_file_ledger": "study/contracts_2026/provenance/frozen_file_hashes.json",
+  "parent_frozen_file_ledger_sha256": "52e88b5d041eeea205af6677d1da33cca9423b9efbdd78fe68020ac496dd075e",
+  "policy": "Historical expected artifacts remain immutable. Current observations are canonical only for the repaired pre-study snapshot after the remaining gates pass.",
+  "mismatches": [
+    {
+      "path": "study/contracts_2026/benchmark_policy.py",
+      "expected_sha256": "83123f64676aa4976d2f51c03d60063eabc930ee8fb199bb15173c786cb24f62",
+      "observed_sha256": "712701d714a5a7bda2b04c6bcc48bfc1459c0df772cb25b94148b1980b27e02e",
+      "why_different": "The frozen_file_hashes ledger predates the later Design-B benchmark-policy construction recorded in the parent pre-study manifest.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["benchmark unit tests", "full A40 Design-B validation"]
+    },
+    {
+      "path": "study/contracts_2026/campaign.py",
+      "expected_sha256": "cf1dea0932a7d9b104b0a34958c6abf25543b6a9c426aa02761e2ced68e168e9",
+      "observed_sha256": "c019bb110cd95d66595c7a6375e41072eb7f2f1c13fc22b26abd1901aa89a83f",
+      "why_different": "The current file contains the later protected uncertainty-aware Pareto implementation; the broad frozen ledger was captured before that implementation settled.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["campaign/Pareto tests", "audit of uncertainty rule"]
+    },
+    {
+      "path": "study/contracts_2026/context.py",
+      "expected_sha256": "fb4efe24208f683e410d99f4ced8a0219cfdabde3979e18d12a266657a42f08c",
+      "observed_sha256": "71f720ee8e6da913184634ec4c9d82e71b715c78aec46f5f1f2b897f17a42894",
+      "why_different": "Context leakage filtering and campaign-view schema were hardened after the earlier ledger capture.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["context leakage tests", "two-campaign view isolation test"]
+    },
+    {
+      "path": "study/contracts_2026/inference_benchmark.py",
+      "expected_sha256": "96d40248303a6702d1551d9491ee7d2a07b5467c221f45fabd0a5fe19c0f1f07",
+      "observed_sha256": "8bd674c009280978108b4a2eebffa2cbedac8003499c238f40a2b28ff1aadf94",
+      "why_different": "The current repair fail-closes the former in-process candidate-definition loader; the prior version permitted candidate source execution in the protected evaluator.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "repair_candidate_not_launchable_until_separate_inference_host_is_verified",
+      "tests_required": ["inference boundary adversarial suite", "full Design-B inference validation"]
+    },
+    {
+      "path": "study/contracts_2026/isolation.py",
+      "expected_sha256": "56ff0e571bc4549cfb837e8378c93a034b0e8fb3a9af5ac6cedee427be0ca303",
+      "observed_sha256": "eacbf5a8ca51a711acc5fc9c9209739402668d6ba448a4319b9e953e68dba1b8",
+      "why_different": "The current isolation module reflects the later fail-closed context staging and Landlock/macOS policy work.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["filesystem allowlist tests", "A40 isolation adversarial suite"]
+    },
+    {
+      "path": "study/contracts_2026/programs/program_fixed_time.md",
+      "expected_sha256": "99ff64003b8695d56fc829829139ebf950bd80f2c0480d2703261157f1e81d93",
+      "observed_sha256": "a6898e914dee335bd5ea5b02856ea6a232150068d24ac39a06633e0a3a4ca4f6",
+      "why_different": "The repair adds the disposable eleven-update compilation warm-up and the pre-registered interleaving rule.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_prompt_pending_final_freeze",
+      "tests_required": ["prompt diff/hash tests", "fresh-state equivalence tests"]
+    },
+    {
+      "path": "study/contracts_2026/programs/program_fixed_tokens.md",
+      "expected_sha256": "852a82e7ffb26568d0d82dd87acf0114569b62f53c575dae36425937dcf8217a",
+      "observed_sha256": "c35ef08f012c2c8f6732cdab74ab421a19fe44b6996c00c72249c4d2011c53f6",
+      "why_different": "The repair adds the disposable eleven-update compilation warm-up and the pre-registered interleaving rule.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_prompt_pending_final_freeze",
+      "tests_required": ["prompt diff/hash tests", "exact-token fresh-state tests"]
+    },
+    {
+      "path": "study/contracts_2026/protocol.md",
+      "expected_sha256": "da6327024c02826423ec6afc2bfbdc910e53b03949c17a2215bae3c1df5e3a23",
+      "observed_sha256": "857b211a227a022e1dc88678873f4339c0373b0d3e5adc5d7588e3d16b8e8867",
+      "why_different": "The repair changes Contract-T/N warm-up semantics, candidate IPC description, and campaign scheduling; it also removes the obsolete claim that a provider image must be provisioned because it lacks bwrap.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_protocol_pending_final_freeze",
+      "tests_required": ["protocol consistency audit", "T/N smoke", "complete pre-launch audit"]
+    },
+    {
+      "path": "study/contracts_2026/provenance/prompt_diff.patch",
+      "expected_sha256": "d4974c52cbfcb88519497c4e1885ab8ffadd4e34fa06a41c7219be1f552393dd",
+      "observed_sha256": "0535395d7c0ad2c238b35c6176f9f96cf44ce722148bc1283ce5ed42eccb10c6",
+      "why_different": "The prompt snapshots changed, so their byte-level diff changed accordingly; the current diff still limits T/N differences to the resource-contract block.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_prompt_diff_pending_final_freeze",
+      "tests_required": ["prompt diff/hash tests"]
+    },
+    {
+      "path": "study/contracts_2026/provenance/prompt_snapshot_manifest.json",
+      "expected_sha256": "18add6682682a3abbac81c9548291d0b87441f842628cb66a9c9324321ce1582",
+      "observed_sha256": "becf3d06dbe6b4c1278e5fe356907d33a51b8525a28f0022559fa2f2717585a4",
+      "why_different": "The manifest now records the repaired prompt bytes and sizes.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_prompt_manifest_pending_final_freeze",
+      "tests_required": ["prompt snapshot hash tests"]
+    },
+    {
+      "path": "study/contracts_2026/runner.py",
+      "expected_sha256": "1c35e267e2c2d1a4db3ad770d37e8c0f9c566103445527e37d2752d42b2d47b4",
+      "observed_sha256": "3c2abdda6192dd495c7dd266b280dea5ae42dcb3f54311dee4a4f4746bf828ed",
+      "why_different": "The current runner contains later campaign/Pareto hardening and now rejects the invalidated pre-repair N_STAR; this repair also registers the schedule payload.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["runner command guard tests", "schedule/N_STAR gating tests"]
+    },
+    {
+      "path": "study/contracts_2026/study_runtime.py",
+      "expected_sha256": "63481a4c58b6d7806febb3f60c91666486950cf3b94c4cdd6f41625ab8451de0",
+      "observed_sha256": "451e55fad68e77da6261af5374ae93a4f2f53ddc34c5b39222ae457b60c8d962",
+      "why_different": "The current contract API is the later protected-runtime interface rather than the earlier ledger version.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["contract API tests", "candidate process IPC tests"]
+    },
+    {
+      "path": "study/contracts_2026/tests/test_benchmark.py",
+      "expected_sha256": "e7e0c94c19de5d8e7861960d17d5ee42facd44137b1a5fd7fd9d517fc179eb88",
+      "observed_sha256": "9df6ceec9fb4d809d487b96b300eabb9c95a2811fbe559eaf52e2167547eabc1",
+      "why_different": "Tests were updated with the Design-B benchmark/uncertainty implementation after the ledger capture.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["benchmark test suite"]
+    },
+    {
+      "path": "study/contracts_2026/tests/test_campaigns.py",
+      "expected_sha256": "c2cf9653c8f7d447b966845106871d44a06334383ea5a7af7f1a4876d33b9a0a",
+      "observed_sha256": "cc8373397b2f6986546a87b7d7861c64f868c3156d8eb86a61d45eb9a6ecf8d3",
+      "why_different": "Tests follow the later campaign-view/Pareto implementation.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["campaign test suite"]
+    },
+    {
+      "path": "study/contracts_2026/tests/test_prompts.py",
+      "expected_sha256": "d16fbf18a181cc29e50609d040473852329d0d979ee19c922283ac6f5c1b0def",
+      "observed_sha256": "92c3e3b3c406a21e500c9c8d8d193f4565a0312d47c1d3faecfe75a08226aaf9",
+      "why_different": "Tests were updated for the repaired interleaved schedule and refreshed prompt snapshots.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["prompt test suite"]
+    },
+    {
+      "path": "study/contracts_2026/train_launcher.py",
+      "expected_sha256": "55e96dda7d458a5b45f3da97fe2262638da6db1665846d2c60f1e13be9f928a7",
+      "observed_sha256": "fb39d6f7f7163aed9c33f9354930ab354571c202b3696b532cadac9121084368",
+      "why_different": "This repair retires the in-process worker command, adds parent reconstruction of typed child events, adds the disposable warm-up process, and starts fresh Contract-T timing at the scientific process boundary.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_training_launcher_pending_final_freeze",
+      "tests_required": ["IPC/event-order tests", "A40 T/N smokes", "three-run N_STAR calibration"]
+    },
+    {
+      "path": "study/contracts_2026/protected_runtime.py",
+      "expected_sha256": "44d5f509e1af8d9a13f209296bef7173f58ef0b811c03a9d659aed0f54126eb2",
+      "observed_sha256": "03bd04d52f434adbaa0524012d917d14bd08e3d0861fd8441e2dc9d65b2d96fa",
+      "why_different": "The current protected runtime is the later v3 implementation captured by the N_STAR v3 record; it is not the bytes listed in the older broad ledger.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["protected runtime tests", "fresh-state Contract-T/N smokes"]
+    },
+    {
+      "path": "study/contracts_2026/candidate_worker.py",
+      "expected_sha256": "bc4a28e6ba720f6e14ca874b1d5eb496ebc28d0bf2707a56c8a0e2ec798e669e",
+      "observed_sha256": "7923d5ab914da60117b6dbafa5c242508865d3d077df4d1c4745a6f6ab4c16b9",
+      "why_different": "The unsafe worker that exec'd candidate source in-process was retired and replaced with a fail-closed compatibility entry point; candidate execution moved to candidate_process.py.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_retirement_stub_pending_final_freeze",
+      "tests_required": ["static no-exec test", "A40 process-boundary adversarial suite"]
+    },
+    {
+      "path": "study/contracts_2026/tests/test_inference_integration.py",
+      "expected_sha256": "5b83e942ba9a3593c77e5a68c570ba0eaecf0575fe4a49ab8a3f245b62170c93",
+      "observed_sha256": "9c6da633234cb932dc6fb6bbd16e35fe889cb72da55d23a0abd4a70bb0e61bcd",
+      "why_different": "The test suite tracks the later inference adapter and Design-B payload implementation.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["inference integration test suite", "separate evaluator IPC tests"]
+    },
+    {
+      "path": "study/contracts_2026/tests/test_protected_instrument.py",
+      "expected_sha256": "33962ff253dbe5446a340ead82c86980fced73d5f795ead3bd04406d1505771c",
+      "observed_sha256": "2e555acc96ecde3cce42d00c53b05e66c37590d94730f2851622fbbd33db3f3d",
+      "why_different": "The test file contains the later protected launcher tests; the broad ledger predates them.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["protected instrument suite", "A40 contract smokes"]
+    },
+    {
+      "path": "study/contracts_2026/bridge.py",
+      "expected_sha256": "1db0065537a251f41e3ec6d024fca558d15cde1b8b64170a61382242078fe70f",
+      "observed_sha256": "3c820d12fa99716b3e4070ead2e6913bf5d867b7eba508768918907b814eae05",
+      "why_different": "The current bridge includes the previously recorded operational-efficiency bundle/remote hash-validation changes.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["bridge tests", "A40 bridge preflight"]
+    },
+    {
+      "path": "study/contracts_2026/remote_runner.py",
+      "expected_sha256": "5619b7e04e8544b082d281eff9599d0c9d5d2ad65d5ecbbf9651a95926da5c35",
+      "observed_sha256": "4babc52a2265a6d801014bec7cf1df499b0655d59e788dac97749bfdbfb41a21",
+      "why_different": "The repair now builds a candidate-only prepare shim that removes protected validation code from the candidate-visible context.",
+      "scientific_semantics_changed": true,
+      "canonical_for_repaired_study": "observed_repaired_remote_runner_pending_final_freeze",
+      "tests_required": ["candidate-prepare visibility test", "A40 leakage suite"]
+    },
+    {
+      "path": "study/contracts_2026/tests/test_bridge.py",
+      "expected_sha256": "bb11b87f846c3a41a97212145110d2a16bf9f1fe39b0b476cbf64f6c4e8ac098",
+      "observed_sha256": "40b40c4894432e95c373db17c307598e740444bae0fe1e086f1da09d532ff14c",
+      "why_different": "The tests track the later bridge payload/remote-transfer implementation.",
+      "scientific_semantics_changed": false,
+      "canonical_for_repaired_study": "observed_current_pending_final_freeze",
+      "tests_required": ["bridge suite"]
+    }
+  ],
+  "unresolved_launch_blockers": [
+    "No trustworthy separate inference model-host/evaluator IPC boundary is implemented. The old in-process candidate-definition path now fails closed.",
+    "No A40 GPU execution or three-run post-repair N_STAR calibration was run in this local CPU/macOS environment.",
+    "Parent event IPC validates structure and counters but does not independently prove that an untrusted child actually performed the reported optimizer update; a stronger attestation mechanism is still required for a claim of non-forgeable accounting.",
+    "A new final freeze must include all observed repaired hashes and explicitly supersede the old ledger without overwriting it."
+  ]
+}

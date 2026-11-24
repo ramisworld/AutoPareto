@@ -1,0 +1,182 @@
+[
+  {
+    "id": 4,
+    "candidate_experiment_id": 65,
+    "training_run_id": 23509,
+    "seed": 0,
+    "selection_role": "lowest_observed_quality",
+    "status": "incompatible",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0001/inference_benchmark.py\", line 293, in <module>\n    raise SystemExit(main())\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0001/inference_benchmark.py\", line 189, in main\n    correctness = correctness_check(model, adapter, prompt)\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0001/inference_benchmark.py\", line 96, in correctness_check\n    return check_cached_correctness(\n  File \"/workspace/autopareto/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 120, in decorate_context\n    return func(*args, **kwargs)\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0001/protected/inference_adapter.py\", line 261, in check_cached_correctness\n    raise RuntimeError(\nRuntimeError: cached/full correctness failed: greedy_tokens_match=True mean_logits_match=False max_mean_abs_error=0.0340111 max_abs_error=0.139058",
+    "created_at": "2026-07-27 03:02:54"
+  },
+  {
+    "id": 5,
+    "candidate_experiment_id": 65,
+    "training_run_id": 23582,
+    "seed": 1,
+    "selection_role": "lowest_observed_quality",
+    "status": "incompatible",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0002/inference_benchmark.py\", line 293, in <module>\n    raise SystemExit(main())\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0002/inference_benchmark.py\", line 189, in main\n    correctness = correctness_check(model, adapter, prompt)\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0002/inference_benchmark.py\", line 96, in correctness_check\n    return check_cached_correctness(\n  File \"/workspace/autopareto/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 120, in decorate_context\n    return func(*args, **kwargs)\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0002/protected/inference_adapter.py\", line 261, in check_cached_correctness\n    raise RuntimeError(\nRuntimeError: cached/full correctness failed: greedy_tokens_match=True mean_logits_match=False max_mean_abs_error=0.0360893 max_abs_error=0.116321",
+    "created_at": "2026-07-27 03:10:55"
+  },
+  {
+    "id": 6,
+    "candidate_experiment_id": 65,
+    "training_run_id": 23656,
+    "seed": 2,
+    "selection_role": "lowest_observed_quality",
+    "status": "incompatible",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0003/inference_benchmark.py\", line 293, in <module>\n    raise SystemExit(main())\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0003/inference_benchmark.py\", line 189, in main\n    correctness = correctness_check(model, adapter, prompt)\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0003/inference_benchmark.py\", line 96, in correctness_check\n    return check_cached_correctness(\n  File \"/workspace/autopareto/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 120, in decorate_context\n    return func(*args, **kwargs)\n  File \"/workspace/autopareto/worktrees/confirmation-exp65-seeds012-20260725-0003/protected/inference_adapter.py\", line 261, in check_cached_correctness\n    raise RuntimeError(\nRuntimeError: cached/full correctness failed: greedy_tokens_match=True mean_logits_match=False max_mean_abs_error=0.0473345 max_abs_error=0.146317",
+    "created_at": "2026-07-27 03:18:10"
+  },
+  {
+    "id": 7,
+    "candidate_experiment_id": 68,
+    "training_run_id": 23731,
+    "seed": 0,
+    "selection_role": "best_compatible",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-07-27 03:25:19"
+  },
+  {
+    "id": 8,
+    "candidate_experiment_id": 68,
+    "training_run_id": 23807,
+    "seed": 1,
+    "selection_role": "best_compatible",
+    "status": "incompatible",
+    "failure_reason": "Traceback (most recent call last):\n  File \"/workspace/autopareto/worktrees/confirmation-exp68-seeds012-20260725-0002/inference_benchmark.py\", line 293, in <module>\n    raise SystemExit(main())\n  File \"/workspace/autopareto/worktrees/confirmation-exp68-seeds012-20260725-0002/inference_benchmark.py\", line 189, in main\n    correctness = correctness_check(model, adapter, prompt)\n  File \"/workspace/autopareto/worktrees/confirmation-exp68-seeds012-20260725-0002/inference_benchmark.py\", line 96, in correctness_check\n    return check_cached_correctness(\n  File \"/workspace/autopareto/.venv/lib/python3.10/site-packages/torch/utils/_contextlib.py\", line 120, in decorate_context\n    return func(*args, **kwargs)\n  File \"/workspace/autopareto/worktrees/confirmation-exp68-seeds012-20260725-0002/protected/inference_adapter.py\", line 261, in check_cached_correctness\n    raise RuntimeError(\nRuntimeError: cached/full correctness failed: greedy_tokens_match=True mean_logits_match=False max_mean_abs_error=0.0469231 max_abs_error=0.138472",
+    "created_at": "2026-07-27 03:32:45"
+  },
+  {
+    "id": 9,
+    "candidate_experiment_id": 68,
+    "training_run_id": 23884,
+    "seed": 2,
+    "selection_role": "best_compatible",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-07-27 03:39:53"
+  },
+  {
+    "id": 10,
+    "candidate_experiment_id": 124,
+    "training_run_id": 96838,
+    "seed": 0,
+    "selection_role": "lowest_memory_within_1pct_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-11 23:43:02"
+  },
+  {
+    "id": 11,
+    "candidate_experiment_id": 124,
+    "training_run_id": 97124,
+    "seed": 1,
+    "selection_role": "lowest_memory_within_1pct_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-11 23:52:40"
+  },
+  {
+    "id": 12,
+    "candidate_experiment_id": 124,
+    "training_run_id": 97411,
+    "seed": 2,
+    "selection_role": "lowest_memory_within_1pct_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:01:09"
+  },
+  {
+    "id": 13,
+    "candidate_experiment_id": 134,
+    "training_run_id": 97699,
+    "seed": 0,
+    "selection_role": "best_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:09:17"
+  },
+  {
+    "id": 14,
+    "candidate_experiment_id": 134,
+    "training_run_id": 97988,
+    "seed": 1,
+    "selection_role": "best_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:17:52"
+  },
+  {
+    "id": 15,
+    "candidate_experiment_id": 134,
+    "training_run_id": 98278,
+    "seed": 2,
+    "selection_role": "best_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:25:32"
+  },
+  {
+    "id": 16,
+    "candidate_experiment_id": 136,
+    "training_run_id": 98569,
+    "seed": 0,
+    "selection_role": "largest_exclusive_hypervolume_contribution",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:33:09"
+  },
+  {
+    "id": 17,
+    "candidate_experiment_id": 136,
+    "training_run_id": 98861,
+    "seed": 1,
+    "selection_role": "largest_exclusive_hypervolume_contribution",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:42:03"
+  },
+  {
+    "id": 18,
+    "candidate_experiment_id": 136,
+    "training_run_id": 99154,
+    "seed": 2,
+    "selection_role": "largest_exclusive_hypervolume_contribution",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:50:57"
+  },
+  {
+    "id": 19,
+    "candidate_experiment_id": 137,
+    "training_run_id": 99448,
+    "seed": 0,
+    "selection_role": "fastest_within_1pct_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 00:59:02"
+  },
+  {
+    "id": 20,
+    "candidate_experiment_id": 137,
+    "training_run_id": 99743,
+    "seed": 1,
+    "selection_role": "fastest_within_1pct_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 01:07:45"
+  },
+  {
+    "id": 21,
+    "candidate_experiment_id": 137,
+    "training_run_id": 100039,
+    "seed": 2,
+    "selection_role": "fastest_within_1pct_quality",
+    "status": "completed",
+    "failure_reason": null,
+    "created_at": "2026-08-12 01:15:33"
+  }
+]

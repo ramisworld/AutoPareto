@@ -1,0 +1,8 @@
+A resource contract can act as a hidden research incentive.
+When an autonomous researcher is scored under a fixed wall-clock budget, an edit that makes training faster is rewarded twice, once for its effect on the model and again because the faster candidate sees more data before it is evaluated, so the contract itself can shape what looks like a discovery.
+We study this in AutoPareto, an autonomous Transformer researcher that edits its own training source under measured quality, cached-decode throughput, and inference-memory objectives on a single GPU, retaining every hypothesis, patch, and parent link it produced.
+To separate discovery from evidence we froze its archived recipes and retrained them on unseen seeds at exactly matched token exposure, and we registered a prospective fixed-time versus fixed-token comparison, so far an exploratory \TimeN{}-attempt prefix per arm.
+The discovery-stage quality advantage does not survive matched exposure.
+The deployment result does: the verified recipe retains \DecodeRatio$\times$ cached-decode throughput with \ParameterReduction\% fewer parameters and \MemoryReduction\% less allocated inference memory.
+Trajectories, contracts, seeds, source hashes, and raw measurements are preserved, so every reported number can be re-derived without rerunning training.
+Resource contracts should be treated as part of the scientific specification of autonomous ML research.
